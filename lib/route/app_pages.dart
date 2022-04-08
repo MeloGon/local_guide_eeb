@@ -1,6 +1,10 @@
 import 'package:get/get.dart';
 import 'package:locals_guide_eeb/modules/access/access_binding.dart';
 import 'package:locals_guide_eeb/modules/access/access_page.dart';
+import 'package:locals_guide_eeb/modules/admin_menu/admin_menu_binding.dart';
+import 'package:locals_guide_eeb/modules/admin_menu/admin_menu_page.dart';
+import 'package:locals_guide_eeb/modules/locals_admin/locals_admin_binding.dart';
+import 'package:locals_guide_eeb/modules/locals_admin/locals_admin_page.dart';
 import 'package:locals_guide_eeb/modules/login/login_binding.dart';
 import 'package:locals_guide_eeb/modules/login/login_page.dart';
 import 'package:locals_guide_eeb/modules/otp/otp_binding.dart';
@@ -33,5 +37,13 @@ class AppPages {
         name: AppRoutes.LOGIN,
         page: () => const LoginPage(),
         binding: LoginBinding()),
+    GetPage(
+        name: AppRoutes.ADMINMENU,
+        page: () => const AdminMenuPage(),
+        binding: AdminMenuBinding()),
+    GetPage(
+        name: AppRoutes.LOCALSADMIN,
+        page: () => const LocalsAdminPage(),
+        binding: LocalsAdminBinding()),
   ];
 }
