@@ -39,21 +39,21 @@ class LocalsAdminPage extends StatelessWidget {
               child: Column(
                 children: [
                   TextField(
-                    style: TextStyle(color: Colors.black),
+                    style: const TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(20),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30)),
                         fillColor: Colors.white,
                         filled: true,
-                        prefixIcon: Icon(Icons.search)),
+                        prefixIcon: const Icon(Icons.search)),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   Container(
                     width: double.infinity,
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.grey[850],
@@ -63,9 +63,9 @@ class LocalsAdminPage extends StatelessWidget {
                         Container(
                             height: 40,
                             width: 40,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 shape: BoxShape.circle, color: Colors.red)),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Column(
@@ -81,10 +81,10 @@ class LocalsAdminPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Spacer(),
+                        const Spacer(),
                         IconButton(
                             onPressed: () {},
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.edit,
                               color: Colors.white,
                             ))
