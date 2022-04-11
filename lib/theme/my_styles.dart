@@ -21,4 +21,9 @@ class MyStyles {
     color: Colors.red,
     fontSize: 16,
   );
+
+  static const TextStyle subtitleTextStyle1 = TextStyle(
+    color: Colors.white,
+    fontSize: 14,
+  );
 }
