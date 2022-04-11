@@ -12,4 +12,12 @@ class AdminMenuController extends GetxController {
   void goToLocalsAdminPage() async {
     Get.toNamed(AppRoutes.LOCALSADMIN);
   }
+
+  void goToUsersAdminPage() async {
+    Get.toNamed(AppRoutes.USERSADMIN);
+  }
+
+  void goToActivityAdminPage() async {
+    Get.toNamed(AppRoutes.ACTIVITYADMIN);
+  }
 }

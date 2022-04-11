@@ -52,12 +52,14 @@ class AdminMenuPage extends StatelessWidget {
                   padding: MyDimens.symetricMarginGeneral,
                   child: ItemPrimaryButton(
                     text: 'Usuarios',
+                    onTap: _.goToUsersAdminPage,
                   ),
                 ),
                 Padding(
                   padding: MyDimens.symetricMarginGeneral,
                   child: ItemPrimaryButton(
                     text: 'Actividad',
+                    onTap: _.goToActivityAdminPage,
                   ),
                 ),
                 Padding(
