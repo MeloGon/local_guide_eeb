@@ -13,6 +13,8 @@ import 'package:locals_guide_eeb/modules/admin_module/locals_admin/locals_admin_
 import 'package:locals_guide_eeb/modules/admin_module/locals_admin/locals_admin_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/users_admin/users_admin_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/users_admin/users_admin_page.dart';
+import 'package:locals_guide_eeb/modules/client_module/client_menu/client_menu_binding.dart';
+import 'package:locals_guide_eeb/modules/client_module/client_menu/client_menu_page.dart';
 
 import 'package:locals_guide_eeb/modules/login/login_binding.dart';
 import 'package:locals_guide_eeb/modules/login/login_page.dart';
@@ -71,5 +73,9 @@ class AppPages {
         name: AppRoutes.INFOADMIN,
         page: () => const InfoAdminPage(),
         binding: InfoAdminBinding()),
+    GetPage(
+        name: AppRoutes.CLIENTMENU,
+        page: () => const ClientMenuPage(),
+        binding: ClientMenuBinding()),
   ];
 }
