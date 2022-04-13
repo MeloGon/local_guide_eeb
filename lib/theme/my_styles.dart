@@ -12,8 +12,13 @@ class MyStyles {
     fontSize: 16,
   );
 
-  static const TextStyle generalTextStyle1 = TextStyle(
+  static const TextStyle generalTextStyleWhite = TextStyle(
     color: Colors.white,
+    fontSize: 16,
+  );
+
+  static const TextStyle generalTextStyleBlack = TextStyle(
+    color: Colors.black,
     fontSize: 16,
   );
 
@@ -22,8 +27,13 @@ class MyStyles {
     fontSize: 16,
   );
 
-  static const TextStyle subtitleTextStyle1 = TextStyle(
+  static const TextStyle subtitleTextStyleWhite = TextStyle(
     color: Colors.white,
+    fontSize: 14,
+  );
+
+  static const TextStyle subtitleTextStyleBlack = TextStyle(
+    color: Colors.black,
     fontSize: 14,
   );
 }
