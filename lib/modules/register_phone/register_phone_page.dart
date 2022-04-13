@@ -70,7 +70,7 @@ class RegisterPhonePage extends StatelessWidget {
                   RichText(
                     text: TextSpan(
                         text: MyStrings.ACCEPTPOLICY,
-                        style: MyStyles.generalTextStyle1,
+                        style: MyStyles.generalTextStyleWhite,
                         children: <TextSpan>[
                           TextSpan(
                               text: ' ${MyStrings.PRIVACYPOLICIES}',

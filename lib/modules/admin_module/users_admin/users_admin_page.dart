@@ -62,7 +62,7 @@ class UsersAdminPage extends StatelessWidget {
                           children: [
                             Text(
                               'Mariale Castillo',
-                              style: MyStyles.generalTextStyle1,
+                              style: MyStyles.generalTextStyleWhite,
                             ),
                           ],
                         ),

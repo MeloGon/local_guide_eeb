@@ -74,7 +74,7 @@ class LocalsAdminPage extends StatelessWidget {
                           children: [
                             Text(
                               'Sushi',
-                              style: MyStyles.generalTextStyle1,
+                              style: MyStyles.generalTextStyleWhite,
                             ),
                             Text(
                               'Comida Nikkei',

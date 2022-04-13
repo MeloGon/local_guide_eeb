@@ -48,7 +48,7 @@ class CategoriesAdminPage extends StatelessWidget {
                           children: [
                             Text(
                               'Carnes y Pollos',
-                              style: MyStyles.generalTextStyle1,
+                              style: MyStyles.generalTextStyleWhite,
                             ),
                           ],
                         ),

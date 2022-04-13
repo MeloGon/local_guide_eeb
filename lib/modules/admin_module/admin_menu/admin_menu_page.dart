@@ -34,7 +34,7 @@ class AdminMenuPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 const Text(
                   MyStrings.ADMINDEFAULT,
-                  style: MyStyles.generalTextStyle1,
+                  style: MyStyles.generalTextStyleWhite,
                 ),
                 const SizedBox(height: 40),
                 Container(

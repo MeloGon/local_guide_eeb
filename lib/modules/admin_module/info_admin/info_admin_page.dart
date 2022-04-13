@@ -30,7 +30,7 @@ class InfoAdminPage extends StatelessWidget {
               children: [
                 const Text(
                   MyStrings.CATEGORIESADMIN,
-                  style: MyStyles.generalTextStyle1,
+                  style: MyStyles.generalTextStyleWhite,
                 ),
                 const SizedBox(height: 20),
                 ItemPrimaryButton(

@@ -27,12 +27,12 @@ class OtpPage extends StatelessWidget {
                 children: [
                   const Text(
                     MyStrings.WESENDCODE,
-                    style: MyStyles.generalTextStyle1,
+                    style: MyStyles.generalTextStyleWhite,
                   ),
                   const SizedBox(height: 10),
                   const Text(
                     '+51 992675623',
-                    style: MyStyles.generalTextStyle1,
+                    style: MyStyles.generalTextStyleWhite,
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * .1),
                   const Align(

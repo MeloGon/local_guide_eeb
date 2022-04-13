@@ -39,11 +39,11 @@ class ActivityAdminPage extends StatelessWidget {
                         children: [
                           Text(
                             'Se agrego un nuevo usuario',
-                            style: MyStyles.generalTextStyle1,
+                            style: MyStyles.generalTextStyleWhite,
                           ),
                           Text(
                             'Carlos Malaspina inicio sesión',
-                            style: MyStyles.subtitleTextStyle1,
+                            style: MyStyles.subtitleTextStyleWhite,
                           )
                         ],
                       ),

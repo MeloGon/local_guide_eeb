@@ -26,7 +26,7 @@ class LoginPage extends StatelessWidget {
               children: [
                 const Text(
                   MyStrings.USER,
-                  style: MyStyles.generalTextStyle1,
+                  style: MyStyles.generalTextStyleWhite,
                 ),
                 const TextField(
                     decoration: InputDecoration(
@@ -41,7 +41,7 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 30),
                 const Text(
                   MyStrings.PASSWORD,
-                  style: MyStyles.generalTextStyle1,
+                  style: MyStyles.generalTextStyleWhite,
                 ),
                 const TextField(
                   decoration: InputDecoration(
@@ -58,7 +58,8 @@ class LoginPage extends StatelessWidget {
                 const Spacer(),
                 ItemPrimaryButton(
                   text: MyStrings.LOGIN,
-                  onTap: _.goToAdminMenu,
+                  onTap: _.goToClientMenu,
+                  borderColor: Colors.white,
                 )
               ],
             ),
