@@ -35,4 +35,9 @@ class MyStrings {
   static const String ADDLOCAL = 'Agregar Local';
   static const String CATEGORIESADMIN = 'Categorias';
   static const String EDIT = 'Editar';
+
+  static const String UBICATIONUSER = 'Ubicación';
+  static const String NOTIFIUSER = 'Notificaciones';
+  static const String MOMENTSUSER = 'Momentos';
+  static const String RECOMMENDUSER = 'Recomendaciones';
 }
