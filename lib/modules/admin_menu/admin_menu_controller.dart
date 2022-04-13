@@ -20,4 +20,8 @@ class AdminMenuController extends GetxController {
   void goToActivityAdminPage() async {
     Get.toNamed(AppRoutes.ACTIVITYADMIN);
   }
+
+  void goToInfoAdminPage() async {
+    Get.toNamed(AppRoutes.INFOADMIN);
+  }
 }

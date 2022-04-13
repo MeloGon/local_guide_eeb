@@ -66,6 +66,7 @@ class AdminMenuPage extends StatelessWidget {
                   padding: MyDimens.symetricMarginGeneral,
                   child: ItemPrimaryButton(
                     text: 'Informacion',
+                    onTap: _.goToInfoAdminPage,
                   ),
                 ),
                 Padding(
