@@ -20,14 +20,13 @@ class CategoriesAdminPage extends StatelessWidget {
             title: Text('Categorias'),
             centerTitle: false,
             actions: [
-              Container(
-                  padding: EdgeInsets.all(15),
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.teal,
-                      ),
-                      onPressed: () {},
-                      child: Icon(Icons.add_circle_sharp)))
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.add_circle_sharp,
+                    color: Colors.teal,
+                    size: 30,
+                  )),
             ],
           ),
           body: SingleChildScrollView(
@@ -35,36 +34,15 @@ class CategoriesAdminPage extends StatelessWidget {
               padding: MyDimens.symetricMarginGeneral,
               child: Column(
                 children: [
-                  TextField(
-                    style: const TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.all(20),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30)),
-                        fillColor: Colors.white,
-                        filled: true,
-                        prefixIcon: const Icon(Icons.search)),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.grey[850],
+                      border: Border.all(width: 2, color: Colors.grey),
                     ),
                     child: Row(
                       children: [
-                        Container(
-                            height: 40,
-                            width: 40,
-                            decoration: const BoxDecoration(
-                                shape: BoxShape.circle, color: Colors.red)),
-                        const SizedBox(
-                          width: 20,
-                        ),
+                        const Spacer(),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
