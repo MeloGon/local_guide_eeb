@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
 
 class LoginController extends GetxController {
@@ -11,5 +10,9 @@ class LoginController extends GetxController {
 
   void goToAdminMenu() async {
     Get.toNamed(AppRoutes.ADMINMENU);
+  }
+
+  void goToClientMenu() async {
+    Get.toNamed(AppRoutes.CLIENTMENU);
   }
 }
