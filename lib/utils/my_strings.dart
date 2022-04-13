@@ -24,4 +24,15 @@ class MyStrings {
   static const String PASSWORD = 'Contraseña';
   static const String INPUTUSER = 'Ingrese su usuario';
   static const String INPUTPWD = 'Ingrese su contraseña';
+
+  static const String ADMINDEFAULT = 'Administrador';
+  static const String LOCALEADMIN = 'Locales';
+  static const String USERSADMIN = 'Usuarios';
+  static const String ACTIVITYADMIN = 'Actividad';
+  static const String INFOADMIN = 'Información';
+  static const String LOGOUT = 'Cerrar Sesión';
+
+  static const String ADDLOCAL = 'Agregar Local';
+  static const String CATEGORIESADMIN = 'Categorias';
+  static const String EDIT = 'Editar';
 }

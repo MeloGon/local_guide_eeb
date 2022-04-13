@@ -4,6 +4,7 @@ import 'package:locals_guide_eeb/modules/admin_module/activity_admin/activity_ad
 
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
+import 'package:locals_guide_eeb/utils/my_strings.dart';
 
 class ActivityAdminPage extends StatelessWidget {
   const ActivityAdminPage({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class ActivityAdminPage extends StatelessWidget {
           child: Scaffold(
         backgroundColor: MyColors.blackBg,
         appBar: AppBar(
-          title: Text('Actividad'),
+          title: const Text(MyStrings.ACTIVITYADMIN),
           centerTitle: false,
           backgroundColor: Colors.transparent,
         ),

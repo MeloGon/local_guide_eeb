@@ -4,6 +4,7 @@ import 'package:locals_guide_eeb/modules/admin_module/locals_admin/locals_admin_
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
+import 'package:locals_guide_eeb/utils/my_strings.dart';
 import 'package:locals_guide_eeb/widgets/item_primary_button.dart';
 
 class LocalsAdminPage extends StatelessWidget {
@@ -17,18 +18,18 @@ class LocalsAdminPage extends StatelessWidget {
           backgroundColor: MyColors.blackBg,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: Text('Locales'),
+            title: const Text(MyStrings.LOCALEADMIN),
             centerTitle: false,
             actions: [
               Container(
-                  padding: EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(15),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         primary: Colors.teal,
                       ),
                       onPressed: () {},
-                      child: Text(
-                        'Agregar Local',
+                      child: const Text(
+                        MyStrings.ADDLOCAL,
                         style: TextStyle(color: Colors.black),
                       )))
             ],

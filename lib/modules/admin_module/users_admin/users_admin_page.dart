@@ -5,6 +5,7 @@ import 'package:locals_guide_eeb/modules/admin_module/users_admin/users_admin_co
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
+import 'package:locals_guide_eeb/utils/my_strings.dart';
 
 class UsersAdminPage extends StatelessWidget {
   const UsersAdminPage({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class UsersAdminPage extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: Text('Usuarios'),
+            title: const Text(MyStrings.USERSADMIN),
             centerTitle: false,
           ),
           backgroundColor: MyColors.blackBg,

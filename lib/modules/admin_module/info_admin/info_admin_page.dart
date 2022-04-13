@@ -5,6 +5,7 @@ import 'package:locals_guide_eeb/modules/admin_module/info_admin/info_admin_cont
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
+import 'package:locals_guide_eeb/utils/my_strings.dart';
 import 'package:locals_guide_eeb/widgets/item_primary_button.dart';
 
 class InfoAdminPage extends StatelessWidget {
@@ -18,9 +19,7 @@ class InfoAdminPage extends StatelessWidget {
         backgroundColor: MyColors.blackBg,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: Text(
-            'Información',
-          ),
+          title: const Text(MyStrings.INFOADMIN),
           centerTitle: false,
         ),
         body: SingleChildScrollView(
@@ -29,13 +28,13 @@ class InfoAdminPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Categorías',
+                const Text(
+                  MyStrings.CATEGORIESADMIN,
                   style: MyStyles.generalTextStyle1,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ItemPrimaryButton(
-                  text: 'Editar',
+                  text: MyStrings.EDIT,
                   onTap: _.goToCategoriesPage,
                 ),
               ],

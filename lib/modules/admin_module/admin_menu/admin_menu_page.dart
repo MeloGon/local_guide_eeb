@@ -5,6 +5,7 @@ import 'package:locals_guide_eeb/modules/admin_module/admin_menu/admin_menu_cont
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
+import 'package:locals_guide_eeb/utils/my_strings.dart';
 import 'package:locals_guide_eeb/widgets/item_primary_button.dart';
 
 class AdminMenuPage extends StatelessWidget {
@@ -22,58 +23,58 @@ class AdminMenuPage extends StatelessWidget {
                 Container(
                   width: 100,
                   height: 100,
-                  decoration:
-                      BoxDecoration(shape: BoxShape.circle, color: Colors.teal),
-                  child: Center(
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.teal),
+                  child: const Center(
                       child: Text(
                     'A',
                     style: TextStyle(fontSize: 46, color: Colors.white),
                   )),
                 ),
-                SizedBox(height: 20),
-                Text(
-                  'Administrador',
+                const SizedBox(height: 20),
+                const Text(
+                  MyStrings.ADMINDEFAULT,
                   style: MyStyles.generalTextStyle1,
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Container(
                   height: 1,
                   width: double.infinity,
                   color: Colors.grey,
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Padding(
                   padding: MyDimens.symetricMarginGeneral,
                   child: ItemPrimaryButton(
-                    text: 'Locales',
+                    text: MyStrings.LOCALEADMIN,
                     onTap: _.goToLocalsAdminPage,
                   ),
                 ),
                 Padding(
                   padding: MyDimens.symetricMarginGeneral,
                   child: ItemPrimaryButton(
-                    text: 'Usuarios',
+                    text: MyStrings.USERSADMIN,
                     onTap: _.goToUsersAdminPage,
                   ),
                 ),
                 Padding(
                   padding: MyDimens.symetricMarginGeneral,
                   child: ItemPrimaryButton(
-                    text: 'Actividad',
+                    text: MyStrings.ACTIVITYADMIN,
                     onTap: _.goToActivityAdminPage,
                   ),
                 ),
                 Padding(
                   padding: MyDimens.symetricMarginGeneral,
                   child: ItemPrimaryButton(
-                    text: 'Informacion',
+                    text: MyStrings.INFOADMIN,
                     onTap: _.goToInfoAdminPage,
                   ),
                 ),
-                Padding(
+                const Padding(
                   padding: MyDimens.symetricMarginGeneral,
                   child: ItemPrimaryButton(
-                    text: 'Cerrar Sesion',
+                    text: MyStrings.LOGOUT,
                   ),
                 ),
               ],

@@ -4,6 +4,7 @@ import 'package:locals_guide_eeb/modules/admin_module/categories_admin/categorie
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
+import 'package:locals_guide_eeb/utils/my_strings.dart';
 
 class CategoriesAdminPage extends StatelessWidget {
   const CategoriesAdminPage({Key? key}) : super(key: key);
@@ -16,12 +17,12 @@ class CategoriesAdminPage extends StatelessWidget {
           backgroundColor: MyColors.blackBg,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: Text('Categorias'),
+            title: const Text(MyStrings.CATEGORIESADMIN),
             centerTitle: false,
             actions: [
               IconButton(
                   onPressed: () {},
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.add_circle_sharp,
                     color: Colors.teal,
                     size: 30,
