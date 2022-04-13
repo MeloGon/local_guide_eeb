@@ -22,7 +22,7 @@ class ItemPrimaryButton extends StatelessWidget {
       this.icon,
       this.onTap,
       this.bgColor,
-      this.borderColor,
+      this.borderColor = MyColors.blackBg,
       this.textColor,
       this.isValid = true,
       this.width,
@@ -34,15 +34,16 @@ class ItemPrimaryButton extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),
-          border: Border.all(color: Colors.white)),
+          border: Border.all(color: borderColor!)),
       width: width ?? MediaQuery.of(context).size.width,
       height: height,
       child: ButtonTheme(
         height: height,
         child: TextButton(
           style: ButtonStyle(
-              //backgroundColor: MaterialStateProperty.all<Color>(isValid ? bgColor ?? MainColors.primary : MainColors.disable),
-              ),
+            backgroundColor: MaterialStateProperty.all<Color>(
+                isValid ? bgColor ?? Colors.transparent : MyColors.disable),
+          ),
           onPressed: onTap,
           //disabledColor: MainColors.disable,
           child: Row(
@@ -64,9 +65,7 @@ class ItemPrimaryButton extends StatelessWidget {
         ),
         shape: RoundedRectangleBorder(
           side: BorderSide(
-              //color: isValid ? borderColor ?? MyColors.primary : MyColors.disable,
-              width: 1,
-              style: BorderStyle.solid),
+              color: borderColor!, width: 1, style: BorderStyle.solid),
         ),
       ),
     );

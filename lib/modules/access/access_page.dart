@@ -36,6 +36,7 @@ class AccessPage extends StatelessWidget {
                         child: ItemPrimaryButton(
                           text: MyStrings.LOGIN,
                           onTap: _.goToLoginPage,
+                          borderColor: Colors.white,
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -44,6 +45,7 @@ class AccessPage extends StatelessWidget {
                         child: ItemPrimaryButton(
                           text: MyStrings.REGISTER,
                           onTap: _.goToRegisterPage,
+                          borderColor: Colors.white,
                         ),
                       )
                     ],
