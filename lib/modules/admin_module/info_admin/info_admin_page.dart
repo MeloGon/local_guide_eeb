@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:locals_guide_eeb/modules/info_admin/info_admin_controller.dart';
+import 'package:locals_guide_eeb/modules/admin_module/info_admin/info_admin_controller.dart';
+
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';

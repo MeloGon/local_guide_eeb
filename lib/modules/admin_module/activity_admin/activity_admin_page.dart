@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:locals_guide_eeb/modules/activity_admin/activity_admin_controller.dart';
-import 'package:locals_guide_eeb/theme/my_colors.dart';
+import 'package:locals_guide_eeb/modules/admin_module/activity_admin/activity_admin_controller.dart';
 
-import '../../theme/my_styles.dart';
+import 'package:locals_guide_eeb/theme/my_colors.dart';
+import 'package:locals_guide_eeb/theme/my_styles.dart';
 
 class ActivityAdminPage extends StatelessWidget {
   const ActivityAdminPage({Key? key}) : super(key: key);

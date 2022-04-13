@@ -1,25 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:locals_guide_eeb/modules/users_admin/users_admin_controller.dart';
+import 'package:locals_guide_eeb/modules/admin_module/locals_admin/locals_admin_controller.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
+import 'package:locals_guide_eeb/theme/my_dimens.dart';
+import 'package:locals_guide_eeb/theme/my_styles.dart';
+import 'package:locals_guide_eeb/widgets/item_primary_button.dart';
 
-import '../../theme/my_dimens.dart';
-import '../../theme/my_styles.dart';
-
-class UsersAdminPage extends StatelessWidget {
-  const UsersAdminPage({Key? key}) : super(key: key);
+class LocalsAdminPage extends StatelessWidget {
+  const LocalsAdminPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<UsersAdminController>(
+    return GetBuilder<LocalsAdminController>(
       builder: (_) => SafeArea(
         child: Scaffold(
+          backgroundColor: MyColors.blackBg,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: Text('Usuarios'),
+            title: Text('Locales'),
             centerTitle: false,
+            actions: [
+              Container(
+                  padding: EdgeInsets.all(15),
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.teal,
+                      ),
+                      onPressed: () {},
+                      child: Text(
+                        'Agregar Local',
+                        style: TextStyle(color: Colors.black),
+                      )))
+            ],
           ),
-          backgroundColor: MyColors.blackBg,
           body: SingleChildScrollView(
             child: Padding(
               padding: MyDimens.symetricMarginGeneral,
@@ -48,11 +61,10 @@ class UsersAdminPage extends StatelessWidget {
                     child: Row(
                       children: [
                         Container(
-                          height: 40,
-                          width: 40,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle, color: Colors.red),
-                        ),
+                            height: 40,
+                            width: 40,
+                            decoration: const BoxDecoration(
+                                shape: BoxShape.circle, color: Colors.red)),
                         const SizedBox(
                           width: 20,
                         ),
@@ -60,8 +72,12 @@ class UsersAdminPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Mariale Castillo',
+                              'Sushi',
                               style: MyStyles.generalTextStyle1,
+                            ),
+                            Text(
+                              'Comida Nikkei',
+                              style: MyStyles.generalTextStyleRed,
                             ),
                           ],
                         ),
@@ -69,8 +85,8 @@ class UsersAdminPage extends StatelessWidget {
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(
-                              Icons.close_rounded,
-                              color: Colors.red,
+                              Icons.edit,
+                              color: Colors.white,
                             ))
                       ],
                     ),
