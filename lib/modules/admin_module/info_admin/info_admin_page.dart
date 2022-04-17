@@ -29,6 +29,28 @@ class InfoAdminPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
+                  'Logo',
+                  style: MyStyles.generalTextStyleWhite,
+                ),
+                const SizedBox(height: 20),
+                ItemPrimaryButton(
+                  text: 'Añadir logo',
+                  onTap: _.goToCategoriesPage,
+                  borderColor: Colors.white,
+                ),
+                const SizedBox(height: 30),
+                const Text(
+                  'Tagline',
+                  style: MyStyles.generalTextStyleWhite,
+                ),
+                const SizedBox(height: 20),
+                ItemPrimaryButton(
+                  text: 'Añadir Slogan',
+                  onTap: _.goToCategoriesPage,
+                  borderColor: Colors.white,
+                ),
+                const SizedBox(height: 30),
+                const Text(
                   MyStrings.CATEGORIESADMIN,
                   style: MyStyles.generalTextStyleWhite,
                 ),
@@ -36,6 +58,7 @@ class InfoAdminPage extends StatelessWidget {
                 ItemPrimaryButton(
                   text: MyStrings.EDIT,
                   onTap: _.goToCategoriesPage,
+                  borderColor: Colors.white,
                 ),
               ],
             ),
