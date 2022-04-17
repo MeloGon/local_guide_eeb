@@ -56,12 +56,13 @@ class ClientMenuPage extends StatelessWidget {
                 color: Colors.grey,
               ),
               const SizedBox(height: 40),
-              const Padding(
+              Padding(
                 padding: MyDimens.symetricMarginGeneral,
                 child: ItemPrimaryButton(
                   text: MyStrings.UBICATIONUSER,
                   textColor: Colors.black,
                   borderColor: Colors.black,
+                  onTap: _.goToClientUbicationsPage,
                 ),
               ),
               const Padding(

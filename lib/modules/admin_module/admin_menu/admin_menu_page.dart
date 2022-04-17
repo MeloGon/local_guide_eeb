@@ -48,6 +48,7 @@ class AdminMenuPage extends StatelessWidget {
                   child: ItemPrimaryButton(
                     text: MyStrings.LOCALEADMIN,
                     onTap: _.goToLocalsAdminPage,
+                    borderColor: Colors.white,
                   ),
                 ),
                 Padding(
@@ -55,6 +56,7 @@ class AdminMenuPage extends StatelessWidget {
                   child: ItemPrimaryButton(
                     text: MyStrings.USERSADMIN,
                     onTap: _.goToUsersAdminPage,
+                    borderColor: Colors.white,
                   ),
                 ),
                 Padding(
@@ -62,6 +64,7 @@ class AdminMenuPage extends StatelessWidget {
                   child: ItemPrimaryButton(
                     text: MyStrings.ACTIVITYADMIN,
                     onTap: _.goToActivityAdminPage,
+                    borderColor: Colors.white,
                   ),
                 ),
                 Padding(
@@ -69,12 +72,14 @@ class AdminMenuPage extends StatelessWidget {
                   child: ItemPrimaryButton(
                     text: MyStrings.INFOADMIN,
                     onTap: _.goToInfoAdminPage,
+                    borderColor: Colors.white,
                   ),
                 ),
                 const Padding(
                   padding: MyDimens.symetricMarginGeneral,
                   child: ItemPrimaryButton(
                     text: MyStrings.LOGOUT,
+                    borderColor: Colors.white,
                   ),
                 ),
               ],
