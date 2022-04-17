@@ -11,4 +11,5 @@ class AppRoutes {
   static const ACTIVITYADMIN = '/activity_admin';
   static const INFOADMIN = '/info_admin';
   static const CLIENTMENU = '/client_menu';
+  static const CLIENTUBICATIONS = '/client_ubications';
 }
