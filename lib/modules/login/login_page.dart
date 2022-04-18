@@ -24,6 +24,16 @@ class LoginPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Center(
+                  child: Container(
+                    height: 120,
+                    width: MediaQuery.of(context).size.width * .7,
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(
+                                'assets/images/logo/foofle-logo.png'))),
+                  ),
+                ),
                 const Text(
                   MyStrings.USER,
                   style: MyStyles.generalTextStyleWhite,
