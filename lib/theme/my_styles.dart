@@ -10,11 +10,18 @@ class MyStyles {
   static const TextStyle logoSubttitle = TextStyle(
     color: MyColors.white,
     fontSize: 16,
+    fontWeight: FontWeight.w500,
   );
 
   static const TextStyle generalTextStyleWhite = TextStyle(
     color: Colors.white,
     fontSize: 16,
+  );
+
+  static const TextStyle generalTextStyleWhiteBold = TextStyle(
+    color: Colors.white,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
   );
 
   static const TextStyle generalTextStyleBlack = TextStyle(

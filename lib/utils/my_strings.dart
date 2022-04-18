@@ -1,6 +1,6 @@
 class MyStrings {
   static const String ACCESSSUBTITLE = 'Que es lo que buscas hoy?';
-  static const String LOGIN = 'Iniciar Sesion';
+  static const String LOGIN = 'Iniciar Sesión';
   static const String REGISTER = 'Registro';
 
   static const String REGISTERSUBTITLE = 'Que te provoca hoy?';
@@ -22,8 +22,8 @@ class MyStrings {
 
   static const String USER = 'Usuario';
   static const String PASSWORD = 'Contraseña';
-  static const String INPUTUSER = 'Ingrese su usuario';
-  static const String INPUTPWD = 'Ingrese su contraseña';
+  static const String INPUTUSER = 'Admin';
+  static const String INPUTPWD = '************';
 
   static const String ADMINDEFAULT = 'Administrador';
   static const String LOCALEADMIN = 'Locales';
