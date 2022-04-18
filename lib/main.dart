@@ -10,12 +10,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      theme: ThemeData(fontFamily: 'Poppins'),
       title: 'Material App',
-      debugShowCheckedModeBanner:false,
+      debugShowCheckedModeBanner: false,
       home: const AccessPage(),
       initialBinding: AccessBinding(),
       getPages: AppPages.pages,
-      builder: (context, child){
+      builder: (context, child) {
         return ScrollConfiguration(behavior: GlowRemover(), child: child!);
       },
     );
