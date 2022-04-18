@@ -28,7 +28,7 @@ class ActivityAdminPage extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                  color: Colors.grey[850],
+                  color: MyColors.cardColorsDefault,
                 ),
                 child: Row(
                   children: [

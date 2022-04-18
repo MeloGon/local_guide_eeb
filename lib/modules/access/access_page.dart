@@ -19,36 +19,38 @@ class AccessPage extends StatelessWidget {
         child: Scaffold(
             backgroundColor: MyColors.blackBg,
             body: SingleChildScrollView(
-              child: Center(
-                child: Padding(
-                  padding: MyDimens.symetricMarginGeneral,
-                  child: Column(
-                    children: [
-                      const Text('Logo', style: MyStyles.logoStyle),
-                      const Text(
-                        MyStrings.ACCESSSUBTITLE,
-                        style: MyStyles.logoSubttitle,
-                      ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * .65),
-                      FadeInUp(
-                        duration: const Duration(milliseconds: 1000),
-                        child: ItemPrimaryButton(
-                          text: MyStrings.LOGIN,
-                          onTap: _.goToLoginPage,
-                          borderColor: Colors.white,
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * .9,
+                child: Center(
+                  child: Padding(
+                    padding: MyDimens.symetricMarginGeneral,
+                    child: Column(
+                      children: [
+                        const Text('Logo', style: MyStyles.logoStyle),
+                        const Text(
+                          MyStrings.ACCESSSUBTITLE,
+                          style: MyStyles.logoSubttitle,
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      FadeInUp(
-                        duration: const Duration(milliseconds: 1000),
-                        child: ItemPrimaryButton(
-                          text: MyStrings.REGISTER,
-                          onTap: _.goToRegisterPage,
-                          borderColor: Colors.white,
+                        const Spacer(),
+                        FadeInUp(
+                          duration: const Duration(milliseconds: 1000),
+                          child: ItemPrimaryButton(
+                            text: MyStrings.LOGIN,
+                            onTap: _.goToLoginPage,
+                            borderColor: Colors.white,
+                          ),
                         ),
-                      )
-                    ],
+                        const SizedBox(height: 20),
+                        FadeInUp(
+                          duration: const Duration(milliseconds: 1000),
+                          child: ItemPrimaryButton(
+                            text: MyStrings.REGISTER,
+                            onTap: _.goToRegisterPage,
+                            borderColor: Colors.white,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -24,7 +24,7 @@ class CategoriesAdminPage extends StatelessWidget {
                   onPressed: () {},
                   icon: const Icon(
                     Icons.add_circle_sharp,
-                    color: Colors.teal,
+                    color: MyColors.cusTeal,
                     size: 30,
                   )),
             ],

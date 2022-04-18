@@ -26,15 +26,19 @@ class UsersAdminPage extends StatelessWidget {
               padding: MyDimens.symetricMarginGeneral,
               child: Column(
                 children: [
-                  TextField(
-                    style: const TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.all(20),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30)),
-                        fillColor: Colors.white,
-                        filled: true,
-                        prefixIcon: const Icon(Icons.search)),
+                  SizedBox(
+                    height: 35,
+                    child: TextField(
+                      style: const TextStyle(
+                          color: Colors.black, fontSize: 14, height: 1),
+                      decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(20),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                          fillColor: Colors.white,
+                          filled: true,
+                          prefixIcon: const Icon(Icons.search)),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
@@ -44,7 +48,7 @@ class UsersAdminPage extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: Colors.grey[850],
+                      color: MyColors.cardColorsDefault,
                     ),
                     child: Row(
                       children: [

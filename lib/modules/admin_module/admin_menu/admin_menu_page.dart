@@ -24,7 +24,7 @@ class AdminMenuPage extends StatelessWidget {
                   width: 100,
                   height: 100,
                   decoration: const BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.teal),
+                      shape: BoxShape.circle, color: MyColors.cusTeal),
                   child: const Center(
                       child: Text(
                     'A',
@@ -34,7 +34,7 @@ class AdminMenuPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 const Text(
                   MyStrings.ADMINDEFAULT,
-                  style: MyStyles.generalTextStyleWhite,
+                  style: MyStyles.generalTextStyleWhiteBold,
                 ),
                 const SizedBox(height: 40),
                 Container(
