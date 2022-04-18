@@ -3,6 +3,8 @@ import 'package:locals_guide_eeb/modules/access/access_binding.dart';
 import 'package:locals_guide_eeb/modules/access/access_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/activity_admin/activity_admin_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/activity_admin/activity_admin_page.dart';
+import 'package:locals_guide_eeb/modules/admin_module/add_categorie_admin/add_categorie_admin_binding.dart';
+import 'package:locals_guide_eeb/modules/admin_module/add_categorie_admin/add_categorie_admin_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/admin_menu/admin_menu_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/admin_menu/admin_menu_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/categories_admin/categories_admin_binding.dart';
@@ -83,5 +85,9 @@ class AppPages {
         name: AppRoutes.CLIENTUBICATIONS,
         page: () => const ClientUbicationsPage(),
         binding: ClientUbicationsBinding()),
+    GetPage(
+        name: AppRoutes.ADDCATEGORIEADMIN,
+        page: () => const AddCategorieAdminPage(),
+        binding: AddCategorieAdminBinding()),
   ];
 }
