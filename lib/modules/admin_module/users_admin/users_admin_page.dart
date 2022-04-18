@@ -57,6 +57,10 @@ class UsersAdminPage extends StatelessWidget {
                           width: 40,
                           decoration: const BoxDecoration(
                               shape: BoxShape.circle, color: Colors.red),
+                          child: Image(
+                            image: NetworkImage(
+                                'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwallpaperaccess.com%2Fcool-profile-pictures&psig=AOvVaw0Ot78lHx67xqLWIJGeNUfK&ust=1650375543558000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCMDLkpPenfcCFQAAAAAdAAAAABAS'),
+                          ),
                         ),
                         const SizedBox(
                           width: 20,

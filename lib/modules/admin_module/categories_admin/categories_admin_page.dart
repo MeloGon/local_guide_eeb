@@ -21,7 +21,7 @@ class CategoriesAdminPage extends StatelessWidget {
             centerTitle: false,
             actions: [
               IconButton(
-                  onPressed: () {},
+                  onPressed: _.goToAddCategorieAdminPage,
                   icon: const Icon(
                     Icons.add_circle_sharp,
                     color: MyColors.cusTeal,
