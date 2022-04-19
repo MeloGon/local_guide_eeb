@@ -5,6 +5,8 @@ import 'package:locals_guide_eeb/modules/admin_module/activity_admin/activity_ad
 import 'package:locals_guide_eeb/modules/admin_module/activity_admin/activity_admin_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_categorie_admin/add_categorie_admin_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_categorie_admin/add_categorie_admin_page.dart';
+import 'package:locals_guide_eeb/modules/admin_module/add_local_admin/add_local_admin_binding.dart';
+import 'package:locals_guide_eeb/modules/admin_module/add_local_admin/add_local_admin_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/admin_menu/admin_menu_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/admin_menu/admin_menu_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/categories_admin/categories_admin_binding.dart';
@@ -89,5 +91,9 @@ class AppPages {
         name: AppRoutes.ADDCATEGORIEADMIN,
         page: () => const AddCategorieAdminPage(),
         binding: AddCategorieAdminBinding()),
+    GetPage(
+        name: AppRoutes.ADDLOCALADMIN,
+        page: () => const AddLocalAdminPage(),
+        binding: AddLocalAdminBinding()),
   ];
 }
