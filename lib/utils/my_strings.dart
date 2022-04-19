@@ -40,4 +40,11 @@ class MyStrings {
   static const String NOTIFIUSER = 'Notificaciones';
   static const String MOMENTSUSER = 'Momentos';
   static const String RECOMMENDUSER = 'Recomendaciones';
+
+  static const String ADDCATEGORIE = 'Agregar Categoría';
+  static const String NAMECATEGORIE = 'Nombre de categoría';
+  static const String SELECTCOLORCATEGORIE =
+      'Selecciona el color de la categoría';
+  static const String SAVECATEGORIE = 'Guardar Categoría';
+  static const String WRITECATEGORIE = 'Escriba el nombre de la categoría';
 }
