@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:locals_guide_eeb/modules/client_module/client_ubications/client_ubications_controller.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
@@ -95,10 +96,8 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                           controller: _controller,
                           tabs: [
                             Tab(
-                                icon: Icon(
-                              Icons.recommend,
-                              color: Colors.black,
-                            )),
+                                icon: SvgPicture.asset(
+                                    'assets/icons/plato-activate.svg')),
                             Tab(
                               icon: Icon(Icons.margin_rounded,
                                   color: Colors.black),
