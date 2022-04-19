@@ -29,7 +29,7 @@ class LocalsAdminPage extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                      onPressed: () {},
+                      onPressed: _.goToAddLocalAdminPage,
                       child: const Text(
                         MyStrings.ADDLOCAL,
                         style: TextStyle(color: Colors.black),
