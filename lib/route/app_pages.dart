@@ -7,6 +7,8 @@ import 'package:locals_guide_eeb/modules/admin_module/add_address/add_address_bi
 import 'package:locals_guide_eeb/modules/admin_module/add_address/add_address_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_categorie_admin/add_categorie_admin_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_categorie_admin/add_categorie_admin_page.dart';
+import 'package:locals_guide_eeb/modules/admin_module/add_details_local/add_details_local_binding.dart';
+import 'package:locals_guide_eeb/modules/admin_module/add_details_local/add_details_local_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_local_admin/add_local_admin_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_local_admin/add_local_admin_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/admin_menu/admin_menu_binding.dart';
@@ -101,5 +103,9 @@ class AppPages {
         name: AppRoutes.ADDADDRESS,
         page: () => const AddAddressPage(),
         binding: AddAddressBinding()),
+    GetPage(
+        name: AppRoutes.ADDDETAILSLOCAL,
+        page: () => const AddDetailsLocalPage(),
+        binding: AddDetailsLocalBinding())
   ];
 }

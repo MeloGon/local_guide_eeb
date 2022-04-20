@@ -15,4 +15,5 @@ class AppRoutes {
   static const ADDCATEGORIEADMIN = '/add_categorie_admin';
   static const ADDLOCALADMIN = '/add_local_admin';
   static const ADDADDRESS = '/add_address';
+  static const ADDDETAILSLOCAL = '/add_details_local';
 }
