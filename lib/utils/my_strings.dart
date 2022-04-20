@@ -51,4 +51,10 @@ class MyStrings {
   static const String DEFAULTNAMELOCALE = 'I sushi';
   static const String NAMELABEL = 'Nombre';
   static const String PROFILEIMAGE = 'Imagen de Perfil';
+
+  static const String ADDADDRESS = 'Agregar Dirección';
+  static const String UBICATION = 'Ubicación';
+  static const String ADDRESSLOCALE = 'Dirección del local';
+  static const String PHONE = 'Teléfono';
+  static const String REPEATPWD = 'Repetir Contraseña';
 }
