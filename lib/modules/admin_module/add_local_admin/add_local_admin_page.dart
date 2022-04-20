@@ -70,6 +70,7 @@ class AddLocalAdminPage extends StatelessWidget {
                 ItemPrimaryButton(
                   text: MyStrings.NEXT,
                   borderColor: Colors.white,
+                  onTap: _.goToAddAddressPage,
                 )
               ],
             ),
