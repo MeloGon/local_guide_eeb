@@ -57,4 +57,14 @@ class MyStrings {
   static const String ADDRESSLOCALE = 'Dirección del local';
   static const String PHONE = 'Teléfono';
   static const String REPEATPWD = 'Repetir Contraseña';
+
+  static const String CATEGORY = 'Categoría';
+  static const String PRICE = 'Precio';
+  static const String CARTABUTTON = 'Botón Carta';
+  static const String BTNPAGWEB = 'Botón Página Web';
+  static const String BTNDELIVERY = 'Botón Delivery';
+  static const String LINKMENU = 'Link de carta';
+  static const String LINKPAGWEB = 'Link a Página Web';
+  static const String LINKDELIVERY = 'Link a Delivery';
+  static const String SELECTCATEGORY = 'Selecciona una categoría';
 }

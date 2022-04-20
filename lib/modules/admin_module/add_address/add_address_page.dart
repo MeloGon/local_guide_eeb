@@ -127,6 +127,7 @@ class AddAddressPage extends StatelessWidget {
                         ItemPrimaryButton(
                           text: MyStrings.NEXT,
                           borderColor: MyColors.white,
+                          onTap: _.goToAddDetailsLocalPage,
                         )
                       ],
                     ),
