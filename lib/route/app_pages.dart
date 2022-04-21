@@ -11,6 +11,8 @@ import 'package:locals_guide_eeb/modules/admin_module/add_details_local/add_deta
 import 'package:locals_guide_eeb/modules/admin_module/add_details_local/add_details_local_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_local_admin/add_local_admin_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_local_admin/add_local_admin_page.dart';
+import 'package:locals_guide_eeb/modules/admin_module/add_table_reserve/add_table_reserve_binding.dart';
+import 'package:locals_guide_eeb/modules/admin_module/add_table_reserve/add_table_reserve_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/admin_menu/admin_menu_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/admin_menu/admin_menu_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/categories_admin/categories_admin_binding.dart';
@@ -106,6 +108,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.ADDDETAILSLOCAL,
         page: () => const AddDetailsLocalPage(),
-        binding: AddDetailsLocalBinding())
+        binding: AddDetailsLocalBinding()),
+    GetPage(
+        name: AppRoutes.ADDTABLERESERVE,
+        page: () => const AddTableReservePage(),
+        binding: AddTableReserveBinding()),
   ];
 }
