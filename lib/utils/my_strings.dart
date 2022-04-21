@@ -67,4 +67,10 @@ class MyStrings {
   static const String LINKPAGWEB = 'Link a Página Web';
   static const String LINKDELIVERY = 'Link a Delivery';
   static const String SELECTCATEGORY = 'Selecciona una categoría';
+
+  static const String RESERVE = 'Reservas';
+  static const String CAPACITY = 'Aforo';
+  static const String NUMBERPEOPLE = 'Cantidad de Personas';
+  static const String ADDNEWADDRESS = 'Agregar nueva dirección';
+  static const String FINISH = 'Finalizar';
 }
