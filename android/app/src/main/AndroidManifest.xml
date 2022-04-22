@@ -1,10 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.locals_guide_eeb">
+    package="com.enelblanco.locals_guide_eeb">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
     
    <application
         android:label="locals_guide_eeb"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+    
         <activity
             android:name=".MainActivity"
             android:exported="true"

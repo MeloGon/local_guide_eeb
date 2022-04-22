@@ -1,4 +1,4 @@
-package com.example.locals_guide_eeb
+package com.enelblanco.locals_guide_eeb
 
 import io.flutter.embedding.android.FlutterActivity
 
