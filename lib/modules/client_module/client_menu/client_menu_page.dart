@@ -49,13 +49,13 @@ class ClientMenuPage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               const Text('12k'),
-              const SizedBox(height: 40),
+              const SizedBox(height: 10),
               Container(
                 height: 1,
                 width: double.infinity,
                 color: Colors.grey,
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               Padding(
                 padding: MyDimens.symetricMarginGeneral,
                 child: ItemPrimaryButton(
@@ -84,6 +84,13 @@ class ClientMenuPage extends StatelessWidget {
                 padding: MyDimens.symetricMarginGeneral,
                 child: ItemPrimaryButton(
                   text: MyStrings.RECOMMENDUSER,
+                  textColor: Colors.black,
+                ),
+              ),
+              const Padding(
+                padding: MyDimens.symetricMarginGeneral,
+                child: ItemPrimaryButton(
+                  text: MyStrings.RESERVE,
                   textColor: Colors.black,
                 ),
               ),

@@ -29,6 +29,12 @@ class MyStyles {
     fontSize: 16,
   );
 
+  static const TextStyle generalTextStyleBlackBold = TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+  );
+
   static const TextStyle generalTextStyleRed = TextStyle(
     color: Colors.red,
     fontSize: 16,

@@ -93,7 +93,7 @@ BEGIN
             VALUE "FileDescription", "locals_guide_eeb" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "locals_guide_eeb" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 com.example. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 com.enelblanco. All rights reserved." "\0"
             VALUE "OriginalFilename", "locals_guide_eeb.exe" "\0"
             VALUE "ProductName", "locals_guide_eeb" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"

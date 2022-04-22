@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_address/add_address_controller.dart';
 import 'package:locals_guide_eeb/modules/register_phone/local_widgets/input_number_phone.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
@@ -28,26 +29,41 @@ class AddAddressPage extends StatelessWidget {
                     color: Colors.amber,
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * .45,
+                    child: GoogleMap(
+                        onMapCreated: (controller) {
+                          _.mapController = controller;
+                          _.mapController.setMapStyle(_.mapStyle);
+                        },
+                        initialCameraPosition: CameraPosition(
+                          target: LatLng(37.42796133580664, -122.085749655962),
+                          zoom: 14.4746,
+                        )),
                   ),
                   Padding(
                     padding: MyDimens.symetricMarginGeneral,
                     child: Row(
                       children: [
-                        Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: MyColors.blackBg,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            color: Colors.white,
-                            size: 15,
+                        GestureDetector(
+                          onTap: () => Navigator.pop(context),
+                          child: Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: MyColors.blackBg,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: const Icon(
+                              Icons.arrow_back_ios_new_rounded,
+                              color: Colors.white,
+                              size: 15,
+                            ),
                           ),
                         ),
                         SizedBox(width: 30),
-                        Text('Agregar direccion')
+                        Text(
+                          MyStrings.ADDADDRESS,
+                          style: MyStyles.generalTextStyleBlackBold,
+                        )
                       ],
                     ),
                   ),
@@ -55,6 +71,7 @@ class AddAddressPage extends StatelessWidget {
               ),
               Expanded(
                 child: SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(),
                   child: Container(
                     padding: MyDimens.symetricMarginGeneral,
                     width: MediaQuery.of(context).size.width,
