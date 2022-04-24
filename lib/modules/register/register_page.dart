@@ -23,7 +23,16 @@ class RegisterPage extends StatelessWidget {
                   padding: MyDimens.symetricMarginGeneral,
                   child: Column(
                     children: [
-                      const Text('Logo', style: MyStyles.logoStyle),
+                      Center(
+                        child: Container(
+                          height: 120,
+                          width: MediaQuery.of(context).size.width * .7,
+                          decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      'assets/images/logo/foofle-logo.png'))),
+                        ),
+                      ),
                       const Text(
                         MyStrings.REGISTERSUBTITLE,
                         style: MyStyles.logoSubttitle,
@@ -31,19 +40,24 @@ class RegisterPage extends StatelessWidget {
                       const SizedBox(height: 40),
                       ItemPrimaryButton(
                         text: MyStrings.REGISTERGMAIL,
+                        borderColor: Colors.white,
+                        onTap: _.registerWithGmail,
                       ),
                       const SizedBox(height: 20),
                       ItemPrimaryButton(
                         text: MyStrings.REGISTERFB,
+                        borderColor: Colors.white,
                       ),
                       const SizedBox(height: 20),
                       ItemPrimaryButton(
                         text: MyStrings.REGISTERPHONE,
+                        borderColor: Colors.white,
                         onTap: _.goToRegisterByPhone,
                       ),
                       const SizedBox(height: 20),
                       ItemPrimaryButton(
                         text: MyStrings.REGISTERMAIL,
+                        borderColor: Colors.white,
                       ),
                     ],
                   ),
