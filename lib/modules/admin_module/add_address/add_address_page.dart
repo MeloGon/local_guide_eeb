@@ -14,19 +14,22 @@ class AddAddressPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final availableHeight = MediaQuery.of(context).size.height -
+        /*AppBar().preferredSize.height -  (si hay appbar)*/
+        MediaQuery.of(context).padding.top -
+        MediaQuery.of(context).padding.bottom;
     return GetBuilder<AddAdressController>(
       builder: (_) => SafeArea(
           child: Scaffold(
               body: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: SizedBox(
-          height: MediaQuery.of(context).size.height * .92,
+          height: availableHeight,
           child: Column(
             children: [
               Stack(
                 children: [
                   Container(
-                    color: Colors.amber,
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * .45,
                     child: GoogleMap(
