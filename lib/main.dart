@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:locals_guide_eeb/modules/access/access_binding.dart';
 import 'package:locals_guide_eeb/modules/access/access_page.dart';
 import 'package:locals_guide_eeb/route/app_pages.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override

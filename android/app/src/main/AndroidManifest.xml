@@ -5,6 +5,7 @@
     
    <application
         android:label="locals_guide_eeb"
+        android:usesCleartextTraffic="true"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
