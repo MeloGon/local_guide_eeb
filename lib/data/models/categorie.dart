@@ -12,8 +12,8 @@ class Category {
   });
 
   Category.fromDocumentSnapshot({required DocumentSnapshot documentSnapshot}) {
-    idCategory = documentSnapshot.id;
-    nombre = documentSnapshot["nombre"];
+    idCategory = documentSnapshot['idCategoria'];
+    nombre = documentSnapshot["nombreCategoria"];
     color = documentSnapshot["color"];
   }
 }
