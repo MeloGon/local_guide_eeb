@@ -11,6 +11,10 @@ class CategoriesAdminPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final availableHeight = MediaQuery.of(context).size.height -
+        /*AppBar().preferredSize.height -  (si hay appbar)*/
+        MediaQuery.of(context).padding.top -
+        MediaQuery.of(context).padding.bottom;
     return GetBuilder<CategoriesAdminController>(
       builder: (_) => SafeArea(
         child: Scaffold(
@@ -30,40 +34,40 @@ class CategoriesAdminPage extends StatelessWidget {
             ],
           ),
           body: SingleChildScrollView(
-            child: Padding(
+            child: Container(
               padding: MyDimens.symetricMarginGeneral,
-              child: Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Colors.grey),
-                    ),
-                    child: Row(
-                      children: [
-                        const Spacer(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+              height: availableHeight,
+              child: ListView.builder(
+                  itemCount: _.categorias.length,
+                  itemBuilder: (context, index) => Container(
+                        margin: EdgeInsets.only(bottom: 20),
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 2, color: Colors.grey),
+                        ),
+                        child: Row(
                           children: [
-                            Text(
-                              'Carnes y Pollos',
-                              style: MyStyles.generalTextStyleWhite,
+                            const Spacer(),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Carnes y Pollos',
+                                  style: MyStyles.generalTextStyleWhite,
+                                ),
+                              ],
                             ),
+                            const Spacer(),
+                            IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.edit,
+                                  color: Colors.white,
+                                ))
                           ],
                         ),
-                        const Spacer(),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                            ))
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                      )),
             ),
           ),
         ),
