@@ -16,7 +16,7 @@ class RegisterController extends GetxController {
     Get.toNamed(AppRoutes.REGISTERPHONE);
   }
 
-  Future<UserCredential> registerWithGmail() async {
+  registerWithGmail() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     final GoogleSignInAuthentication? googleAuth =
         await googleUser?.authentication;
@@ -26,6 +26,17 @@ class RegisterController extends GetxController {
       idToken: googleAuth?.idToken,
     );
 
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    final authResult =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+    final User? user = authResult.user;
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    if (user!.uid == currentUser!.uid) {
+      Get.toNamed(AppRoutes.ADMINMENU);
+      return;
+    } else {
+      Get.snackbar('Ups algo salió mal',
+          'Por favor pongase en contacto con el equipo de desarrollo. Gracias');
+    }
   }
 }
