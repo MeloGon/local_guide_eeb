@@ -13,6 +13,10 @@ class AddCategorieAdminPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final availableHeight = MediaQuery.of(context).size.height -
+        /*AppBar().preferredSize.height -  (si hay appbar)*/
+        MediaQuery.of(context).padding.top -
+        MediaQuery.of(context).padding.bottom;
     return GetBuilder<AddCategorieAdminController>(
       builder: (_) => SafeArea(
           child: Scaffold(
@@ -24,7 +28,7 @@ class AddCategorieAdminPage extends StatelessWidget {
         backgroundColor: MyColors.blackBg,
         body: SingleChildScrollView(
           child: SizedBox(
-            height: MediaQuery.of(context).size.height * .9,
+            height: availableHeight,
             child: Padding(
               padding: MyDimens.symetricMarginGeneral,
               child: Column(
@@ -34,8 +38,10 @@ class AddCategorieAdminPage extends StatelessWidget {
                     MyStrings.NAMECATEGORIE,
                     style: MyStyles.subtitleTextStyleWhite,
                   ),
-                  const TextField(
-                      decoration: InputDecoration(
+                  TextField(
+                      style: MyStyles.generalTextStyleWhite,
+                      controller: _.txNombreCat,
+                      decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: MyStrings.WRITECATEGORIE,
                           hintStyle: TextStyle(color: Colors.grey))),
@@ -53,10 +59,13 @@ class AddCategorieAdminPage extends StatelessWidget {
                   ColorPicker(
                       labelTextStyle: MyStyles.generalTextStyleWhiteBold,
                       pickerColor: Colors.red,
-                      onColorChanged: (value) {}),
-                  const ItemPrimaryButton(
+                      onColorChanged: (value) {
+                        _.txColorCat = value.toString();
+                      }),
+                  ItemPrimaryButton(
                     text: MyStrings.SAVECATEGORIE,
                     borderColor: Colors.white,
+                    onTap: _.addCategory,
                   )
                 ],
               ),
