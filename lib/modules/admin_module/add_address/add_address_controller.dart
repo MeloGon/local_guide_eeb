@@ -7,6 +7,9 @@ class AddAdressController extends GetxController {
   String? _mapStyle;
   String? get mapStyle => _mapStyle;
 
+  List<Marker>? _myMarker = [];
+  List<Marker>? get myMarker => _myMarker;
+
   late GoogleMapController mapController;
 
   @override
@@ -19,5 +22,14 @@ class AddAdressController extends GetxController {
 
   void goToAddDetailsLocalPage() async {
     Get.toNamed(AppRoutes.ADDDETAILSLOCAL);
+  }
+
+  putMarker(LatLng tapPoint) {
+    _myMarker = [];
+    _myMarker!.add(Marker(
+        markerId: MarkerId(tapPoint.toString()),
+        position: tapPoint,
+        draggable: true));
+    update();
   }
 }

@@ -37,9 +37,12 @@ class AddAddressPage extends StatelessWidget {
                           _.mapController = controller;
                           _.mapController.setMapStyle(_.mapStyle);
                         },
+                        markers: Set.from(_.myMarker!),
+                        onTap: _.putMarker,
                         initialCameraPosition: CameraPosition(
-                          target: LatLng(37.42796133580664, -122.085749655962),
-                          zoom: 14.4746,
+                          target:
+                              LatLng(-12.050424378417254, -77.04314569048383),
+                          zoom: 12,
                         )),
                   ),
                   Padding(
