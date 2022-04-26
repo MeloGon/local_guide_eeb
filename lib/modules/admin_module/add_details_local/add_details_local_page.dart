@@ -12,14 +12,19 @@ class AddDetailsLocalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final availableHeight = MediaQuery.of(context).size.height -
+        /*AppBar().preferredSize.height -  (si hay appbar)*/
+        MediaQuery.of(context).padding.top -
+        MediaQuery.of(context).padding.bottom;
     return GetBuilder<AddDetailsLocalController>(
       builder: (_) => SafeArea(
           child: Scaffold(
         backgroundColor: MyColors.blackBg,
         body: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
           child: SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * .9,
+              height: availableHeight,
               child: Stack(
                 children: [
                   Container(
@@ -37,125 +42,127 @@ class AddDetailsLocalPage extends StatelessWidget {
                       size: 15,
                     ),
                   ),
-                  Padding(
-                    padding: MyDimens.symetricMarginGeneral,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Align(
-                          alignment: Alignment.center,
-                          child: Container(
-                            width: 100,
-                            height: 100,
-                            decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: MyColors.cusTeal),
-                            child: const Center(
-                                child: Text(
-                              'A',
-                              style:
-                                  TextStyle(fontSize: 46, color: Colors.white),
-                            )),
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: MyDimens.symetricMarginGeneral,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              width: 100,
+                              height: 100,
+                              decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: MyColors.cusTeal),
+                              child: const Center(
+                                  child: Text(
+                                'A',
+                                style: TextStyle(
+                                    fontSize: 46, color: Colors.white),
+                              )),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'I Sushi',
+                          const SizedBox(height: 20),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'I Sushi',
+                              style: MyStyles.generalTextStyleWhite,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          const Text(
+                            MyStrings.CATEGORY,
                             style: MyStyles.generalTextStyleWhite,
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        const Text(
-                          MyStrings.CATEGORY,
-                          style: MyStyles.generalTextStyleWhite,
-                        ),
-                        const TextField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: MyStrings.SELECTCATEGORY,
-                            hintStyle: TextStyle(color: Colors.grey),
+                          const TextField(
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: MyStrings.SELECTCATEGORY,
+                              hintStyle: TextStyle(color: Colors.grey),
+                            ),
                           ),
-                        ),
-                        Container(
-                          height: 1,
-                          color: Colors.lightGreen,
-                          width: double.infinity,
-                        ),
-                        const SizedBox(height: 30),
-                        const Text(
-                          MyStrings.PRICE,
-                          style: MyStyles.generalTextStyleWhite,
-                        ),
-                        Slider(
-                          divisions: 3,
-                          value: 10,
-                          onChanged: (value) {},
-                          min: 0,
-                          max: 30,
-                          thumbColor: Colors.lightGreen,
-                          inactiveColor: Colors.grey.withOpacity(.5),
-                          activeColor: Colors.lightGreen,
-                        ),
-                        const SizedBox(height: 30),
-                        const Text(
-                          MyStrings.CARTABUTTON,
-                          style: MyStyles.generalTextStyleWhite,
-                        ),
-                        const TextField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: MyStrings.LINKMENU,
-                            hintStyle: TextStyle(color: Colors.grey),
+                          Container(
+                            height: 1,
+                            color: Colors.lightGreen,
+                            width: double.infinity,
                           ),
-                        ),
-                        Container(
-                          height: 1,
-                          color: Colors.lightGreen,
-                          width: double.infinity,
-                        ),
-                        const SizedBox(height: 30),
-                        const Text(
-                          MyStrings.BTNPAGWEB,
-                          style: MyStyles.generalTextStyleWhite,
-                        ),
-                        const TextField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: MyStrings.LINKPAGWEB,
-                            hintStyle: TextStyle(color: Colors.grey),
+                          const SizedBox(height: 30),
+                          const Text(
+                            MyStrings.PRICE,
+                            style: MyStyles.generalTextStyleWhite,
                           ),
-                        ),
-                        Container(
-                          height: 1,
-                          color: Colors.lightGreen,
-                          width: double.infinity,
-                        ),
-                        const SizedBox(height: 30),
-                        const Text(
-                          MyStrings.BTNDELIVERY,
-                          style: MyStyles.generalTextStyleWhite,
-                        ),
-                        const TextField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: MyStrings.LINKDELIVERY,
-                            hintStyle: TextStyle(color: Colors.grey),
+                          Slider(
+                            divisions: 3,
+                            value: 10,
+                            onChanged: (value) {},
+                            min: 0,
+                            max: 30,
+                            thumbColor: Colors.lightGreen,
+                            inactiveColor: Colors.grey.withOpacity(.5),
+                            activeColor: Colors.lightGreen,
                           ),
-                        ),
-                        Container(
-                          height: 1,
-                          color: Colors.lightGreen,
-                          width: double.infinity,
-                        ),
-                        const Spacer(),
-                        ItemPrimaryButton(
-                          text: MyStrings.NEXT,
-                          borderColor: MyColors.white,
-                          onTap: _.goToAddTableReservePage,
-                        )
-                      ],
+                          const SizedBox(height: 30),
+                          const Text(
+                            MyStrings.CARTABUTTON,
+                            style: MyStyles.generalTextStyleWhite,
+                          ),
+                          const TextField(
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: MyStrings.LINKMENU,
+                              hintStyle: TextStyle(color: Colors.grey),
+                            ),
+                          ),
+                          Container(
+                            height: 1,
+                            color: Colors.lightGreen,
+                            width: double.infinity,
+                          ),
+                          const SizedBox(height: 30),
+                          const Text(
+                            MyStrings.BTNPAGWEB,
+                            style: MyStyles.generalTextStyleWhite,
+                          ),
+                          const TextField(
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: MyStrings.LINKPAGWEB,
+                              hintStyle: TextStyle(color: Colors.grey),
+                            ),
+                          ),
+                          Container(
+                            height: 1,
+                            color: Colors.lightGreen,
+                            width: double.infinity,
+                          ),
+                          const SizedBox(height: 30),
+                          const Text(
+                            MyStrings.BTNDELIVERY,
+                            style: MyStyles.generalTextStyleWhite,
+                          ),
+                          const TextField(
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: MyStrings.LINKDELIVERY,
+                              hintStyle: TextStyle(color: Colors.grey),
+                            ),
+                          ),
+                          Container(
+                            height: 1,
+                            color: Colors.lightGreen,
+                            width: double.infinity,
+                          ),
+                          const SizedBox(height: 30),
+                          ItemPrimaryButton(
+                            text: MyStrings.NEXT,
+                            borderColor: MyColors.white,
+                            onTap: _.goToAddTableReservePage,
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],
