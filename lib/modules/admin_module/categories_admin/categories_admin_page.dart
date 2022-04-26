@@ -37,10 +37,19 @@ class CategoriesAdminPage extends StatelessWidget {
             child: Container(
               padding: MyDimens.symetricMarginGeneral,
               height: availableHeight,
-              child: ListView.builder(
-                  itemCount: _.categorias.length,
-                  itemBuilder: (context, index) => Container(
-                        margin: EdgeInsets.only(bottom: 20),
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  _.showCategories();
+                },
+                child: ListView.builder(
+                    itemCount: _.categorias.length,
+                    itemBuilder: (context, index) {
+                      final categoria = _.categorias[index];
+                      final color = categoria.color;
+                      String valueString = color.split('(0x')[1].split(')')[0];
+                      int value = int.parse(valueString, radix: 16);
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 10),
                         width: double.infinity,
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
@@ -53,21 +62,24 @@ class CategoriesAdminPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Carnes y Pollos',
-                                  style: MyStyles.generalTextStyleWhite,
+                                  categoria.nombre,
+                                  style: TextStyle(
+                                      fontSize: 16, color: Color(value)),
                                 ),
                               ],
                             ),
                             const Spacer(),
                             IconButton(
                                 onPressed: () {},
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.edit,
-                                  color: Colors.white,
+                                  color: Color(value),
                                 ))
                           ],
                         ),
-                      )),
+                      );
+                    }),
+              ),
             ),
           ),
         ),

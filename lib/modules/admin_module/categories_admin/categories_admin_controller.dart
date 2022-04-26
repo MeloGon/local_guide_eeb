@@ -22,20 +22,7 @@ class CategoriesAdminController extends GetxController {
   }
 
   void showCategories() async {
-    // await firebaseFirestore
-    //     .collection("GuiaLocales")
-    //     .doc("admin")
-    //     .collection("Categorias")
-    //     .snapshots()
-    //     .map((event) {
-    //   for (var item in event.docs) {
-    //     print(item);
-    //     final category = Category.fromDocumentSnapshot(documentSnapshot: item);
-    //     categorias.add(category);
-    //     update();
-    //   }
-    //   return categorias;
-    // });
+    categorias.clear();
     await firebaseFirestore
         .collection("GuiaLocales")
         .doc("admin")
