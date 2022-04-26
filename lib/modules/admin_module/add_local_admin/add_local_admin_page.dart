@@ -32,9 +32,10 @@ class AddLocalAdminPage extends StatelessWidget {
                   MyStrings.NAMELABEL,
                   style: MyStyles.generalTextStyleWhite,
                 ),
-                const TextField(
-                    style: TextStyle(color: MyColors.white),
-                    decoration: InputDecoration(
+                TextField(
+                    controller: _.txNameLocal,
+                    style: const TextStyle(color: MyColors.white),
+                    decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: MyStrings.DEFAULTNAMELOCALE,
                         hintStyle: TextStyle(color: Colors.grey))),
