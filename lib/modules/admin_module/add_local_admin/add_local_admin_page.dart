@@ -33,6 +33,7 @@ class AddLocalAdminPage extends StatelessWidget {
                   style: MyStyles.generalTextStyleWhite,
                 ),
                 const TextField(
+                    style: TextStyle(color: MyColors.white),
                     decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: MyStrings.DEFAULTNAMELOCALE,
@@ -44,17 +45,21 @@ class AddLocalAdminPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 50),
                 Center(
-                  child: Container(
-                    width: 200,
-                    height: 200,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                        border: Border.all(color: MyColors.cusTeal, width: 2)),
-                    child: const Center(
-                      child: Icon(
-                        Icons.add,
-                        size: 50,
+                  child: GestureDetector(
+                    onTap: _.addPhoto,
+                    child: Container(
+                      width: 200,
+                      height: 200,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                          border:
+                              Border.all(color: MyColors.cusTeal, width: 2)),
+                      child: const Center(
+                        child: Icon(
+                          Icons.add,
+                          size: 50,
+                        ),
                       ),
                     ),
                   ),
