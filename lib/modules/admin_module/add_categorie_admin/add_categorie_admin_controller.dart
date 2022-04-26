@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
+
 import 'package:locals_guide_eeb/data/models/categorie.dart';
+import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:random_string/random_string.dart';
 
 class AddCategorieAdminController extends GetxController {
@@ -30,5 +32,9 @@ class AddCategorieAdminController extends GetxController {
       'nombreCategoria': txNombreCat.text,
       'color': txColorCat,
     });
+    Get.back();
+    Get.snackbar('La categoria ha sido agregada',
+        'Porfavor deslize hacia abajo para actualizar la página',
+        colorText: MyColors.blackBg, backgroundColor: MyColors.white);
   }
 }
