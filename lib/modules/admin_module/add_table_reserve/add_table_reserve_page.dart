@@ -21,7 +21,11 @@ class AddTableReservePage extends StatelessWidget {
           centerTitle: false,
           title: const Text(MyStrings.RESERVE),
           actions: [
-            TextButton(onPressed: () {}, child: Text('Agregar nueva mesa'))
+            TextButton(
+                onPressed: () {
+                  _.addNewTable();
+                },
+                child: Text('Agregar nueva mesa'))
           ],
         ),
         body: SingleChildScrollView(
@@ -40,10 +44,26 @@ class AddTableReservePage extends StatelessWidget {
                     ),
                     SizedBox(
                         width: MediaQuery.of(context).size.width * .3,
-                        child: TextField()),
+                        child: TextField(
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              filled: true,
+                              fillColor: MyColors.white),
+                        )),
                   ],
                 ),
-                const Spacer(),
+                Expanded(
+                  //flex: 2,
+                  child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: _.dynamicList.length,
+                      itemBuilder: (context, index) => _.dynamicList[index]),
+                ),
+
+                //
+
                 ItemPrimaryButton(
                   text: MyStrings.ADDNEWADDRESS,
                   borderColor: MyColors.white,

@@ -31,7 +31,7 @@ class AddDetailsLocalController extends GetxController {
 
   void goToAddTableReservePage() async {
     Get.toNamed(AppRoutes.ADDTABLERESERVE, arguments: [
-      _price!,
+      _price ?? 0,
       txMenu.text,
       txWeb.text,
       txDelivery.text,
