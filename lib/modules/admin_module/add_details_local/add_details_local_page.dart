@@ -96,8 +96,10 @@ class AddDetailsLocalPage extends StatelessWidget {
                           ),
                           Slider(
                             divisions: 3,
-                            value: 10,
-                            onChanged: (value) {},
+                            value: _.price ?? 10,
+                            onChanged: (value) {
+                              _.onChangePrice(value);
+                            },
                             min: 0,
                             max: 30,
                             thumbColor: Colors.lightGreen,
@@ -109,8 +111,9 @@ class AddDetailsLocalPage extends StatelessWidget {
                             MyStrings.CARTABUTTON,
                             style: MyStyles.generalTextStyleWhite,
                           ),
-                          const TextField(
-                            decoration: InputDecoration(
+                          TextField(
+                            controller: _.txMenu,
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: MyStrings.LINKMENU,
                               hintStyle: TextStyle(color: Colors.grey),
@@ -126,8 +129,9 @@ class AddDetailsLocalPage extends StatelessWidget {
                             MyStrings.BTNPAGWEB,
                             style: MyStyles.generalTextStyleWhite,
                           ),
-                          const TextField(
-                            decoration: InputDecoration(
+                          TextField(
+                            controller: _.txWeb,
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: MyStrings.LINKPAGWEB,
                               hintStyle: TextStyle(color: Colors.grey),
@@ -143,8 +147,9 @@ class AddDetailsLocalPage extends StatelessWidget {
                             MyStrings.BTNDELIVERY,
                             style: MyStyles.generalTextStyleWhite,
                           ),
-                          const TextField(
-                            decoration: InputDecoration(
+                          TextField(
+                            controller: _.txDelivery,
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: MyStrings.LINKDELIVERY,
                               hintStyle: TextStyle(color: Colors.grey),
