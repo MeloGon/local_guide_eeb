@@ -19,7 +19,7 @@ class AddLocalAdminController extends GetxController {
 
   void goToAddAddressPage() async {
     Get.toNamed(AppRoutes.ADDADDRESS, arguments: [
-      txNameLocal,
+      txNameLocal.text,
       _fotoLocal,
     ]);
   }

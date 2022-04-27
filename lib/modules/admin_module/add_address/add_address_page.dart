@@ -117,8 +117,9 @@ class AddAddressPage extends StatelessWidget {
                           MyStrings.PASSWORD,
                           style: MyStyles.generalTextStyleWhite,
                         ),
-                        const TextField(
-                          decoration: InputDecoration(
+                        TextField(
+                          controller: _.txPwd,
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: MyStrings.INPUTPWD,
                             hintStyle: TextStyle(color: Colors.grey),
@@ -134,8 +135,9 @@ class AddAddressPage extends StatelessWidget {
                           MyStrings.REPEATPWD,
                           style: MyStyles.generalTextStyleWhite,
                         ),
-                        const TextField(
-                          decoration: InputDecoration(
+                        TextField(
+                          controller: _.txRepeatPwd,
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: MyStrings.INPUTPWD,
                             hintStyle: TextStyle(color: Colors.grey),
