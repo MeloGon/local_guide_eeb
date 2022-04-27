@@ -14,13 +14,17 @@ class AccessPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final availableHeight = MediaQuery.of(context).size.height -
+        /*AppBar().preferredSize.height -  (si hay appbar)*/
+        MediaQuery.of(context).padding.top -
+        MediaQuery.of(context).padding.bottom;
     return GetBuilder<AccessController>(builder: (_) {
       return SafeArea(
         child: Scaffold(
             backgroundColor: MyColors.blackBg,
             body: SingleChildScrollView(
               child: SizedBox(
-                height: MediaQuery.of(context).size.height * .9,
+                height: availableHeight,
                 child: Center(
                   child: Padding(
                     padding: MyDimens.symetricMarginGeneral,

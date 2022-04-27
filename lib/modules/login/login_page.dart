@@ -12,6 +12,10 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final availableHeight = MediaQuery.of(context).size.height -
+        /*AppBar().preferredSize.height -  (si hay appbar)*/
+        MediaQuery.of(context).padding.top -
+        MediaQuery.of(context).padding.bottom;
     return GetBuilder<LoginController>(
       builder: (_) => SafeArea(
         child: Scaffold(
@@ -20,7 +24,7 @@ class LoginPage extends StatelessWidget {
               child: Container(
             padding: MyDimens.symetricMarginGeneral,
             width: double.infinity,
-            height: MediaQuery.of(context).size.height * .9,
+            height: availableHeight,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
