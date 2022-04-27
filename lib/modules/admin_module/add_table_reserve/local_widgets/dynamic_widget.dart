@@ -3,7 +3,7 @@ import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
 
 class dynamicWidget extends StatelessWidget {
-  TextEditingController priceController = TextEditingController();
+  TextEditingController capacityController = TextEditingController();
   final int? numeroMesa;
 
   dynamicWidget({Key? key, this.numeroMesa}) : super(key: key);
@@ -28,9 +28,9 @@ class dynamicWidget extends StatelessWidget {
                   ),
                   Container(
                     width: 100,
-                    padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
-                    child: new TextFormField(
-                      controller: priceController,
+                    padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+                    child: TextFormField(
+                      controller: capacityController,
                       decoration: const InputDecoration(
                           fillColor: MyColors.white,
                           filled: true,

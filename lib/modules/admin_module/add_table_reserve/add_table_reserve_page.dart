@@ -25,7 +25,7 @@ class AddTableReservePage extends StatelessWidget {
                 onPressed: () {
                   _.addNewTable();
                 },
-                child: Text('Agregar nueva mesa'))
+                child: const Text('Agregar nueva mesa'))
           ],
         ),
         body: SingleChildScrollView(
@@ -70,6 +70,7 @@ class AddTableReservePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 ItemPrimaryButton(
+                  onTap: _.sendNewLocalData,
                   text: MyStrings.FINISH,
                   borderColor: MyColors.white,
                 )
