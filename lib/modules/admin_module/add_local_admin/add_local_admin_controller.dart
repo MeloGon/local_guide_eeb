@@ -4,21 +4,25 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
 import 'package:locals_guide_eeb/widgets/dialogs/dialog_two_buttons.dart';
+import 'package:random_string/random_string.dart';
 
 class AddLocalAdminController extends GetxController {
   final cloudinary = CloudinaryPublic('en-el-blanco', 'o2pugvho', cache: false);
   XFile? _fotoLocal;
   XFile? get fotoLocal => _fotoLocal;
   late TextEditingController txNameLocal;
+  late String idLocal;
 
   @override
   void onInit() {
     txNameLocal = TextEditingController();
+    idLocal = (randomAlphaNumeric(8));
     super.onInit();
   }
 
   void goToAddAddressPage() async {
     Get.toNamed(AppRoutes.ADDADDRESS, arguments: [
+      idLocal,
       txNameLocal.text,
       _fotoLocal,
     ]);

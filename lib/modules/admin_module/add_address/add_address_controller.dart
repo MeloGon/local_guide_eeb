@@ -17,6 +17,7 @@ class AddAdressController extends GetxController {
 
   String? _nameLocal;
   String? get nameLocal => _nameLocal;
+  String? idLocal;
 
   String? _phoneNumber;
   String? get phoneNumber => _phoneNumber;
@@ -45,12 +46,16 @@ class AddAdressController extends GetxController {
   }
 
   _setArguments() {
-    //_nameLocal = Get.arguments[0] as String;
-    //_photoLocal = Get.arguments[1] as XFile;
+    idLocal = Get.arguments[0] as String;
+    _nameLocal = Get.arguments[1] as String;
+    _photoLocal = Get.arguments[2] as XFile;
   }
 
   void goToAddDetailsLocalPage() async {
     Get.toNamed(AppRoutes.ADDDETAILSLOCAL, arguments: [
+      idLocal,
+      _nameLocal,
+      _photoLocal,
       txAddress.text,
       _phoneNumber,
       txPwd.text,
