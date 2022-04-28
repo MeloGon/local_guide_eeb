@@ -89,8 +89,10 @@ class AddAddressPage extends StatelessWidget {
                           MyStrings.UBICATION,
                           style: MyStyles.generalTextStyleWhite,
                         ),
-                        const TextField(
-                          decoration: InputDecoration(
+                        TextField(
+                          style: MyStyles.generalTextStyleWhite,
+                          controller: _.txAddress,
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: MyStrings.ADDRESSLOCALE,
                             hintStyle: TextStyle(color: Colors.grey),
@@ -118,6 +120,7 @@ class AddAddressPage extends StatelessWidget {
                           style: MyStyles.generalTextStyleWhite,
                         ),
                         TextField(
+                          style: MyStyles.generalTextStyleWhite,
                           controller: _.txPwd,
                           decoration: const InputDecoration(
                             border: InputBorder.none,
@@ -136,6 +139,7 @@ class AddAddressPage extends StatelessWidget {
                           style: MyStyles.generalTextStyleWhite,
                         ),
                         TextField(
+                          style: MyStyles.generalTextStyleWhite,
                           controller: _.txRepeatPwd,
                           decoration: const InputDecoration(
                             border: InputBorder.none,

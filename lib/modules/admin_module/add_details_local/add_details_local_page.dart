@@ -78,6 +78,7 @@ class AddDetailsLocalPage extends StatelessWidget {
                             style: MyStyles.generalTextStyleWhite,
                           ),
                           const TextField(
+                            style: MyStyles.generalTextStyleWhite,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: MyStrings.SELECTCATEGORY,
@@ -112,6 +113,7 @@ class AddDetailsLocalPage extends StatelessWidget {
                             style: MyStyles.generalTextStyleWhite,
                           ),
                           TextField(
+                            style: MyStyles.generalTextStyleWhite,
                             controller: _.txMenu,
                             decoration: const InputDecoration(
                               border: InputBorder.none,
@@ -130,6 +132,7 @@ class AddDetailsLocalPage extends StatelessWidget {
                             style: MyStyles.generalTextStyleWhite,
                           ),
                           TextField(
+                            style: MyStyles.generalTextStyleWhite,
                             controller: _.txWeb,
                             decoration: const InputDecoration(
                               border: InputBorder.none,
@@ -148,6 +151,7 @@ class AddDetailsLocalPage extends StatelessWidget {
                             style: MyStyles.generalTextStyleWhite,
                           ),
                           TextField(
+                            style: MyStyles.generalTextStyleWhite,
                             controller: _.txDelivery,
                             decoration: const InputDecoration(
                               border: InputBorder.none,

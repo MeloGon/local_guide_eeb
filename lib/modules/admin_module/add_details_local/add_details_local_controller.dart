@@ -39,9 +39,9 @@ class AddDetailsLocalController extends GetxController {
     _nameLocal = Get.arguments[1] as String;
     _photoLocal = Get.arguments[2] as XFile;
     _txAddress = Get.arguments[3] as String;
-    _phoneNumber = Get.arguments[3] as String;
-    _txPwd = Get.arguments[3] as String;
-    _txRepeatPwd = Get.arguments[3] as String;
+    _phoneNumber = Get.arguments[4] as String;
+    _txPwd = Get.arguments[5] as String;
+    _txRepeatPwd = Get.arguments[6] as String;
   }
 
   onChangePrice(double value) {
