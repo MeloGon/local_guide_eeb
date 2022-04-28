@@ -58,46 +58,56 @@ class LocalsAdminPage extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: MyColors.cardColorsDefault,
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                            height: 40,
-                            width: 40,
-                            decoration: const BoxDecoration(
-                                shape: BoxShape.circle, color: Colors.red)),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Sushi',
-                              style: MyStyles.generalTextStyleWhite,
-                            ),
-                            Text(
-                              'Comida Nikkei',
-                              style: MyStyles.generalTextStyleRed,
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                            ))
-                      ],
-                    ),
-                  )
+                  ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: _.locales.length,
+                      itemBuilder: ((context, index) {
+                        final local = _.locales[index];
+                        return Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: MyColors.cardColorsDefault,
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image: NetworkImage(local.fotoLocal),
+                                        fit: BoxFit.cover)),
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    local.nombreLocal,
+                                    style: MyStyles.generalTextStyleWhite,
+                                  ),
+                                  Text(
+                                    local.nombreLocal,
+                                    style: MyStyles.generalTextStyleRed,
+                                  ),
+                                ],
+                              ),
+                              const Spacer(),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.edit,
+                                    color: Colors.white,
+                                  ))
+                            ],
+                          ),
+                        );
+                      }))
                 ],
               ),
             ),
