@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
+import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/widgets/dialogs/dialog_two_buttons.dart';
 import 'package:random_string/random_string.dart';
 
@@ -21,11 +22,17 @@ class AddLocalAdminController extends GetxController {
   }
 
   void goToAddAddressPage() async {
-    Get.toNamed(AppRoutes.ADDADDRESS, arguments: [
-      idLocal,
-      txNameLocal.text,
-      _fotoLocal,
-    ]);
+    if (_fotoLocal == null || txNameLocal.text.isEmpty) {
+      Get.snackbar(
+          'Advertencia', 'Para continuar llena todos los campos porfavor',
+          backgroundColor: MyColors.white);
+    } else {
+      Get.toNamed(AppRoutes.ADDADDRESS, arguments: [
+        idLocal,
+        txNameLocal.text,
+        _fotoLocal,
+      ]);
+    }
   }
 
   addPhoto() async {
@@ -40,12 +47,14 @@ class AddLocalAdminController extends GetxController {
             _fotoLocal =
                 await ImagePicker().pickImage(source: ImageSource.gallery);
             update();
+            Get.back();
             //linkToCloudinary(_fotoLocal!);
           },
           onTap2: () async {
             _fotoLocal =
                 await ImagePicker().pickImage(source: ImageSource.camera);
             update();
+            Get.back();
             //linkToCloudinary(_fotoLocal!);
           },
         ),
