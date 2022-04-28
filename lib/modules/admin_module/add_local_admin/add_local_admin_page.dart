@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_local_admin/add_local_admin_controller.dart';
@@ -49,20 +51,27 @@ class AddLocalAdminPage extends StatelessWidget {
                   child: GestureDetector(
                     onTap: _.addPhoto,
                     child: Container(
-                      width: 200,
-                      height: 200,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                          border:
-                              Border.all(color: MyColors.cusTeal, width: 2)),
-                      child: const Center(
-                        child: Icon(
-                          Icons.add,
-                          size: 50,
-                        ),
-                      ),
-                    ),
+                        width: 200,
+                        height: 200,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            border:
+                                Border.all(color: MyColors.cusTeal, width: 2)),
+                        child: _.fotoLocal == null
+                            ? const Center(
+                                child: Icon(
+                                  Icons.add,
+                                  size: 50,
+                                ),
+                              )
+                            : ClipRRect(
+                                borderRadius: BorderRadius.circular(100.0),
+                                child: Image.file(
+                                  File(_.fotoLocal!.path),
+                                  fit: BoxFit.cover,
+                                ),
+                              )),
                   ),
                 ),
                 const SizedBox(height: 30),

@@ -39,11 +39,13 @@ class AddLocalAdminController extends GetxController {
           onTap: () async {
             _fotoLocal =
                 await ImagePicker().pickImage(source: ImageSource.gallery);
+            update();
             //linkToCloudinary(_fotoLocal!);
           },
           onTap2: () async {
             _fotoLocal =
                 await ImagePicker().pickImage(source: ImageSource.camera);
+            update();
             //linkToCloudinary(_fotoLocal!);
           },
         ),
