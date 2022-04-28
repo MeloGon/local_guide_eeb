@@ -69,6 +69,7 @@ class AddAdressController extends GetxController {
         markerId: MarkerId(tapPoint.toString()),
         position: tapPoint,
         draggable: true));
+    //print('Esta es la latitud y la longitud $tapPoint');
     update();
   }
 }

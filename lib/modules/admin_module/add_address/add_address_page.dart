@@ -29,7 +29,7 @@ class AddAddressPage extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * .45,
                     child: GoogleMap(
@@ -39,11 +39,29 @@ class AddAddressPage extends StatelessWidget {
                         },
                         markers: Set.from(_.myMarker!),
                         onTap: _.putMarker,
-                        initialCameraPosition: CameraPosition(
+                        initialCameraPosition: const CameraPosition(
                           target:
                               LatLng(-12.050424378417254, -77.04314569048383),
                           zoom: 12,
                         )),
+                  ),
+                  Positioned(
+                    top: MediaQuery.of(context).size.height * .37,
+                    left: MediaQuery.of(context).size.height * .05,
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.black87,
+                      ),
+                      width: MediaQuery.of(context).size.width * .7,
+                      child: const Text(
+                        'Porfavor pon un marcador de tu local sobre el mapa, presionando sobre él',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 12, color: MyColors.white),
+                      ),
+                    ),
                   ),
                   Padding(
                     padding: MyDimens.symetricMarginGeneral,
@@ -65,8 +83,8 @@ class AddAddressPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(width: 30),
-                        Text(
+                        const SizedBox(width: 30),
+                        const Text(
                           MyStrings.ADDADDRESS,
                           style: MyStyles.generalTextStyleBlackBold,
                         )
