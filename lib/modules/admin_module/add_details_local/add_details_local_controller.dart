@@ -1,9 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:locals_guide_eeb/data/models/categorie.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
 
 class AddDetailsLocalController extends GetxController {
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  List<Category> categoriasForDropDown = [];
+
+  Category? _categorySelected;
+  Category? get categorySelected => _categorySelected;
+
   double? _price;
   double? get price => _price;
   set priceSet(double value) {
@@ -25,6 +33,14 @@ class AddDetailsLocalController extends GetxController {
 
   //--------------------
 
+  String? get nameLocal => _nameLocal;
+
+  @override
+  void onReady() {
+    _chargeDataForDropDown();
+    super.onReady();
+  }
+
   @override
   void onInit() {
     txMenu = TextEditingController();
@@ -32,6 +48,28 @@ class AddDetailsLocalController extends GetxController {
     txDelivery = TextEditingController();
     _setArguments();
     super.onInit();
+  }
+
+  _chargeDataForDropDown() async {
+    categoriasForDropDown.clear();
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Categorias")
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        final category =
+            Category.fromDocumentSnapshot(documentSnapshot: element);
+        categoriasForDropDown.add(category);
+        update();
+      });
+    });
+  }
+
+  onChangedDDB(Category categoria) {
+    _categorySelected = categoria;
+    update();
   }
 
   _setArguments() {

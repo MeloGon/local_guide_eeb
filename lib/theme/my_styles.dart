@@ -18,6 +18,11 @@ class MyStyles {
     fontSize: 16,
   );
 
+  static const TextStyle disableTextStyle = TextStyle(
+    color: Colors.grey,
+    fontSize: 16,
+  );
+
   static const TextStyle generalTextStyleWhiteBold = TextStyle(
     color: Colors.white,
     fontSize: 16,

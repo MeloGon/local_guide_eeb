@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:locals_guide_eeb/data/models/categorie.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_details_local/add_details_local_controller.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
@@ -12,6 +13,7 @@ class AddDetailsLocalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String dropdownValue = 'One';
     final availableHeight = MediaQuery.of(context).size.height -
         /*AppBar().preferredSize.height -  (si hay appbar)*/
         MediaQuery.of(context).padding.top -
@@ -68,7 +70,7 @@ class AddDetailsLocalPage extends StatelessWidget {
                           Align(
                             alignment: Alignment.center,
                             child: Text(
-                              'I Sushi',
+                              _.nameLocal!,
                               style: MyStyles.generalTextStyleWhite,
                             ),
                           ),
@@ -77,14 +79,34 @@ class AddDetailsLocalPage extends StatelessWidget {
                             MyStrings.CATEGORY,
                             style: MyStyles.generalTextStyleWhite,
                           ),
-                          const TextField(
+                          //----------------------
+                          DropdownButton<Category>(
+                            value: _.categorySelected,
+                            isExpanded: true,
+                            icon: const Icon(Icons.arrow_drop_down_rounded),
+                            elevation: 16,
+                            dropdownColor: Colors.white10,
                             style: MyStyles.generalTextStyleWhite,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: MyStrings.SELECTCATEGORY,
-                              hintStyle: TextStyle(color: Colors.grey),
+                            hint: const Text(
+                              'Selecciona una categoría',
+                              style: MyStyles.disableTextStyle,
                             ),
+                            underline: Container(
+                              height: 0,
+                            ),
+                            onChanged: (Category? newValue) {
+                              _.onChangedDDB(newValue!);
+                            },
+                            items: _.categoriasForDropDown
+                                .map<DropdownMenuItem<Category>>(
+                                    (Category value) {
+                              return DropdownMenuItem<Category>(
+                                value: value,
+                                child: Text(value.nombre),
+                              );
+                            }).toList(),
                           ),
+                          //----------------------
                           Container(
                             height: 1,
                             color: Colors.lightGreen,
