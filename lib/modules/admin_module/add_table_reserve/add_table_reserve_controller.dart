@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_table_reserve/local_widgets/dynamic_widget.dart';
+import 'package:locals_guide_eeb/route/app_routes.dart';
+import 'package:locals_guide_eeb/theme/my_colors.dart';
 
 class AddTableReserveController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -101,5 +103,9 @@ class AddTableReserveController extends GetxController {
 
       //falta aqui as mesas
     });
+    Get.offAllNamed(AppRoutes.ADMINMENU);
+    Get.snackbar('El local ha sido agregado',
+        'Puedes asegurarte ingresando a la opcion de locales para poder visualizarlo.',
+        colorText: MyColors.blackBg, backgroundColor: MyColors.white);
   }
 }
