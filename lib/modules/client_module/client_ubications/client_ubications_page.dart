@@ -5,6 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:locals_guide_eeb/modules/client_module/client_ubications/client_ubications_controller.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
@@ -97,16 +98,13 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                           tabs: [
                             Tab(
                                 icon: SvgPicture.asset(
-                                    'assets/icons/plato-activate.svg')),
+                                    'assets/icons/dish-icon.svg')),
                             Tab(
-                              icon: Icon(Icons.margin_rounded,
-                                  color: Colors.black),
-                            ),
+                                icon: SvgPicture.asset(
+                                    'assets/icons/gallery-icon.svg')),
                             Tab(
-                                icon: Icon(
-                              Icons.pin_drop,
-                              color: Colors.black,
-                            )),
+                                icon: SvgPicture.asset(
+                                    'assets/icons/ubication-icon.svg')),
                           ],
                         ),
                       ),
@@ -166,7 +164,13 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                               SizedBox(
                                 width: MediaQuery.of(context).size.width,
                                 height: 400,
-                                child: const Placeholder(),
+                                child: GoogleMap(
+                                    onMapCreated: (controller) {},
+                                    initialCameraPosition: const CameraPosition(
+                                      target: LatLng(-12.050424378417254,
+                                          -77.04314569048383),
+                                      zoom: 12,
+                                    )),
                               ),
                             ],
                           ),
