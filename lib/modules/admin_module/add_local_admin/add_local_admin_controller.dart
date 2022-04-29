@@ -13,6 +13,7 @@ class AddLocalAdminController extends GetxController {
   XFile? get fotoLocal => _fotoLocal;
   late TextEditingController txNameLocal;
   late String idLocal;
+  String? _flujo;
 
   @override
   void onInit() {
@@ -23,8 +24,7 @@ class AddLocalAdminController extends GetxController {
 
   void goToAddAddressPage() async {
     if (_fotoLocal == null || txNameLocal.text.isEmpty) {
-      Get.snackbar(
-          'Advertencia', 'Para continuar llena todos los campos porfavor',
+      Get.snackbar('Advertencia', 'Para continuar llena todos los campos',
           backgroundColor: MyColors.white);
     } else {
       Get.toNamed(AppRoutes.ADDADDRESS, arguments: [

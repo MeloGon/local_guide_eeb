@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:locals_guide_eeb/data/models/categorie.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
@@ -30,9 +31,9 @@ class AddDetailsLocalController extends GetxController {
   String? _phoneNumber;
   String? _txPwd;
   String? _txRepeatPwd;
-
   //--------------------
 
+  LatLng? _marker;
   String? get nameLocal => _nameLocal;
 
   @override
@@ -73,13 +74,14 @@ class AddDetailsLocalController extends GetxController {
   }
 
   _setArguments() {
-    idLocal = Get.arguments[0] as String;
-    _nameLocal = Get.arguments[1] as String;
-    _photoLocal = Get.arguments[2] as XFile;
-    _txAddress = Get.arguments[3] as String;
-    _phoneNumber = Get.arguments[4] as String;
-    _txPwd = Get.arguments[5] as String;
-    _txRepeatPwd = Get.arguments[6] as String;
+    _marker = Get.arguments[0] as LatLng;
+    idLocal = Get.arguments[1] as String;
+    _nameLocal = Get.arguments[2] as String;
+    _photoLocal = Get.arguments[3] as XFile;
+    _txAddress = Get.arguments[4] as String;
+    _phoneNumber = Get.arguments[5] as String;
+    _txPwd = Get.arguments[6] as String;
+    _txRepeatPwd = Get.arguments[7] as String;
   }
 
   onChangePrice(double value) {
@@ -89,6 +91,7 @@ class AddDetailsLocalController extends GetxController {
 
   void goToAddTableReservePage() async {
     Get.toNamed(AppRoutes.ADDTABLERESERVE, arguments: [
+      _marker,
       idLocal,
       _nameLocal,
       _photoLocal,

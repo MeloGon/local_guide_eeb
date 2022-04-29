@@ -53,6 +53,7 @@ class AddAdressController extends GetxController {
 
   void goToAddDetailsLocalPage() async {
     Get.toNamed(AppRoutes.ADDDETAILSLOCAL, arguments: [
+      _myMarker![0].position,
       idLocal,
       _nameLocal,
       _photoLocal,
@@ -69,7 +70,8 @@ class AddAdressController extends GetxController {
         markerId: MarkerId(tapPoint.toString()),
         position: tapPoint,
         draggable: true));
-    //print('Esta es la latitud y la longitud $tapPoint');
+    print('posicion Esta es la latitud y la longitud $tapPoint');
+    print('posicion en lista ${_myMarker![0].position}');
     update();
   }
 }
