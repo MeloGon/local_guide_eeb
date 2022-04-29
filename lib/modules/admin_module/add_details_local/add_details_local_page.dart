@@ -29,21 +29,6 @@ class AddDetailsLocalPage extends StatelessWidget {
               height: availableHeight,
               child: Stack(
                 children: [
-                  Container(
-                    margin: MyDimens.symetricMarginGeneral,
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: MyColors.blackBg,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: MyColors.white),
-                    ),
-                    child: const Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                      color: Colors.white,
-                      size: 15,
-                    ),
-                  ),
                   SingleChildScrollView(
                     child: Padding(
                       padding: MyDimens.symetricMarginGeneral,
@@ -195,7 +180,25 @@ class AddDetailsLocalPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                  )
+                  ),
+                  GestureDetector(
+                    onTap: () => Get.back(),
+                    child: Container(
+                      margin: MyDimens.symetricMarginGeneral,
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: MyColors.blackBg,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: MyColors.white),
+                      ),
+                      child: const Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        color: Colors.white,
+                        size: 15,
+                      ),
+                    ),
+                  ),
                 ],
               )),
         ),
