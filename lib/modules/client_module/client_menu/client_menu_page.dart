@@ -57,7 +57,7 @@ class ClientMenuPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Padding(
-                padding: MyDimens.symetricMarginGeneral,
+                padding: MyDimens.paddingForOptions,
                 child: ItemPrimaryButton(
                   text: MyStrings.UBICATIONUSER,
                   textColor: Colors.black,
@@ -66,7 +66,7 @@ class ClientMenuPage extends StatelessWidget {
                 ),
               ),
               const Padding(
-                padding: MyDimens.symetricMarginGeneral,
+                padding: MyDimens.paddingForOptions,
                 child: ItemPrimaryButton(
                   text: MyStrings.NOTIFIUSER,
                   textColor: Colors.black,
@@ -74,28 +74,28 @@ class ClientMenuPage extends StatelessWidget {
                 ),
               ),
               const Padding(
-                padding: MyDimens.symetricMarginGeneral,
+                padding: MyDimens.paddingForOptions,
                 child: ItemPrimaryButton(
                   text: MyStrings.MOMENTSUSER,
                   textColor: Colors.black,
                 ),
               ),
               const Padding(
-                padding: MyDimens.symetricMarginGeneral,
+                padding: MyDimens.paddingForOptions,
                 child: ItemPrimaryButton(
                   text: MyStrings.RECOMMENDUSER,
                   textColor: Colors.black,
                 ),
               ),
               const Padding(
-                padding: MyDimens.symetricMarginGeneral,
+                padding: MyDimens.paddingForOptions,
                 child: ItemPrimaryButton(
                   text: MyStrings.RESERVE,
                   textColor: Colors.black,
                 ),
               ),
               const Padding(
-                padding: MyDimens.symetricMarginGeneral,
+                padding: MyDimens.paddingForOptions,
                 child: ItemPrimaryButton(
                   text: MyStrings.LOGOUT,
                   textColor: Colors.black,
