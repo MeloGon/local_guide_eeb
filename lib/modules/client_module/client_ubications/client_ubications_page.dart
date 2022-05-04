@@ -97,14 +97,23 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                           controller: _controller,
                           tabs: [
                             Tab(
-                                icon: SvgPicture.asset(
-                                    'assets/icons/dish-icon.svg')),
+                                icon: Container(
+                              padding: const EdgeInsets.all(5),
+                              child: SvgPicture.asset(
+                                  'assets/icons/ubication-icon.svg'),
+                            )),
                             Tab(
-                                icon: SvgPicture.asset(
-                                    'assets/icons/gallery-icon.svg')),
+                                icon: Container(
+                              padding: const EdgeInsets.all(5),
+                              child: SvgPicture.asset(
+                                  'assets/icons/gallery-icon.svg'),
+                            )),
                             Tab(
-                                icon: SvgPicture.asset(
-                                    'assets/icons/ubication-icon.svg')),
+                                icon: Container(
+                              padding: const EdgeInsets.all(5),
+                              child: SvgPicture.asset(
+                                  'assets/icons/dish-icon.svg'),
+                            )),
                           ],
                         ),
                       ),
