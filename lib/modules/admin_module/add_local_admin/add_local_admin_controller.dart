@@ -3,6 +3,7 @@ import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:locals_guide_eeb/data/models/categorie.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/widgets/dialogs/dialog_two_buttons.dart';
@@ -18,11 +19,44 @@ class AddLocalAdminController extends GetxController {
   String? _flujo;
   CloudinaryResponse? response;
 
+  List<Category> categoriasForDropDown = [];
+
+  Category? _categorySelected;
+  Category? get categorySelected => _categorySelected;
+
+  @override
+  void onReady() {
+    _chargeDataForDropDown();
+    super.onReady();
+  }
+
   @override
   void onInit() {
     txNameLocal = TextEditingController();
     idLocal = (randomAlphaNumeric(8));
     super.onInit();
+  }
+
+  _chargeDataForDropDown() async {
+    categoriasForDropDown.clear();
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Categorias")
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        final category =
+            Category.fromDocumentSnapshot(documentSnapshot: element);
+        categoriasForDropDown.add(category);
+        update();
+      });
+    });
+  }
+
+  onChangedDDB(Category categoria) {
+    _categorySelected = categoria;
+    update();
   }
 
   void goToAddAddressPage() async {
@@ -49,6 +83,8 @@ class AddLocalAdminController extends GetxController {
         'idLocal': idLocal,
         'nombreLocal': txNameLocal.text,
         'fotoLocal': response!.secureUrl,
+        'categoria': _categorySelected!.nombre,
+        'colorCategoria': _categorySelected!.color,
       });
       Get.snackbar('Información',
           'El local ha sido creado, procede a añadir la sucursal',

@@ -63,6 +63,9 @@ class LocalsAdminPage extends StatelessWidget {
                       itemCount: _.locales.length,
                       itemBuilder: ((context, index) {
                         final local = _.locales[index];
+                        String valueString =
+                            local.colorCategoria.split('(0x')[1].split(')')[0];
+                        int value = int.parse(valueString, radix: 16);
                         return Container(
                           width: double.infinity,
                           padding: const EdgeInsets.all(10),
@@ -92,8 +95,9 @@ class LocalsAdminPage extends StatelessWidget {
                                     style: MyStyles.generalTextStyleWhite,
                                   ),
                                   Text(
-                                    local.categoria,
-                                    style: MyStyles.generalTextStyleRed,
+                                    local.categoria.toString(),
+                                    style: TextStyle(
+                                        fontSize: 16, color: Color(value)),
                                   ),
                                 ],
                               ),

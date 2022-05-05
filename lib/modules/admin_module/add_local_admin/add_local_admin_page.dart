@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:locals_guide_eeb/data/models/categorie.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_local_admin/add_local_admin_controller.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
@@ -80,6 +81,37 @@ class AddLocalAdminPage extends StatelessWidget {
                     MyStrings.PROFILEIMAGE,
                     style: MyStyles.generalTextStyleWhite,
                   ),
+                ),
+                const SizedBox(height: 30),
+                DropdownButton<Category>(
+                  value: _.categorySelected,
+                  isExpanded: true,
+                  icon: const Icon(Icons.arrow_drop_down_rounded),
+                  elevation: 16,
+                  dropdownColor: Colors.white10,
+                  style: MyStyles.generalTextStyleWhite,
+                  hint: const Text(
+                    'Selecciona una categoría',
+                    style: MyStyles.disableTextStyle,
+                  ),
+                  underline: Container(
+                    height: 0,
+                  ),
+                  onChanged: (Category? newValue) {
+                    _.onChangedDDB(newValue!);
+                  },
+                  items: _.categoriasForDropDown
+                      .map<DropdownMenuItem<Category>>((Category value) {
+                    return DropdownMenuItem<Category>(
+                      value: value,
+                      child: Text(value.nombre),
+                    );
+                  }).toList(),
+                ),
+                Container(
+                  height: 1,
+                  color: Colors.lightGreen,
+                  width: double.infinity,
                 ),
                 const Spacer(),
                 ItemPrimaryButton(
