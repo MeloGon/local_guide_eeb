@@ -65,6 +65,7 @@ class AddTableReservePage extends StatelessWidget {
                 //
 
                 ItemPrimaryButton(
+                  onTap: _.addNewAddress,
                   text: MyStrings.ADDNEWADDRESS,
                   borderColor: MyColors.white,
                 ),
