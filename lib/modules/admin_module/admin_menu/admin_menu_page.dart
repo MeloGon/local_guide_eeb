@@ -44,7 +44,7 @@ class AdminMenuPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 40),
                 Padding(
-                  padding: MyDimens.symetricMarginGeneral,
+                  padding: MyDimens.paddingForOptions,
                   child: ItemPrimaryButton(
                     text: MyStrings.LOCALEADMIN,
                     onTap: _.goToLocalsAdminPage,
@@ -52,7 +52,7 @@ class AdminMenuPage extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: MyDimens.symetricMarginGeneral,
+                  padding: MyDimens.paddingForOptions,
                   child: ItemPrimaryButton(
                     text: MyStrings.USERSADMIN,
                     onTap: _.goToUsersAdminPage,
@@ -60,7 +60,7 @@ class AdminMenuPage extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: MyDimens.symetricMarginGeneral,
+                  padding: MyDimens.paddingForOptions,
                   child: ItemPrimaryButton(
                     text: MyStrings.ACTIVITYADMIN,
                     onTap: _.goToActivityAdminPage,
@@ -68,7 +68,7 @@ class AdminMenuPage extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: MyDimens.symetricMarginGeneral,
+                  padding: MyDimens.paddingForOptions,
                   child: ItemPrimaryButton(
                     text: MyStrings.INFOADMIN,
                     onTap: _.goToInfoAdminPage,
@@ -76,7 +76,7 @@ class AdminMenuPage extends StatelessWidget {
                   ),
                 ),
                 const Padding(
-                  padding: MyDimens.symetricMarginGeneral,
+                  padding: MyDimens.paddingForOptions,
                   child: ItemPrimaryButton(
                     text: MyStrings.LOGOUT,
                     borderColor: Colors.white,
