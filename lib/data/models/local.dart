@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:locals_guide_eeb/data/models/categorie.dart';
 
 class Local {
   String? idLocal;
@@ -10,6 +11,7 @@ class Local {
   late String linkLocal;
   late String linkWeb;
   late String linkDelivery;
+  late String categoria;
 
   Local({
     required this.idLocal,
@@ -21,6 +23,7 @@ class Local {
     required this.linkLocal,
     required this.linkWeb,
     required this.linkDelivery,
+    required this.categoria,
   });
 
   Local.fromDocumentSnapshot({required DocumentSnapshot documentSnapshot}) {
@@ -33,5 +36,6 @@ class Local {
     linkLocal = documentSnapshot['linkLocal'];
     linkWeb = documentSnapshot['linkWeb'];
     linkDelivery = documentSnapshot['linkDelivery'];
+    categoria = documentSnapshot['categoria'];
   }
 }
