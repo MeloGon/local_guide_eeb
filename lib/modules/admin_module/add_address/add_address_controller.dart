@@ -27,6 +27,7 @@ class AddAdressController extends GetxController {
 
   late TextEditingController txAddress;
   //late TextEditingController txNumberPhone;
+  late TextEditingController txNick;
   late TextEditingController txPwd;
   late TextEditingController txRepeatPwd;
 
@@ -38,6 +39,7 @@ class AddAdressController extends GetxController {
       _mapStyle = value;
     });
     txAddress = TextEditingController();
+    txNick = TextEditingController();
     //txNumberPhone = TextEditingController();
     txPwd = TextEditingController();
     txRepeatPwd = TextEditingController();
@@ -59,6 +61,7 @@ class AddAdressController extends GetxController {
       _photoLocal,
       txAddress.text,
       _phoneNumber,
+      txNick.text,
       txPwd.text,
       txRepeatPwd.text,
     ]);

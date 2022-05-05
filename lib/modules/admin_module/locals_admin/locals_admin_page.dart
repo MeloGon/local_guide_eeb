@@ -92,7 +92,7 @@ class LocalsAdminPage extends StatelessWidget {
                                     style: MyStyles.generalTextStyleWhite,
                                   ),
                                   Text(
-                                    local.nombreLocal,
+                                    local.categoria,
                                     style: MyStyles.generalTextStyleRed,
                                   ),
                                 ],

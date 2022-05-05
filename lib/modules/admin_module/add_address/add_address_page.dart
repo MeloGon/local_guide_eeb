@@ -134,6 +134,25 @@ class AddAddressPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         const Text(
+                          MyStrings.USERNAME,
+                          style: MyStyles.generalTextStyleWhite,
+                        ),
+                        TextField(
+                          style: MyStyles.generalTextStyleWhite,
+                          controller: _.txNick,
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            hintText: MyStrings.NICKNAME,
+                            hintStyle: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                        Container(
+                          height: 1,
+                          color: Colors.lightGreen,
+                          width: double.infinity,
+                        ),
+                        const SizedBox(height: 20),
+                        const Text(
                           MyStrings.PASSWORD,
                           style: MyStyles.generalTextStyleWhite,
                         ),

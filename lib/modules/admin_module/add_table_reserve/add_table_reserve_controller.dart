@@ -8,6 +8,8 @@ import 'package:locals_guide_eeb/modules/admin_module/add_table_reserve/local_wi
 import 'package:locals_guide_eeb/route/app_routes.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 
+import '../../../data/models/categorie.dart';
+
 class AddTableReserveController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   final cloudinary = CloudinaryPublic('en-el-blanco', 'o2pugvho', cache: false);
@@ -26,10 +28,12 @@ class AddTableReserveController extends GetxController {
   String? _phoneNumber;
   String? _txPwd;
   String? _txRepeatPwd;
+  Category? _category;
   double? _price;
   String? _txMenu;
   String? _txWeb;
   String? _txDelivery;
+  String? _txNick;
   //--------------------
 
   String? _photoLocalUrl;
@@ -47,12 +51,14 @@ class AddTableReserveController extends GetxController {
     _photoLocal = Get.arguments[3] as XFile;
     _txAddress = Get.arguments[4] as String;
     _phoneNumber = Get.arguments[5] as String;
-    _txPwd = Get.arguments[6] as String;
-    _txRepeatPwd = Get.arguments[7] as String;
-    _price = Get.arguments[8] as double;
-    _txMenu = Get.arguments[9] as String;
-    _txWeb = Get.arguments[10] as String;
-    _txDelivery = Get.arguments[11] as String;
+    _txNick = Get.arguments[6] as String;
+    _txPwd = Get.arguments[7] as String;
+    _txRepeatPwd = Get.arguments[8] as String;
+    _category = Get.arguments[9] as Category;
+    _price = Get.arguments[10] as double;
+    _txMenu = Get.arguments[11] as String;
+    _txWeb = Get.arguments[12] as String;
+    _txDelivery = Get.arguments[13] as String;
   }
 
   addNewTable() {
@@ -96,9 +102,10 @@ class AddTableReserveController extends GetxController {
       'fotoLocal': _photoLocalUrl,
       'ubicacionLocal': _txAddress,
       'telefonoLocal': _phoneNumber,
+      'username': _txNick,
       'pwdLocal': _txPwd,
       'repeatPwd': _txPwd,
-      'categoria': 'Alguna categoria',
+      'categoria': _category!.nombre,
       'precioLocal': _price,
       'linkLocal': _txMenu,
       'linkWeb': _txWeb,

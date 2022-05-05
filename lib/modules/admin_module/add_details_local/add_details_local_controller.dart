@@ -27,10 +27,12 @@ class AddDetailsLocalController extends GetxController {
   String? idLocal;
   String? _nameLocal;
   XFile? _photoLocal;
+  XFile? get photoLocal => _photoLocal;
   String? _txAddress;
   String? _phoneNumber;
   String? _txPwd;
   String? _txRepeatPwd;
+  String? _txNick;
   //--------------------
 
   LatLng? _marker;
@@ -80,8 +82,9 @@ class AddDetailsLocalController extends GetxController {
     _photoLocal = Get.arguments[3] as XFile;
     _txAddress = Get.arguments[4] as String;
     _phoneNumber = Get.arguments[5] as String;
-    _txPwd = Get.arguments[6] as String;
-    _txRepeatPwd = Get.arguments[7] as String;
+    _txNick = Get.arguments[6] as String;
+    _txPwd = Get.arguments[7] as String;
+    _txRepeatPwd = Get.arguments[8] as String;
   }
 
   onChangePrice(double value) {
@@ -97,8 +100,10 @@ class AddDetailsLocalController extends GetxController {
       _photoLocal,
       _txAddress,
       _phoneNumber,
+      _txNick,
       _txPwd,
       _txRepeatPwd,
+      _categorySelected,
       _price ?? 0,
       txMenu.text,
       txWeb.text,
