@@ -21,8 +21,10 @@ class MyStrings {
   static const String RESENDCODE = 'Enviar otro codigo';
 
   static const String USER = 'Usuario';
+  static const String USERNAME = 'Nombre de usuario';
   static const String PASSWORD = 'Contraseña';
   static const String INPUTUSER = 'Admin';
+  static const String NICKNAME = 'Nickname';
   static const String INPUTPWD = '************';
 
   static const String ADMINDEFAULT = 'Administrador';
