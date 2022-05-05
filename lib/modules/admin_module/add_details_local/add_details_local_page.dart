@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:locals_guide_eeb/data/models/categorie.dart';
@@ -13,7 +15,6 @@ class AddDetailsLocalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String dropdownValue = 'One';
     final availableHeight = MediaQuery.of(context).size.height -
         /*AppBar().preferredSize.height -  (si hay appbar)*/
         MediaQuery.of(context).padding.top -
@@ -38,18 +39,21 @@ class AddDetailsLocalPage extends StatelessWidget {
                           Align(
                             alignment: Alignment.center,
                             child: Container(
-                              width: 100,
-                              height: 100,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: MyColors.cusTeal),
-                              child: const Center(
-                                  child: Text(
-                                'A',
-                                style: TextStyle(
-                                    fontSize: 46, color: Colors.white),
-                              )),
-                            ),
+                                padding: const EdgeInsets.all(6),
+                                width: 130,
+                                height: 130,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.transparent,
+                                    border: Border.all(
+                                        color: MyColors.cusTeal, width: 2)),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(100.0),
+                                  child: Image.file(
+                                    File(_.photoLocal!.path),
+                                    fit: BoxFit.cover,
+                                  ),
+                                )),
                           ),
                           const SizedBox(height: 20),
                           Align(
