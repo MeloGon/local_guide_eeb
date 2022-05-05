@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:random_string/random_string.dart';
 
 class AddAdressController extends GetxController {
   String? _mapStyle;
@@ -24,6 +25,8 @@ class AddAdressController extends GetxController {
   set phoneNumberSet(String value) {
     _phoneNumber = value;
   }
+
+  String? _idSucursal;
 
   late TextEditingController txAddress;
   //late TextEditingController txNumberPhone;
@@ -48,6 +51,7 @@ class AddAdressController extends GetxController {
   }
 
   _setArguments() {
+    _idSucursal = (randomAlphaNumeric(8));
     idLocal = Get.arguments[0] as String;
     _nameLocal = Get.arguments[1] as String;
     _photoLocal = Get.arguments[2] as XFile;
@@ -55,6 +59,7 @@ class AddAdressController extends GetxController {
 
   void goToAddDetailsLocalPage() async {
     Get.toNamed(AppRoutes.ADDDETAILSLOCAL, arguments: [
+      _idSucursal,
       _myMarker![0].position,
       idLocal,
       _nameLocal,

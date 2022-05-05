@@ -20,6 +20,7 @@ class AddTableReserveController extends GetxController {
   List<String>? get table => _table;
 
   //parametros que llegan
+  String? _idSucursal;
   LatLng? _marker;
   String? idLocal;
   String? _nameLocal;
@@ -45,20 +46,21 @@ class AddTableReserveController extends GetxController {
   }
 
   setArguments() {
-    _marker = Get.arguments[0] as LatLng;
-    idLocal = Get.arguments[1] as String;
-    _nameLocal = Get.arguments[2] as String;
-    _photoLocal = Get.arguments[3] as XFile;
-    _txAddress = Get.arguments[4] as String;
-    _phoneNumber = Get.arguments[5] as String;
-    _txNick = Get.arguments[6] as String;
-    _txPwd = Get.arguments[7] as String;
-    _txRepeatPwd = Get.arguments[8] as String;
-    _category = Get.arguments[9] as Category;
-    _price = Get.arguments[10] as double;
-    _txMenu = Get.arguments[11] as String;
-    _txWeb = Get.arguments[12] as String;
-    _txDelivery = Get.arguments[13] as String;
+    _idSucursal = Get.arguments[0] as String;
+    _marker = Get.arguments[1] as LatLng;
+    idLocal = Get.arguments[2] as String;
+    _nameLocal = Get.arguments[3] as String;
+    _photoLocal = Get.arguments[4] as XFile;
+    _txAddress = Get.arguments[5] as String;
+    _phoneNumber = Get.arguments[6] as String;
+    _txNick = Get.arguments[7] as String;
+    _txPwd = Get.arguments[8] as String;
+    _txRepeatPwd = Get.arguments[9] as String;
+    _category = Get.arguments[10] as Category;
+    _price = Get.arguments[11] as double;
+    _txMenu = Get.arguments[12] as String;
+    _txWeb = Get.arguments[13] as String;
+    _txDelivery = Get.arguments[14] as String;
   }
 
   addNewTable() {
@@ -79,27 +81,15 @@ class AddTableReserveController extends GetxController {
     dynamicList
         .forEach((widget) => _table!.add(widget.capacityController.text));
 
-    try {
-      CloudinaryResponse response = await cloudinary.uploadFile(
-        CloudinaryFile.fromFile(_photoLocal!.path,
-            resourceType: CloudinaryResourceType.Image),
-      );
-      _photoLocalUrl = response.secureUrl;
-      print(response.secureUrl);
-    } on CloudinaryException catch (e) {
-      print(e.message);
-      print(e.request);
-    }
-
     await firebaseFirestore
         .collection("GuiaLocales")
         .doc("admin")
         .collection("Locales")
         .doc(idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
         .set({
-      'idLocal': idLocal,
-      'nombreLocal': _nameLocal,
-      'fotoLocal': _photoLocalUrl,
+      'idSucursal': _idSucursal,
       'ubicacionLocal': _txAddress,
       'telefonoLocal': _phoneNumber,
       'username': _txNick,
@@ -111,12 +101,47 @@ class AddTableReserveController extends GetxController {
       'linkWeb': _txWeb,
       'linkDelivery': _txDelivery,
       'marker': _marker.toString(),
-
       //falta aqui as mesas
     });
     Get.offAllNamed(AppRoutes.ADMINMENU);
     Get.snackbar('El local ha sido agregado',
         'Puedes asegurarte ingresando a la opcion de locales para poder visualizarlo.',
+        colorText: MyColors.blackBg, backgroundColor: MyColors.white);
+  }
+
+  addNewAddress() async {
+    dynamicList
+        .forEach((widget) => _table!.add(widget.capacityController.text));
+
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .set({
+      'idSucursal': _idSucursal,
+      'ubicacionLocal': _txAddress,
+      'telefonoLocal': _phoneNumber,
+      'username': _txNick,
+      'pwdLocal': _txPwd,
+      'repeatPwd': _txPwd,
+      'categoria': _category!.nombre,
+      'precioLocal': _price,
+      'linkLocal': _txMenu,
+      'linkWeb': _txWeb,
+      'linkDelivery': _txDelivery,
+      'marker': _marker.toString(),
+      //falta aqui as mesas
+    });
+    Get.offAllNamed(AppRoutes.ADDADDRESS, arguments: [
+      idLocal,
+      _nameLocal,
+      _photoLocal,
+    ]);
+    Get.snackbar('Sucursal agregada',
+        'La sucursar ha sido agregada, podras ver los cambios cuando termines de agregar la nueva sucursal',
         colorText: MyColors.blackBg, backgroundColor: MyColors.white);
   }
 }

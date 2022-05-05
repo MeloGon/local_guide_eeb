@@ -31,8 +31,8 @@ class LocalsAdminController extends GetxController {
         .get()
         .then((value) {
       value.docs.forEach((element) {
-        final category = Local.fromDocumentSnapshot(documentSnapshot: element);
-        locales.add(category);
+        final local = Local.fromDocumentSnapshot(documentSnapshot: element);
+        locales.add(local);
         update();
       });
     });

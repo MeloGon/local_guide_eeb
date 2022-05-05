@@ -24,6 +24,7 @@ class AddDetailsLocalController extends GetxController {
   late TextEditingController txDelivery;
 
   //parametros que llegan
+  String? _idSucursal;
   String? idLocal;
   String? _nameLocal;
   XFile? _photoLocal;
@@ -76,15 +77,16 @@ class AddDetailsLocalController extends GetxController {
   }
 
   _setArguments() {
-    _marker = Get.arguments[0] as LatLng;
-    idLocal = Get.arguments[1] as String;
-    _nameLocal = Get.arguments[2] as String;
-    _photoLocal = Get.arguments[3] as XFile;
-    _txAddress = Get.arguments[4] as String;
-    _phoneNumber = Get.arguments[5] as String;
-    _txNick = Get.arguments[6] as String;
-    _txPwd = Get.arguments[7] as String;
-    _txRepeatPwd = Get.arguments[8] as String;
+    _idSucursal = Get.arguments[0] as String;
+    _marker = Get.arguments[1] as LatLng;
+    idLocal = Get.arguments[2] as String;
+    _nameLocal = Get.arguments[3] as String;
+    _photoLocal = Get.arguments[4] as XFile;
+    _txAddress = Get.arguments[5] as String;
+    _phoneNumber = Get.arguments[6] as String;
+    _txNick = Get.arguments[7] as String;
+    _txPwd = Get.arguments[8] as String;
+    _txRepeatPwd = Get.arguments[9] as String;
   }
 
   onChangePrice(double value) {
@@ -94,6 +96,7 @@ class AddDetailsLocalController extends GetxController {
 
   void goToAddTableReservePage() async {
     Get.toNamed(AppRoutes.ADDTABLERESERVE, arguments: [
+      _idSucursal,
       _marker,
       idLocal,
       _nameLocal,
