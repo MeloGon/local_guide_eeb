@@ -103,7 +103,9 @@ class LocalsAdminPage extends StatelessWidget {
                               ),
                               const Spacer(),
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    _.goToSucursales(local.idLocal);
+                                  },
                                   icon: const Icon(
                                     Icons.edit,
                                     color: Colors.white,
