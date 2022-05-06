@@ -17,4 +17,5 @@ class AppRoutes {
   static const ADDADDRESS = '/add_address';
   static const ADDDETAILSLOCAL = '/add_details_local';
   static const ADDTABLERESERVE = '/add_table_reserve';
+  static const SUCURSALADMIN = '/sucursal_admin';
 }

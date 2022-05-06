@@ -21,6 +21,8 @@ import 'package:locals_guide_eeb/modules/admin_module/info_admin/info_admin_bind
 import 'package:locals_guide_eeb/modules/admin_module/info_admin/info_admin_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/locals_admin/locals_admin_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/locals_admin/locals_admin_page.dart';
+import 'package:locals_guide_eeb/modules/admin_module/sucursal_admin/sucursal_admin_binding.dart';
+import 'package:locals_guide_eeb/modules/admin_module/sucursal_admin/sucursal_admin_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/users_admin/users_admin_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/users_admin/users_admin_page.dart';
 import 'package:locals_guide_eeb/modules/client_module/client_menu/client_menu_binding.dart';
@@ -113,5 +115,9 @@ class AppPages {
         name: AppRoutes.ADDTABLERESERVE,
         page: () => const AddTableReservePage(),
         binding: AddTableReserveBinding()),
+    GetPage(
+        name: AppRoutes.SUCURSALADMIN,
+        page: () => const SucursalAdminPage(),
+        binding: SucursalAdminBinding())
   ];
 }
