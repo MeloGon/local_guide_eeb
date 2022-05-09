@@ -9,6 +9,7 @@ class Sucursal {
   late String linkWeb;
   late String linkDelivery;
   late String categoria;
+  late String username;
 
   Sucursal({
     required this.idSucursal,
@@ -19,6 +20,7 @@ class Sucursal {
     required this.linkWeb,
     required this.linkDelivery,
     required this.categoria,
+    required this.username,
   });
 
   Sucursal.fromDocumentSnapshot({required DocumentSnapshot documentSnapshot}) {
@@ -29,5 +31,6 @@ class Sucursal {
     linkWeb = documentSnapshot['linkWeb'];
     linkDelivery = documentSnapshot['linkDelivery'];
     categoria = documentSnapshot['categoria'];
+    username = documentSnapshot['username'];
   }
 }
