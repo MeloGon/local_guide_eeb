@@ -38,9 +38,12 @@ class LocalsAdminController extends GetxController {
     });
   }
 
-  void goToSucursales(String? idLocal) async {
+  void goToSucursales(
+      String? idLocal, String? nameLocal, String? fotoLocal) async {
     Get.toNamed(AppRoutes.SUCURSALADMIN, arguments: [
       idLocal,
+      nameLocal,
+      fotoLocal,
     ]);
   }
 }

@@ -81,7 +81,7 @@ class AddDetailsLocalController extends GetxController {
     _marker = Get.arguments[1] as LatLng;
     idLocal = Get.arguments[2] as String;
     _nameLocal = Get.arguments[3] as String;
-    _photoLocal = Get.arguments[4] as XFile;
+    _photoLocal = Get.arguments[4];
     _txAddress = Get.arguments[5] as String;
     _phoneNumber = Get.arguments[6] as String;
     _txNick = Get.arguments[7] as String;

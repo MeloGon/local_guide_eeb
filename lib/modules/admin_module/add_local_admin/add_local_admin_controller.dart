@@ -93,6 +93,8 @@ class AddLocalAdminController extends GetxController {
         idLocal,
         txNameLocal.text,
         _fotoLocal,
+        '',
+        '',
       ]);
     }
   }
