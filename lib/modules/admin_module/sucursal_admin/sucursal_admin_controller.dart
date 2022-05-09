@@ -2,12 +2,22 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:locals_guide_eeb/data/models/sucursal.dart';
+import 'package:locals_guide_eeb/route/app_routes.dart';
 
 class SucursalAdminController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   List<Sucursal> sucursales = [];
+  // Estos parametros necesarios para completar el flujo
   String? _idLocal;
+  String? _nameLocal;
+  String? _fotoLocal;
+  // ---------------------
+  //Parametros para editar
+  final String _flujo = "editar";
+  String? _idSucursalSeleccionado;
+  // ----------------------
   QuerySnapshot? _querySnapshot;
   QuerySnapshot? get querySnapshot => _querySnapshot;
   @override
@@ -24,6 +34,8 @@ class SucursalAdminController extends GetxController {
 
   _setArguments() {
     _idLocal = Get.arguments[0] as String;
+    _nameLocal = Get.arguments[1] as String;
+    _fotoLocal = Get.arguments[2] as String;
   }
 
   void showSucursales() async {
@@ -43,17 +55,17 @@ class SucursalAdminController extends GetxController {
     //     .then((value) {
     //   //print('${value.docs[0]['idSucursal']}');
     // });
+  }
 
-    // return await firebaseFirestore
-    //     .collection("GuiaLocales")
-    //     .doc("admin")
-    //     .collection("Locales")
-    //     .where('idLocal', isEqualTo: _idSucursal)
-    //     .get()
-    //     .then((value) {
-    //   final sucursal = Sucursal.fromDocumentSnapshot(documentSnapshot: value);
-    //   sucursales.add(sucursal);
-    //   update();
-    // });
+  //way 1
+  goToEditSucursal(String idSucu) async {
+    _idSucursalSeleccionado = idSucu;
+    Get.toNamed(AppRoutes.ADDADDRESS, arguments: [
+      _idLocal,
+      _nameLocal,
+      _fotoLocal,
+      _flujo,
+      _idSucursalSeleccionado,
+    ]);
   }
 }
