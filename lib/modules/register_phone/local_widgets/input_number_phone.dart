@@ -16,7 +16,8 @@ class InputNumberPhone extends StatelessWidget {
         builder: (_) => InternationalPhoneNumberInput(
               locale: 'ES',
               textStyle: const TextStyle(color: Colors.white),
-              initialValue: PhoneNumber(dialCode: '+51', isoCode: 'PE'),
+              initialValue: PhoneNumber(
+                  dialCode: '+51', isoCode: 'PE', phoneNumber: _.phoneNumber),
               onInputChanged: (PhoneNumber number) {
                 _.phoneNumberSet = number.phoneNumber!;
                 print(number.phoneNumber);
