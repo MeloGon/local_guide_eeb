@@ -191,7 +191,9 @@ class AddAddressPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 30),
                         ItemPrimaryButton(
-                          text: MyStrings.NEXT,
+                          text: _.flujo == 'editar'
+                              ? 'Editar y Continuar '
+                              : MyStrings.NEXT,
                           borderColor: MyColors.white,
                           onTap: _.goToAddDetailsLocalPage,
                         )
