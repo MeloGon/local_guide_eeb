@@ -17,6 +17,8 @@ import 'package:locals_guide_eeb/modules/admin_module/admin_menu/admin_menu_bind
 import 'package:locals_guide_eeb/modules/admin_module/admin_menu/admin_menu_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/categories_admin/categories_admin_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/categories_admin/categories_admin_page.dart';
+import 'package:locals_guide_eeb/modules/admin_module/edit_sucursal_admin/edit_sucursal_admin_binding.dart';
+import 'package:locals_guide_eeb/modules/admin_module/edit_sucursal_admin/edit_sucursal_admin_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/info_admin/info_admin_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/info_admin/info_admin_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/locals_admin/locals_admin_binding.dart';
@@ -118,6 +120,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.SUCURSALADMIN,
         page: () => const SucursalAdminPage(),
-        binding: SucursalAdminBinding())
+        binding: SucursalAdminBinding()),
+    GetPage(
+        name: AppRoutes.EDITSUCURSALADMIN,
+        page: () => const EditSucursalAdminPage(),
+        binding: EditSucursalAdminBinding())
   ];
 }

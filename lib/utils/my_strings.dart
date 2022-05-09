@@ -75,4 +75,7 @@ class MyStrings {
   static const String NUMBERPEOPLE = 'Cantidad de Personas';
   static const String ADDNEWADDRESS = 'Agregar nueva dirección';
   static const String FINISH = 'Finalizar';
+
+  static const String EDITSUCURSAL = 'Editar Sucursal';
+  static const String SUGGESTEDIT = 'Escoja de sucursal desea editar';
 }
