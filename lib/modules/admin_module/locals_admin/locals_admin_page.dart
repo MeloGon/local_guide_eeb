@@ -104,7 +104,8 @@ class LocalsAdminPage extends StatelessWidget {
                               const Spacer(),
                               IconButton(
                                   onPressed: () {
-                                    _.goToSucursales(local.idLocal);
+                                    _.goToSucursales(local.idLocal,
+                                        local.nombreLocal, local.fotoLocal);
                                   },
                                   icon: const Icon(
                                     Icons.edit,
