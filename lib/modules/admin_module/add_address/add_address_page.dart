@@ -49,15 +49,17 @@ class AddAddressPage extends StatelessWidget {
                     top: MediaQuery.of(context).size.height * .37,
                     left: MediaQuery.of(context).size.height * .05,
                     child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.black87,
                       ),
                       width: MediaQuery.of(context).size.width * .7,
-                      child: const Text(
-                        'Porfavor pon un marcador de tu local sobre el mapa, presionando sobre él',
+                      child: Text(
+                        _.flujo == 'editar'
+                            ? MyStrings.EDITMARKER
+                            : MyStrings.TIPADDMARKER,
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 12, color: MyColors.white),
                       ),
@@ -84,8 +86,10 @@ class AddAddressPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 30),
-                        const Text(
-                          MyStrings.ADDADDRESS,
+                        Text(
+                          _.flujo == 'editar'
+                              ? MyStrings.EDITADDRESS
+                              : MyStrings.ADDADDRESS,
                           style: MyStyles.generalTextStyleBlackBold,
                         )
                       ],
@@ -192,7 +196,7 @@ class AddAddressPage extends StatelessWidget {
                         const SizedBox(height: 30),
                         ItemPrimaryButton(
                           text: _.flujo == 'editar'
-                              ? 'Editar y Continuar '
+                              ? MyStrings.EDITANDCONTINUE
                               : MyStrings.NEXT,
                           borderColor: MyColors.white,
                           onTap: _.goToAddDetailsLocalPage,

@@ -78,4 +78,9 @@ class MyStrings {
 
   static const String EDITSUCURSAL = 'Editar Sucursal';
   static const String SUGGESTEDIT = 'Escoja de sucursal desea editar';
+  static const String EDITANDCONTINUE = 'Guardar y Continuar';
+  static const String TIPADDMARKER =
+      'Porfavor pon un marcador de tu local sobre el mapa, presionando sobre él';
+  static const String EDITMARKER = 'Selecciona donde estara ahora tu local';
+  static const String EDITADDRESS = 'Editar Dirección';
 }
