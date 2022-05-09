@@ -19,7 +19,7 @@ class SucursalAdminPage extends StatelessWidget {
           backgroundColor: MyColors.blackBg,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: const Text(MyStrings.LOCALEADMIN),
+            title: const Text(MyStrings.EDITSUCURSAL),
             centerTitle: false,
             actions: [],
           ),
@@ -42,6 +42,9 @@ class SucursalAdminPage extends StatelessWidget {
                           prefixIcon: const Icon(Icons.search)),
                     ),
                   ),
+                  const SizedBox(height: 10),
+                  Text(MyStrings.SUGGESTEDIT,
+                      style: MyStyles.generalTextStyleWhite),
                   const SizedBox(
                     height: 20,
                   ),
@@ -54,30 +57,35 @@ class SucursalAdminPage extends StatelessWidget {
                           itemCount: _.querySnapshot!.docs.length,
                           itemBuilder: ((context, index) {
                             final sucursal = _.querySnapshot!.docs[index];
-                            return Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                color: MyColors.cardColorsDefault,
-                              ),
-                              child: Row(
-                                children: [
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        sucursal["ubicacionLocal"],
-                                        style: MyStyles.generalTextStyleWhite,
-                                      ),
-                                    ],
-                                  ),
-                                  const Spacer(),
-                                ],
+                            return GestureDetector(
+                              onTap: () {
+                                _.goToEditSucursal(sucursal["idSucursal"]);
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: MyColors.cardColorsDefault,
+                                ),
+                                child: Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          sucursal["ubicacionLocal"],
+                                          style: MyStyles.generalTextStyleWhite,
+                                        ),
+                                      ],
+                                    ),
+                                    const Spacer(),
+                                  ],
+                                ),
                               ),
                             );
                           }))
