@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:locals_guide_eeb/data/models/categorie.dart';
+import 'package:locals_guide_eeb/data/models/sucursal.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
 
 class AddDetailsLocalController extends GetxController {
@@ -27,7 +28,7 @@ class AddDetailsLocalController extends GetxController {
   String? _idSucursal;
   String? idLocal;
   String? _nameLocal;
-  XFile? _photoLocal;
+  dynamic? _photoLocal;
   XFile? get photoLocal => _photoLocal;
   String? _txAddress;
   String? _phoneNumber;
@@ -35,6 +36,11 @@ class AddDetailsLocalController extends GetxController {
   String? _txRepeatPwd;
   String? _txNick;
   //--------------------
+  String? _flujo;
+  String? get flujo => _flujo;
+
+  Sucursal? _infoSucursal;
+  Sucursal? get infoSucursal => _infoSucursal;
 
   LatLng? _marker;
   String? get nameLocal => _nameLocal;
@@ -42,6 +48,9 @@ class AddDetailsLocalController extends GetxController {
   @override
   void onReady() {
     _chargeDataForDropDown();
+    if (_flujo == 'editar') {
+      loadInfoSucursal();
+    }
     super.onReady();
   }
 
@@ -87,6 +96,7 @@ class AddDetailsLocalController extends GetxController {
     _txNick = Get.arguments[7] as String;
     _txPwd = Get.arguments[8] as String;
     _txRepeatPwd = Get.arguments[9] as String;
+    _flujo = Get.arguments[10] as String;
   }
 
   onChangePrice(double value) {
@@ -112,5 +122,25 @@ class AddDetailsLocalController extends GetxController {
       txWeb.text,
       txDelivery.text,
     ]);
+  }
+
+  loadInfoSucursal() async {
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .get()
+        .then((value) {
+      //print(value['ubicacionLocal']);
+      _infoSucursal = Sucursal.fromDocumentSnapshot(documentSnapshot: value);
+      txMenu.text = _infoSucursal!.linkLocal;
+      txWeb.text = _infoSucursal!.linkWeb;
+      txDelivery.text = _infoSucursal!.linkDelivery;
+      onChangePrice(_infoSucursal!.price);
+      update();
+    });
   }
 }

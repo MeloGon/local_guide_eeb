@@ -68,9 +68,6 @@ class AddAdressController extends GetxController {
     txPwd = TextEditingController();
     txRepeatPwd = TextEditingController();
     _setArguments();
-    // if (_flujo == 'editar') {
-    //   loadInfoSucursal();
-    // }
     super.onInit();
   }
 
@@ -95,6 +92,7 @@ class AddAdressController extends GetxController {
       txNick.text,
       txPwd.text,
       txRepeatPwd.text,
+      _flujo,
     ]);
   }
 

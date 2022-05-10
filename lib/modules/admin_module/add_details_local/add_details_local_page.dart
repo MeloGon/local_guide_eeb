@@ -36,25 +36,29 @@ class AddDetailsLocalPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Align(
-                            alignment: Alignment.center,
-                            child: Container(
-                                padding: const EdgeInsets.all(6),
-                                width: 130,
-                                height: 130,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.transparent,
-                                    border: Border.all(
-                                        color: MyColors.cusTeal, width: 2)),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(100.0),
-                                  child: Image.file(
-                                    File(_.photoLocal!.path),
-                                    fit: BoxFit.cover,
-                                  ),
-                                )),
-                          ),
+                          (_.flujo == 'editar')
+                              ? const SizedBox()
+                              : Align(
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                      padding: const EdgeInsets.all(6),
+                                      width: 130,
+                                      height: 130,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.transparent,
+                                          border: Border.all(
+                                              color: MyColors.cusTeal,
+                                              width: 2)),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100.0),
+                                        child: Image.file(
+                                          File(_.photoLocal!.path),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )),
+                                ),
                           const SizedBox(height: 20),
                           Align(
                             alignment: Alignment.center,
