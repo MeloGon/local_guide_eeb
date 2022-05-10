@@ -121,6 +121,7 @@ class AddDetailsLocalController extends GetxController {
       txMenu.text,
       txWeb.text,
       txDelivery.text,
+      _flujo,
     ]);
   }
 

@@ -36,8 +36,17 @@ class AddTableReserveController extends GetxController {
   String? _txDelivery;
   String? _txNick;
   //--------------------
+  String? _flujo;
 
   String? _photoLocalUrl;
+
+  @override
+  void onReady() {
+    if (_flujo == 'editar') {
+      //metodo para mostrar el valor de las mesas
+    }
+    super.onReady();
+  }
 
   @override
   void onInit() {
@@ -56,11 +65,12 @@ class AddTableReserveController extends GetxController {
     _txNick = Get.arguments[7] as String;
     _txPwd = Get.arguments[8] as String;
     _txRepeatPwd = Get.arguments[9] as String;
-    _category = Get.arguments[10] as Category;
+    _category = Get.arguments[10];
     _price = Get.arguments[11] as double;
     _txMenu = Get.arguments[12] as String;
     _txWeb = Get.arguments[13] as String;
     _txDelivery = Get.arguments[14] as String;
+    _flujo = Get.arguments[15] as String;
   }
 
   addNewTable() {
@@ -95,7 +105,8 @@ class AddTableReserveController extends GetxController {
       'username': _txNick,
       'pwdLocal': _txPwd,
       'repeatPwd': _txPwd,
-      'categoria': _category!.nombre,
+      'categoria': _category?.nombre ??
+          'ca', // esta parte la categoria ya se debio haber eliminado, confirmar
       'precioLocal': _price,
       'linkLocal': _txMenu,
       'linkWeb': _txWeb,
