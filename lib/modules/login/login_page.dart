@@ -42,8 +42,9 @@ class LoginPage extends StatelessWidget {
                   MyStrings.USER,
                   style: MyStyles.generalTextStyleWhite,
                 ),
-                const TextField(
-                    decoration: InputDecoration(
+                TextField(
+                    controller: _.txUser,
+                    decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: MyStrings.INPUTUSER,
                         hintStyle: TextStyle(color: Colors.grey))),
@@ -57,8 +58,9 @@ class LoginPage extends StatelessWidget {
                   MyStrings.PASSWORD,
                   style: MyStyles.generalTextStyleWhite,
                 ),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: _.txPass,
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: MyStrings.INPUTPWD,
                     hintStyle: TextStyle(color: Colors.grey),
