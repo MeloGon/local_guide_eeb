@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:locals_guide_eeb/modules/client_module/client_menu/client_menu_controller.dart';
+import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
 import 'package:locals_guide_eeb/utils/my_strings.dart';
@@ -24,15 +25,34 @@ class ClientMenuPage extends StatelessWidget {
                 height: 100,
                 decoration: const BoxDecoration(
                     shape: BoxShape.circle, color: Colors.teal),
-                child: const Center(
-                    child: Text(
-                  'A',
-                  style: TextStyle(fontSize: 46, color: Colors.white),
-                )),
+                child: Center(
+                  child: Container(
+                      width: 200,
+                      height: 200,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                          border:
+                              Border.all(color: MyColors.cusTeal, width: 2)),
+                      child: _.local!.fotoLocal == null
+                          ? const Center(
+                              child: Icon(
+                                Icons.add,
+                                size: 50,
+                              ),
+                            )
+                          : ClipRRect(
+                              borderRadius: BorderRadius.circular(100.0),
+                              child: Image(
+                                image: NetworkImage(_.local!.fotoLocal),
+                                fit: BoxFit.cover,
+                              ),
+                            )),
+                ),
               ),
               const SizedBox(height: 20),
-              const Text(
-                'Nombre local',
+              Text(
+                _.local!.nombreLocal,
                 style: MyStyles.generalTextStyleBlack,
               ),
               const SizedBox(height: 10),

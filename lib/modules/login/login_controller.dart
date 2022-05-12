@@ -46,15 +46,20 @@ class LoginController extends GetxController {
         .then((value) {
       _querySnapshot = value;
       _querySnapshot!.docs.forEach(
-        (element) {
-          element.reference.collection("Sucursales").get().then((value) {
+        (firstElement) {
+          firstElement.reference.collection("Sucursales").get().then((value) {
             value.docs.forEach((element) {
-              print(element.data());
+              //print(element.data());
               // if (element["username"] == "nickname_editado" &&
               //     element["pwdLocal"] == "dsadkasd")
               if (element["username"] == txUser!.text &&
                   element["pwdLocal"] == txPass!.text) {
-                Get.toNamed(AppRoutes.CLIENTMENU);
+                // print(
+                //     'este es el local de la que contiene la sucursal ${firstElement.data()}');
+                Get.toNamed(AppRoutes.CLIENTMENU, arguments: [
+                  element["idSucursal"],
+                  firstElement["idLocal"],
+                ]);
               }
             });
           });
