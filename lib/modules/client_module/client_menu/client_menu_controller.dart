@@ -30,8 +30,8 @@ class ClientMenuController extends GetxController {
   }
 
   loadDataForLocal() async {
-    print(_idSucursal);
-    print(_idLocal);
+    //print(_idSucursal);
+    //print(_idLocal);
     await firebaseFirestore
         .collection("GuiaLocales")
         .doc("admin")
@@ -45,6 +45,10 @@ class ClientMenuController extends GetxController {
   }
 
   void goToClientUbicationsPage() async {
-    Get.toNamed(AppRoutes.CLIENTUBICATIONS);
+    Get.toNamed(AppRoutes.CLIENTUBICATIONS, arguments: [
+      _idLocal,
+      _local!.nombreLocal,
+      _local!.fotoLocal,
+    ]);
   }
 }

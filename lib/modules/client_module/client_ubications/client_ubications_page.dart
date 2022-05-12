@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:locals_guide_eeb/modules/client_module/client_ubications/client_ubications_controller.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
+import 'package:locals_guide_eeb/utils/my_strings.dart';
 
 class ClientUbicationsPage extends StatefulWidget {
   const ClientUbicationsPage({Key? key}) : super(key: key);
@@ -35,7 +37,7 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
           floatingActionButton: _controller!.index == 2
               ? FloatingActionButton(
                   onPressed: () {},
-                  child: Icon(Icons.add_a_photo_rounded),
+                  child: const Icon(Icons.add_a_photo_rounded),
                 )
               : SizedBox(),
           body: SingleChildScrollView(
@@ -44,15 +46,18 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                 Positioned(
                   top: 10,
                   left: 10,
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(9)),
-                    child: const Icon(
-                      Icons.arrow_back_ios_new,
-                      size: 15,
-                      color: Colors.white,
+                  child: GestureDetector(
+                    onTap: () => Get.back(),
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(9)),
+                      child: const Icon(
+                        Icons.arrow_back_ios_new,
+                        size: 15,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -62,20 +67,18 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        margin: const EdgeInsets.only(top: 30),
-                        width: 100,
+                        margin: const EdgeInsets.only(top: 20),
                         height: 100,
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.teal),
-                        child: const Center(
-                            child: Text(
-                          'A',
-                          style: TextStyle(fontSize: 46, color: Colors.white),
-                        )),
+                        width: 100,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: NetworkImage(_.fotoLocal!),
+                                fit: BoxFit.cover)),
                       ),
                       const SizedBox(height: 20),
-                      const Text(
-                        'Nombre local',
+                      Text(
+                        _.nombreLocal!,
                         style: MyStyles.generalTextStyleBlack,
                       ),
                       const SizedBox(height: 10),
@@ -134,47 +137,43 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                                 height: 1,
                               ),
                               Padding(
-                                padding: MyDimens.symetricMarginGeneral,
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text('Dirección'),
-                                                Text(
-                                                    'Ac. Caminos del Inca 1483 - Surco')
-                                              ],
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Text('Distancia'),
-                                                Text('350 m')
-                                              ],
-                                            )
-                                          ]),
-                                    ),
-                                    const SizedBox(height: 20),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      color: Colors.grey,
-                                      height: 1,
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                  padding: MyDimens.symetricMarginGeneral,
+                                  child: ListView.builder(
+                                    itemCount: _.listMarkers!.length,
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, index) {
+                                      final sucursal = _.sucursales![index];
+                                      return SizedBox(
+                                        child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  const Text('Dirección'),
+                                                  Text(sucursal.ubicacionLocal)
+                                                ],
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                children: [
+                                                  Text(MyStrings.DISTANCE),
+                                                  Text('350 m')
+                                                ],
+                                              )
+                                            ]),
+                                      );
+                                    },
+                                  )),
                               SizedBox(
                                 width: MediaQuery.of(context).size.width,
                                 height: 400,
                                 child: GoogleMap(
                                     onMapCreated: (controller) {},
+                                    markers: Set.from(_.myMarker!),
                                     initialCameraPosition: const CameraPosition(
                                       target: LatLng(-12.050424378417254,
                                           -77.04314569048383),
