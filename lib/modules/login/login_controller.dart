@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
+import 'package:locals_guide_eeb/theme/my_colors.dart';
 
 class LoginController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -24,7 +25,6 @@ class LoginController extends GetxController {
   setArguments() {
     _txUser = TextEditingController();
     _txPass = TextEditingController();
-    searchLocalUser();
   }
 
   void goToAdminMenu() async {
@@ -36,6 +36,7 @@ class LoginController extends GetxController {
   }
 
   searchLocalUser() async {
+    Get.snackbar('Validando', 'Espere un momento por favor ...');
     print(txUser!.text);
     await firebaseFirestore
         .collection("GuiaLocales")
@@ -49,25 +50,16 @@ class LoginController extends GetxController {
           element.reference.collection("Sucursales").get().then((value) {
             value.docs.forEach((element) {
               print(element.data());
-              // if (element["username"] == txUser!.text &&
-              //     element["pwdLocal"] == txPass!.text)
-
-              if (element["username"] == "nickname_editado" &&
-                  element["pwdLocal"] == "dsadkasd") {
-                print('Si existe el usuario');
-              } else {
-                print('no existe');
+              // if (element["username"] == "nickname_editado" &&
+              //     element["pwdLocal"] == "dsadkasd")
+              if (element["username"] == txUser!.text &&
+                  element["pwdLocal"] == txPass!.text) {
+                Get.toNamed(AppRoutes.CLIENTMENU);
               }
             });
           });
         },
       );
-      // print(_querySnapshot!.docs[0].reference
-      //     .collection("Sucursales")
-      //     .get()
-      //     .then((value) {
-      //   print(value.docs[0].data());
-      // }));
     });
   }
 }

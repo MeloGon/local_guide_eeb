@@ -44,6 +44,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 TextField(
                     controller: _.txUser,
+                    style: MyStyles.generalTextStyleWhite,
                     decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: MyStrings.INPUTUSER,
@@ -60,6 +61,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 TextField(
                   controller: _.txPass,
+                  style: MyStyles.generalTextStyleWhite,
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: MyStrings.INPUTPWD,
@@ -74,7 +76,7 @@ class LoginPage extends StatelessWidget {
                 const Spacer(),
                 ItemPrimaryButton(
                   text: MyStrings.LOGIN,
-                  onTap: _.goToClientMenu,
+                  onTap: _.searchLocalUser,
                   borderColor: Colors.white,
                 )
               ],
