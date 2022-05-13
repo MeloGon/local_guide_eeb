@@ -130,6 +130,7 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                       Expanded(
                         child: SizedBox(
                           child: TabBarView(
+                              physics: const NeverScrollableScrollPhysics(),
                               controller: _.tabController,
                               children: [
                                 tabUbication(context, _),
@@ -399,7 +400,7 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
             )),
         SizedBox(
           width: MediaQuery.of(context).size.width,
-          height: 400,
+          height: MediaQuery.of(context).size.height * .45,
           child: GoogleMap(
               onMapCreated: (controller) {},
               markers: Set.from(_.myMarker!),

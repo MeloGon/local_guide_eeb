@@ -14,7 +14,8 @@ class SpeedDialWidget extends StatelessWidget {
       curve: Curves.bounceInOut,
       children: [
         SpeedDialChild(
-          child: Icon(Icons.photo_camera_back_outlined, color: Colors.white),
+          child:
+              const Icon(Icons.photo_camera_back_outlined, color: Colors.white),
           backgroundColor: Colors.blueAccent,
           onTap: () => print('Pressed Read Later'),
           label: 'Abrir la galería',
@@ -23,7 +24,7 @@ class SpeedDialWidget extends StatelessWidget {
           labelBackgroundColor: Colors.black,
         ),
         SpeedDialChild(
-          child: Icon(Icons.camera_alt_outlined, color: Colors.white),
+          child: const Icon(Icons.camera_alt_outlined, color: Colors.white),
           backgroundColor: Colors.blueAccent,
           onTap: () => print('Pressed Write'),
           label: 'Tomar Fotografia',
