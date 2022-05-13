@@ -2,11 +2,13 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:locals_guide_eeb/data/models/foto.dart';
 import 'package:locals_guide_eeb/data/models/sucursal.dart';
 import 'package:http/http.dart' as http;
@@ -35,6 +37,12 @@ class ClientUbicationsController extends GetxController
   int? get indexTab => _indexTab;
   bool _loadingUbications = true;
   bool get loadingUbications => _loadingUbications;
+  //para las fotos del tab de momentos
+  XFile? _fotoMomentos;
+  XFile? get fotoMomentos => _fotoMomentos;
+  CloudinaryResponse? response;
+  final cloudinary = CloudinaryPublic('en-el-blanco', 'o2pugvho', cache: false);
+  //-----------------------------------
 
   @override
   void onReady() {
@@ -62,6 +70,7 @@ class ClientUbicationsController extends GetxController
     update();
   }
 
+  //metodos para el marker personalizado
   Future<BitmapDescriptor> getMarkerImageFromUrl(
     String? url, {
     int? targetWidth,
@@ -122,6 +131,37 @@ class ClientUbicationsController extends GetxController
     //convert PNG bytes as BitmapDescriptor
     return BitmapDescriptor.fromBytes(data!.buffer.asUint8List());
   }
+  //---------------------------------------------------------------------------
+
+  //metodos para subir foto en el tab de momentos
+  addMoment({String? option}) async {
+    switch (option) {
+      case "camara":
+        _fotoMomentos =
+            await ImagePicker().pickImage(source: ImageSource.camera);
+        update();
+        break;
+      case "galeria":
+        _fotoMomentos =
+            await ImagePicker().pickImage(source: ImageSource.gallery);
+        update();
+        break;
+    }
+
+    if (_fotoMomentos != null) {
+      try {
+        response = await cloudinary.uploadFile(
+          CloudinaryFile.fromFile(_fotoMomentos!.path,
+              resourceType: CloudinaryResourceType.Image),
+        );
+        print(response!.secureUrl);
+      } on CloudinaryException catch (e) {
+        print(e.message);
+        print(e.request);
+      }
+    }
+  }
+  //---------------------------------------------------------------------------
 
   loadDataForDashboard() async {
     //print(txUser!.text);
