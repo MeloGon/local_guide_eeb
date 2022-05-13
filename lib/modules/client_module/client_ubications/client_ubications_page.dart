@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:locals_guide_eeb/modules/client_module/client_ubications/client_ubications_controller.dart';
+import 'package:locals_guide_eeb/modules/client_module/client_ubications/local_widgets/speed_dial.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
 import 'package:locals_guide_eeb/utils/my_strings.dart';
@@ -21,11 +23,8 @@ class ClientUbicationsPage extends StatefulWidget {
 
 class _ClientUbicationsPageState extends State<ClientUbicationsPage>
     with SingleTickerProviderStateMixin {
-  TabController? _controller;
-
   @override
   void initState() {
-    _controller = TabController(length: 3, vsync: this);
     super.initState();
   }
 
@@ -34,13 +33,11 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
     return GetBuilder<ClientUbicationsController>(
       builder: (_) => SafeArea(
         child: Scaffold(
-          floatingActionButton: _controller!.index == 2
-              ? FloatingActionButton(
-                  onPressed: () {},
-                  child: const Icon(Icons.add_a_photo_rounded),
-                )
-              : SizedBox(),
+          floatingActionButton: _.indexTab == 1
+              ? FadeIn(child: SpeedDialWidget())
+              : const SizedBox(),
           body: SingleChildScrollView(
+            physics: const NeverScrollableScrollPhysics(),
             child: Stack(
               children: [
                 Positioned(
@@ -63,23 +60,33 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         margin: const EdgeInsets.only(top: 20),
-                        height: 100,
-                        width: 100,
+                        padding: const EdgeInsets.all(2),
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                image: NetworkImage(_.fotoLocal!),
-                                fit: BoxFit.cover)),
+                            border: Border.all(
+                                color: Color((Random().nextDouble() * 0xFFFFFF)
+                                        .toInt())
+                                    .withOpacity(1.0)),
+                            shape: BoxShape.circle),
+                        child: Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  image: NetworkImage(_.fotoLocal!),
+                                  fit: BoxFit.cover)),
+                        ),
                       ),
                       const SizedBox(height: 20),
                       Text(
                         _.nombreLocal!,
-                        style: MyStyles.generalTextStyleBlack,
+                        style: MyStyles.generalTextStyleBlackSemiSmall,
                       ),
                       const SizedBox(height: 10),
                       RatingBarIndicator(
@@ -97,7 +104,7 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                       DefaultTabController(
                         length: 3,
                         child: TabBar(
-                          controller: _controller,
+                          controller: _.tabController,
                           tabs: [
                             Tab(
                                 icon: Container(
@@ -120,251 +127,16 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * .61,
-                        width: MediaQuery.of(context).size.width,
-                        child: TabBarView(controller: _controller, children: [
-                          ListView(
-                            shrinkWrap: true,
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text('Ubicación'),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                color: Colors.grey,
-                                height: 1,
-                              ),
-                              Padding(
-                                  padding: MyDimens.symetricMarginGeneral,
-                                  child: ListView.builder(
-                                    itemCount: _.listMarkers!.length,
-                                    shrinkWrap: true,
-                                    itemBuilder: (context, index) {
-                                      final sucursal = _.sucursales![index];
-                                      return SizedBox(
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  const Text('Dirección'),
-                                                  Text(sucursal.ubicacionLocal)
-                                                ],
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
-                                                children: [
-                                                  Text(MyStrings.DISTANCE),
-                                                  Text('350 m')
-                                                ],
-                                              )
-                                            ]),
-                                      );
-                                    },
-                                  )),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                height: 400,
-                                child: GoogleMap(
-                                    onMapCreated: (controller) {},
-                                    markers: Set.from(_.myMarker!),
-                                    initialCameraPosition: const CameraPosition(
-                                      target: LatLng(-12.050424378417254,
-                                          -77.04314569048383),
-                                      zoom: 12,
-                                    )),
-                              ),
-                            ],
-                          ),
-                          ListView(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            children: [
-                              //corregir este contenedor para dinamismo
-                              Container(
-                                height: 900,
-                                width: 500,
-                                child: MasonryGridView.count(
-                                  crossAxisCount: 3,
-                                  mainAxisSpacing: 4,
-                                  crossAxisSpacing: 4,
-                                  itemBuilder: (context, index) {
-                                    return Stack(
-                                      children: [
-                                        Card(
-                                          // Give each item a random background color
-                                          color: Color.fromARGB(
-                                              Random().nextInt(256),
-                                              Random().nextInt(256),
-                                              Random().nextInt(256),
-                                              Random().nextInt(256)),
-                                          key: ValueKey(index),
-                                          child: SizedBox(
-                                            height: (index % 5 + 1) * 100,
-                                            child: Center(
-                                              child: Text(index.toString()),
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          top: 10,
-                                          right: 10,
-                                          child: Row(
-                                            children: [
-                                              Text(Random()
-                                                  .nextInt(256)
-                                                  .toString()),
-                                              Icon(
-                                                Icons.favorite,
-                                                size: 15,
-                                                color: Colors.pink,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                          ListView(
-                            shrinkWrap: true,
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text('Recomendaciones'),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                color: Colors.grey,
-                                height: 1,
-                              ),
-                              Padding(
-                                  padding: MyDimens.symetricMarginGeneral,
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: 50,
-                                            height: 50,
-                                            color: Colors.red,
-                                          ),
-                                          SizedBox(width: 20),
-                                          Text('Mariale Castillo'),
-                                          Spacer(),
-                                          Icon(Icons.share),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 50, top: 10),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              width: 30,
-                                              height: 30,
-                                              color: Colors.blue,
-                                            ),
-                                            SizedBox(
-                                              width: 20,
-                                            ),
-                                            Text('Maki Imperial'),
-                                            Spacer(),
-                                            Row(
-                                              children: [
-                                                Text('67'),
-                                                SizedBox(width: 2),
-                                                Icon(
-                                                  Icons.favorite,
-                                                  color: Colors.pink
-                                                      .withOpacity(.2),
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 50, top: 10),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              width: 30,
-                                              height: 30,
-                                              color: Colors.blue,
-                                            ),
-                                            SizedBox(
-                                              width: 20,
-                                            ),
-                                            Text('Maki Imperial'),
-                                            Spacer(),
-                                            Row(
-                                              children: [
-                                                Text('67'),
-                                                SizedBox(width: 2),
-                                                Icon(
-                                                  Icons.favorite,
-                                                  color: Colors.pink
-                                                      .withOpacity(.2),
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 50, top: 10),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              width: 30,
-                                              height: 30,
-                                              color: Colors.blue,
-                                            ),
-                                            SizedBox(
-                                              width: 20,
-                                            ),
-                                            Text('Maki Imperial'),
-                                            Spacer(),
-                                            Row(
-                                              children: [
-                                                Text('67'),
-                                                SizedBox(width: 2),
-                                                Icon(
-                                                  Icons.favorite,
-                                                  color: Colors.pink
-                                                      .withOpacity(.2),
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(top: 20),
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        color: Colors.grey,
-                                        height: 1,
-                                      ),
-                                      Row(),
-                                      Row(),
-                                    ],
-                                  )),
-                            ],
-                          ),
-                        ]),
+                      Expanded(
+                        child: SizedBox(
+                          child: TabBarView(
+                              controller: _.tabController,
+                              children: [
+                                tabUbication(context, _),
+                                tabMoments(_),
+                                tabRecommends(context),
+                              ]),
+                        ),
                       )
                     ],
                   ),
@@ -374,6 +146,269 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
           ),
         ),
       ),
+    );
+  }
+
+  ListView tabRecommends(BuildContext context) {
+    return ListView(
+      shrinkWrap: true,
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Center(
+              child: Text(
+            "Recomendaciones",
+            style: MyStyles.generalTextStyleBlackSemiSmall,
+          )),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          color: Colors.grey,
+          height: 1,
+        ),
+        Padding(
+            padding: MyDimens.symetricMarginGeneral,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 50,
+                      height: 50,
+                      color: Colors.red,
+                    ),
+                    SizedBox(width: 20),
+                    Text('Mariale Castillo'),
+                    Spacer(),
+                    Icon(Icons.share),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 50, top: 10),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 30,
+                        height: 30,
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text('Maki Imperial'),
+                      Spacer(),
+                      Row(
+                        children: [
+                          Text('67'),
+                          SizedBox(width: 2),
+                          Icon(
+                            Icons.favorite,
+                            color: Colors.pink.withOpacity(.2),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 50, top: 10),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 30,
+                        height: 30,
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text('Maki Imperial'),
+                      Spacer(),
+                      Row(
+                        children: [
+                          Text('67'),
+                          SizedBox(width: 2),
+                          Icon(
+                            Icons.favorite,
+                            color: Colors.pink.withOpacity(.2),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 50, top: 10),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 30,
+                        height: 30,
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text('Maki Imperial'),
+                      Spacer(),
+                      Row(
+                        children: [
+                          Text('67'),
+                          SizedBox(width: 2),
+                          Icon(
+                            Icons.favorite,
+                            color: Colors.pink.withOpacity(.2),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.grey,
+                  height: 1,
+                ),
+                Row(),
+                Row(),
+              ],
+            )),
+      ],
+    );
+  }
+
+  ListView tabMoments(ClientUbicationsController _) {
+    return ListView(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Center(
+              child: Text(
+            "Momentos",
+            style: MyStyles.generalTextStyleBlackSemiSmall,
+          )),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          color: Colors.grey,
+          height: 1,
+        ),
+        MasonryGridView.count(
+          shrinkWrap: true,
+          crossAxisCount: 3,
+          mainAxisSpacing: 4,
+          crossAxisSpacing: 4,
+          itemCount: _.listFoto!.length,
+          itemBuilder: (context, index) {
+            final foto = _.listFoto![index];
+            return Padding(
+              padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    // Give each item a random background color
+                    borderRadius: BorderRadius.circular(8.0),
+                    key: ValueKey(index),
+                    child: Image(
+                      image: NetworkImage(foto.pathFoto),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Positioned(
+                    top: 10,
+                    right: 10,
+                    child: Row(
+                      children: [
+                        Text(foto.likes),
+                        const Icon(
+                          Icons.favorite,
+                          size: 15,
+                          color: Colors.pink,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  ListView tabUbication(BuildContext context, ClientUbicationsController _) {
+    return ListView(
+      shrinkWrap: true,
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Center(
+              child: Text(
+            MyStrings.UBICATIONUSER,
+            style: MyStyles.generalTextStyleBlackSemiSmall,
+          )),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          color: Colors.grey,
+          height: 1,
+        ),
+        Padding(
+            padding: MyDimens.symetricMarginGeneral,
+            child: ListView.separated(
+              separatorBuilder: (context, index) {
+                return Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  height: 1.5,
+                  color: Colors.grey.shade300,
+                );
+              },
+              itemCount: _.listMarkers!.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                if (_.loadingUbications) {
+                  return const Center(child: CircularProgressIndicator());
+                } else {
+                  final sucursal = _.sucursales![index];
+                  return SizedBox(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Dirección'),
+                              Text(sucursal.ubicacionLocal)
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: const [
+                              Text(MyStrings.DISTANCE),
+                              Text('350 m')
+                            ],
+                          )
+                        ]),
+                  );
+                }
+              },
+            )),
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 400,
+          child: GoogleMap(
+              onMapCreated: (controller) {},
+              markers: Set.from(_.myMarker!),
+              initialCameraPosition: const CameraPosition(
+                target: LatLng(-12.050424378417254, -77.04314569048383),
+                zoom: 12,
+              )),
+        ),
+      ],
     );
   }
 }
