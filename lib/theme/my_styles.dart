@@ -34,6 +34,11 @@ class MyStyles {
     fontSize: 16,
   );
 
+  static const TextStyle generalTextStyleBlackSemiSmall = TextStyle(
+    color: Colors.black,
+    fontSize: 15,
+  );
+
   static const TextStyle generalTextStyleBlackBold = TextStyle(
     color: Colors.black,
     fontSize: 16,
