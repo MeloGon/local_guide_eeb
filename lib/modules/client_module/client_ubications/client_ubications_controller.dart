@@ -168,7 +168,19 @@ class ClientUbicationsController extends GetxController
             .doc(_idLocal)
             .get()
             .then((local) {
-          local.reference.collection("Sucursales").get().then((value) {});
+          local.reference
+              .collection("Sucursales")
+              .doc(_idSucursal)
+              .get()
+              .then((sucursal) {
+            sucursal.reference.collection("Fotografias").doc(idFotoTemp).set({
+              'idFoto': idFotoTemp,
+              'likes': '0',
+              'pathFoto': response!.secureUrl
+            });
+
+            //------------------------------------------
+          });
         });
       } on CloudinaryException catch (e) {
         print(e.message);
@@ -219,7 +231,6 @@ class ClientUbicationsController extends GetxController
 
   loadDataforMomets() async {
     //esto es para las fotografias
-    print('el id de la sucursal en ubicacion $_idSucursal');
     await firebaseFirestore
         .collection("GuiaLocales")
         .doc("admin")
