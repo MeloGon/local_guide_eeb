@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 
@@ -33,6 +35,10 @@ class LoginController extends GetxController {
 
   void goToClientMenu() async {
     Get.toNamed(AppRoutes.CLIENTMENU);
+  }
+
+  void goToUserMenu() async {
+    Get.toNamed(AppRoutes.USERMENU);
   }
 
   searchLocalUser() async {
@@ -71,6 +77,31 @@ class LoginController extends GetxController {
           },
         );
       });
+      //    loginWithGoogleMail();
     }
   }
+
+  /* loginWithGoogleMail() async {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    final authResult =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+    final User? user = authResult.user;
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    if (user!.uid == currentUser!.uid) {
+      Get.toNamed(AppRoutes.USERMENU);
+      return;
+    } else {
+      Get.snackbar('Ups algo salió mal',
+          'Por favor pongase en contacto con el equipo de desarrollo. Gracias');
+    }
+  } */
 }
