@@ -15,6 +15,7 @@ class SpeedDialWidget extends StatelessWidget {
               backgroundColor: Colors.blueAccent,
               visible: true,
               curve: Curves.bounceInOut,
+              overlayColor: Colors.black,
               children: [
                 SpeedDialChild(
                   child: const Icon(Icons.photo_camera_back_outlined,
