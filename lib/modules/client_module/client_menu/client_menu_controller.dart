@@ -45,10 +45,12 @@ class ClientMenuController extends GetxController {
   }
 
   void goToClientUbicationsPage() async {
+//    print('el id de sucusal $_idSucursal');
     Get.toNamed(AppRoutes.CLIENTUBICATIONS, arguments: [
       _idLocal,
       _local!.nombreLocal,
       _local!.fotoLocal,
+      _idSucursal,
     ]);
   }
 }

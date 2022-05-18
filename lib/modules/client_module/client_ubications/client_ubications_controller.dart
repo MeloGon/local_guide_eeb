@@ -21,9 +21,10 @@ class ClientUbicationsController extends GetxController
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   QuerySnapshot? _querySnapshot;
   //parametros que llegan
-  String? _idLocal, _nombreLocal, _fotoLocal;
+  String? _idLocal, _nombreLocal, _fotoLocal, _idSucursal;
   String? get nombreLocal => _nombreLocal;
   String? get fotoLocal => _fotoLocal;
+  String? get idSucursal => _idSucursal;
   //--------------------
   List<LatLng>? _listMarkers = [];
   List<LatLng>? get listMarkers => _listMarkers;
@@ -50,6 +51,7 @@ class ClientUbicationsController extends GetxController
   @override
   void onReady() {
     loadDataForDashboard();
+    loadDataforMomets();
     _tabController!.addListener(cambiandoTabs);
     // make sure to initialize before map loading
     super.onReady();
@@ -65,6 +67,7 @@ class ClientUbicationsController extends GetxController
     _idLocal = Get.arguments[0] as String;
     _nombreLocal = Get.arguments[1] as String;
     _fotoLocal = Get.arguments[2] as String;
+    _idSucursal = Get.arguments[3] as String;
     _tabController = TabController(length: 3, vsync: this);
   }
 
@@ -165,15 +168,7 @@ class ClientUbicationsController extends GetxController
             .doc(_idLocal)
             .get()
             .then((local) {
-          local.reference.collection("Sucursales").get().then((value) {
-            value.docs.forEach((sucursal) {
-              sucursal.reference.collection("Fotografias").doc(idFotoTemp).set({
-                'idFoto': idFotoTemp,
-                'likes': '0',
-                'pathFoto': response!.secureUrl
-              });
-            });
-          });
+          local.reference.collection("Sucursales").get().then((value) {});
         });
       } on CloudinaryException catch (e) {
         print(e.message);
@@ -197,19 +192,6 @@ class ClientUbicationsController extends GetxController
         .then((value) {
       value.reference.collection("Sucursales").get().then((value) {
         value.docs.forEach((element) {
-          //esto es para las fotografias
-          element.reference
-              .collection("Fotografias")
-              .where('idSucursal', isEqualTo: element['idSucursal'])
-              .get()
-              .then((fotografias) {
-            for (var foto in fotografias.docs) {
-              final photo = Foto.fromDocumentSnapshot(documentSnapshot: foto);
-              listFoto!.add(photo);
-              update();
-            }
-          });
-          //------------------------------------------
           //esto es para parsear el string a latlong
           //print(element["marker"]);
           final sucursal =
@@ -231,6 +213,34 @@ class ClientUbicationsController extends GetxController
           update();
           // ---------
         });
+      });
+    });
+  }
+
+  loadDataforMomets() async {
+    //esto es para las fotografias
+    print('el id de la sucursal en ubicacion $_idSucursal');
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .get()
+        .then((local) {
+      local.reference
+          .collection("Sucursales")
+          .doc(_idSucursal)
+          .get()
+          .then((sucursal) {
+        sucursal.reference.collection("Fotografias").get().then((fotografias) {
+          for (var foto in fotografias.docs) {
+            final photo = Foto.fromDocumentSnapshot(documentSnapshot: foto);
+            listFoto!.add(photo);
+            update();
+          }
+        });
+
+        //------------------------------------------
       });
     });
   }
