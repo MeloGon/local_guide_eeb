@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:locals_guide_eeb/data/models/categorie.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_details_local/add_details_local_controller.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
@@ -36,7 +37,7 @@ class AddDetailsLocalPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          (_.flujo == 'editar')
+                          (_.flujo == 'editar' || _.flujo == 'agregar')
                               ? const SizedBox()
                               : Align(
                                   alignment: Alignment.center,

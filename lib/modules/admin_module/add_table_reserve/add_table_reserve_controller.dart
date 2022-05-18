@@ -150,6 +150,8 @@ class AddTableReserveController extends GetxController {
       idLocal,
       _nameLocal,
       _photoLocal,
+      '',
+      '',
     ]);
     Get.snackbar('Sucursal agregada',
         'La sucursar ha sido agregada, podras ver los cambios cuando termines de agregar la nueva sucursal',

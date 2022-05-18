@@ -59,6 +59,7 @@ class LocalsAdminPage extends StatelessWidget {
                     height: 20,
                   ),
                   ListView.builder(
+                      physics: const BouncingScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: _.locales.length,
                       itemBuilder: ((context, index) {
