@@ -37,6 +37,7 @@ class RegisterController extends GetxController {
     final User? user = authResult.user;
     final User? currentUser = FirebaseAuth.instance.currentUser;
     if (user!.uid == currentUser!.uid) {
+      print('este es el correo y pass ${user.displayName}');
       await firebaseFirestore
           .collection("GuiaLocales")
           .doc("admin")
@@ -46,6 +47,8 @@ class RegisterController extends GetxController {
         'idUser': _idUser,
         'email': user.email,
         'pwd': 'emptyForNow',
+        'nombreUser ': user.displayName,
+        'photoUser': user.photoURL,
       });
       Get.toNamed(AppRoutes.ADMINMENU);
       return;
