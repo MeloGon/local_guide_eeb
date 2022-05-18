@@ -47,7 +47,7 @@ class RegisterController extends GetxController {
         'idUser': _idUser,
         'email': user.email,
         'pwd': 'emptyForNow',
-        'nombreUser ': user.displayName,
+        'nombreUser': user.displayName,
         'photoUser': user.photoURL,
       });
       Get.toNamed(AppRoutes.ADMINMENU);

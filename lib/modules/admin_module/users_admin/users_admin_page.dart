@@ -43,46 +43,54 @@ class UsersAdminPage extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: MyColors.cardColorsDefault,
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 40,
-                          width: 40,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle, color: Colors.red),
-                          child: Image(
-                            image: NetworkImage(
-                                'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwallpaperaccess.com%2Fcool-profile-pictures&psig=AOvVaw0Ot78lHx67xqLWIJGeNUfK&ust=1650375543558000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCMDLkpPenfcCFQAAAAAdAAAAABAS'),
-                          ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: _.usuarios.length,
+                    itemBuilder: (context, index) {
+                      final user = _.usuarios[index];
+                      return Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: MyColors.cardColorsDefault,
                         ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'Mariale Castillo',
-                              style: MyStyles.generalTextStyleWhite,
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: Image.network(
+                                user.photoUser,
+                                height: 40,
+                                width: 40,
+                              ),
                             ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    user.nombreUser,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: MyStyles.itemTextStyleWhite,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.close_rounded,
+                                  color: Colors.red,
+                                ))
                           ],
                         ),
-                        const Spacer(),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.close_rounded,
-                              color: Colors.red,
-                            ))
-                      ],
-                    ),
+                      );
+                    },
                   )
                 ],
               ),
