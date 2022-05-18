@@ -7,7 +7,7 @@ import 'package:locals_guide_eeb/route/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
