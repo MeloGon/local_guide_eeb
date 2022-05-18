@@ -36,35 +36,41 @@ class LoginController extends GetxController {
   }
 
   searchLocalUser() async {
-    Get.snackbar('Validando', 'Espere un momento por favor ...');
-    print(txUser!.text);
-    await firebaseFirestore
-        .collection("GuiaLocales")
-        .doc("admin")
-        .collection("Locales")
-        .get()
-        .then((value) {
-      _querySnapshot = value;
-      _querySnapshot!.docs.forEach(
-        (firstElement) {
-          firstElement.reference.collection("Sucursales").get().then((value) {
-            value.docs.forEach((element) {
-              //print(element.data());
-              // if (element["username"] == "nickname_editado" &&
-              //     element["pwdLocal"] == "dsadkasd")
-              if (element["username"] == txUser!.text &&
-                  element["pwdLocal"] == txPass!.text) {
-                // print(
-                //     'este es el local de la que contiene la sucursal ${firstElement.data()}');
-                Get.toNamed(AppRoutes.CLIENTMENU, arguments: [
-                  element["idSucursal"],
-                  firstElement["idLocal"],
-                ]);
-              }
+    if (txUser!.text.isEmpty || txPass!.text.isEmpty) {
+      Get.snackbar('Advertencia',
+          'Tiene que ingresar una cuenta y una contraseña validos para poder continuar',
+          backgroundColor: MyColors.white, colorText: MyColors.blackBg);
+    } else {
+      Get.snackbar('Validando', 'Espere un momento por favor ...');
+      print(txUser!.text);
+      await firebaseFirestore
+          .collection("GuiaLocales")
+          .doc("admin")
+          .collection("Locales")
+          .get()
+          .then((value) {
+        _querySnapshot = value;
+        _querySnapshot!.docs.forEach(
+          (firstElement) {
+            firstElement.reference.collection("Sucursales").get().then((value) {
+              value.docs.forEach((element) {
+                //print(element.data());
+                // if (element["username"] == "nickname_editado" &&
+                //     element["pwdLocal"] == "dsadkasd")
+                if (element["username"] == txUser!.text &&
+                    element["pwdLocal"] == txPass!.text) {
+                  // print(
+                  //     'este es el local de la que contiene la sucursal ${firstElement.data()}');
+                  Get.toNamed(AppRoutes.CLIENTMENU, arguments: [
+                    element["idSucursal"],
+                    firstElement["idLocal"],
+                  ]);
+                }
+              });
             });
-          });
-        },
-      );
-    });
+          },
+        );
+      });
+    }
   }
 }
