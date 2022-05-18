@@ -1,14 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
+import 'package:random_string/random_string.dart';
 
 class RegisterController extends GetxController {
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  String? _idUser;
+
   @override
   void onInit() {
-    // TODO: implement onInit
+    _idUser = (randomAlphaNumeric(8));
     super.onInit();
   }
 
@@ -32,6 +37,16 @@ class RegisterController extends GetxController {
     final User? user = authResult.user;
     final User? currentUser = FirebaseAuth.instance.currentUser;
     if (user!.uid == currentUser!.uid) {
+      await firebaseFirestore
+          .collection("GuiaLocales")
+          .doc("admin")
+          .collection("Usuarios")
+          .doc(_idUser)
+          .set({
+        'idUser': _idUser,
+        'email': user.email,
+        'pwd': 'emptyForNow',
+      });
       Get.toNamed(AppRoutes.ADMINMENU);
       return;
     } else {
