@@ -14,6 +14,8 @@ import 'package:locals_guide_eeb/data/models/sucursal.dart';
 import 'package:http/http.dart' as http;
 import 'dart:ui' as ui;
 
+import 'package:random_string/random_string.dart';
+
 class ClientUbicationsController extends GetxController
     with GetSingleTickerProviderStateMixin {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -42,6 +44,7 @@ class ClientUbicationsController extends GetxController
   XFile? get fotoMomentos => _fotoMomentos;
   CloudinaryResponse? response;
   final cloudinary = CloudinaryPublic('en-el-blanco', 'o2pugvho', cache: false);
+  QuerySnapshot? localesQuery;
   //-----------------------------------
 
   @override
@@ -149,12 +152,29 @@ class ClientUbicationsController extends GetxController
     }
 
     if (_fotoMomentos != null) {
+      var idFotoTemp = (randomAlphaNumeric(8));
       try {
         response = await cloudinary.uploadFile(
           CloudinaryFile.fromFile(_fotoMomentos!.path,
               resourceType: CloudinaryResourceType.Image),
         );
-        print(response!.secureUrl);
+        await firebaseFirestore
+            .collection("GuiaLocales")
+            .doc("admin")
+            .collection("Locales")
+            .doc(_idLocal)
+            .get()
+            .then((local) {
+          local.reference.collection("Sucursales").get().then((value) {
+            value.docs.forEach((sucursal) {
+              sucursal.reference.collection("Fotografias").doc(idFotoTemp).set({
+                'idFoto': idFotoTemp,
+                'likes': '0',
+                'pathFoto': response!.secureUrl
+              });
+            });
+          });
+        });
       } on CloudinaryException catch (e) {
         print(e.message);
         print(e.request);
@@ -178,7 +198,11 @@ class ClientUbicationsController extends GetxController
       value.reference.collection("Sucursales").get().then((value) {
         value.docs.forEach((element) {
           //esto es para las fotografias
-          element.reference.collection("Fotografias").get().then((fotografias) {
+          element.reference
+              .collection("Fotografias")
+              .where('idSucursal', isEqualTo: element['idSucursal'])
+              .get()
+              .then((fotografias) {
             for (var foto in fotografias.docs) {
               final photo = Foto.fromDocumentSnapshot(documentSnapshot: foto);
               listFoto!.add(photo);
