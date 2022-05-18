@@ -19,4 +19,5 @@ class AppRoutes {
   static const ADDTABLERESERVE = '/add_table_reserve';
   static const SUCURSALADMIN = '/sucursal_admin';
   static const EDITSUCURSALADMIN = '/edit_sucursal_admin';
+  static const USERMENU = '/user_menu';
 }

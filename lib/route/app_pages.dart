@@ -40,6 +40,8 @@ import 'package:locals_guide_eeb/modules/register/register_binding.dart';
 import 'package:locals_guide_eeb/modules/register/register_page.dart';
 import 'package:locals_guide_eeb/modules/register_phone/register_phone_binding.dart';
 import 'package:locals_guide_eeb/modules/register_phone/register_phone_page.dart';
+import 'package:locals_guide_eeb/modules/user_module/user_menu/user_menu_binding.dart';
+import 'package:locals_guide_eeb/modules/user_module/user_menu/user_menu_page.dart';
 
 import 'package:locals_guide_eeb/route/app_routes.dart';
 
@@ -124,6 +126,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.EDITSUCURSALADMIN,
         page: () => const EditSucursalAdminPage(),
-        binding: EditSucursalAdminBinding())
+        binding: EditSucursalAdminBinding()),
+    GetPage(
+        name: AppRoutes.USERMENU,
+        page: () => const UserMenuPage(),
+        binding: UserMenuBinding()),
   ];
 }
