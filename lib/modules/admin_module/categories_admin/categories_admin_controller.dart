@@ -18,7 +18,7 @@ class CategoriesAdminController extends GetxController {
   }
 
   void goToAddCategorieAdminPage() async {
-    Get.toNamed(AppRoutes.ADDCATEGORIEADMIN);
+    Get.toNamed(AppRoutes.ADDCATEGORIEADMIN, arguments: ['agregar']);
   }
 
   void showCategories() async {
@@ -36,5 +36,12 @@ class CategoriesAdminController extends GetxController {
         update();
       });
     });
+  }
+
+  goToEditCategorie(Category categoria) async {
+    Get.toNamed(AppRoutes.ADDCATEGORIEADMIN, arguments: [
+      'editar',
+      categoria.idCategory,
+    ]);
   }
 }

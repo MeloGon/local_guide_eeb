@@ -58,15 +58,19 @@ class AddCategorieAdminPage extends StatelessWidget {
                   const SizedBox(height: 20),
                   ColorPicker(
                       labelTextStyle: MyStyles.generalTextStyleWhiteBold,
-                      pickerColor: Colors.red,
+                      pickerColor: _.flujo == 'editar'
+                          ? Color(_.valueColor)
+                          : Colors.red,
                       onColorChanged: (value) {
                         _.txColorCat = value.toString();
                       }),
                   ItemPrimaryButton(
-                    text: MyStrings.SAVECATEGORIE,
-                    borderColor: Colors.white,
-                    onTap: _.addCategory,
-                  )
+                      text: _.flujo == 'editar'
+                          ? MyStrings.EDITANDCONTINUE
+                          : MyStrings.SAVECATEGORIE,
+                      borderColor: Colors.white,
+                      onTap:
+                          _.flujo == 'editar' ? _.editCategoria : _.addCategory)
                 ],
               ),
             ),

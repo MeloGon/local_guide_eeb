@@ -12,7 +12,7 @@ class CategoriesAdminPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final availableHeight = MediaQuery.of(context).size.height -
-        /*AppBar().preferredSize.height -  (si hay appbar)*/
+        AppBar().preferredSize.height -
         MediaQuery.of(context).padding.top -
         MediaQuery.of(context).padding.bottom;
     return GetBuilder<CategoriesAdminController>(
@@ -70,7 +70,9 @@ class CategoriesAdminPage extends StatelessWidget {
                             ),
                             const Spacer(),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _.goToEditCategorie(categoria);
+                                },
                                 icon: Icon(
                                   Icons.edit,
                                   color: Color(value),
