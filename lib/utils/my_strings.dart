@@ -84,4 +84,9 @@ class MyStrings {
       'Porfavor pon un marcador de tu local sobre el mapa, presionando sobre él';
   static const String EDITMARKER = 'Selecciona donde estara ahora tu local';
   static const String EDITADDRESS = 'Editar Dirección';
+
+  static const String FILTERS = 'Filtros de búsqueda';
+  static const String FORCATEGORY = 'Por Categoría';
+  static const String FORDISTANCE = 'Por Distancia';
+  static const String FORPRICE = 'Por Precio';
 }
