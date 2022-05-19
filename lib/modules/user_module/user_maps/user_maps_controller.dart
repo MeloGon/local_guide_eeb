@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:locals_guide_eeb/route/app_routes.dart';
 
 class UserMapsController extends GetxController {
   late GoogleMapController mapController;
@@ -13,5 +14,9 @@ class UserMapsController extends GetxController {
       _mapStyle = value;
     });
     super.onInit();
+  }
+
+  goToDrawerMenu() async {
+    Get.toNamed(AppRoutes.USERDRAWER);
   }
 }

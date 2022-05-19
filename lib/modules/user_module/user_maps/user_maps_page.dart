@@ -124,31 +124,38 @@ class UserMapsPage extends StatelessWidget {
                     ),
                     Positioned(
                       top: 40,
-                      child: Container(
-                        margin: const EdgeInsets.all(10),
-                        width: 35,
-                        height: 35,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                          border: Border.all(color: Colors.black),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(0.0, 1.0), //(x,y)
-                              blurRadius: 6.0,
-                            ),
-                          ],
-                        ),
-                        child: const Icon(
-                          Icons.filter_list,
-                          size: 20,
-                        ),
-                      ),
+                      child: buttonMenuDrawer(_),
                     ),
                   ],
                 ),
               )),
+        ),
+      ),
+    );
+  }
+
+  Widget buttonMenuDrawer(UserMapsController _) {
+    return GestureDetector(
+      onTap: _.goToDrawerMenu,
+      child: Container(
+        margin: const EdgeInsets.all(10),
+        width: 35,
+        height: 35,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+          border: Border.all(color: Colors.black),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              offset: Offset(0.0, 1.0), //(x,y)
+              blurRadius: 6.0,
+            ),
+          ],
+        ),
+        child: const Icon(
+          Icons.filter_list,
+          size: 20,
         ),
       ),
     );
