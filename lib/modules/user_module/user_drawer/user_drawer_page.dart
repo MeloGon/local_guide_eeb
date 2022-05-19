@@ -51,12 +51,12 @@ class UserDrawerPage extends StatelessWidget {
                           const SizedBox(height: 20),
                           Column(
                             children: [
-                              optionDrawer(Icons.home, 'Home'),
-                              optionDrawer(Icons.history, 'Historial'),
+                              optionDrawer(Icons.home, 'Home', _),
+                              optionDrawer(Icons.history, 'Historial', _),
                               optionDrawer(
-                                  Icons.notification_add, 'Notificaciones'),
-                              optionDrawer(Icons.settings, 'Configuración'),
-                              optionDrawer(Icons.logout, 'Cerrar Sesión'),
+                                  Icons.notification_add, 'Notificaciones', _),
+                              optionDrawer(Icons.settings, 'Configuración', _),
+                              optionDrawer(Icons.logout, 'Cerrar Sesión', _),
                             ],
                           )
                         ],
@@ -76,21 +76,31 @@ class UserDrawerPage extends StatelessWidget {
             )));
   }
 
-  Widget optionDrawer(IconData icon, String title, {void onTap}) {
-    return Padding(
-      padding: MyDimens.paddingForOptions,
-      child: Row(
-        children: [
-          Icon(
-            icon,
-            color: Colors.white,
-          ),
-          const SizedBox(width: 20),
-          Text(
-            title,
-            style: MyStyles.generalTextStyleWhite,
-          ),
-        ],
+  Widget optionDrawer(IconData icon, String title, UserDrawerController _) {
+    return GestureDetector(
+      onTap: () {
+        switch (title) {
+          case 'Home':
+            _.goToHomeUser();
+            break;
+          default:
+        }
+      },
+      child: Padding(
+        padding: MyDimens.paddingForOptions,
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: Colors.white,
+            ),
+            const SizedBox(width: 20),
+            Text(
+              title,
+              style: MyStyles.generalTextStyleWhite,
+            ),
+          ],
+        ),
       ),
     );
   }
