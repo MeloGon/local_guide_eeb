@@ -15,7 +15,7 @@ class UserMenuPage extends StatelessWidget {
       builder: (_) => SafeArea(
         child: Scaffold(
           backgroundColor: MyColors.white,
-          appBar: appBar(),
+          appBar: appBar(_),
           body: SingleChildScrollView(
             child: Padding(
               padding: MyDimens.symetricMarginGeneral,
