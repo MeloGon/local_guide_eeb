@@ -21,4 +21,5 @@ class AppRoutes {
   static const EDITSUCURSALADMIN = '/edit_sucursal_admin';
   static const USERMENU = '/user_menu';
   static const USERMAPS = '/user_maps';
+  static const USERDRAWER = '/user_drawer';
 }

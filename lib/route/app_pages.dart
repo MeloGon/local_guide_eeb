@@ -40,6 +40,8 @@ import 'package:locals_guide_eeb/modules/register/register_binding.dart';
 import 'package:locals_guide_eeb/modules/register/register_page.dart';
 import 'package:locals_guide_eeb/modules/register_phone/register_phone_binding.dart';
 import 'package:locals_guide_eeb/modules/register_phone/register_phone_page.dart';
+import 'package:locals_guide_eeb/modules/user_module/user_drawer/user_drawer_binding.dart';
+import 'package:locals_guide_eeb/modules/user_module/user_drawer/user_drawer_page.dart';
 import 'package:locals_guide_eeb/modules/user_module/user_maps/user_maps_binding.dart';
 import 'package:locals_guide_eeb/modules/user_module/user_maps/user_maps_page.dart';
 import 'package:locals_guide_eeb/modules/user_module/user_menu/user_menu_binding.dart';
@@ -137,5 +139,9 @@ class AppPages {
         name: AppRoutes.USERMAPS,
         page: () => const UserMapsPage(),
         binding: UserMapsBinding()),
+    GetPage(
+        name: AppRoutes.USERDRAWER,
+        page: () => const UserDrawerPage(),
+        binding: UserDrawerBinding()),
   ];
 }
