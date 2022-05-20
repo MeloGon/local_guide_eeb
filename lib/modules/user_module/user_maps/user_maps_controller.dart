@@ -15,7 +15,8 @@ import 'dart:ui' as ui;
 
 class UserMapsController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  late GoogleMapController mapController;
+  late GoogleMapController? _mapController;
+  GoogleMapController? get mapController => _mapController;
   String? _mapStyle;
   String? get mapStyle => _mapStyle;
   //lista para los marcadores
@@ -142,6 +143,7 @@ class UserMapsController extends GetxController {
                 icon: customMarker,
                 markerId: MarkerId(sucursal['marker']),
                 position: location,
+                infoWindow: InfoWindow(title: tempNLocal),
                 draggable: true));
             update();
           });
@@ -149,4 +151,18 @@ class UserMapsController extends GetxController {
       });
     });
   }
+
+  onMapCreated(GoogleMapController controller) {
+    _mapController = controller;
+    _mapController!.setMapStyle(_mapStyle);
+    update();
+  }
+
+  /* centrarVista() async {
+    await _mapController!.getVisibleRegion();
+    var left = min()
+    var bounds = LatLngBounds(southwest: southwest, northeast: northeast)
+    var cameraUpdate = CameraUpdate.newLatLngBounds(bounds, 50)
+    _mapController.animateCamera(cameraUpdate)
+  } */
 }

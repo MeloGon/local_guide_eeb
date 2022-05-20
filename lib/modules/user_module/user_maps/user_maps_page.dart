@@ -26,6 +26,24 @@ class UserMapsPage extends StatelessWidget {
                 height: availableHeight,
                 child: Stack(
                   children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height * .6,
+                      child: GoogleMap(
+                        myLocationButtonEnabled: true,
+                        myLocationEnabled: true,
+                        onMapCreated: (controller) {
+                          _.onMapCreated(controller);
+                          /* _.centrarVista; */
+                        },
+                        markers: Set.from(_.myMarker!),
+                        // onTap: _.putMarker,
+                        initialCameraPosition: const CameraPosition(
+                          target:
+                              LatLng(-12.050424378417254, -77.04314569048383),
+                          zoom: 12,
+                        ),
+                      ),
+                    ),
                     SlidingUpPanel(
                       minHeight: MediaQuery.of(context).size.height * .4,
                       maxHeight: MediaQuery.of(context).size.height * .89,
@@ -86,19 +104,7 @@ class UserMapsPage extends StatelessWidget {
                       ),
                       // this is main body now,
                       // replace by the scaffold body.
-                      body: GoogleMap(
-                        onMapCreated: (controller) {
-                          _.mapController = controller;
-                          _.mapController.setMapStyle(_.mapStyle);
-                        },
-                        markers: Set.from(_.myMarker!),
-                        // onTap: _.putMarker,
-                        initialCameraPosition: const CameraPosition(
-                          target:
-                              LatLng(-12.050424378417254, -77.04314569048383),
-                          zoom: 12,
-                        ),
-                      ),
+                      body: SizedBox(),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     GestureDetector(
