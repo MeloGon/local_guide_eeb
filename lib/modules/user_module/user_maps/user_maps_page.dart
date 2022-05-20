@@ -91,7 +91,7 @@ class UserMapsPage extends StatelessWidget {
                           _.mapController = controller;
                           _.mapController.setMapStyle(_.mapStyle);
                         },
-                        // markers: Set.from(_.myMarker!),
+                        markers: Set.from(_.myMarker!),
                         // onTap: _.putMarker,
                         initialCameraPosition: const CameraPosition(
                           target:

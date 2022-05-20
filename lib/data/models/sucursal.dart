@@ -8,7 +8,7 @@ class Sucursal {
   late String linkLocal;
   late String linkWeb;
   late String linkDelivery;
-  late String categoria;
+
   late String username;
   late double price;
 
@@ -20,7 +20,6 @@ class Sucursal {
     required this.linkLocal,
     required this.linkWeb,
     required this.linkDelivery,
-    required this.categoria,
     required this.username,
     required this.price,
   });
@@ -32,7 +31,7 @@ class Sucursal {
     linkLocal = documentSnapshot['linkLocal'];
     linkWeb = documentSnapshot['linkWeb'];
     linkDelivery = documentSnapshot['linkDelivery'];
-    categoria = documentSnapshot['categoria'];
+
     username = documentSnapshot['username'];
     price = documentSnapshot['precioLocal'];
   }
