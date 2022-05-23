@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:locals_guide_eeb/data/models/categorie.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class UserMenuController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -16,6 +17,7 @@ class UserMenuController extends GetxController {
   @override
   void onReady() {
     showCategories();
+    //getPermission();
     super.onReady();
   }
 
@@ -40,6 +42,12 @@ class UserMenuController extends GetxController {
         update();
       });
     });
+  }
+
+  getPermission() async {
+    if (await Permission.location.request().isGranted) {
+      print('permiso concedido');
+    }
   }
 
   onChangeDistance(double value) {
