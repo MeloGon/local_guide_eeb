@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:locals_guide_eeb/modules/user_module/user_maps/user_maps_controller.dart';
-import 'package:locals_guide_eeb/modules/user_module/user_menu/user_menu_controller.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
@@ -27,7 +26,7 @@ class UserMapsPage extends StatelessWidget {
                 height: availableHeight,
                 child: Stack(
                   children: [
-                    Container(
+                    SizedBox(
                       height: MediaQuery.of(context).size.height * .6,
                       child: GoogleMap(
                         myLocationButtonEnabled: true,
@@ -49,114 +48,10 @@ class UserMapsPage extends StatelessWidget {
                       minHeight: MediaQuery.of(context).size.height * .4,
                       maxHeight: MediaQuery.of(context).size.height * .89,
                       collapsed: collapsedContent(context),
-                      panel: Container(
-                        padding: MyDimens.symetricMarginGeneral,
-                        color: Colors.black,
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 100,
-                              height: 3,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: MyColors.white),
-                            ),
-                            const SizedBox(height: 20),
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width * .5,
-                                child: Image.asset(
-                                    'assets/images/logo/foofle-logo.png')),
-                            const SizedBox(height: 20),
-                            Container(
-                              height: MediaQuery.of(context).size.height * .72,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey.shade800,
-                                  borderRadius: BorderRadius.circular(20)),
-                              padding: MyDimens.symetricMarginGeneral,
-                              child: ListView.separated(
-                                separatorBuilder: (context, index) {
-                                  return Container(
-                                    height: 1.5,
-                                    color: Colors.grey,
-                                  );
-                                },
-                                itemCount: _.localsBottom!.length,
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) {
-                                  final localBottom = _.localsBottom![index];
-                                  final color = localBottom.colorCategoria!;
-                                  String valueString =
-                                      color.split('(0x')[1].split(')')[0];
-                                  int value = int.parse(valueString, radix: 16);
-                                  return Container(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 6),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  width: 9,
-                                                  height: 9,
-                                                  decoration: BoxDecoration(
-                                                      color: Color(value),
-                                                      shape: BoxShape.circle),
-                                                ),
-                                                const SizedBox(width: 10),
-                                                Text(
-                                                  localBottom.categoria!,
-                                                  style: TextStyle(
-                                                      color: Color(value),
-                                                      fontFamily: 'Poppins'),
-                                                ),
-                                              ],
-                                            ),
-                                            Text(
-                                              MyStrings.DISTANCE,
-                                              style: TextStyle(
-                                                  color: Color(value),
-                                                  fontFamily: 'Poppins'),
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              localBottom.nombreLocal!,
-                                              style: MyStyles
-                                                  .generalTextStyleWhite,
-                                            ),
-                                            Text(
-                                              '${localBottom.distance!.toStringAsFixed(2)} km',
-                                              style: MyStyles
-                                                  .generalTextStyleWhite,
-                                            )
-                                          ],
-                                        ),
-                                        Text(
-                                          'Dirección: ${localBottom.sucursal!.ubicacionLocal}',
-                                          style: MyStyles.littleTextStyleWhite,
-                                        )
-                                      ],
-                                    ),
-                                  );
-                                },
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                      panel: panelContent(context, _),
                       // this is main body now,
                       // replace by the scaffold body.
-                      body: SizedBox(),
+                      body: const SizedBox(),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     GestureDetector(
@@ -195,6 +90,109 @@ class UserMapsPage extends StatelessWidget {
     );
   }
 
+  Widget panelContent(BuildContext context, UserMapsController _) {
+    return Container(
+      padding: MyDimens.symetricMarginGeneral,
+      color: Colors.black,
+      child: Column(
+        children: [
+          Container(
+            width: 100,
+            height: 3,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50), color: MyColors.white),
+          ),
+          const SizedBox(height: 20),
+          SizedBox(
+              width: MediaQuery.of(context).size.width * .5,
+              child: Image.asset('assets/images/logo/foofle-logo.png')),
+          const SizedBox(height: 20),
+          Container(
+            height: MediaQuery.of(context).size.height * .72,
+            decoration: BoxDecoration(
+                color: Colors.grey.shade800,
+                borderRadius: BorderRadius.circular(20)),
+            padding: MyDimens.symetricMarginGeneral,
+            child: ListView.separated(
+              separatorBuilder: (context, index) {
+                return Container(
+                  height: 1.5,
+                  color: Colors.grey,
+                );
+              },
+              itemCount: _.localsBottom!.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                final localBottom = _.localsBottom![index];
+                final color = localBottom.colorCategoria!;
+                String valueString = color.split('(0x')[1].split(')')[0];
+                int value = int.parse(valueString, radix: 16);
+                return GestureDetector(
+                  onTap: () {
+                    print('lol');
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  width: 9,
+                                  height: 9,
+                                  decoration: BoxDecoration(
+                                      color: Color(value),
+                                      shape: BoxShape.circle),
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  localBottom.categoria!,
+                                  style: TextStyle(
+                                      color: Color(value),
+                                      fontFamily: 'Poppins'),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              MyStrings.DISTANCE,
+                              style: TextStyle(
+                                  color: Color(value), fontFamily: 'Poppins'),
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              localBottom.nombreLocal!,
+                              style: MyStyles.generalTextStyleWhite,
+                            ),
+                            Text(
+                              '${localBottom.distance!.toStringAsFixed(2)} km',
+                              style: MyStyles.generalTextStyleWhite,
+                            )
+                          ],
+                        ),
+                        Text(
+                          'Dirección: ${localBottom.sucursal!.ubicacionLocal}',
+                          style: MyStyles.littleTextStyleWhite,
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   Widget buttonMenuDrawer(UserMapsController _) {
     return GestureDetector(
       onTap: _.goToDrawerMenu,
@@ -206,7 +204,7 @@ class UserMapsPage extends StatelessWidget {
           shape: BoxShape.circle,
           color: Colors.white,
           border: Border.all(color: Colors.black),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.grey,
               offset: Offset(0.0, 1.0), //(x,y)
