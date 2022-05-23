@@ -6,6 +6,7 @@ import 'package:locals_guide_eeb/modules/user_module/user_menu/user_menu_control
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
+import 'package:locals_guide_eeb/utils/my_strings.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class UserMapsPage extends StatelessWidget {
@@ -53,50 +54,101 @@ class UserMapsPage extends StatelessWidget {
                         color: Colors.black,
                         child: Column(
                           children: [
+                            Container(
+                              width: 100,
+                              height: 3,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: MyColors.white),
+                            ),
+                            const SizedBox(height: 20),
                             SizedBox(
                                 width: MediaQuery.of(context).size.width * .5,
                                 child: Image.asset(
                                     'assets/images/logo/foofle-logo.png')),
                             const SizedBox(height: 20),
                             Container(
+                              height: MediaQuery.of(context).size.height * .72,
                               decoration: BoxDecoration(
-                                  color: Colors.grey,
+                                  color: Colors.grey.shade800,
                                   borderRadius: BorderRadius.circular(20)),
                               padding: MyDimens.symetricMarginGeneral,
-                              child: ListView(
+                              child: ListView.separated(
+                                separatorBuilder: (context, index) {
+                                  return Container(
+                                    height: 1.5,
+                                    color: Colors.grey,
+                                  );
+                                },
+                                itemCount: _.localsBottom!.length,
                                 shrinkWrap: true,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 5,
-                                        foregroundColor: Colors.pink,
-                                      ),
-                                      Text(
-                                        'Comida Nikei',
-                                        style: MyStyles.generalTextStyleWhite,
-                                      ),
-                                      Text(
-                                        'Distancia',
-                                        style: MyStyles.generalTextStyleWhite,
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Text(
-                                        'KFC',
-                                        style: MyStyles.generalTextStyleWhite,
-                                      ),
-                                      Text('150m',
-                                          style: MyStyles.generalTextStyleWhite)
-                                    ],
-                                  )
-                                ],
+                                itemBuilder: (context, index) {
+                                  final localBottom = _.localsBottom![index];
+                                  final color = localBottom.colorCategoria!;
+                                  String valueString =
+                                      color.split('(0x')[1].split(')')[0];
+                                  int value = int.parse(valueString, radix: 16);
+                                  return Container(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 6),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  width: 9,
+                                                  height: 9,
+                                                  decoration: BoxDecoration(
+                                                      color: Color(value),
+                                                      shape: BoxShape.circle),
+                                                ),
+                                                const SizedBox(width: 10),
+                                                Text(
+                                                  localBottom.categoria!,
+                                                  style: TextStyle(
+                                                      color: Color(value),
+                                                      fontFamily: 'Poppins'),
+                                                ),
+                                              ],
+                                            ),
+                                            Text(
+                                              MyStrings.DISTANCE,
+                                              style: TextStyle(
+                                                  color: Color(value),
+                                                  fontFamily: 'Poppins'),
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              localBottom.nombreLocal!,
+                                              style: MyStyles
+                                                  .generalTextStyleWhite,
+                                            ),
+                                            Text(
+                                              '${localBottom.distance!.toStringAsFixed(2)} km',
+                                              style: MyStyles
+                                                  .generalTextStyleWhite,
+                                            )
+                                          ],
+                                        ),
+                                        Text(
+                                          'Dirección: ${localBottom.sucursal!.ubicacionLocal}',
+                                          style: MyStyles.littleTextStyleWhite,
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                },
                               ),
                             )
                           ],

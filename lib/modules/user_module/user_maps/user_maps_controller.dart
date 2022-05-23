@@ -1,12 +1,15 @@
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:locals_guide_eeb/data/models/localbottom.dart';
 import 'package:locals_guide_eeb/data/models/marcador.dart';
 import 'package:locals_guide_eeb/data/models/sucursal.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
@@ -29,10 +32,17 @@ class UserMapsController extends GetxController {
   List<Marker>? get myMarker => _myMarker;
   //--------------------------
 
+  //para la distancia y el bottomsheet
+  Position? _ubicacionActual;
+  Position? get ubicacionActual => _ubicacionActual;
+  List<LocalBottom>? _localsBottom = [];
+  List<LocalBottom>? get localsBottom => _localsBottom;
+  // --------------------------
+
   @override
   void onReady() {
+    _getGeoLocationPosition();
     loadMarkers();
-
     super.onReady();
   }
 
@@ -120,6 +130,10 @@ class UserMapsController extends GetxController {
         .then((docsLocal) {
       docsLocal.docs.forEach((local) async {
         String tempNLocal = local['nombreLocal'];
+        //datos para el local del bottomsheet
+        String categoriaLocal = local['categoria'];
+        String colorCategoria = local['colorCategoria'];
+        //-------------------------------------------
         //esta va ser la imagen para el custom marker
         final customMarker =
             await getMarkerImageFromUrl(local['fotoLocal'], targetWidth: 70);
@@ -139,6 +153,20 @@ class UserMapsController extends GetxController {
             double longitude = double.parse(latlong[1]);
             LatLng location = LatLng(latitude, longitude);
             //--------------------------------------------------
+
+            //locales o sucursales para el bottom
+            final distance = calculateDistance(
+                _ubicacionActual!.latitude,
+                _ubicacionActual!.longitude,
+                location.latitude,
+                location.longitude);
+            _localsBottom!.add(LocalBottom(
+                nombreLocal: tempNLocal,
+                colorCategoria: colorCategoria,
+                categoria: categoriaLocal,
+                sucursal: tempSucursal,
+                distance: distance));
+            //-----------------------------------
             _myMarker!.add(Marker(
                 icon: customMarker,
                 markerId: MarkerId(sucursal['marker']),
@@ -156,6 +184,52 @@ class UserMapsController extends GetxController {
     _mapController = controller;
     _mapController!.setMapStyle(_mapStyle);
     update();
+  }
+
+  ///para calcular la distancia de las sucursales respecto a mi
+  calculateDistance(lat1, lon1, lat2, lon2) {
+    var p = 0.017453292519943295;
+    var a = 0.5 -
+        cos((lat2 - lat1) * p) / 2 +
+        cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
+    return 12742 * asin(sqrt(a));
+  }
+
+  Future<Position> _getGeoLocationPosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      await Geolocator.openLocationSettings();
+      return Future.error(
+          'Los servicios de localizacion estan deshabilitados.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Los permisos de localizacion han sido denegados');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Los permisos de localizacion han sido denegados permanentemente');
+    }
+
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+    _ubicacionActual = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
   }
 
   /* centrarVista() async {
