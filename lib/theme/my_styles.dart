@@ -64,4 +64,10 @@ class MyStyles {
     color: Colors.black,
     fontSize: 14,
   );
+
+  static const TextStyle titleTextStyleBlack = TextStyle(
+    color: Colors.black,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+  );
 }
