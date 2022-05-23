@@ -76,7 +76,7 @@ class LoginPage extends StatelessWidget {
                 const Spacer(),
                 ItemPrimaryButton(
                   text: MyStrings.LOGIN,
-                  onTap: _.goToAdminMenu,
+                  onTap: _.searchLocalUser,
                   borderColor: Colors.white,
                 )
               ],

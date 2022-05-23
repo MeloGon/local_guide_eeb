@@ -368,13 +368,13 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                   color: Colors.grey.shade300,
                 );
               },
-              itemCount: _.listMarkers!.length,
+              itemCount: _.ubicaciones!.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 if (_.loadingUbications) {
                   return const Center(child: CircularProgressIndicator());
                 } else {
-                  final sucursal = _.sucursales![index];
+                  final ubicacion = _.ubicaciones![index];
                   return SizedBox(
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -383,14 +383,15 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text('Dirección'),
-                              Text(sucursal.ubicacionLocal)
+                              Text(ubicacion.sucursal.ubicacionLocal)
                             ],
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
-                            children: const [
-                              Text(MyStrings.DISTANCE),
-                              Text('350 m')
+                            children: [
+                              const Text(MyStrings.DISTANCE),
+                              Text(
+                                  '${ubicacion.distance.toStringAsFixed(2)} km')
                             ],
                           )
                         ]),
@@ -402,6 +403,8 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * .45,
           child: GoogleMap(
+              myLocationEnabled: true,
+              myLocationButtonEnabled: true,
               onMapCreated: (controller) {},
               markers: Set.from(_.myMarker!),
               initialCameraPosition: const CameraPosition(
