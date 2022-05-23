@@ -70,4 +70,13 @@ class MyStyles {
     fontSize: 14,
     fontWeight: FontWeight.w500,
   );
+
+  static const TextStyle littleTextStyleBlack = TextStyle(
+    color: Colors.black,
+    fontSize: 11,
+  );
+  static const TextStyle littleTextStyleWhite = TextStyle(
+    color: Colors.white,
+    fontSize: 11,
+  );
 }
