@@ -69,6 +69,7 @@ class ClientUbicationsController extends GetxController
 
   @override
   void onInit() {
+    _loadingUbications = true;
     setArguments();
     super.onInit();
   }

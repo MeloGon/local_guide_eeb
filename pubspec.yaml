@@ -28,6 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   animate_do: ^2.1.0
+  animated_text_kit: ^4.2.1
   blur: ^3.1.0
   cloud_firestore: ^3.1.13
   cloudinary_public: ^0.11.0

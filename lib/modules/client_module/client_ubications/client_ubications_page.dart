@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:animate_do/animate_do.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -159,7 +160,7 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
           child: Center(
               child: Text(
             "Recomendaciones",
-            style: MyStyles.generalTextStyleBlackSemiSmall,
+            style: MyStyles.generalTextStyleBlackBold,
           )),
         ),
         Container(
@@ -289,7 +290,7 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
           child: Center(
               child: Text(
             "Momentos",
-            style: MyStyles.generalTextStyleBlackSemiSmall,
+            style: MyStyles.generalTextStyleBlackBold,
           )),
         ),
         Container(
@@ -348,10 +349,8 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
         const Padding(
           padding: EdgeInsets.all(8.0),
           child: Center(
-              child: Text(
-            MyStrings.UBICATIONUSER,
-            style: MyStyles.generalTextStyleBlackSemiSmall,
-          )),
+              child: Text(MyStrings.UBICATIONUSER,
+                  style: MyStyles.generalTextStyleBlackBold)),
         ),
         Container(
           width: MediaQuery.of(context).size.width,
@@ -360,45 +359,57 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
         ),
         Padding(
             padding: MyDimens.symetricMarginGeneral,
-            child: ListView.separated(
-              separatorBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  height: 1.5,
-                  color: Colors.grey.shade300,
-                );
-              },
-              itemCount: _.ubicaciones!.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                if (_.loadingUbications) {
-                  return const Center(child: CircularProgressIndicator());
-                } else {
-                  final ubicacion = _.ubicaciones![index];
-                  return SizedBox(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+            child: _.ubicaciones!.isEmpty
+                ? DefaultTextStyle(
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'Poppins'),
+                    child: AnimatedTextKit(
+                      animatedTexts: [
+                        WavyAnimatedText('Cargando...'),
+                      ],
+                      isRepeatingAnimation: true,
+                    ),
+                  )
+                : ListView.separated(
+                    separatorBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        height: 1.5,
+                        color: Colors.grey.shade300,
+                      );
+                    },
+                    itemCount: _.ubicaciones!.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      final ubicacion = _.ubicaciones![index];
+                      return SizedBox(
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Dirección'),
-                              Text(ubicacion.sucursal.ubicacionLocal)
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              const Text(MyStrings.DISTANCE),
-                              Text(
-                                  '${ubicacion.distance.toStringAsFixed(2)} km')
-                            ],
-                          )
-                        ]),
-                  );
-                }
-              },
-            )),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text('Dirección',
+                                      style: MyStyles.titleTextStyleBlack),
+                                  Text(ubicacion.sucursal.ubicacionLocal)
+                                ],
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  const Text(MyStrings.DISTANCE,
+                                      style: MyStyles.titleTextStyleBlack),
+                                  Text(
+                                      '${ubicacion.distance.toStringAsFixed(2)} km')
+                                ],
+                              )
+                            ]),
+                      );
+                    },
+                  )),
         SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * .45,
