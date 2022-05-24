@@ -10,7 +10,7 @@
         android:label="locals_guide_eeb"
         android:usesCleartextTraffic="true"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
 
         <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyBm12cGWg--j0pefW-1-qkAE6NHlTl034A"/>
