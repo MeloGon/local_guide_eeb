@@ -79,7 +79,24 @@ class LoginPage extends StatelessWidget {
                   text: MyStrings.LOGIN,
                   onTap: _.searchLocalUser,
                   borderColor: Colors.white,
-                )
+                ),
+                const SizedBox(height: 20),
+                const Center(
+                  child: Text(
+                    MyStrings.ORSOCIAL,
+                    style: MyStyles.generalTextStyleWhite,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                ItemPrimaryButton(
+                  text: MyStrings.LOGINGMAIL,
+                  borderColor: Colors.white,
+                ),
+                const SizedBox(height: 20),
+                ItemPrimaryButton(
+                  text: MyStrings.LOGINFB,
+                  borderColor: Colors.white,
+                ),
               ],
             ),
           )),

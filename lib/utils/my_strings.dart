@@ -97,4 +97,8 @@ class MyStrings {
   static const String DELIVERY = 'Delivery';
   static const String PAGWEB = 'Página Web';
   static const String WATCHMENU = 'Ver Carta';
+
+  static const String ORSOCIAL = 'O ingresar por medio de redes sociales';
+  static const String LOGINGMAIL = 'Login con Gmail';
+  static const String LOGINFB = 'Login con Facebook';
 }

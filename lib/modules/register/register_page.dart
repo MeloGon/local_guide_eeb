@@ -50,12 +50,6 @@ class RegisterPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       ItemPrimaryButton(
-                        text: MyStrings.REGISTERPHONE,
-                        borderColor: Colors.white,
-                        onTap: _.goToRegisterByPhone,
-                      ),
-                      const SizedBox(height: 20),
-                      ItemPrimaryButton(
                         text: MyStrings.REGISTERMAIL,
                         borderColor: Colors.white,
                       ),
