@@ -27,7 +27,9 @@ class UserMapsPage extends StatelessWidget {
                 child: Stack(
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * .6,
+                      height: (_.isMarkerSelected)
+                          ? MediaQuery.of(context).size.height
+                          : MediaQuery.of(context).size.height * .6,
                       child: GoogleMap(
                         myLocationButtonEnabled: true,
                         myLocationEnabled: true,
@@ -35,7 +37,9 @@ class UserMapsPage extends StatelessWidget {
                           _.onMapCreated(controller);
                           /* _.centrarVista; */
                         },
-                        markers: Set.from(_.myMarker!),
+                        markers: (_.isMarkerSelected)
+                            ? Set.from(_.markerTap!)
+                            : Set.from(_.myMarker!),
                         // onTap: _.putMarker,
                         initialCameraPosition: const CameraPosition(
                           target:
@@ -44,16 +48,107 @@ class UserMapsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SlidingUpPanel(
-                      minHeight: MediaQuery.of(context).size.height * .4,
-                      maxHeight: MediaQuery.of(context).size.height * .89,
-                      collapsed: collapsedContent(context),
-                      panel: panelContent(context, _),
-                      // this is main body now,
-                      // replace by the scaffold body.
-                      body: const SizedBox(),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                    (_.isMarkerSelected)
+                        ? Positioned(
+                            bottom: 0,
+                            child: Container(
+                              color: Colors.transparent,
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height * .4,
+                              child: Container(
+                                margin: const EdgeInsets.all(20),
+                                width: MediaQuery.of(context).size.width * .7,
+                                height: MediaQuery.of(context).size.height * .3,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(0.0, 1.0), //(x,y)
+                                        blurRadius: 6.0,
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Column(
+                                  children: [
+                                    IconButton(
+                                        onPressed: () {
+                                          _.closeTapMarker();
+                                        },
+                                        icon: const Icon(Icons.close)),
+                                    Row(
+                                      children: [
+                                        Column(
+                                          children: [
+                                            CircleAvatar(
+                                              backgroundImage:
+                                                  NetworkImage(_.fotoTap!),
+                                            ),
+                                            Text(_.nameTap!)
+                                          ],
+                                        ),
+                                        Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text('comida'),
+                                                Text('some')
+                                              ],
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    Divider(height: 1.5, color: Colors.black),
+                                    Row(
+                                      children: [
+                                        Text('Direccion'),
+                                        Text(MyStrings.DISTANCE),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(_.sucursalTapped!.ubicacionLocal),
+                                        Text(
+                                            '${_.distanceTap!.toStringAsFixed(2)} km'),
+                                      ],
+                                    ),
+                                    Divider(height: 1.5, color: Colors.black),
+                                    Row(
+                                      children: [
+                                        ElevatedButton(
+                                            onPressed: () {},
+                                            child: Text('Ver carta')),
+                                        ElevatedButton(
+                                            onPressed: () {},
+                                            child: Text('Pagina Web'))
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        ElevatedButton(
+                                            onPressed: () {},
+                                            child: Text('Ver carta')),
+                                        ElevatedButton(
+                                            onPressed: () {},
+                                            child: Text('Pagina Web'))
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        : SlidingUpPanel(
+                            minHeight: MediaQuery.of(context).size.height * .4,
+                            maxHeight: MediaQuery.of(context).size.height * .89,
+                            collapsed: collapsedContent(context),
+                            panel: panelContent(context, _),
+                            // this is main body now,
+                            // replace by the scaffold body.
+                            body: const SizedBox(),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                     GestureDetector(
                       onTap: () => Get.back(),
                       child: Container(
@@ -127,12 +222,14 @@ class UserMapsPage extends StatelessWidget {
                 final color = localBottom.colorCategoria!;
                 String valueString = color.split('(0x')[1].split(')')[0];
                 int value = int.parse(valueString, radix: 16);
-                return GestureDetector(
+                return InkWell(
                   onTap: () {
-                    print('lol');
+                    print('se presion');
+                    _.markerSelected(localBottom.sucursal!,
+                        localBottom.fotoLocal!, localBottom.nombreLocal!);
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    margin: const EdgeInsets.symmetric(vertical: 12),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

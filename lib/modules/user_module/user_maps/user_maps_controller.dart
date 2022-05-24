@@ -39,6 +39,29 @@ class UserMapsController extends GetxController {
   List<LocalBottom>? get localsBottom => _localsBottom;
   // --------------------------
 
+  //evento de seleccion de un marker
+  bool _isMarkerSelected = false;
+  bool get isMarkerSelected => _isMarkerSelected;
+  set setIsMarkerSelected(bool value) {
+    _isMarkerSelected = value;
+  }
+
+  Sucursal? _sucursalTapped;
+  Sucursal? get sucursalTapped => _sucursalTapped;
+
+  String? _nameTap;
+  String? get nameTap => _nameTap;
+
+  String? _fotoTap;
+  String? get fotoTap => _fotoTap;
+
+  double? _distanceTap;
+  double? get distanceTap => _distanceTap;
+
+  List<Marker>? _markerTap = [];
+  List<Marker>? get markerTap => _markerTap;
+  //----------------------------
+
   @override
   void onReady() {
     _getGeoLocationPosition();
@@ -48,6 +71,7 @@ class UserMapsController extends GetxController {
 
   @override
   void onInit() {
+    _isMarkerSelected = false;
     rootBundle.loadString('assets/map_style.text').then((value) {
       _mapStyle = value;
     });
@@ -133,6 +157,7 @@ class UserMapsController extends GetxController {
         //datos para el local del bottomsheet
         String categoriaLocal = local['categoria'];
         String colorCategoria = local['colorCategoria'];
+        String fotoLocal = local['fotoLocal'];
         //-------------------------------------------
         //esta va ser la imagen para el custom marker
         final customMarker =
@@ -165,7 +190,8 @@ class UserMapsController extends GetxController {
                 colorCategoria: colorCategoria,
                 categoria: categoriaLocal,
                 sucursal: tempSucursal,
-                distance: distance));
+                distance: distance,
+                fotoLocal: fotoLocal));
             //-----------------------------------
             _myMarker!.add(Marker(
                 icon: customMarker,
@@ -232,6 +258,38 @@ class UserMapsController extends GetxController {
         desiredAccuracy: LocationAccuracy.high);
   }
 
+  markerSelected(Sucursal sucursal, String foto, String localName) async {
+    _isMarkerSelected = true;
+    _sucursalTapped = sucursal;
+    _nameTap = localName;
+    _fotoTap = foto;
+    //esta va ser la imagen para el custom marker
+    final customMarker = await getMarkerImageFromUrl(foto, targetWidth: 70);
+    //-------------------------------------------------
+    //para parsear a ubicacion en la lista de marcadores
+    List<String> latlong =
+        sucursal.marker.toString().substring(7, 44).split(",");
+    double latitude = double.parse(latlong[0]);
+    double longitude = double.parse(latlong[1]);
+    LatLng location = LatLng(latitude, longitude);
+    //--------------------------------------------------
+    //distancia de nosotros hacia el local tap
+    _distanceTap = calculateDistance(_ubicacionActual!.latitude,
+        _ubicacionActual!.longitude, location.latitude, location.longitude);
+    //-------------------------------------------------
+    _markerTap!.add(Marker(
+        icon: customMarker,
+        markerId: MarkerId(sucursal.marker!),
+        position: location,
+        infoWindow: InfoWindow(title: localName),
+        draggable: true));
+    update();
+  }
+
+  closeTapMarker() async {
+    _isMarkerSelected = false;
+    update();
+  }
   /* centrarVista() async {
     await _mapController!.getVisibleRegion();
     var left = min()
