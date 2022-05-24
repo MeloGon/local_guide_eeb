@@ -60,6 +60,7 @@ class LoginPage extends StatelessWidget {
                   style: MyStyles.generalTextStyleWhite,
                 ),
                 TextField(
+                  obscureText: true,
                   controller: _.txPass,
                   style: MyStyles.generalTextStyleWhite,
                   decoration: const InputDecoration(
