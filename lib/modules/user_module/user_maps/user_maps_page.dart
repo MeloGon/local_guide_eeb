@@ -117,11 +117,22 @@ class UserMapsPage extends StatelessWidget {
                                     Row(
                                       children: [
                                         ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Colors.pink,
+                                                elevation: 0,
+                                                side: BorderSide(
+                                                    color: Colors.black,
+                                                    width: 1.5),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50))),
                                             onPressed: () {},
-                                            child: Text('Ver carta')),
-                                        ElevatedButton(
-                                            onPressed: () {},
-                                            child: Text('Pagina Web'))
+                                            child: Text(
+                                              'Ver carta',
+                                              style: MyStyles
+                                                  .generalTextStyleBlack,
+                                            )),
                                       ],
                                     ),
                                     Row(
@@ -222,13 +233,14 @@ class UserMapsPage extends StatelessWidget {
                 final color = localBottom.colorCategoria!;
                 String valueString = color.split('(0x')[1].split(')')[0];
                 int value = int.parse(valueString, radix: 16);
-                return InkWell(
+                return GestureDetector(
                   onTap: () {
                     print('se presion');
                     _.markerSelected(localBottom.sucursal!,
                         localBottom.fotoLocal!, localBottom.nombreLocal!);
                   },
                   child: Container(
+                    color: Colors.transparent,
                     margin: const EdgeInsets.symmetric(vertical: 12),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
