@@ -88,7 +88,7 @@ class AddLocalAdminPage extends StatelessWidget {
                   isExpanded: true,
                   icon: const Icon(Icons.arrow_drop_down_rounded),
                   elevation: 16,
-                  dropdownColor: Colors.white10,
+                  dropdownColor: Colors.grey,
                   style: MyStyles.generalTextStyleWhite,
                   hint: const Text(
                     'Selecciona una categoría',
