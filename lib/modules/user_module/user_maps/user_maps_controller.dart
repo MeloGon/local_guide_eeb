@@ -317,7 +317,7 @@ class UserMapsController extends GetxController {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
       });
     } else {
-      print('Si hay errorsote ${result.errorMessage}');
+      print('error detectado ${result.errorMessage}');
     }
     addPolyLine(polylineCoordinates);
   }
