@@ -89,4 +89,9 @@ class MyStrings {
   static const String FORCATEGORY = 'Por Categoría';
   static const String FORDISTANCE = 'Por Distancia';
   static const String FORPRICE = 'Por Precio';
+
+  static const String DIRECTION = 'Dirección';
+  static const String FOOD = 'Comida';
+  static const String SERVICE = 'Servicio';
+  static const String AMBIENCE = 'Ambiente';
 }
