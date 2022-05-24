@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:locals_guide_eeb/modules/user_module/user_maps/local_widgets/card_sucursal.dart';
 import 'package:locals_guide_eeb/modules/user_module/user_maps/user_maps_controller.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
@@ -49,107 +51,7 @@ class UserMapsPage extends StatelessWidget {
                       ),
                     ),
                     (_.isMarkerSelected)
-                        ? Positioned(
-                            bottom: 0,
-                            child: Container(
-                              color: Colors.transparent,
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height * .4,
-                              child: Container(
-                                margin: const EdgeInsets.all(20),
-                                width: MediaQuery.of(context).size.width * .7,
-                                height: MediaQuery.of(context).size.height * .3,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Colors.grey,
-                                        offset: Offset(0.0, 1.0), //(x,y)
-                                        blurRadius: 6.0,
-                                      ),
-                                    ],
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Column(
-                                  children: [
-                                    IconButton(
-                                        onPressed: () {
-                                          _.closeTapMarker();
-                                        },
-                                        icon: const Icon(Icons.close)),
-                                    Row(
-                                      children: [
-                                        Column(
-                                          children: [
-                                            CircleAvatar(
-                                              backgroundImage:
-                                                  NetworkImage(_.fotoTap!),
-                                            ),
-                                            Text(_.nameTap!)
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text('comida'),
-                                                Text('some')
-                                              ],
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                    Divider(height: 1.5, color: Colors.black),
-                                    Row(
-                                      children: [
-                                        Text('Direccion'),
-                                        Text(MyStrings.DISTANCE),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(_.sucursalTapped!.ubicacionLocal),
-                                        Text(
-                                            '${_.distanceTap!.toStringAsFixed(2)} km'),
-                                      ],
-                                    ),
-                                    Divider(height: 1.5, color: Colors.black),
-                                    Row(
-                                      children: [
-                                        ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.pink,
-                                                elevation: 0,
-                                                side: BorderSide(
-                                                    color: Colors.black,
-                                                    width: 1.5),
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50))),
-                                            onPressed: () {},
-                                            child: Text(
-                                              'Ver carta',
-                                              style: MyStyles
-                                                  .generalTextStyleBlack,
-                                            )),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        ElevatedButton(
-                                            onPressed: () {},
-                                            child: Text('Ver carta')),
-                                        ElevatedButton(
-                                            onPressed: () {},
-                                            child: Text('Pagina Web'))
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          )
+                        ? const CardSucursal()
                         : SlidingUpPanel(
                             minHeight: MediaQuery.of(context).size.height * .4,
                             maxHeight: MediaQuery.of(context).size.height * .89,
@@ -163,9 +65,10 @@ class UserMapsPage extends StatelessWidget {
                     GestureDetector(
                       onTap: () => Get.back(),
                       child: Container(
-                        margin: const EdgeInsets.all(10),
-                        width: 35,
-                        height: 35,
+                        margin: const EdgeInsets.only(
+                            top: 10, bottom: 10, left: 20),
+                        width: 45,
+                        height: 45,
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.black,
@@ -185,7 +88,8 @@ class UserMapsPage extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: 40,
+                      left: 10,
+                      top: 50,
                       child: buttonMenuDrawer(_),
                     ),
                   ],
@@ -307,8 +211,8 @@ class UserMapsPage extends StatelessWidget {
       onTap: _.goToDrawerMenu,
       child: Container(
         margin: const EdgeInsets.all(10),
-        width: 35,
-        height: 35,
+        width: 45,
+        height: 45,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.white,
