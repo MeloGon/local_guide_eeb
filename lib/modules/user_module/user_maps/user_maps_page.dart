@@ -39,6 +39,9 @@ class UserMapsPage extends StatelessWidget {
                           _.onMapCreated(controller);
                           /* _.centrarVista; */
                         },
+                        polylines: (_.isMarkerSelected)
+                            ? Set.from(_.polis!)
+                            : Set.from(_.polisEmpty!),
                         markers: (_.isMarkerSelected)
                             ? Set.from(_.markerTap!)
                             : Set.from(_.myMarker!),

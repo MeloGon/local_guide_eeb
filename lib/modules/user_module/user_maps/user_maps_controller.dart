@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -61,6 +62,13 @@ class UserMapsController extends GetxController {
   List<Marker>? _markerTap = [];
   List<Marker>? get markerTap => _markerTap;
   //----------------------------
+
+  //para las polylines
+  List<Polyline>? _polis = [];
+  List<Polyline>? get polis => _polis;
+  List<Polyline>? _polisEmpty = [];
+  List<Polyline>? get polisEmpty => _polisEmpty;
+  //-----------------------------
 
   @override
   void onReady() {
@@ -283,6 +291,8 @@ class UserMapsController extends GetxController {
         position: location,
         infoWindow: InfoWindow(title: localName),
         draggable: true));
+    getDirections(location.latitude, location.longitude,
+        _ubicacionActual!.latitude, _ubicacionActual!.longitude);
     update();
   }
 
@@ -291,6 +301,39 @@ class UserMapsController extends GetxController {
     _isMarkerSelected = false;
     update();
   }
+
+  ///Metodos para dibujar las polylines
+  getDirections(lat1, long1, lat2, long2) async {
+    List<LatLng> polylineCoordinates = [];
+    PolylinePoints polylinePoints = PolylinePoints();
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      'AIzaSyBm12cGWg--j0pefW-1-qkAE6NHlTl034A',
+      PointLatLng(lat1, long1),
+      PointLatLng(lat2, long2),
+      travelMode: TravelMode.driving,
+    );
+    if (result.points.isNotEmpty) {
+      result.points.forEach((PointLatLng point) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      });
+    } else {
+      print('Si hay errorsote ${result.errorMessage}');
+    }
+    addPolyLine(polylineCoordinates);
+  }
+
+  addPolyLine(List<LatLng> polylineCoordinates) {
+    PolylineId id = PolylineId(polylineCoordinates.toString());
+    _polis!.add(Polyline(
+      polylineId: id,
+      color: Colors.deepPurpleAccent,
+      points: polylineCoordinates,
+      width: 8,
+    ));
+    update();
+  }
+
+  //-------------------------------------------------------
   /* centrarVista() async {
     await _mapController!.getVisibleRegion();
     var left = min()
