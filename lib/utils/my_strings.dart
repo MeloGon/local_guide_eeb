@@ -94,4 +94,7 @@ class MyStrings {
   static const String FOOD = 'Comida';
   static const String SERVICE = 'Servicio';
   static const String AMBIENCE = 'Ambiente';
+  static const String DELIVERY = 'Delivery';
+  static const String PAGWEB = 'Página Web';
+  static const String WATCHMENU = 'Ver Carta';
 }

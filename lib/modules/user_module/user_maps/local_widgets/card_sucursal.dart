@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:locals_guide_eeb/modules/user_module/user_maps/user_maps_controller.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
 import 'package:locals_guide_eeb/utils/my_strings.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CardSucursal extends StatelessWidget {
   const CardSucursal({
@@ -63,7 +64,7 @@ class CardSucursal extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Text(MyStrings.FOOD),
+                            const Text(MyStrings.FOOD),
                             const SizedBox(width: 10),
                             RatingBarIndicator(
                               rating: 4,
@@ -134,7 +135,7 @@ class CardSucursal extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 10),
-                Divider(height: 1.5, color: Colors.black),
+                const Divider(height: 1.5, color: Colors.black),
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -157,21 +158,26 @@ class CardSucursal extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 10),
-                Divider(height: 1.5, color: Colors.black),
+                const Divider(height: 1.5, color: Colors.black),
                 const SizedBox(height: 10),
                 Row(
                   children: [
                     Expanded(
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: Color(0xffE0627B),
+                              primary: const Color(0xffE0627B),
                               elevation: 0,
-                              side: BorderSide(color: Colors.black, width: 1.5),
+                              side: const BorderSide(
+                                  color: Colors.black, width: 1.5),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50))),
-                          onPressed: () {},
-                          child: Text(
-                            'Ver carta',
+                          onPressed: () async {
+                            final Uri _url =
+                                Uri.parse(_.sucursalTapped!.linkWeb);
+                            await launchUrl(_url);
+                          },
+                          child: const Text(
+                            MyStrings.WATCHMENU,
                             style: MyStyles.generalTextStyleBlack,
                           )),
                     ),
@@ -179,14 +185,19 @@ class CardSucursal extends StatelessWidget {
                     Expanded(
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: Color(0xffF3F1BC),
+                              primary: const Color(0xffF3F1BC),
                               elevation: 0,
-                              side: BorderSide(color: Colors.black, width: 1.5),
+                              side: const BorderSide(
+                                  color: Colors.black, width: 1.5),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50))),
-                          onPressed: () {},
-                          child: Text(
-                            'Pagina web',
+                          onPressed: () async {
+                            final Uri _url =
+                                Uri.parse(_.sucursalTapped!.linkWeb);
+                            await launchUrl(_url);
+                          },
+                          child: const Text(
+                            MyStrings.PAGWEB,
                             style: MyStyles.generalTextStyleBlack,
                           )),
                     ),
@@ -198,14 +209,19 @@ class CardSucursal extends StatelessWidget {
                     Expanded(
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: Color(0xffA6CED9),
+                              primary: const Color(0xffA6CED9),
                               elevation: 0,
-                              side: BorderSide(color: Colors.black, width: 1.5),
+                              side: const BorderSide(
+                                  color: Colors.black, width: 1.5),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50))),
-                          onPressed: () {},
-                          child: Text(
-                            'Delivery',
+                          onPressed: () async {
+                            final Uri _url =
+                                Uri.parse(_.sucursalTapped!.linkDelivery);
+                            await launchUrl(_url);
+                          },
+                          child: const Text(
+                            MyStrings.DELIVERY,
                             style: MyStyles.generalTextStyleBlack,
                           )),
                     ),
@@ -213,14 +229,15 @@ class CardSucursal extends StatelessWidget {
                     Expanded(
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: Color(0xffB8FAB2),
+                              primary: const Color(0xffB8FAB2),
                               elevation: 0,
-                              side: BorderSide(color: Colors.black, width: 1.5),
+                              side: const BorderSide(
+                                  color: Colors.black, width: 1.5),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50))),
                           onPressed: () {},
-                          child: Text(
-                            'Reserva',
+                          child: const Text(
+                            MyStrings.RESERVE,
                             style: MyStyles.generalTextStyleBlack,
                           )),
                     ),
