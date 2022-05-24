@@ -287,6 +287,7 @@ class UserMapsController extends GetxController {
   }
 
   closeTapMarker() async {
+    _markerTap!.clear();
     _isMarkerSelected = false;
     update();
   }
