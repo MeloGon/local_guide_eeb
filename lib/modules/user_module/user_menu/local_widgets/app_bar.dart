@@ -15,9 +15,9 @@ AppBar appBar(UserMenuController _) {
     leading: GestureDetector(
       onTap: _.hideFilter,
       child: Container(
-        margin: const EdgeInsets.all(10),
-        width: 30,
-        height: 30,
+        margin: const EdgeInsets.only(top: 10, bottom: 10, left: 20),
+        width: 45,
+        height: 45,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.black,
