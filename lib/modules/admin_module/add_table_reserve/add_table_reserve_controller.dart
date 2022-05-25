@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:locals_guide_eeb/data/models/local.dart';
 import 'package:locals_guide_eeb/data/models/mesa.dart';
+import 'package:locals_guide_eeb/data/models/sucursal.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_table_reserve/local_widgets/dynamic_widget.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
@@ -50,6 +52,7 @@ class AddTableReserveController extends GetxController {
     print('cual es el flujo $_flujo');
     if (_flujo == 'editar') {
       loadInfoTables();
+      loadAforo();
     }
     super.onReady();
   }
@@ -214,6 +217,23 @@ class AddTableReserveController extends GetxController {
           update();
         });
       });
+      update();
+    });
+  }
+
+  loadAforo() async {
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .get()
+        .then((sucursal) {
+      final sucursalData =
+          Sucursal.fromDocumentSnapshot(documentSnapshot: sucursal);
+      txAforo.text = sucursalData.aforo;
       update();
     });
   }
