@@ -8,6 +8,7 @@ class LocalBottom {
   Sucursal? sucursal;
   double? distance;
   String? fotoLocal;
+  String? idLocal;
 
   LocalBottom({
     required this.nombreLocal,
@@ -16,5 +17,6 @@ class LocalBottom {
     required this.sucursal,
     required this.distance,
     required this.fotoLocal,
+    required this.idLocal,
   });
 }

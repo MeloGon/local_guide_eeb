@@ -36,6 +36,7 @@ class CardSucursal extends StatelessWidget {
                 ],
                 borderRadius: BorderRadius.circular(20)),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 IconButton(
                     onPressed: () {
@@ -50,6 +51,7 @@ class CardSucursal extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           foregroundColor: Colors.grey,
+                          backgroundColor: Colors.grey,
                           backgroundImage: NetworkImage(_.fotoTap!),
                           radius: MediaQuery.of(context).size.height * .05,
                         ),
@@ -130,6 +132,19 @@ class CardSucursal extends StatelessWidget {
                             ),
                           ],
                         ),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Color.fromARGB(255, 19, 20, 19),
+                                elevation: 0,
+                                side: const BorderSide(
+                                    color: Colors.black, width: 1.5),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50))),
+                            onPressed: () {
+                              _.goToLocalProfile();
+                            },
+                            child: const Text(MyStrings.PERFIL,
+                                style: MyStyles.generalTextStyleWhite)),
                       ],
                     )
                   ],

@@ -50,6 +50,9 @@ class UserMapsController extends GetxController {
   Sucursal? _sucursalTapped;
   Sucursal? get sucursalTapped => _sucursalTapped;
 
+  String? _idLocal;
+  String? get idLocal => _idLocal;
+
   String? _nameTap;
   String? get nameTap => _nameTap;
 
@@ -58,6 +61,9 @@ class UserMapsController extends GetxController {
 
   double? _distanceTap = 0;
   double? get distanceTap => _distanceTap;
+
+  String? _idSucursalTap;
+  String? get idSucursalTap => _idSucursalTap;
 
   List<Marker>? _markerTap = [];
   List<Marker>? get markerTap => _markerTap;
@@ -162,6 +168,7 @@ class UserMapsController extends GetxController {
         .then((docsLocal) {
       docsLocal.docs.forEach((local) async {
         String tempNLocal = local['nombreLocal'];
+        String tempIdLocal = local['idLocal'];
         //datos para el local del bottomsheet
         String categoriaLocal = local['categoria'];
         String colorCategoria = local['colorCategoria'];
@@ -194,12 +201,14 @@ class UserMapsController extends GetxController {
                 location.latitude,
                 location.longitude);
             _localsBottom!.add(LocalBottom(
-                nombreLocal: tempNLocal,
-                colorCategoria: colorCategoria,
-                categoria: categoriaLocal,
-                sucursal: tempSucursal,
-                distance: distance,
-                fotoLocal: fotoLocal));
+              nombreLocal: tempNLocal,
+              colorCategoria: colorCategoria,
+              categoria: categoriaLocal,
+              sucursal: tempSucursal,
+              distance: distance,
+              fotoLocal: fotoLocal,
+              idLocal: tempIdLocal,
+            ));
             //-----------------------------------
             _myMarker!.add(Marker(
                 icon: customMarker,
@@ -209,7 +218,8 @@ class UserMapsController extends GetxController {
                     snippet: 'presiona para mas info.',
                     title: tempNLocal,
                     onTap: () {
-                      markerSelected(tempSucursal, fotoLocal, tempNLocal);
+                      markerSelected(
+                          tempSucursal, fotoLocal, tempNLocal, tempIdLocal);
                       update();
                     }),
                 draggable: true));
@@ -272,11 +282,15 @@ class UserMapsController extends GetxController {
         desiredAccuracy: LocationAccuracy.high);
   }
 
-  markerSelected(Sucursal sucursal, String foto, String localName) async {
+  markerSelected(
+      Sucursal sucursal, String foto, String localName, String idlocal) async {
+    print('el id de la sucursal es ${sucursal.idSucursal}');
     _isMarkerSelected = true;
     _sucursalTapped = sucursal;
     _nameTap = localName;
     _fotoTap = foto;
+    _idLocal = idlocal;
+    _idSucursalTap = sucursal.idSucursal;
     //esta va ser la imagen para el custom marker
     final customMarker = await getMarkerImageFromUrl(foto, targetWidth: 70);
     //-------------------------------------------------
@@ -337,6 +351,15 @@ class UserMapsController extends GetxController {
       width: 8,
     ));
     update();
+  }
+
+  goToLocalProfile() async {
+    Get.toNamed(AppRoutes.CLIENTUBICATIONS, arguments: [
+      _idLocal,
+      _nameTap,
+      _fotoTap,
+      _idSucursalTap,
+    ]);
   }
 
   //-------------------------------------------------------

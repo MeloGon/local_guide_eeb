@@ -28,6 +28,7 @@ class Sucursal {
   });
 
   Sucursal.fromDocumentSnapshot({required DocumentSnapshot documentSnapshot}) {
+    idSucursal = documentSnapshot['idSucursal'];
     ubicacionLocal = documentSnapshot['ubicacionLocal'];
     telefonoLocal = documentSnapshot['telefonoLocal'];
     pwdLocal = documentSnapshot['pwdLocal'];

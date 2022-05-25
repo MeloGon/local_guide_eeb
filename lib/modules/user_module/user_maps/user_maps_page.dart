@@ -172,8 +172,11 @@ class UserMapsPage extends StatelessWidget {
                 return GestureDetector(
                   onTap: () {
                     print('se presion');
-                    _.markerSelected(localBottom.sucursal!,
-                        localBottom.fotoLocal!, localBottom.nombreLocal!);
+                    _.markerSelected(
+                        localBottom.sucursal!,
+                        localBottom.fotoLocal!,
+                        localBottom.nombreLocal!,
+                        localBottom.idLocal!);
                   },
                   child: Container(
                     color: Colors.transparent,
