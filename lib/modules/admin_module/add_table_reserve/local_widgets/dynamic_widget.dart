@@ -5,11 +5,17 @@ import 'package:locals_guide_eeb/theme/my_styles.dart';
 class dynamicWidget extends StatelessWidget {
   TextEditingController capacityController = TextEditingController();
   final int? numeroMesa;
+  final String? asientos;
+  final String? idMesa;
 
-  dynamicWidget({Key? key, this.numeroMesa}) : super(key: key);
+  dynamicWidget({Key? key, this.numeroMesa, this.asientos, this.idMesa})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (asientos != null) {
+      capacityController = TextEditingController(text: asientos);
+    }
     return SizedBox(
 //      margin: new EdgeInsets.all(8.0),
       child: ListBody(

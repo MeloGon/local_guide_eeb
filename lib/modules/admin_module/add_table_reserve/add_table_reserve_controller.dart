@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:locals_guide_eeb/data/models/mesa.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_table_reserve/local_widgets/dynamic_widget.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
@@ -46,8 +47,9 @@ class AddTableReserveController extends GetxController {
 
   @override
   void onReady() {
+    print('cual es el flujo $_flujo');
     if (_flujo == 'editar') {
-      //metodo para mostrar el valor de las mesas
+      loadInfoTables();
     }
     super.onReady();
   }
@@ -134,6 +136,9 @@ class AddTableReserveController extends GetxController {
         .then((sucursalDoc) {
       dynamicList.forEach((mesas) {
         var idMesaTemp = (randomAlphaNumeric(8));
+        if (_flujo == 'editar') {
+          idMesaTemp = mesas.idMesa!;
+        }
         sucursalDoc.reference.collection("Mesas").doc(idMesaTemp).set({
           'idMesa': idMesaTemp,
           'reservado': false,
@@ -186,5 +191,30 @@ class AddTableReserveController extends GetxController {
     Get.snackbar('Sucursal agregada',
         'La sucursar ha sido agregada, podras ver los cambios cuando termines de agregar la nueva sucursal',
         colorText: MyColors.blackBg, backgroundColor: MyColors.white);
+  }
+
+  loadInfoTables() async {
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .get()
+        .then((sucursal) {
+      sucursal.reference.collection("Mesas").get().then((value) {
+        value.docs.forEach((mesa) {
+          final mesaData = Mesa.fromDocumentSnapshot(documentSnapshot: mesa);
+          dynamicList.add(dynamicWidget(
+            numeroMesa: mesaData.nroMesa - 1,
+            asientos: mesaData.asientos,
+            idMesa: mesaData.idMesa,
+          ));
+          update();
+        });
+      });
+      update();
+    });
   }
 }
