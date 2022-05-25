@@ -101,4 +101,7 @@ class MyStrings {
   static const String ORSOCIAL = 'O ingresar por medio de redes sociales';
   static const String LOGINGMAIL = 'Login con Gmail';
   static const String LOGINFB = 'Login con Facebook';
+
+  static const String GO = 'Ir';
+  static const String PERFIL = 'Ver perfil';
 }
