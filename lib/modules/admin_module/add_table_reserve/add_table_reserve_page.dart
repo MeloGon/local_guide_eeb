@@ -45,6 +45,7 @@ class AddTableReservePage extends StatelessWidget {
                     SizedBox(
                         width: MediaQuery.of(context).size.width * .3,
                         child: TextField(
+                          controller: _.txAforo,
                           decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               filled: true,
@@ -61,9 +62,6 @@ class AddTableReservePage extends StatelessWidget {
                       itemCount: _.dynamicList.length,
                       itemBuilder: (context, index) => _.dynamicList[index]),
                 ),
-
-                //
-
                 ItemPrimaryButton(
                   onTap: _.addNewAddress,
                   text: MyStrings.ADDNEWADDRESS,
