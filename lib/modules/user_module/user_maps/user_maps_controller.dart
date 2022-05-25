@@ -56,7 +56,7 @@ class UserMapsController extends GetxController {
   String? _fotoTap;
   String? get fotoTap => _fotoTap;
 
-  double? _distanceTap;
+  double? _distanceTap = 0;
   double? get distanceTap => _distanceTap;
 
   List<Marker>? _markerTap = [];
@@ -205,7 +205,13 @@ class UserMapsController extends GetxController {
                 icon: customMarker,
                 markerId: MarkerId(sucursal['marker']),
                 position: location,
-                infoWindow: InfoWindow(title: tempNLocal),
+                infoWindow: InfoWindow(
+                    snippet: 'presiona para mas info.',
+                    title: tempNLocal,
+                    onTap: () {
+                      markerSelected(tempSucursal, fotoLocal, tempNLocal);
+                      update();
+                    }),
                 draggable: true));
             update();
           });

@@ -154,7 +154,9 @@ class CardSucursal extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(_.sucursalTapped!.ubicacionLocal),
-                    Text('${_.distanceTap!.toStringAsFixed(2)} km'),
+                    Text(_.distanceTap.toString() == '0'
+                        ? 'Calculando'
+                        : '${_.distanceTap!.toStringAsFixed(2)} km'),
                   ],
                 ),
                 const SizedBox(height: 10),
