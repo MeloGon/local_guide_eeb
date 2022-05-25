@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
 import 'package:random_string/random_string.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class RegisterController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -55,6 +54,19 @@ class RegisterController extends GetxController {
     } else {
       Get.snackbar('Ups algo salió mal',
           'Por favor pongase en contacto con el equipo de desarrollo. Gracias');
+    }
+  }
+
+  registerWithFacebook() async {
+    final LoginResult result = await FacebookAuth.instance
+        .login(); // by default we request the email and the public profile
+// or FacebookAuth.i.login()
+    if (result.status == LoginStatus.success) {
+      // you are logged
+      final AccessToken accessToken = result.accessToken!;
+    } else {
+      print(result.status);
+      print(result.message);
     }
   }
 }

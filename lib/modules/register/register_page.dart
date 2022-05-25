@@ -47,6 +47,7 @@ class RegisterPage extends StatelessWidget {
                       ItemPrimaryButton(
                         text: MyStrings.REGISTERFB,
                         borderColor: Colors.white,
+                        onTap: _.registerWithFacebook,
                       ),
                       const SizedBox(height: 20),
                       ItemPrimaryButton(
