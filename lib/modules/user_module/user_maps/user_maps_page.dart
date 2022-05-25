@@ -95,6 +95,35 @@ class UserMapsPage extends StatelessWidget {
                       top: 50,
                       child: buttonMenuDrawer(_),
                     ),
+                    // (_.isMarkerSelected)
+                    //     ? Positioned(
+                    //         right: 60,
+                    //         top: 0,
+                    //         child: Container(
+                    //           margin: const EdgeInsets.only(
+                    //               top: 10, bottom: 10, left: 20),
+                    //           width: 45,
+                    //           height: 45,
+                    //           decoration: const BoxDecoration(
+                    //             shape: BoxShape.circle,
+                    //             color: Colors.black,
+                    //             boxShadow: [
+                    //               BoxShadow(
+                    //                 color: Colors.grey,
+                    //                 offset: Offset(0.0, 1.0), //(x,y)
+                    //                 blurRadius: 6.0,
+                    //               ),
+                    //             ],
+                    //           ),
+                    //           child: const Center(
+                    //             child: Text(
+                    //               MyStrings.GO,
+                    //               style: MyStyles.generalTextStyleWhite,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       )
+                    //     : const SizedBox(),
                   ],
                 ),
               )),
