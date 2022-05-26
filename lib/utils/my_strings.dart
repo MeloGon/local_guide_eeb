@@ -107,9 +107,10 @@ class MyStrings {
   static const String TABLEMPTY = 'Mesa sin reservar';
   static const String TABLEFULL = 'Mesa Reservada';
   static const String TABLESLIST = 'Lista de Mesas';
-  static const String SELECTTABLE =
-      'Seleccione su mesa, presionando sobre ella :';
+  static const String SELECTTABLE = 'Seleccione su mesa :';
   static const String REQUESTRESERVE = 'Solicitar Reserva';
   static const String SELECTDAY = 'Seleccione el día :';
   static const String SELECTHOUR = 'Seleccione la hora :';
+  static const String LISTTABLE = 'Mesas';
+  static const String ADDDETAILS = 'Desea brindar algun detalle (opcional)';
 }
