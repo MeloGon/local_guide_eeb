@@ -75,7 +75,7 @@ class AddDetailsLocalPage extends StatelessWidget {
                           ),
                           Slider(
                             divisions: 3,
-                            value: _.price ?? 10,
+                            value: _.price ?? 0,
                             onChanged: (value) {
                               _.onChangePrice(value);
                             },
