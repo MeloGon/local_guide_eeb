@@ -252,7 +252,7 @@ class CardSucursal extends StatelessWidget {
                                   color: Colors.black, width: 1.5),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50))),
-                          onPressed: () {},
+                          onPressed: _.goToReserve,
                           child: const Text(
                             MyStrings.RESERVE,
                             style: MyStyles.generalTextStyleBlack,

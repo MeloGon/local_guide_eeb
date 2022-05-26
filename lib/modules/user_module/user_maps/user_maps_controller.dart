@@ -362,6 +362,10 @@ class UserMapsController extends GetxController {
     ]);
   }
 
+  goToReserve() async {
+    Get.toNamed(AppRoutes.USERRESERVE);
+  }
+
   //-------------------------------------------------------
   /* centrarVista() async {
     await _mapController!.getVisibleRegion();

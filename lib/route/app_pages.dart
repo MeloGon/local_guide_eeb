@@ -49,6 +49,8 @@ import 'package:locals_guide_eeb/modules/user_module/user_maps/user_maps_binding
 import 'package:locals_guide_eeb/modules/user_module/user_maps/user_maps_page.dart';
 import 'package:locals_guide_eeb/modules/user_module/user_menu/user_menu_binding.dart';
 import 'package:locals_guide_eeb/modules/user_module/user_menu/user_menu_page.dart';
+import 'package:locals_guide_eeb/modules/user_module/user_reserve/user_reserve_binding.dart';
+import 'package:locals_guide_eeb/modules/user_module/user_reserve/user_reserve_page.dart';
 
 import 'package:locals_guide_eeb/route/app_routes.dart';
 
@@ -150,5 +152,9 @@ class AppPages {
         name: AppRoutes.USERHOME,
         page: () => const UserHomePage(),
         binding: UserHomeBinding()),
+    GetPage(
+        name: AppRoutes.USERRESERVE,
+        page: () => const UserReservePage(),
+        binding: UserReserveBinding()),
   ];
 }
