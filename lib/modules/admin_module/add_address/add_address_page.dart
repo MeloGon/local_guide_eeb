@@ -163,6 +163,7 @@ class AddAddressPage extends StatelessWidget {
                         TextField(
                           style: MyStyles.generalTextStyleWhite,
                           controller: _.txPwd,
+                          obscureText: true,
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: MyStrings.INPUTPWD,
@@ -182,6 +183,7 @@ class AddAddressPage extends StatelessWidget {
                         TextField(
                           style: MyStyles.generalTextStyleWhite,
                           controller: _.txRepeatPwd,
+                          obscureText: true,
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: MyStrings.INPUTPWD,
