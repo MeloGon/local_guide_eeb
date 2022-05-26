@@ -176,7 +176,7 @@ class AddTableReserveController extends GetxController {
       'username': _txNick,
       'pwdLocal': _txPwd,
       'repeatPwd': _txPwd,
-      'categoria': _category!.nombre,
+      'categoria': 'ga',
       'precioLocal': _price,
       'linkLocal': _txMenu,
       'linkWeb': _txWeb,
@@ -233,7 +233,7 @@ class AddTableReserveController extends GetxController {
         .then((sucursal) {
       final sucursalData =
           Sucursal.fromDocumentSnapshot(documentSnapshot: sucursal);
-      txAforo.text = sucursalData.aforo;
+      txAforo.text = sucursalData.aforo!;
       update();
     });
   }
