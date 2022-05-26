@@ -11,7 +11,7 @@ class Sucursal {
   String? marker;
   late String username;
   late double price;
-  late String aforo;
+  String? aforo;
 
   Sucursal({
     required this.idSucursal,
@@ -24,7 +24,7 @@ class Sucursal {
     required this.username,
     required this.price,
     this.marker,
-    required this.aforo,
+    this.aforo,
   });
 
   Sucursal.fromDocumentSnapshot({required DocumentSnapshot documentSnapshot}) {
