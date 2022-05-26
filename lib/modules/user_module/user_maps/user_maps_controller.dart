@@ -11,6 +11,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:locals_guide_eeb/data/models/filter.dart';
 import 'package:locals_guide_eeb/data/models/localbottom.dart';
 import 'package:locals_guide_eeb/data/models/marcador.dart';
 import 'package:locals_guide_eeb/data/models/sucursal.dart';
@@ -77,6 +78,10 @@ class UserMapsController extends GetxController {
   List<Polyline>? get polisEmpty => _polisEmpty;
   //-----------------------------
 
+  //lista de filtros
+  List<Filter> _filtros = [];
+  //-------------------
+
   @override
   void onReady() {
     _getGeoLocationPosition();
@@ -90,7 +95,12 @@ class UserMapsController extends GetxController {
     rootBundle.loadString('assets/map_style.text').then((value) {
       _mapStyle = value;
     });
+    setArguments();
     super.onInit();
+  }
+
+  setArguments() {
+    _filtros = Get.arguments[0] as List<Filter>;
   }
 
   goToDrawerMenu() async {
@@ -98,84 +108,171 @@ class UserMapsController extends GetxController {
   }
 
   void loadMarkers() async {
-    await firebaseFirestore
-        .collection("GuiaLocales")
-        .doc("admin")
-        .collection("Locales")
-        .get()
-        .then((docsLocal) {
-      docsLocal.docs.forEach((local) async {
-        String tempNLocal = local['nombreLocal'];
-        String tempIdLocal = local['idLocal'];
-        //datos para el local del bottomsheet
-        String categoriaLocal = local['categoria'];
-        String colorCategoria = local['colorCategoria'];
-        String fotoLocal = local['fotoLocal'];
-        //-------------------------------------------
-        //esta va ser la imagen para el custom marker
-        //-------------------------------------------
-        local.reference.collection('Sucursales').get().then((docsSucursal) {
-          docsSucursal.docs.forEach((sucursal) async {
-            Sucursal tempSucursal =
-                Sucursal.fromDocumentSnapshot(documentSnapshot: sucursal);
-            print('$tempNLocal yyyy ${tempSucursal.ubicacionLocal}');
-            final marcadorTmp =
-                Marcador(nombreLocal: tempNLocal, sucursal: tempSucursal);
-            _marcadores!.add(marcadorTmp);
-            //para parsear a ubicacion en la lista de marcadores
-            List<String> latlong =
-                sucursal['marker'].toString().substring(7, 44).split(",");
-            double latitude = double.parse(latlong[0]);
-            double longitude = double.parse(latlong[1]);
-            LatLng location = LatLng(latitude, longitude);
-            //--------------------------------------------------
+    if (_filtros.isEmpty) {
+      await firebaseFirestore
+          .collection("GuiaLocales")
+          .doc("admin")
+          .collection("Locales")
+          .get()
+          .then((docsLocal) {
+        docsLocal.docs.forEach((local) async {
+          String tempNLocal = local['nombreLocal'];
+          String tempIdLocal = local['idLocal'];
+          //datos para el local del bottomsheet
+          String categoriaLocal = local['categoria'];
+          String colorCategoria = local['colorCategoria'];
+          String fotoLocal = local['fotoLocal'];
+          //-------------------------------------------
+          //esta va ser la imagen para el custom marker
+          //-------------------------------------------
+          local.reference.collection('Sucursales').get().then((docsSucursal) {
+            docsSucursal.docs.forEach((sucursal) async {
+              Sucursal tempSucursal =
+                  Sucursal.fromDocumentSnapshot(documentSnapshot: sucursal);
+              print('$tempNLocal yyyy ${tempSucursal.ubicacionLocal}');
+              final marcadorTmp =
+                  Marcador(nombreLocal: tempNLocal, sucursal: tempSucursal);
+              _marcadores!.add(marcadorTmp);
+              //para parsear a ubicacion en la lista de marcadores
+              List<String> latlong =
+                  sucursal['marker'].toString().substring(7, 44).split(",");
+              double latitude = double.parse(latlong[0]);
+              double longitude = double.parse(latlong[1]);
+              LatLng location = LatLng(latitude, longitude);
+              //--------------------------------------------------
 
-            //para parsear el coklor recibido
-            final color = colorCategoria;
-            String valueString = color.split('(0x')[1].split(')')[0];
-            int colorParseado = int.parse(valueString, radix: 16);
-            //-------------------------------
+              //para parsear el coklor recibido
+              final color = colorCategoria;
+              String valueString = color.split('(0x')[1].split(')')[0];
+              int colorParseado = int.parse(valueString, radix: 16);
+              //-------------------------------
 
-            //locales o sucursales para el bottom
-            final distance = calculateDistance(
-                _ubicacionActual!.latitude,
-                _ubicacionActual!.longitude,
-                location.latitude,
-                location.longitude);
-            _localsBottom!.add(LocalBottom(
-              nombreLocal: tempNLocal,
-              colorCategoria: colorCategoria,
-              categoria: categoriaLocal,
-              sucursal: tempSucursal,
-              distance: distance,
-              fotoLocal: fotoLocal,
-              idLocal: tempIdLocal,
-            ));
+              //locales o sucursales para el bottom
+              final distance = calculateDistance(
+                  _ubicacionActual!.latitude,
+                  _ubicacionActual!.longitude,
+                  location.latitude,
+                  location.longitude);
+              _localsBottom!.add(LocalBottom(
+                nombreLocal: tempNLocal,
+                colorCategoria: colorCategoria,
+                categoria: categoriaLocal,
+                sucursal: tempSucursal,
+                distance: distance,
+                fotoLocal: fotoLocal,
+                idLocal: tempIdLocal,
+              ));
 
-            _myMarker!.add(
-              Marker(
-                infoWindow: InfoWindow(
-                    snippet: 'presiona para mas info.',
-                    title: tempNLocal,
-                    onTap: () {
-                      markerSelected(tempSucursal, fotoLocal, tempNLocal,
-                          tempIdLocal, colorParseado);
-                      update();
-                    }),
-                position: location,
-                markerId: MarkerId(sucursal['marker']),
-                icon: await MarkerIcon.downloadResizePictureCircle(fotoLocal,
-                    size: 150,
-                    addBorder: true,
-                    borderColor: Color(colorParseado),
-                    borderSize: 20),
-              ),
-            );
-            update();
+              _myMarker!.add(
+                Marker(
+                  infoWindow: InfoWindow(
+                      snippet: 'presiona para mas info.',
+                      title: tempNLocal,
+                      onTap: () {
+                        markerSelected(tempSucursal, fotoLocal, tempNLocal,
+                            tempIdLocal, colorParseado);
+                        update();
+                      }),
+                  position: location,
+                  markerId: MarkerId(sucursal['marker']),
+                  icon: await MarkerIcon.downloadResizePictureCircle(fotoLocal,
+                      size: 150,
+                      addBorder: true,
+                      borderColor: Color(colorParseado),
+                      borderSize: 20),
+                ),
+              );
+              update();
+            });
           });
         });
       });
-    });
+    } else {
+      await firebaseFirestore
+          .collection("GuiaLocales")
+          .doc("admin")
+          .collection("Locales")
+          .get()
+          .then((docsLocal) {
+        docsLocal.docs.forEach((local) async {
+          String tempNLocal = local['nombreLocal'];
+          String tempIdLocal = local['idLocal'];
+          //datos para el local del bottomsheet
+          String categoriaLocal = local['categoria'];
+          String colorCategoria = local['colorCategoria'];
+          String fotoLocal = local['fotoLocal'];
+          _filtros.forEach((filtro) {
+            if (filtro.nombre == categoriaLocal) {
+              local.reference
+                  .collection('Sucursales')
+                  .get()
+                  .then((docsSucursal) {
+                docsSucursal.docs.forEach((sucursal) async {
+                  Sucursal tempSucursal =
+                      Sucursal.fromDocumentSnapshot(documentSnapshot: sucursal);
+                  print('$tempNLocal yyyy ${tempSucursal.ubicacionLocal}');
+                  final marcadorTmp =
+                      Marcador(nombreLocal: tempNLocal, sucursal: tempSucursal);
+                  _marcadores!.add(marcadorTmp);
+                  //para parsear a ubicacion en la lista de marcadores
+                  List<String> latlong =
+                      sucursal['marker'].toString().substring(7, 44).split(",");
+                  double latitude = double.parse(latlong[0]);
+                  double longitude = double.parse(latlong[1]);
+                  LatLng location = LatLng(latitude, longitude);
+                  //--------------------------------------------------
+
+                  //para parsear el coklor recibido
+                  final color = colorCategoria;
+                  String valueString = color.split('(0x')[1].split(')')[0];
+                  int colorParseado = int.parse(valueString, radix: 16);
+                  //-------------------------------
+
+                  //locales o sucursales para el bottom
+                  final distance = calculateDistance(
+                      _ubicacionActual!.latitude,
+                      _ubicacionActual!.longitude,
+                      location.latitude,
+                      location.longitude);
+                  _localsBottom!.add(LocalBottom(
+                    nombreLocal: tempNLocal,
+                    colorCategoria: colorCategoria,
+                    categoria: categoriaLocal,
+                    sucursal: tempSucursal,
+                    distance: distance,
+                    fotoLocal: fotoLocal,
+                    idLocal: tempIdLocal,
+                  ));
+
+                  _myMarker!.add(
+                    Marker(
+                      infoWindow: InfoWindow(
+                          snippet: 'presiona para mas info.',
+                          title: tempNLocal,
+                          onTap: () {
+                            markerSelected(tempSucursal, fotoLocal, tempNLocal,
+                                tempIdLocal, colorParseado);
+                            update();
+                          }),
+                      position: location,
+                      markerId: MarkerId(sucursal['marker']),
+                      icon: await MarkerIcon.downloadResizePictureCircle(
+                          fotoLocal,
+                          size: 150,
+                          addBorder: true,
+                          borderColor: Color(colorParseado),
+                          borderSize: 20),
+                    ),
+                  );
+                  update();
+                });
+              });
+            }
+          });
+          //-------------------------------------------
+        });
+      });
+    }
   }
 
   onMapCreated(GoogleMapController controller) {
