@@ -176,7 +176,8 @@ class UserMapsPage extends StatelessWidget {
                         localBottom.sucursal!,
                         localBottom.fotoLocal!,
                         localBottom.nombreLocal!,
-                        localBottom.idLocal!);
+                        localBottom.idLocal!,
+                        value);
                   },
                   child: Container(
                     color: Colors.transparent,

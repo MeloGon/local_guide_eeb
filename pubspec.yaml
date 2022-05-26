@@ -33,6 +33,7 @@ dependencies:
   cloud_firestore: ^3.1.13
   cloudinary_public: ^0.11.0
   cupertino_icons: ^1.0.2
+  custom_marker: ^1.0.0
   firebase_auth: ^3.3.15
   firebase_core: ^1.15.0
   flutter:

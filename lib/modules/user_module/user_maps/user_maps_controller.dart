@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:custom_marker/marker_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -96,69 +97,6 @@ class UserMapsController extends GetxController {
     Get.toNamed(AppRoutes.USERDRAWER);
   }
 
-  //metodos para el marker personalizado
-  Future<BitmapDescriptor> getMarkerImageFromUrl(
-    String? url, {
-    int? targetWidth,
-  }) async {
-    assert(url != null);
-    final File markerImageFile =
-        await DefaultCacheManager().getSingleFile(url!);
-    if (targetWidth != null) {
-      return convertImageFileToBitmapDescriptor(markerImageFile, size: 100);
-    } else {
-      Uint8List markerImageBytes = await markerImageFile.readAsBytes();
-      return BitmapDescriptor.fromBytes(markerImageBytes);
-    }
-  }
-
-  static Future<BitmapDescriptor> convertImageFileToBitmapDescriptor(
-      File imageFile,
-      {int size = 100,
-      bool addBorder = false,
-      Color borderColor = Colors.red,
-      double borderSize = 10,
-      Color titleColor = Colors.transparent,
-      Color titleBackgroundColor = Colors.transparent}) async {
-    final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
-    final Canvas canvas = Canvas(pictureRecorder);
-    final Paint paint = Paint()..color;
-    final TextPainter textPainter = TextPainter(
-      textDirection: TextDirection.ltr,
-    );
-    final double radius = size / 2;
-
-    //make canvas clip path to prevent image drawing over the circle
-    final Path clipPath = Path();
-    clipPath.addRRect(RRect.fromRectAndRadius(
-        Rect.fromLTWH(0, 0, size.toDouble(), size.toDouble()),
-        Radius.circular(100)));
-    clipPath.addRRect(RRect.fromRectAndRadius(
-        Rect.fromLTWH(size / 2.toDouble(), size + 20.toDouble(), 10, 10),
-        Radius.circular(100)));
-    canvas.clipPath(clipPath);
-
-    //paintImage
-    final Uint8List imageUint8List = await imageFile.readAsBytes();
-    final ui.Codec codec = await ui.instantiateImageCodec(imageUint8List);
-    final ui.FrameInfo imageFI = await codec.getNextFrame();
-    paintImage(
-        canvas: canvas,
-        rect: Rect.fromLTWH(0, 0, size.toDouble(), size.toDouble()),
-        image: imageFI.image,
-        fit: BoxFit.cover);
-
-    //convert canvas as PNG bytes
-    final _image = await pictureRecorder
-        .endRecording()
-        .toImage(size, (size * 1.1).toInt());
-    final data = await _image.toByteData(format: ui.ImageByteFormat.png);
-
-    //convert PNG bytes as BitmapDescriptor
-    return BitmapDescriptor.fromBytes(data!.buffer.asUint8List());
-  }
-  //---------------------------------------------------------------------------
-
   void loadMarkers() async {
     await firebaseFirestore
         .collection("GuiaLocales")
@@ -175,11 +113,9 @@ class UserMapsController extends GetxController {
         String fotoLocal = local['fotoLocal'];
         //-------------------------------------------
         //esta va ser la imagen para el custom marker
-        final customMarker =
-            await getMarkerImageFromUrl(local['fotoLocal'], targetWidth: 70);
         //-------------------------------------------
         local.reference.collection('Sucursales').get().then((docsSucursal) {
-          docsSucursal.docs.forEach((sucursal) {
+          docsSucursal.docs.forEach((sucursal) async {
             Sucursal tempSucursal =
                 Sucursal.fromDocumentSnapshot(documentSnapshot: sucursal);
             print('$tempNLocal yyyy ${tempSucursal.ubicacionLocal}');
@@ -193,6 +129,12 @@ class UserMapsController extends GetxController {
             double longitude = double.parse(latlong[1]);
             LatLng location = LatLng(latitude, longitude);
             //--------------------------------------------------
+
+            //para parsear el coklor recibido
+            final color = colorCategoria;
+            String valueString = color.split('(0x')[1].split(')')[0];
+            int colorParseado = int.parse(valueString, radix: 16);
+            //-------------------------------
 
             //locales o sucursales para el bottom
             final distance = calculateDistance(
@@ -209,20 +151,26 @@ class UserMapsController extends GetxController {
               fotoLocal: fotoLocal,
               idLocal: tempIdLocal,
             ));
-            //-----------------------------------
-            _myMarker!.add(Marker(
-                icon: customMarker,
-                markerId: MarkerId(sucursal['marker']),
-                position: location,
+
+            _myMarker!.add(
+              Marker(
                 infoWindow: InfoWindow(
                     snippet: 'presiona para mas info.',
                     title: tempNLocal,
                     onTap: () {
-                      markerSelected(
-                          tempSucursal, fotoLocal, tempNLocal, tempIdLocal);
+                      markerSelected(tempSucursal, fotoLocal, tempNLocal,
+                          tempIdLocal, colorParseado);
                       update();
                     }),
-                draggable: true));
+                position: location,
+                markerId: MarkerId(sucursal['marker']),
+                icon: await MarkerIcon.downloadResizePictureCircle(fotoLocal,
+                    size: 150,
+                    addBorder: true,
+                    borderColor: Color(colorParseado),
+                    borderSize: 20),
+              ),
+            );
             update();
           });
         });
@@ -282,8 +230,8 @@ class UserMapsController extends GetxController {
         desiredAccuracy: LocationAccuracy.high);
   }
 
-  markerSelected(
-      Sucursal sucursal, String foto, String localName, String idlocal) async {
+  markerSelected(Sucursal sucursal, String foto, String localName,
+      String idlocal, int colorParseado) async {
     print('el id de la sucursal es ${sucursal.idSucursal}');
     _isMarkerSelected = true;
     _sucursalTapped = sucursal;
@@ -291,9 +239,7 @@ class UserMapsController extends GetxController {
     _fotoTap = foto;
     _idLocal = idlocal;
     _idSucursalTap = sucursal.idSucursal;
-    //esta va ser la imagen para el custom marker
-    final customMarker = await getMarkerImageFromUrl(foto, targetWidth: 70);
-    //-------------------------------------------------
+
     //para parsear a ubicacion en la lista de marcadores
     List<String> latlong =
         sucursal.marker.toString().substring(7, 44).split(",");
@@ -306,11 +252,16 @@ class UserMapsController extends GetxController {
         _ubicacionActual!.longitude, location.latitude, location.longitude);
     //-------------------------------------------------
     _markerTap!.add(Marker(
-        icon: customMarker,
+        icon: await MarkerIcon.downloadResizePictureCircle(foto,
+            size: 150,
+            addBorder: true,
+            borderColor: Color(colorParseado),
+            borderSize: 20),
         markerId: MarkerId(sucursal.marker!),
         position: location,
         infoWindow: InfoWindow(title: localName),
         draggable: true));
+
     getDirections(location.latitude, location.longitude,
         _ubicacionActual!.latitude, _ubicacionActual!.longitude);
     update();
