@@ -26,9 +26,9 @@ class UserMenuPage extends StatelessWidget {
                   ListView.builder(
                     physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: _.categorias.length,
+                    itemCount: _.categorias!.length,
                     itemBuilder: (context, index) {
-                      final categoria = _.categorias[index];
+                      final categoria = _.categorias![index];
                       final color = categoria.color;
                       String valueString = color.split('(0x')[1].split(')')[0];
                       int value = int.parse(valueString, radix: 16);
@@ -42,8 +42,10 @@ class UserMenuPage extends StatelessWidget {
                               style: TextStyle(color: Color(value)),
                             ),
                             Checkbox(
-                              value: true,
-                              onChanged: (value) {},
+                              value: categoria.isSelected,
+                              onChanged: (value) {
+                                _.onChanged(categoria);
+                              },
                             ),
                           ],
                         ),

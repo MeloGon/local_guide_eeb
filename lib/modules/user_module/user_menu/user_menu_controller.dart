@@ -1,18 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:group_button/group_button.dart';
 import 'package:locals_guide_eeb/data/models/categorie.dart';
+import 'package:locals_guide_eeb/data/models/filter.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class UserMenuController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  List<Category> categorias = [];
+  List<Filter>? _categorias = [];
+  List<Filter>? get categorias => _categorias;
+
+  List<Filter>? _categoriasSelected = [];
+  List<Filter>? get categoriasSelected => _categoriasSelected;
 
   double? _distance;
   double? get distance => _distance;
   set distanceSet(double value) {
     _distance = value;
   }
+
+  late GroupButtonController groupButtonController;
 
   @override
   void onReady() {
@@ -23,12 +31,12 @@ class UserMenuController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
+    groupButtonController = GroupButtonController();
     super.onInit();
   }
 
   void showCategories() async {
-    categorias.clear();
+    _categorias!.clear();
     await firebaseFirestore
         .collection("GuiaLocales")
         .doc("admin")
@@ -38,7 +46,11 @@ class UserMenuController extends GetxController {
       value.docs.forEach((element) {
         final category =
             Category.fromDocumentSnapshot(documentSnapshot: element);
-        categorias.add(category);
+        _categorias!.add(Filter(
+            idCategory: category.idCategory,
+            nombre: category.nombre,
+            color: category.color,
+            isSelected: false));
         update();
       });
     });
@@ -56,6 +68,19 @@ class UserMenuController extends GetxController {
   }
 
   hideFilter() async {
-    Get.toNamed(AppRoutes.USERMAPS);
+    /* categoriasSelected!.forEach((element) {
+      print('nombre de la categoria ${element.nombre}');
+    }); */
+    Get.toNamed(AppRoutes.USERMAPS, arguments: [_categoriasSelected]);
+  }
+
+  onChanged(Filter value) {
+    value.isSelected = !value.isSelected;
+    if (value.isSelected) {
+      _categoriasSelected!.add(value);
+    } else {
+      _categoriasSelected!.remove(value);
+    }
+    update();
   }
 }
