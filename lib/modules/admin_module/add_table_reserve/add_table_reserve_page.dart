@@ -12,6 +12,10 @@ class AddTableReservePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final availableHeight = MediaQuery.of(context).size.height -
+        AppBar().preferredSize.height -
+        MediaQuery.of(context).padding.top -
+        MediaQuery.of(context).padding.bottom;
     return GetBuilder<AddTableReserveController>(
       builder: (_) => SafeArea(
           child: Scaffold(
@@ -32,7 +36,7 @@ class AddTableReservePage extends StatelessWidget {
           child: Container(
             padding: MyDimens.symetricMarginGeneral,
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * .8,
+            height: availableHeight,
             child: Column(
               children: [
                 Row(
@@ -53,15 +57,27 @@ class AddTableReservePage extends StatelessWidget {
                         )),
                   ],
                 ),
+                const SizedBox(height: 10),
+                const Divider(
+                  color: Colors.white,
+                ),
+                const SizedBox(height: 10),
                 Expanded(
                   //flex: 2,
-                  child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: _.dynamicList.length,
-                      itemBuilder: (context, index) => _.dynamicList[index]),
+                  child: Scrollbar(
+                    isAlwaysShown: _.dynamicList.length > 2 ? true : false,
+                    child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: _.dynamicList.length,
+                        itemBuilder: (context, index) => _.dynamicList[index]),
+                  ),
                 ),
+                const SizedBox(height: 10),
+                const Divider(
+                  color: Colors.white,
+                ),
+                const SizedBox(height: 10),
                 ItemPrimaryButton(
                   onTap: _.addNewAddress,
                   text: MyStrings.ADDNEWADDRESS,
