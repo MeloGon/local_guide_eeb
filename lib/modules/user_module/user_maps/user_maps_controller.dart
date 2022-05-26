@@ -363,7 +363,12 @@ class UserMapsController extends GetxController {
   }
 
   goToReserve() async {
-    Get.toNamed(AppRoutes.USERRESERVE);
+    Get.toNamed(AppRoutes.USERRESERVE, arguments: [
+      _idLocal,
+      _nameTap,
+      _fotoTap,
+      _idSucursalTap,
+    ]);
   }
 
   //-------------------------------------------------------
