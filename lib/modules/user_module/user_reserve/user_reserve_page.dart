@@ -56,10 +56,12 @@ class UserReservePage extends StatelessWidget {
                               Icon(
                                 Icons.table_bar_outlined,
                                 size: 35,
+                                color: Colors.green,
                               ),
                               Icon(
                                 Icons.table_bar_sharp,
                                 size: 35,
+                                color: Colors.red,
                               )
                             ],
                           ),
