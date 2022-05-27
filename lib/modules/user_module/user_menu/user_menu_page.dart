@@ -33,7 +33,8 @@ class UserMenuPage extends StatelessWidget {
                       String valueString = color.split('(0x')[1].split(')')[0];
                       int value = int.parse(valueString, radix: 16);
                       return Container(
-                        padding: const EdgeInsets.symmetric(vertical: 7),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -53,48 +54,49 @@ class UserMenuPage extends StatelessWidget {
                       );
                     },
                   ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 20),
-                    width: MediaQuery.of(context).size.width,
-                    height: 1,
-                    color: Colors.grey,
-                  ),
-                  const Text(MyStrings.FORDISTANCE),
-                  Slider(
-                    value: _.distance ?? 0,
-                    onChanged: (value) {
-                      _.onChangeDistance(value);
-                    },
-                    min: 0,
-                    max: 30,
-                    thumbColor: Colors.black,
-                    inactiveColor: Colors.grey.withOpacity(.5),
-                    activeColor: Colors.black,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 20),
-                    width: MediaQuery.of(context).size.width,
-                    height: 1,
-                    color: Colors.grey,
-                  ),
-                  const Text(MyStrings.PRICE),
-                  Slider(
-                    value: _.distance ?? 0,
-                    onChanged: (value) {
-                      _.onChangeDistance(value);
-                    },
-                    min: 0,
-                    max: 30,
-                    thumbColor: Colors.black,
-                    inactiveColor: Colors.grey.withOpacity(.5),
-                    activeColor: Colors.black,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 20),
-                    width: MediaQuery.of(context).size.width,
-                    height: 1,
-                    color: Colors.grey,
-                  ),
+                  //SE COMENTAN LOS SLIDERS FALTAN CONFIGURAR
+                  // Container(
+                  //   margin: const EdgeInsets.symmetric(vertical: 20),
+                  //   width: MediaQuery.of(context).size.width,
+                  //   height: 1,
+                  //   color: Colors.grey,
+                  // ),
+                  // const Text(MyStrings.FORDISTANCE),
+                  // Slider(
+                  //   value: _.distance ?? 0,
+                  //   onChanged: (value) {
+                  //     _.onChangeDistance(value);
+                  //   },
+                  //   min: 0,
+                  //   max: 30,
+                  //   thumbColor: Colors.black,
+                  //   inactiveColor: Colors.grey.withOpacity(.5),
+                  //   activeColor: Colors.black,
+                  // ),
+                  // Container(
+                  //   margin: const EdgeInsets.symmetric(vertical: 20),
+                  //   width: MediaQuery.of(context).size.width,
+                  //   height: 1,
+                  //   color: Colors.grey,
+                  // ),
+                  // const Text(MyStrings.PRICE),
+                  // Slider(
+                  //   value: _.distance ?? 0,
+                  //   onChanged: (value) {
+                  //     _.onChangeDistance(value);
+                  //   },
+                  //   min: 0,
+                  //   max: 30,
+                  //   thumbColor: Colors.black,
+                  //   inactiveColor: Colors.grey.withOpacity(.5),
+                  //   activeColor: Colors.black,
+                  // ),
+                  // Container(
+                  //   margin: const EdgeInsets.symmetric(vertical: 20),
+                  //   width: MediaQuery.of(context).size.width,
+                  //   height: 1,
+                  //   color: Colors.grey,
+                  // ),
                 ],
               ),
             ),
