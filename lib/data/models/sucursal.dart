@@ -38,6 +38,6 @@ class Sucursal {
     marker = documentSnapshot['marker'];
     username = documentSnapshot['username'];
     price = documentSnapshot['precioLocal'];
-    aforo = documentSnapshot['aforo'];
+    aforo = documentSnapshot['aforo'] ?? '';
   }
 }

@@ -79,7 +79,7 @@ class UserMapsController extends GetxController {
   //-----------------------------
 
   //lista de filtros
-  List<Filter> _filtros = [];
+  List<Filter>? _filtros = [];
   //-------------------
 
   @override
@@ -108,7 +108,7 @@ class UserMapsController extends GetxController {
   }
 
   void loadMarkers() async {
-    if (_filtros.isEmpty) {
+    if (_filtros!.isEmpty) {
       await firebaseFirestore
           .collection("GuiaLocales")
           .doc("admin")
@@ -125,8 +125,11 @@ class UserMapsController extends GetxController {
           //-------------------------------------------
           //esta va ser la imagen para el custom marker
           //-------------------------------------------
-          local.reference.collection('Sucursales').get().then((docsSucursal) {
-            docsSucursal.docs.forEach((sucursal) async {
+          local.reference
+              .collection('Sucursales')
+              .get()
+              .then((docsSucursal) async {
+            for (var sucursal in docsSucursal.docs) {
               Sucursal tempSucursal =
                   Sucursal.fromDocumentSnapshot(documentSnapshot: sucursal);
               print('$tempNLocal yyyy ${tempSucursal.ubicacionLocal}');
@@ -183,7 +186,7 @@ class UserMapsController extends GetxController {
                 ),
               );
               update();
-            });
+            }
           });
         });
       });
@@ -201,7 +204,7 @@ class UserMapsController extends GetxController {
           String categoriaLocal = local['categoria'];
           String colorCategoria = local['colorCategoria'];
           String fotoLocal = local['fotoLocal'];
-          _filtros.forEach((filtro) {
+          for (var filtro in _filtros!) {
             if (filtro.nombre == categoriaLocal) {
               local.reference
                   .collection('Sucursales')
@@ -268,7 +271,7 @@ class UserMapsController extends GetxController {
                 });
               });
             }
-          });
+          }
           //-------------------------------------------
         });
       });
