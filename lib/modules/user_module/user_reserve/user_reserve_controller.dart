@@ -18,7 +18,12 @@ class UserReserveController extends GetxController {
   TimeOfDay? get selectedHour => _selectedHour;
 
   //parametros que llegan
-  String? _idLocal, _nombreLocal, _fotoLocal, _idSucursal;
+  String? _idLocal,
+      _nombreLocal,
+      _fotoLocal,
+      _idSucursal,
+      _idUser,
+      _displayName;
   String? get nombreLocal => _nombreLocal;
   String? get fotoLocal => _fotoLocal;
   String? get idSucursal => _idSucursal;
@@ -54,6 +59,8 @@ class UserReserveController extends GetxController {
     _nombreLocal = Get.arguments[1] as String;
     _fotoLocal = Get.arguments[2] as String;
     _idSucursal = Get.arguments[3] as String;
+    _idUser = Get.arguments[4] as String;
+    _displayName = Get.arguments[5] as String;
   }
 
   selectDate(BuildContext context) async {
@@ -132,11 +139,13 @@ class UserReserveController extends GetxController {
       final idReserva = (randomAlphaNumeric(8));
       sucursal.reference.collection("Reservas").doc(idReserva).set({
         'idReserva': idReserva,
-        'nombreUsuario': 'idReserva',
+        'nombreUsuario': _displayName,
+        'idUsuario': _idUser,
         'fecha': _formattedDate,
         'hora': _selectedHour!.format(context),
         'observaciones': txOptional.text,
         'mesa': _mesaSelected!.nroMesa,
+        'isAcepted': false,
       });
     });
     Get.snackbar(
