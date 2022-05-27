@@ -44,6 +44,7 @@ class UsersAdminPage extends StatelessWidget {
                     height: 20,
                   ),
                   ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: _.usuarios.length,
                     itemBuilder: (context, index) {
