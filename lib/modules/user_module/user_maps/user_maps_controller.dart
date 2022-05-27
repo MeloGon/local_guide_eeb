@@ -84,7 +84,6 @@ class UserMapsController extends GetxController {
 
   @override
   void onReady() {
-    _getGeoLocationPosition();
     loadMarkers();
     super.onReady();
   }
@@ -95,6 +94,7 @@ class UserMapsController extends GetxController {
     rootBundle.loadString('assets/map_style.text').then((value) {
       _mapStyle = value;
     });
+    _getGeoLocationPosition();
     setArguments();
     super.onInit();
   }
