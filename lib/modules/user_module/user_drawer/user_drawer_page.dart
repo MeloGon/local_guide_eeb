@@ -83,6 +83,9 @@ class UserDrawerPage extends StatelessWidget {
           case 'Home':
             _.goToHomeUser();
             break;
+          case 'Cerrar Sesión':
+            _.signOut();
+            break;
           default:
         }
       },
