@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:locals_guide_eeb/modules/access/access_binding.dart';
 import 'package:locals_guide_eeb/modules/access/access_page.dart';
@@ -143,6 +144,9 @@ class AppPages {
         page: () => const UserMenuPage(),
         binding: UserMenuBinding()),
     GetPage(
+        transition: Transition.rightToLeft,
+        curve: Curves.easeInOutQuart,
+        transitionDuration: const Duration(seconds: 1),
         name: AppRoutes.USERMAPS,
         page: () => const UserMapsPage(),
         binding: UserMapsBinding()),
