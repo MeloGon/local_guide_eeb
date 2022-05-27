@@ -299,12 +299,11 @@ class UserMapsPage extends StatelessWidget {
                         border: Border.all(color: Colors.red)),
                     child: CircleAvatar(
                       radius: 65,
-                      backgroundImage: NetworkImage(
-                          'https://concepto.de/wp-content/uploads/2014/03/modelo-e1551453273683.jpg'),
+                      backgroundImage: NetworkImage(_.photoUrl!),
                     ),
                   ),
                   Text(
-                    'Alisson Nuñez',
+                    _.displayName!,
                     style: MyStyles.generalTextStyleWhiteBold,
                   )
                 ],

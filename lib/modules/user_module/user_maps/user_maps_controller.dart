@@ -78,8 +78,11 @@ class UserMapsController extends GetxController {
   List<Polyline>? get polisEmpty => _polisEmpty;
   //-----------------------------
 
-  //lista de filtros
+  //parametros que llegan
   List<Filter>? _filtros = [];
+  String? _idUser, _displayName, _photoUrl;
+  String? get displayName => _displayName;
+  String? get photoUrl => _photoUrl;
   //-------------------
 
   //controlando altura
@@ -106,6 +109,9 @@ class UserMapsController extends GetxController {
 
   setArguments() {
     _filtros = Get.arguments[0] as List<Filter>;
+    _idUser = Get.arguments[1];
+    _displayName = Get.arguments[2];
+    _photoUrl = Get.arguments[3];
   }
 
   goToDrawerMenu() async {
