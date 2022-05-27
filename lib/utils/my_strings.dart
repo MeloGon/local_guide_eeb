@@ -113,4 +113,7 @@ class MyStrings {
   static const String SELECTHOUR = 'Seleccione la hora :';
   static const String LISTTABLE = 'Mesas';
   static const String ADDDETAILS = 'Desea brindar algun detalle (opcional)';
+
+  static const String ACCEPT = 'Aceptar';
+  static const String CANCEL = 'Cancelar';
 }
