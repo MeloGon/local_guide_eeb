@@ -178,11 +178,19 @@ class ClientReservePage extends StatelessWidget {
                                             MainAxisAlignment.spaceAround,
                                         children: [
                                           TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                _.acceptReserva(
+                                                    solicitudReserva.idReserva!,
+                                                    solicitudReserva.idUsuario);
+                                              },
                                               child:
                                                   const Text(MyStrings.ACCEPT)),
                                           TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                _.deniedReserve(
+                                                    solicitudReserva.idReserva!,
+                                                    solicitudReserva.idUsuario);
+                                              },
                                               child: const Text(
                                                 MyStrings.CANCEL,
                                                 style: TextStyle(
