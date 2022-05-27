@@ -179,7 +179,7 @@ class UserMapsController extends GetxController {
                   position: location,
                   markerId: MarkerId(sucursal['marker']),
                   icon: await MarkerIcon.downloadResizePictureCircle(fotoLocal,
-                      size: 150,
+                      size: 90,
                       addBorder: true,
                       borderColor: Color(colorParseado),
                       borderSize: 20),
@@ -261,7 +261,7 @@ class UserMapsController extends GetxController {
                       markerId: MarkerId(sucursal['marker']),
                       icon: await MarkerIcon.downloadResizePictureCircle(
                           fotoLocal,
-                          size: 150,
+                          size: 90,
                           addBorder: true,
                           borderColor: Color(colorParseado),
                           borderSize: 20),
