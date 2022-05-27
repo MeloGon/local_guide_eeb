@@ -82,6 +82,10 @@ class UserMapsController extends GetxController {
   List<Filter>? _filtros = [];
   //-------------------
 
+  //controlando altura
+  double? _heightX;
+  double? get heightX => _heightX;
+  //
   @override
   void onReady() {
     loadMarkers();
@@ -90,6 +94,7 @@ class UserMapsController extends GetxController {
 
   @override
   void onInit() {
+    _heightX = .4;
     _isMarkerSelected = false;
     rootBundle.loadString('assets/map_style.text').then((value) {
       _mapStyle = value;
@@ -370,6 +375,7 @@ class UserMapsController extends GetxController {
   closeTapMarker() async {
     _markerTap!.clear();
     _isMarkerSelected = false;
+    closedPanel();
     update();
   }
 
@@ -420,6 +426,16 @@ class UserMapsController extends GetxController {
       _fotoTap,
       _idSucursalTap,
     ]);
+  }
+
+  openedPanel() {
+    _heightX = .1;
+    update();
+  }
+
+  closedPanel() {
+    _heightX = .4;
+    update();
   }
 
   //-------------------------------------------------------

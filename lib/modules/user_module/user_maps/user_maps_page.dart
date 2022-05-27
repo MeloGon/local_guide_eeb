@@ -56,9 +56,12 @@ class UserMapsPage extends StatelessWidget {
                     (_.isMarkerSelected)
                         ? const CardSucursal()
                         : SlidingUpPanel(
-                            minHeight: MediaQuery.of(context).size.height * .4,
+                            onPanelOpened: _.openedPanel,
+                            onPanelClosed: _.closedPanel,
+                            minHeight:
+                                MediaQuery.of(context).size.height * _.heightX!,
                             maxHeight: MediaQuery.of(context).size.height * .89,
-                            collapsed: collapsedContent(context),
+                            collapsed: collapsedContent(context, _),
                             panel: panelContent(context, _),
                             // this is main body now,
                             // replace by the scaffold body.
@@ -171,7 +174,6 @@ class UserMapsPage extends StatelessWidget {
                 int value = int.parse(valueString, radix: 16);
                 return GestureDetector(
                   onTap: () {
-                    print('se presion');
                     _.markerSelected(
                         localBottom.sucursal!,
                         localBottom.fotoLocal!,
@@ -269,38 +271,43 @@ class UserMapsPage extends StatelessWidget {
     );
   }
 
-  Container collapsedContent(BuildContext context) {
+  Container collapsedContent(BuildContext context, UserMapsController _) {
     return Container(
         color: Colors.black,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-                width: MediaQuery.of(context).size.width * .5,
-                child: Image.asset('assets/images/logo/foofle-logo.png')),
-            Container(
-              width: 100,
-              height: 3,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: MyColors.white),
-            ),
-            Container(
-              padding: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.red)),
-              child: CircleAvatar(
-                radius: 65,
-                backgroundImage: NetworkImage(
-                    'https://concepto.de/wp-content/uploads/2014/03/modelo-e1551453273683.jpg'),
-              ),
-            ),
-            Text(
-              'Alisson Nuñez',
-              style: MyStyles.generalTextStyleWhiteBold,
-            )
-          ],
-        ));
+        child: _.heightX! == .1
+            ? const Center(
+                child: CircularProgressIndicator(
+                color: MyColors.white,
+              ))
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                      width: MediaQuery.of(context).size.width * .5,
+                      child: Image.asset('assets/images/logo/foofle-logo.png')),
+                  Container(
+                    width: 100,
+                    height: 3,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: MyColors.white),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.red)),
+                    child: CircleAvatar(
+                      radius: 65,
+                      backgroundImage: NetworkImage(
+                          'https://concepto.de/wp-content/uploads/2014/03/modelo-e1551453273683.jpg'),
+                    ),
+                  ),
+                  Text(
+                    'Alisson Nuñez',
+                    style: MyStyles.generalTextStyleWhiteBold,
+                  )
+                ],
+              ));
   }
 }
