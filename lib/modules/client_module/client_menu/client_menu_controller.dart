@@ -53,4 +53,13 @@ class ClientMenuController extends GetxController {
       _idSucursal,
     ]);
   }
+
+  goToListOfReserves() async {
+    Get.toNamed(AppRoutes.CLIENTRESERVE, arguments: [
+      _idLocal,
+      _idSucursal,
+      _local!.fotoLocal,
+      _local!.nombreLocal,
+    ]);
+  }
 }

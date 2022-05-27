@@ -106,9 +106,10 @@ class ClientMenuPage extends StatelessWidget {
                         textColor: Colors.black,
                       ),
                     ),
-                    const Padding(
+                    Padding(
                       padding: MyDimens.paddingForOptions,
                       child: ItemPrimaryButton(
+                        onTap: _.goToListOfReserves,
                         text: MyStrings.RESERVE,
                         textColor: Colors.black,
                       ),
