@@ -145,6 +145,7 @@ class UserReserveController extends GetxController {
         'hora': _selectedHour!.format(context),
         'observaciones': txOptional.text,
         'mesa': _mesaSelected!.nroMesa,
+        'mesaid': _mesaSelected!.idMesa,
         'isAcepted': false,
       });
     });
