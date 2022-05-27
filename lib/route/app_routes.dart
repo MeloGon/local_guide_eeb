@@ -24,4 +24,5 @@ class AppRoutes {
   static const USERDRAWER = '/user_drawer';
   static const USERHOME = '/user_home';
   static const USERRESERVE = '/user_reserve';
+  static const CLIENTRESERVE = '/client_reserve';
 }

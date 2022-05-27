@@ -29,6 +29,8 @@ import 'package:locals_guide_eeb/modules/admin_module/users_admin/users_admin_bi
 import 'package:locals_guide_eeb/modules/admin_module/users_admin/users_admin_page.dart';
 import 'package:locals_guide_eeb/modules/client_module/client_menu/client_menu_binding.dart';
 import 'package:locals_guide_eeb/modules/client_module/client_menu/client_menu_page.dart';
+import 'package:locals_guide_eeb/modules/client_module/client_reserve/client_reserve_binding.dart';
+import 'package:locals_guide_eeb/modules/client_module/client_reserve/client_reserve_page.dart';
 import 'package:locals_guide_eeb/modules/client_module/client_ubications/client_ubications_binding.dart';
 import 'package:locals_guide_eeb/modules/client_module/client_ubications/client_ubications_page.dart';
 
@@ -156,5 +158,9 @@ class AppPages {
         name: AppRoutes.USERRESERVE,
         page: () => const UserReservePage(),
         binding: UserReserveBinding()),
+    GetPage(
+        name: AppRoutes.CLIENTRESERVE,
+        page: () => const ClientReservePage(),
+        binding: ClientReserveBinding()),
   ];
 }
