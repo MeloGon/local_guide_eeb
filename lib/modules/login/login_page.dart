@@ -89,6 +89,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 ItemPrimaryButton(
+                  onTap: _.loginWithGoogleMail,
                   text: MyStrings.LOGINGMAIL,
                   borderColor: Colors.white,
                 ),

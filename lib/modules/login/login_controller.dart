@@ -83,6 +83,47 @@ class LoginController extends GetxController {
     }
   }
 
+  loginWithGoogleMail() async {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    final authResult =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+    final User? user = authResult.user;
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    if (user!.uid == currentUser!.uid) {
+      print('este es el correo y pass ${user.displayName}');
+      await firebaseFirestore
+          .collection("GuiaLocales")
+          .doc("admin")
+          .collection("Usuarios")
+          .get()
+          .then((usuariosDocs) {
+        for (var usuario in usuariosDocs.docs) {
+          if (user.email == usuario["email"]) {
+            Get.toNamed(AppRoutes.USERMENU, arguments: [
+              usuario['idUser'],
+              user.displayName,
+              user.photoURL,
+            ]);
+          }
+        }
+      });
+
+      return;
+    } else {
+      Get.snackbar('Ups algo salió mal',
+          'Por favor pongase en contacto con el equipo de desarrollo. Gracias');
+    }
+  }
+
   /* loginWithGoogleMail() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     final GoogleSignInAuthentication? googleAuth =
