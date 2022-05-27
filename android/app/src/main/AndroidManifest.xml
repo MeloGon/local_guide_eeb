@@ -24,7 +24,7 @@
     </queries>
     
    <application
-        android:label="locals_guide_eeb"
+        android:label="Foodle"
         android:usesCleartextTraffic="true"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
