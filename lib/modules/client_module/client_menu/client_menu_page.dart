@@ -81,27 +81,27 @@ class ClientMenuPage extends StatelessWidget {
                         text: MyStrings.UBICATIONUSER,
                         textColor: Colors.black,
                         borderColor: Colors.black,
-                        onTap: _.goToClientUbicationsPage,
+                        onTap: () {
+                          _.goToClientUbicationsPage(0);
+                        },
                       ),
                     ),
-                    const Padding(
+                    Padding(
                       padding: MyDimens.paddingForOptions,
                       child: ItemPrimaryButton(
-                        text: MyStrings.NOTIFIUSER,
-                        textColor: Colors.black,
-                        borderColor: Colors.black,
-                      ),
-                    ),
-                    const Padding(
-                      padding: MyDimens.paddingForOptions,
-                      child: ItemPrimaryButton(
+                        onTap: () {
+                          _.goToClientUbicationsPage(1);
+                        },
                         text: MyStrings.MOMENTSUSER,
                         textColor: Colors.black,
                       ),
                     ),
-                    const Padding(
+                    Padding(
                       padding: MyDimens.paddingForOptions,
                       child: ItemPrimaryButton(
+                        onTap: () {
+                          _.goToClientUbicationsPage(2);
+                        },
                         text: MyStrings.RECOMMENDUSER,
                         textColor: Colors.black,
                       ),
@@ -117,6 +117,15 @@ class ClientMenuPage extends StatelessWidget {
                     const Padding(
                       padding: MyDimens.paddingForOptions,
                       child: ItemPrimaryButton(
+                        text: MyStrings.NOTIFIUSER,
+                        textColor: Colors.black,
+                        borderColor: Colors.black,
+                      ),
+                    ),
+                    Padding(
+                      padding: MyDimens.paddingForOptions,
+                      child: ItemPrimaryButton(
+                        onTap: _.logout,
                         text: MyStrings.LOGOUT,
                         textColor: Colors.black,
                       ),

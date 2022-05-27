@@ -34,7 +34,7 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
     return GetBuilder<ClientUbicationsController>(
       builder: (_) => SafeArea(
         child: Scaffold(
-          floatingActionButton: _.indexTab == 1
+          floatingActionButton: _.indexTab == 1 || _.indice == 1
               ? FadeIn(child: SpeedDialWidget())
               : const SizedBox(),
           body: SingleChildScrollView(

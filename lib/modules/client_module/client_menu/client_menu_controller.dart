@@ -44,13 +44,14 @@ class ClientMenuController extends GetxController {
     });
   }
 
-  void goToClientUbicationsPage() async {
+  void goToClientUbicationsPage(int tab) async {
 //    print('el id de sucusal $_idSucursal');
     Get.toNamed(AppRoutes.CLIENTUBICATIONS, arguments: [
       _idLocal,
       _local!.nombreLocal,
       _local!.fotoLocal,
       _idSucursal,
+      tab
     ]);
   }
 
@@ -61,5 +62,9 @@ class ClientMenuController extends GetxController {
       _local!.fotoLocal,
       _local!.nombreLocal,
     ]);
+  }
+
+  logout() async {
+    Get.offAllNamed(AppRoutes.ACCESS);
   }
 }

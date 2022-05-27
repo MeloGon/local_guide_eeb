@@ -28,6 +28,8 @@ class ClientUbicationsController extends GetxController
   String? get nombreLocal => _nombreLocal;
   String? get fotoLocal => _fotoLocal;
   String? get idSucursal => _idSucursal;
+  int _indice = 0;
+  int get indice => _indice;
   //--------------------
   List<LatLng>? _listMarkers = [];
   List<LatLng>? get listMarkers => _listMarkers;
@@ -70,6 +72,7 @@ class ClientUbicationsController extends GetxController
   @override
   void onInit() {
     _loadingUbications = true;
+    _indice = Get.arguments[4] as int;
     setArguments();
     super.onInit();
   }
@@ -79,11 +82,13 @@ class ClientUbicationsController extends GetxController
     _nombreLocal = Get.arguments[1] as String;
     _fotoLocal = Get.arguments[2] as String;
     _idSucursal = Get.arguments[3] as String;
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController =
+        TabController(length: 3, initialIndex: _indice, vsync: this);
   }
 
   cambiandoTabs() {
     _indexTab = _tabController!.index;
+    _indice = _tabController!.index;
     update();
   }
 

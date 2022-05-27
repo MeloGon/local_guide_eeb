@@ -417,12 +417,8 @@ class UserMapsController extends GetxController {
   }
 
   goToLocalProfile() async {
-    Get.toNamed(AppRoutes.CLIENTUBICATIONS, arguments: [
-      _idLocal,
-      _nameTap,
-      _fotoTap,
-      _idSucursalTap,
-    ]);
+    Get.toNamed(AppRoutes.CLIENTUBICATIONS,
+        arguments: [_idLocal, _nameTap, _fotoTap, _idSucursalTap, 0]);
   }
 
   goToReserve() async {
