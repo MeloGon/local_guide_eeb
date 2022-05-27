@@ -49,7 +49,11 @@ class RegisterController extends GetxController {
         'nombreUser': user.displayName,
         'photoUser': user.photoURL,
       });
-      Get.toNamed(AppRoutes.USERMENU);
+      Get.toNamed(AppRoutes.USERMENU, arguments: [
+        _idUser,
+        user.displayName,
+        user.photoURL,
+      ]);
       return;
     } else {
       Get.snackbar('Ups algo salió mal',
