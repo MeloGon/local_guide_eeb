@@ -24,4 +24,8 @@ class AdminMenuController extends GetxController {
   void goToInfoAdminPage() async {
     Get.toNamed(AppRoutes.INFOADMIN);
   }
+
+  void logout() async {
+    Get.offAllNamed(AppRoutes.ACCESS);
+  }
 }

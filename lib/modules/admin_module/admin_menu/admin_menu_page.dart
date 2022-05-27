@@ -75,9 +75,10 @@ class AdminMenuPage extends StatelessWidget {
                     borderColor: Colors.white,
                   ),
                 ),
-                const Padding(
+                Padding(
                   padding: MyDimens.paddingForOptions,
                   child: ItemPrimaryButton(
+                    onTap: _.logout,
                     text: MyStrings.LOGOUT,
                     borderColor: Colors.white,
                   ),
