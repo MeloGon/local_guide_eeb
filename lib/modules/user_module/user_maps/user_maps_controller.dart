@@ -380,6 +380,7 @@ class UserMapsController extends GetxController {
 
   closeTapMarker() async {
     _markerTap!.clear();
+    _polis!.clear();
     _isMarkerSelected = false;
     closedPanel();
     update();

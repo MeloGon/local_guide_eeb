@@ -146,7 +146,7 @@ class AppPages {
     GetPage(
         transition: Transition.rightToLeft,
         curve: Curves.easeInOutQuart,
-        transitionDuration: const Duration(seconds: 1),
+        transitionDuration: const Duration(milliseconds: 1500),
         name: AppRoutes.USERMAPS,
         page: () => const UserMapsPage(),
         binding: UserMapsBinding()),
