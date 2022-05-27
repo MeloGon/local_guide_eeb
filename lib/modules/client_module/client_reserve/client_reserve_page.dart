@@ -150,8 +150,48 @@ class ClientReservePage extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final solicitudReserva = _.listReservas![index];
                                 return Container(
-                                  child:
-                                      Text('${solicitudReserva.nombreUsuario}'),
+                                  margin: EdgeInsets.all(10),
+                                  padding: EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                    color: MyColors.white,
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(0.0, 1.0), //(x,y)
+                                        blurRadius: 6.0,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                          'Solicitada por: ${solicitudReserva.nombreUsuario}'),
+                                      Text('Fecha: ${solicitudReserva.fecha}'),
+                                      Text('Hora: ${solicitudReserva.hora}'),
+                                      Text(
+                                          'Observaciones: ${solicitudReserva.obs == '' ? "--" : solicitudReserva.obs}'),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          TextButton(
+                                              onPressed: () {},
+                                              child:
+                                                  const Text(MyStrings.ACCEPT)),
+                                          TextButton(
+                                              onPressed: () {},
+                                              child: const Text(
+                                                MyStrings.CANCEL,
+                                                style: TextStyle(
+                                                    color: Colors.red),
+                                              )),
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 );
                               }),
                           const SizedBox(height: 30),
