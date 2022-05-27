@@ -108,7 +108,7 @@ class LoginController extends GetxController {
           .then((usuariosDocs) {
         for (var usuario in usuariosDocs.docs) {
           if (user.email == usuario["email"]) {
-            Get.toNamed(AppRoutes.USERMENU, arguments: [
+            Get.offAllNamed(AppRoutes.USERMENU, arguments: [
               usuario['idUser'],
               user.displayName,
               user.photoURL,
