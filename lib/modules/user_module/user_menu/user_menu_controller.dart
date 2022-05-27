@@ -20,6 +20,10 @@ class UserMenuController extends GetxController {
     _distance = value;
   }
 
+  //parametros que llegan
+  String? _idUser, _displayName, _photoUrl;
+  //--------------------
+
   late GroupButtonController groupButtonController;
 
   @override
@@ -32,7 +36,14 @@ class UserMenuController extends GetxController {
   @override
   void onInit() {
     groupButtonController = GroupButtonController();
+    setArguments();
     super.onInit();
+  }
+
+  setArguments() {
+    _idUser = Get.arguments[0] as String;
+    _displayName = Get.arguments[1] as String;
+    _photoUrl = Get.arguments[2] as String;
   }
 
   void showCategories() async {
@@ -71,7 +82,8 @@ class UserMenuController extends GetxController {
     /* categoriasSelected!.forEach((element) {
       print('nombre de la categoria ${element.nombre}');
     }); */
-    Get.toNamed(AppRoutes.USERMAPS, arguments: [_categoriasSelected]);
+    Get.toNamed(AppRoutes.USERMAPS,
+        arguments: [_categoriasSelected, _idUser, _displayName, _photoUrl]);
   }
 
   onChanged(Filter value) {
