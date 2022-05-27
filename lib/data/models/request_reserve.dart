@@ -8,6 +8,8 @@ class RequestReserve {
   late String hora;
   late String fecha;
   late String obs;
+  late String idMesa;
+  late String idUsuario;
 
   RequestReserve({
     required this.idReserva,
@@ -16,6 +18,8 @@ class RequestReserve {
     required this.hora,
     required this.fecha,
     required this.obs,
+    required this.idMesa,
+    required this.idUsuario,
   });
 
   RequestReserve.fromDocumentSnapshot(
@@ -26,5 +30,7 @@ class RequestReserve {
     hora = documentSnapshot['hora'];
     fecha = documentSnapshot['fecha'];
     obs = documentSnapshot['observaciones'];
+    idMesa = documentSnapshot['mesaid'];
+    idUsuario = documentSnapshot['idUsuario'];
   }
 }
