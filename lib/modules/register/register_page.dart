@@ -50,10 +50,10 @@ class RegisterPage extends StatelessWidget {
                         onTap: _.registerWithFacebook,
                       ),
                       const SizedBox(height: 20),
-                      ItemPrimaryButton(
-                        text: MyStrings.REGISTERMAIL,
-                        borderColor: Colors.white,
-                      ),
+                      // ItemPrimaryButton(
+                      //   text: MyStrings.REGISTERMAIL,
+                      //   borderColor: Colors.white,
+                      // ),
                     ],
                   ),
                 ),
