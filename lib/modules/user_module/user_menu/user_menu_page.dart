@@ -42,6 +42,7 @@ class UserMenuPage extends StatelessWidget {
                               style: TextStyle(color: Color(value)),
                             ),
                             Checkbox(
+                              activeColor: MyColors.blackBg,
                               value: categoria.isSelected,
                               onChanged: (value) {
                                 _.onChanged(categoria);
