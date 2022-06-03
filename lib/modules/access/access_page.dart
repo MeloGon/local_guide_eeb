@@ -35,16 +35,13 @@ class AccessPage extends StatelessWidget {
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width,
                           height: availableHeight,
-                          child: _.loading
-                              ? const SizedBox()
-                              : FadeInUp(
-                                  child: Image.network(_.urlFoto!,
-                                      fit: BoxFit.fitHeight,
-                                      // color: Color.fromARGB(255, 15, 147, 59),
-                                      opacity:
-                                          const AlwaysStoppedAnimation<double>(
-                                              0.5)),
-                                ),
+                          child: FadeInUp(
+                            child: Image.asset('assets/images/parrilla.png',
+                                fit: BoxFit.fitHeight,
+                                // color: Color.fromARGB(255, 15, 147, 59),
+                                opacity:
+                                    const AlwaysStoppedAnimation<double>(0.5)),
+                          ),
                         ),
                       ),
                     ),
@@ -53,15 +50,17 @@ class AccessPage extends StatelessWidget {
                         padding: MyDimens.symetricMarginGeneral,
                         child: Column(
                           children: [
-                            Container(
-                              height: 60,
-                              width: MediaQuery.of(context).size.width * .7,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/logo/foofle-logo.png'),
-                                      fit: BoxFit.contain)),
-                            ),
+                            _.loading
+                                ? const SizedBox()
+                                : Container(
+                                    height: 60,
+                                    width:
+                                        MediaQuery.of(context).size.width * .7,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: NetworkImage(_.urlFoto!),
+                                            fit: BoxFit.contain)),
+                                  ),
                             const SizedBox(height: 20),
                             Text(
                               _.loading ? '' : _.tagLine!,
