@@ -412,7 +412,7 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                   )),
         SizedBox(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * .45,
+          height: MediaQuery.of(context).size.height * .48,
           child: GoogleMap(
               myLocationEnabled: true,
               myLocationButtonEnabled: true,
