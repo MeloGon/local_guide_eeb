@@ -25,44 +25,58 @@ class AccessPage extends StatelessWidget {
             body: SingleChildScrollView(
               child: SizedBox(
                 height: availableHeight,
-                child: Center(
-                  child: Padding(
-                    padding: MyDimens.symetricMarginGeneral,
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 120,
-                          width: MediaQuery.of(context).size.width * .7,
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      'assets/images/logo/foofle-logo.png'))),
-                        ),
-                        const Text(
-                          MyStrings.ACCESSSUBTITLE,
-                          style: MyStyles.logoSubttitle,
-                        ),
-                        const Spacer(),
-                        FadeInUp(
-                          duration: const Duration(milliseconds: 1000),
-                          child: ItemPrimaryButton(
-                            text: MyStrings.LOGIN,
-                            onTap: _.goToLoginPage,
-                            borderColor: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        FadeInUp(
-                          duration: const Duration(milliseconds: 1000),
-                          child: ItemPrimaryButton(
-                            text: MyStrings.REGISTER,
-                            onTap: _.goToRegisterPage,
-                            borderColor: Colors.white,
-                          ),
-                        )
-                      ],
+                child: Stack(
+                  children: [
+                    JelloIn(
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: availableHeight,
+                        child: Image.asset('assets/images/parrilla.png',
+                            fit: BoxFit.fitWidth,
+                            // color: Color.fromARGB(255, 15, 147, 59),
+                            opacity: const AlwaysStoppedAnimation<double>(0.5)),
+                      ),
                     ),
-                  ),
+                    Center(
+                      child: Padding(
+                        padding: MyDimens.symetricMarginGeneral,
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 120,
+                              width: MediaQuery.of(context).size.width * .7,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/logo/foofle-logo.png'))),
+                            ),
+                            const Text(
+                              MyStrings.ACCESSSUBTITLE,
+                              style: MyStyles.logoSubttitle,
+                            ),
+                            const Spacer(),
+                            FadeInUp(
+                              duration: const Duration(milliseconds: 1000),
+                              child: ItemPrimaryButton(
+                                text: MyStrings.LOGIN,
+                                onTap: _.goToLoginPage,
+                                borderColor: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            FadeInUp(
+                              duration: const Duration(milliseconds: 1000),
+                              child: ItemPrimaryButton(
+                                text: MyStrings.REGISTER,
+                                onTap: _.goToRegisterPage,
+                                borderColor: Colors.white,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             )),
