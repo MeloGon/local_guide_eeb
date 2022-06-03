@@ -58,65 +58,72 @@ class LocalsAdminPage extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: _.locales.length,
-                      itemBuilder: ((context, index) {
-                        final local = _.locales[index];
-                        String valueString =
-                            local.colorCategoria.split('(0x')[1].split(')')[0];
-                        int value = int.parse(valueString, radix: 16);
-                        return Container(
-                          width: double.infinity,
-                          margin: const EdgeInsets.symmetric(vertical: 7),
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: MyColors.cardColorsDefault,
-                          ),
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                        image: NetworkImage(local.fotoLocal),
-                                        fit: BoxFit.cover)),
+                  (!_.loading)
+                      ? ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: _.locales.length,
+                          itemBuilder: ((context, index) {
+                            final local = _.locales[index];
+                            String valueString = local.colorCategoria
+                                .split('(0x')[1]
+                                .split(')')[0];
+                            int value = int.parse(valueString, radix: 16);
+                            return Container(
+                              width: double.infinity,
+                              margin: const EdgeInsets.symmetric(vertical: 7),
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: MyColors.cardColorsDefault,
                               ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              child: Row(
                                 children: [
-                                  Text(
-                                    local.nombreLocal,
-                                    style: MyStyles.generalTextStyleWhite,
+                                  Container(
+                                    height: 40,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                            image:
+                                                NetworkImage(local.fotoLocal),
+                                            fit: BoxFit.cover)),
                                   ),
-                                  Text(
-                                    local.categoria.toString(),
-                                    style: TextStyle(
-                                        fontSize: 16, color: Color(value)),
+                                  const SizedBox(
+                                    width: 20,
                                   ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        local.nombreLocal,
+                                        style: MyStyles.generalTextStyleWhite,
+                                      ),
+                                      Text(
+                                        local.categoria.toString(),
+                                        style: TextStyle(
+                                            fontSize: 16, color: Color(value)),
+                                      ),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  IconButton(
+                                      onPressed: () {
+                                        _.goToSucursales(local.idLocal,
+                                            local.nombreLocal, local.fotoLocal);
+                                      },
+                                      icon: const Icon(
+                                        Icons.edit,
+                                        color: Colors.white,
+                                      ))
                                 ],
                               ),
-                              const Spacer(),
-                              IconButton(
-                                  onPressed: () {
-                                    _.goToSucursales(local.idLocal,
-                                        local.nombreLocal, local.fotoLocal);
-                                  },
-                                  icon: const Icon(
-                                    Icons.edit,
-                                    color: Colors.white,
-                                  ))
-                            ],
-                          ),
-                        );
-                      }))
+                            );
+                          }))
+                      : const Center(
+                          child: CircularProgressIndicator(color: Colors.white),
+                        )
                 ],
               ),
             ),

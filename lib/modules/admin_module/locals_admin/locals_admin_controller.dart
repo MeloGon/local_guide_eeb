@@ -6,6 +6,9 @@ import 'package:locals_guide_eeb/route/app_routes.dart';
 class LocalsAdminController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   List<Local> locales = [];
+  bool _loading = false;
+  bool get loading => _loading;
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -24,6 +27,7 @@ class LocalsAdminController extends GetxController {
 
   void showLocals() async {
     locales.clear();
+    _loading = true;
     await firebaseFirestore
         .collection("GuiaLocales")
         .doc("admin")
@@ -35,6 +39,9 @@ class LocalsAdminController extends GetxController {
         locales.add(local);
         update();
       });
+    }).then((value) {
+      _loading = false;
+      update();
     });
   }
 
