@@ -116,4 +116,6 @@ class MyStrings {
 
   static const String ACCEPT = 'Aceptar';
   static const String CANCEL = 'Cancelar';
+
+  static const String NUMBEROFPEOPLE = 'Cantidad de personas:';
 }

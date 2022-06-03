@@ -38,6 +38,7 @@ class UserReserveController extends GetxController {
   Mesa? get mesaSelected => _mesaSelected;
 
   late TextEditingController txOptional;
+  late TextEditingController txNumberPeople;
 
   @override
   void onReady() {
@@ -49,6 +50,7 @@ class UserReserveController extends GetxController {
   @override
   void onInit() {
     txOptional = TextEditingController();
+    txNumberPeople = TextEditingController();
     _formattedDate = DateFormat.yMMMMd().format(_selectedDate!);
     setArguments();
     super.onInit();
@@ -147,6 +149,7 @@ class UserReserveController extends GetxController {
         'mesa': _mesaSelected!.nroMesa,
         'mesaid': _mesaSelected!.idMesa,
         'isAcepted': false,
+        'cantidadPersonas': txNumberPeople.text,
       });
     });
     Get.snackbar(

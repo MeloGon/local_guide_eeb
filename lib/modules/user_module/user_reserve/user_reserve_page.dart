@@ -108,6 +108,7 @@ class UserReservePage extends StatelessWidget {
                             // _.imageFileList!.map((i) => Text('Item $i')).toList(),
                             _.mesas!.map((mesa) {
                           return Container(
+                            margin: EdgeInsets.only(bottom: 20),
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                                 border: Border.all(
@@ -133,7 +134,7 @@ class UserReservePage extends StatelessWidget {
                           );
                         }).toList(),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       const Divider(
                         color: Colors.black54,
                       ),
@@ -203,6 +204,27 @@ class UserReservePage extends StatelessWidget {
                                 child: Center(
                                     child:
                                         Text(_.selectedHour!.format(context)))),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(MyStrings.NUMBEROFPEOPLE),
+                          SizedBox(
+                            height: 60,
+                            width: 100,
+                            child: TextField(
+                              controller: _.txNumberPeople,
+                              keyboardType: TextInputType.number,
+                              style: MyStyles.generalTextStyleBlack,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(0))),
+                              ),
+                            ),
                           ),
                         ],
                       ),
