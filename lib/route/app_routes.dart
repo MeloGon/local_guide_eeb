@@ -25,4 +25,5 @@ class AppRoutes {
   static const USERHOME = '/user_home';
   static const USERRESERVE = '/user_reserve';
   static const CLIENTRESERVE = '/client_reserve';
+  static const ADDLOGO = '/add_logo';
 }

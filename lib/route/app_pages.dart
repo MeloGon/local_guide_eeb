@@ -12,6 +12,8 @@ import 'package:locals_guide_eeb/modules/admin_module/add_details_local/add_deta
 import 'package:locals_guide_eeb/modules/admin_module/add_details_local/add_details_local_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_local_admin/add_local_admin_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_local_admin/add_local_admin_page.dart';
+import 'package:locals_guide_eeb/modules/admin_module/add_logo/add_logo_binding.dart';
+import 'package:locals_guide_eeb/modules/admin_module/add_logo/add_logo_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_table_reserve/add_table_reserve_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_table_reserve/add_table_reserve_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/admin_menu/admin_menu_binding.dart';
@@ -166,5 +168,9 @@ class AppPages {
         name: AppRoutes.CLIENTRESERVE,
         page: () => const ClientReservePage(),
         binding: ClientReserveBinding()),
+    GetPage(
+        name: AppRoutes.ADDLOGO,
+        page: () => const AddLogoPage(),
+        binding: AddLogoBinding()),
   ];
 }
