@@ -51,6 +51,7 @@ class UsersAdminPage extends StatelessWidget {
                       final user = _.usuarios[index];
                       return Container(
                         width: double.infinity,
+                        margin: const EdgeInsets.symmetric(vertical: 7),
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),

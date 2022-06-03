@@ -69,6 +69,7 @@ class LocalsAdminPage extends StatelessWidget {
                         int value = int.parse(valueString, radix: 16);
                         return Container(
                           width: double.infinity,
+                          margin: const EdgeInsets.symmetric(vertical: 7),
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
