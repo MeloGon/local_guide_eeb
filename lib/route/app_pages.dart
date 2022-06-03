@@ -16,6 +16,8 @@ import 'package:locals_guide_eeb/modules/admin_module/add_logo/add_logo_binding.
 import 'package:locals_guide_eeb/modules/admin_module/add_logo/add_logo_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_table_reserve/add_table_reserve_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_table_reserve/add_table_reserve_page.dart';
+import 'package:locals_guide_eeb/modules/admin_module/add_tagline/add_tagline_binding.dart';
+import 'package:locals_guide_eeb/modules/admin_module/add_tagline/add_tagline_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/admin_menu/admin_menu_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/admin_menu/admin_menu_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/categories_admin/categories_admin_binding.dart';
@@ -172,5 +174,9 @@ class AppPages {
         name: AppRoutes.ADDLOGO,
         page: () => const AddLogoPage(),
         binding: AddLogoBinding()),
+    GetPage(
+        name: AppRoutes.ADDTAGLINE,
+        page: () => const AddTaglinePage(),
+        binding: AddTaglineBinding()),
   ];
 }
