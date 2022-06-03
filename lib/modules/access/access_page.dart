@@ -27,14 +27,25 @@ class AccessPage extends StatelessWidget {
                 height: availableHeight,
                 child: Stack(
                   children: [
-                    JelloIn(
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: availableHeight,
-                        child: Image.asset('assets/images/parrilla.png',
-                            fit: BoxFit.fitWidth,
-                            // color: Color.fromARGB(255, 15, 147, 59),
-                            opacity: const AlwaysStoppedAnimation<double>(0.5)),
+                    Transform.scale(
+                      scale: 1.5,
+                      child: Transform.translate(
+                        offset:
+                            Offset(0, MediaQuery.of(context).size.height * .32),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: availableHeight,
+                          child: _.loading
+                              ? const SizedBox()
+                              : FadeInUp(
+                                  child: Image.network(_.urlFoto!,
+                                      fit: BoxFit.fitHeight,
+                                      // color: Color.fromARGB(255, 15, 147, 59),
+                                      opacity:
+                                          const AlwaysStoppedAnimation<double>(
+                                              0.5)),
+                                ),
+                        ),
                       ),
                     ),
                     Center(
@@ -43,21 +54,24 @@ class AccessPage extends StatelessWidget {
                         child: Column(
                           children: [
                             Container(
-                              height: 120,
+                              height: 60,
                               width: MediaQuery.of(context).size.width * .7,
                               decoration: const BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage(
-                                          'assets/images/logo/foofle-logo.png'))),
+                                          'assets/images/logo/foofle-logo.png'),
+                                      fit: BoxFit.contain)),
                             ),
-                            const Text(
-                              MyStrings.ACCESSSUBTITLE,
+                            const SizedBox(height: 20),
+                            Text(
+                              _.loading ? '' : _.tagLine!,
                               style: MyStyles.logoSubttitle,
                             ),
                             const Spacer(),
                             FadeInUp(
                               duration: const Duration(milliseconds: 1000),
                               child: ItemPrimaryButton(
+                                bgColor: Colors.black,
                                 text: MyStrings.LOGIN,
                                 onTap: _.goToLoginPage,
                                 borderColor: Colors.white,
@@ -67,6 +81,7 @@ class AccessPage extends StatelessWidget {
                             FadeInUp(
                               duration: const Duration(milliseconds: 1000),
                               child: ItemPrimaryButton(
+                                bgColor: Colors.black,
                                 text: MyStrings.REGISTER,
                                 onTap: _.goToRegisterPage,
                                 borderColor: Colors.white,
