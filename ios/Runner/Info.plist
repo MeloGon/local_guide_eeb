@@ -22,7 +22,7 @@
 	<string>This app needs access to location when open.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This app needs access to location when in the background.</string>
-	<key> NSCameraUsageDescription</key>
+	<key>NSCameraUsageDescription</key>
 	<string> Necesitamos acceso a tu cámara para tomar fotos.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Necesitamos acceso a tu galeria para poder continuar</string>
