@@ -203,20 +203,6 @@ class ClientReservePage extends StatelessWidget {
                                 );
                               }),
                           const SizedBox(height: 30),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(5)),
-                            margin: const EdgeInsets.only(bottom: 30),
-                            child: ItemPrimaryButton(
-                              text: MyStrings.REQUESTRESERVE,
-                              textColor: MyColors.white,
-                              bgColor: MyColors.blackBg,
-                              onTap: () {
-                                //_.reserve(context);
-                              },
-                            ),
-                          )
                         ],
                       ),
                       GestureDetector(
