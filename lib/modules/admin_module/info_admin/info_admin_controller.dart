@@ -8,6 +8,10 @@ class InfoAdminController extends GetxController {
     super.onInit();
   }
 
+  void goToChangeLogo() async {
+    Get.toNamed(AppRoutes.ADDLOGO);
+  }
+
   void goToCategoriesPage() async {
     Get.toNamed(AppRoutes.CATEGORIESADMIN);
   }
