@@ -41,6 +41,10 @@ class ItemPrimaryButton extends StatelessWidget {
         height: height,
         child: TextButton(
           style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            )),
             backgroundColor: MaterialStateProperty.all<Color>(
                 isValid ? bgColor ?? Colors.transparent : MyColors.disable),
           ),
