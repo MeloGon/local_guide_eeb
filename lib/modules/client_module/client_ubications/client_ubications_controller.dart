@@ -59,6 +59,10 @@ class ClientUbicationsController extends GetxController
   Position? _ubicacionActual;
   //---------------------------
 
+  late GoogleMapController? _mapController;
+  GoogleMapController? get mapController => _mapController;
+  String? _mapStyle;
+
   @override
   void onReady() {
     loadDataForDashboard();
@@ -71,6 +75,9 @@ class ClientUbicationsController extends GetxController
 
   @override
   void onInit() {
+    rootBundle.loadString('assets/maps/map_style.txt').then((string) {
+      _mapStyle = string;
+    });
     _loadingUbications = true;
     _indice = Get.arguments[4] as int;
     setArguments();
@@ -84,6 +91,12 @@ class ClientUbicationsController extends GetxController
     _idSucursal = Get.arguments[3] as String;
     _tabController =
         TabController(length: 3, initialIndex: _indice, vsync: this);
+  }
+
+  onMapCreated(GoogleMapController controller) {
+    _mapController = controller;
+    _mapController!.setMapStyle(_mapStyle);
+    update();
   }
 
   cambiandoTabs() {

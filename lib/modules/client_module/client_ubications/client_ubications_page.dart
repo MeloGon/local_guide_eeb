@@ -416,7 +416,9 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
           child: GoogleMap(
               myLocationEnabled: true,
               myLocationButtonEnabled: true,
-              onMapCreated: (controller) {},
+              onMapCreated: (controller) {
+                _.onMapCreated(controller);
+              },
               markers: Set.from(_.myMarker!),
               initialCameraPosition: const CameraPosition(
                 target: LatLng(-12.050424378417254, -77.04314569048383),
