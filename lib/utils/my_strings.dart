@@ -118,4 +118,8 @@ class MyStrings {
   static const String CANCEL = 'Cancelar';
 
   static const String NUMBEROFPEOPLE = 'Cantidad de personas:';
+  static const String CHANGELOGO = 'Cambia el logo del app';
+  static const String FINISHIT = 'Terminar';
+  static const String TIPCHANGELOGO =
+      'Pulsa sobre el contenedor para cambiar el logo del app';
 }
