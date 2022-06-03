@@ -27,19 +27,18 @@ class UserDrawerPage extends StatelessWidget {
                       Column(
                         children: [
                           Container(
-                            padding: EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(color: Colors.red)),
                             child: CircleAvatar(
                               radius: 65,
-                              backgroundImage: NetworkImage(
-                                  'https://concepto.de/wp-content/uploads/2014/03/modelo-e1551453273683.jpg'),
+                              backgroundImage: NetworkImage(_.photoUrl!),
                             ),
                           ),
                           const SizedBox(height: 10),
                           Text(
-                            'Alisson Nuñez',
+                            _.displayName!,
                             style: MyStyles.generalTextStyleWhiteBold,
                           ),
                           const SizedBox(height: 40),
@@ -52,7 +51,6 @@ class UserDrawerPage extends StatelessWidget {
                           Column(
                             children: [
                               optionDrawer(Icons.home, 'Home', _),
-                              optionDrawer(Icons.history, 'Historial', _),
                               optionDrawer(
                                   Icons.notification_add, 'Notificaciones', _),
                               optionDrawer(Icons.settings, 'Configuración', _),

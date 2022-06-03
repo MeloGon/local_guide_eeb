@@ -115,7 +115,11 @@ class UserMapsController extends GetxController {
   }
 
   goToDrawerMenu() async {
-    Get.toNamed(AppRoutes.USERDRAWER);
+    Get.toNamed(AppRoutes.USERDRAWER, arguments: [
+      _idUser,
+      _displayName,
+      _photoUrl,
+    ]);
   }
 
   void loadMarkers() async {

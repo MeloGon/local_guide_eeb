@@ -3,10 +3,20 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
 
 class UserDrawerController extends GetxController {
+  String? _idUser, _displayName, _photoUrl;
+  String? get displayName => _displayName;
+  String? get photoUrl => _photoUrl;
+
   @override
   void onInit() {
-    // TODO: implement onInit
+    setArguments();
     super.onInit();
+  }
+
+  setArguments() {
+    _idUser = Get.arguments[0];
+    _displayName = Get.arguments[1];
+    _photoUrl = Get.arguments[2];
   }
 
   goToHomeUser() async {
