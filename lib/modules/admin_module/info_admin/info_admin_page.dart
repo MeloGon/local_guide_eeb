@@ -46,7 +46,7 @@ class InfoAdminPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 ItemPrimaryButton(
                   text: 'Añadir Slogan',
-                  onTap: _.goToCategoriesPage,
+                  onTap: _.goToChangeTagline,
                   borderColor: Colors.white,
                 ),
                 const SizedBox(height: 30),

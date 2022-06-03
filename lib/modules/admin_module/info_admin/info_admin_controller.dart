@@ -15,4 +15,8 @@ class InfoAdminController extends GetxController {
   void goToCategoriesPage() async {
     Get.toNamed(AppRoutes.CATEGORIESADMIN);
   }
+
+  void goToChangeTagline() async {
+    Get.toNamed(AppRoutes.ADDTAGLINE);
+  }
 }
