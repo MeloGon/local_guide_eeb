@@ -43,6 +43,7 @@ class AccessController extends GetxController
       _loading = false;
       _tagline = recursos["tagline"];
       _urlFoto = recursos["url"];
+      update();
     });
   }
 
