@@ -112,6 +112,7 @@ class LoginController extends GetxController {
               usuario['idUser'],
               user.displayName,
               user.photoURL,
+              usuario['tipoUsuario']
             ]);
           }
         }
