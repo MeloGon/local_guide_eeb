@@ -75,6 +75,17 @@ class MyStyles {
     color: Colors.black,
     fontSize: 11,
   );
+
+  static const TextStyle littleTextStyleBlackDisabled = TextStyle(
+    color: Colors.grey,
+    fontSize: 11,
+  );
+
+  static const TextStyle littleTextStyleBlackButton = TextStyle(
+    color: Colors.blue,
+    fontSize: 11,
+  );
+
   static const TextStyle littleTextStyleWhite = TextStyle(
     color: Colors.white,
     fontSize: 11,
