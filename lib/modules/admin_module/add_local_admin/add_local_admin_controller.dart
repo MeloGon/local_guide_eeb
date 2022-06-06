@@ -85,6 +85,7 @@ class AddLocalAdminController extends GetxController {
         'fotoLocal': response!.secureUrl,
         'categoria': _categorySelected!.nombre,
         'colorCategoria': _categorySelected!.color,
+        'tipoUsuario': 1,
       });
       Get.snackbar('Información',
           'El local ha sido creado, procede a añadir la sucursal',
