@@ -83,6 +83,7 @@ class UserMapsController extends GetxController {
   String? _idUser, _displayName, _photoUrl;
   String? get displayName => _displayName;
   String? get photoUrl => _photoUrl;
+  int? _tipoUsuario;
   //-------------------
 
   //controlando altura
@@ -112,6 +113,7 @@ class UserMapsController extends GetxController {
     _idUser = Get.arguments[1];
     _displayName = Get.arguments[2];
     _photoUrl = Get.arguments[3];
+    _tipoUsuario = Get.arguments[4];
   }
 
   goToDrawerMenu() async {
@@ -422,8 +424,14 @@ class UserMapsController extends GetxController {
   }
 
   goToLocalProfile() async {
-    Get.toNamed(AppRoutes.CLIENTUBICATIONS,
-        arguments: [_idLocal, _nameTap, _fotoTap, _idSucursalTap, 0]);
+    Get.toNamed(AppRoutes.CLIENTUBICATIONS, arguments: [
+      _idLocal,
+      _nameTap,
+      _fotoTap,
+      _idSucursalTap,
+      0,
+      _tipoUsuario
+    ]);
   }
 
   goToReserve() async {

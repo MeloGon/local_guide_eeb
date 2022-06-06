@@ -48,11 +48,13 @@ class RegisterController extends GetxController {
         'pwd': 'emptyForNow',
         'nombreUser': user.displayName,
         'photoUser': user.photoURL,
+        'tipoUsuario': 2,
       });
       Get.offAllNamed(AppRoutes.USERMENU, arguments: [
         _idUser,
         user.displayName,
         user.photoURL,
+        2,
       ]);
       return;
     } else {

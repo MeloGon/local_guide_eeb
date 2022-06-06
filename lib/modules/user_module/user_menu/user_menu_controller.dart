@@ -22,6 +22,7 @@ class UserMenuController extends GetxController {
 
   //parametros que llegan
   String? _idUser, _displayName, _photoUrl;
+  int? _tipoUsuario;
   //--------------------
 
   late GroupButtonController groupButtonController;
@@ -44,6 +45,7 @@ class UserMenuController extends GetxController {
     _idUser = Get.arguments[0] as String;
     _displayName = Get.arguments[1] as String;
     _photoUrl = Get.arguments[2] as String;
+    _tipoUsuario = Get.arguments[3] as int;
   }
 
   void showCategories() async {
@@ -82,8 +84,13 @@ class UserMenuController extends GetxController {
     /* categoriasSelected!.forEach((element) {
       print('nombre de la categoria ${element.nombre}');
     }); */
-    Get.toNamed(AppRoutes.USERMAPS,
-        arguments: [_categoriasSelected, _idUser, _displayName, _photoUrl]);
+    Get.toNamed(AppRoutes.USERMAPS, arguments: [
+      _categoriasSelected,
+      _idUser,
+      _displayName,
+      _photoUrl,
+      _tipoUsuario
+    ]);
   }
 
   onChanged(Filter value) {
