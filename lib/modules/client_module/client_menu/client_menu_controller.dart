@@ -51,7 +51,8 @@ class ClientMenuController extends GetxController {
       _local!.nombreLocal,
       _local!.fotoLocal,
       _idSucursal,
-      tab
+      tab,
+      _local!.tipoUsuario,
     ]);
   }
 

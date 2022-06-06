@@ -137,7 +137,7 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                               children: [
                                 tabUbication(context, _),
                                 tabMoments(_),
-                                tabRecommends(context),
+                                tabRecommends(context, _),
                               ]),
                         ),
                       )
@@ -152,7 +152,7 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
     );
   }
 
-  ListView tabRecommends(BuildContext context) {
+  ListView tabRecommends(BuildContext context, ClientUbicationsController _) {
     return ListView(
       shrinkWrap: true,
       children: [
@@ -169,35 +169,38 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
           color: Colors.grey,
           height: 1,
         ),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-          child: Card(
-            elevation: 2,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  TextField(
-                    style: MyStyles.generalTextStyleBlack,
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.all(10),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black)),
-                      hintText: MyStrings.PUTACOMMENT,
-                      hintStyle: TextStyle(color: Colors.grey),
+        (_.tipoUsuario == 2)
+            ? Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                child: Card(
+                  elevation: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        TextField(
+                          style: MyStyles.generalTextStyleBlack,
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.all(10),
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black)),
+                            hintText: MyStrings.PUTACOMMENT,
+                            hintStyle: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                        ElevatedButton(
+                            onPressed: () {},
+                            child: const Text(MyStrings.POST),
+                            style: ElevatedButton.styleFrom(
+                                primary: MyColors.blackBg))
+                      ],
                     ),
                   ),
-                  ElevatedButton(
-                      onPressed: () {},
-                      child: const Text(MyStrings.POST),
-                      style:
-                          ElevatedButton.styleFrom(primary: MyColors.blackBg))
-                ],
-              ),
-            ),
-          ),
-        ),
+                ),
+              )
+            : const SizedBox(),
         Padding(
             padding: MyDimens.symetricMarginGeneral,
             child: Column(

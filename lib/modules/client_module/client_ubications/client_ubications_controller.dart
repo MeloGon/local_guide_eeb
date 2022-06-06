@@ -63,6 +63,12 @@ class ClientUbicationsController extends GetxController
   GoogleMapController? get mapController => _mapController;
   String? _mapStyle;
 
+  //para los comentarios
+  int? _tipoUsuario;
+  int? get tipoUsuario => _tipoUsuario;
+  late TextEditingController _txPost;
+  //--------------------------------------
+
   @override
   void onReady() {
     loadDataForDashboard();
@@ -78,6 +84,7 @@ class ClientUbicationsController extends GetxController
     rootBundle.loadString('assets/maps/map_style.txt').then((string) {
       _mapStyle = string;
     });
+    _txPost = TextEditingController();
     _loadingUbications = true;
     _indice = Get.arguments[4] as int;
     setArguments();
@@ -89,6 +96,7 @@ class ClientUbicationsController extends GetxController
     _nombreLocal = Get.arguments[1] as String;
     _fotoLocal = Get.arguments[2] as String;
     _idSucursal = Get.arguments[3] as String;
+    _tipoUsuario = Get.arguments[5] as int;
     _tabController =
         TabController(length: 3, initialIndex: _indice, vsync: this);
   }
@@ -286,8 +294,6 @@ class ClientUbicationsController extends GetxController
             update();
           }
         });
-
-        //------------------------------------------
       });
     });
   }
