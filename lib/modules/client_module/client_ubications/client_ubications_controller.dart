@@ -11,6 +11,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:locals_guide_eeb/data/models/comentario.dart';
 import 'package:locals_guide_eeb/data/models/foto.dart';
 import 'package:locals_guide_eeb/data/models/localubication.dart';
 import 'package:locals_guide_eeb/data/models/sucursal.dart';
@@ -24,7 +25,13 @@ class ClientUbicationsController extends GetxController
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   QuerySnapshot? _querySnapshot;
   //parametros que llegan
-  String? _idLocal, _nombreLocal, _fotoLocal, _idSucursal;
+  String? _idLocal,
+      _nombreLocal,
+      _fotoLocal,
+      _idSucursal,
+      _idUser,
+      _displayName,
+      _photoUrl;
   String? get nombreLocal => _nombreLocal;
   String? get fotoLocal => _fotoLocal;
   String? get idSucursal => _idSucursal;
@@ -66,13 +73,18 @@ class ClientUbicationsController extends GetxController
   //para los comentarios
   int? _tipoUsuario;
   int? get tipoUsuario => _tipoUsuario;
-  late TextEditingController _txPost;
+  late TextEditingController txPost;
+  List<Comentario>? _listComentarios = [];
+  List<Comentario>? get listComentarios => _listComentarios;
+  bool? _darLike = true;
+  bool? get darLike => _darLike;
   //--------------------------------------
 
   @override
   void onReady() {
     loadDataForDashboard();
     loadDataforMomets();
+    loadComments();
     _tabController!.addListener(cambiandoTabs);
     _getGeoLocationPosition();
     // make sure to initialize before map loading
@@ -84,7 +96,7 @@ class ClientUbicationsController extends GetxController
     rootBundle.loadString('assets/maps/map_style.txt').then((string) {
       _mapStyle = string;
     });
-    _txPost = TextEditingController();
+    txPost = TextEditingController();
     _loadingUbications = true;
     _indice = Get.arguments[4] as int;
     setArguments();
@@ -97,6 +109,11 @@ class ClientUbicationsController extends GetxController
     _fotoLocal = Get.arguments[2] as String;
     _idSucursal = Get.arguments[3] as String;
     _tipoUsuario = Get.arguments[5] as int;
+    if (_tipoUsuario == 2) {
+      _idUser = Get.arguments[6] as String;
+      _displayName = Get.arguments[7] as String;
+      _photoUrl = Get.arguments[8] as String;
+    }
     _tabController =
         TabController(length: 3, initialIndex: _indice, vsync: this);
   }
@@ -341,5 +358,88 @@ class ClientUbicationsController extends GetxController
         desiredAccuracy: LocationAccuracy.high);
     return await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
+  }
+
+  postComment() async {
+    //se necesita likes,idcomment,idusuario,contenidoPost
+    //foto usuario, nombre usuario, fecha
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .get()
+        .then((sucursal) {
+      final idComentario = (randomAlphaNumeric(8));
+      sucursal.reference.collection("Comentarios").doc(idComentario).set({
+        'idComentario': idComentario,
+        'likes': 0,
+        'idUsuario': _idUser,
+        'fotoUsuario': _photoUrl,
+        'nombreUsuario': _displayName,
+        'post': txPost.text,
+        'fecha': DateTime.now().toString(),
+      });
+    }).then((value) {
+      loadComments();
+    });
+  }
+
+  loadComments() async {
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .collection("Comentarios")
+        .get()
+        .then((comentariosDocs) {
+      comentariosDocs.docs.forEach((comentario) {
+        final comment =
+            Comentario.fromDocumentSnapshot(documentSnapshot: comentario);
+        _listComentarios!.add(comment);
+        update();
+      });
+    });
+  }
+
+  giveLike(Comentario comentario) async {
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .collection("Comentarios")
+        .doc(comentario.idComentario)
+        .update({
+      'likes': comentario.likes + 1,
+    });
+    comentario.likes = comentario.likes + 1;
+    _darLike = false;
+    update();
+  }
+
+  putOffLike(Comentario comentario) async {
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .collection("Comentarios")
+        .doc(comentario.idComentario)
+        .update({
+      'likes': comentario.likes - 1,
+    });
+    comentario.likes = comentario.likes - 1;
+    _darLike = true;
+    update();
   }
 }

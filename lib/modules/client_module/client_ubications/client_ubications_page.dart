@@ -181,6 +181,7 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         TextField(
+                          controller: _.txPost,
                           style: MyStyles.generalTextStyleBlack,
                           decoration: const InputDecoration(
                             contentPadding: EdgeInsets.all(10),
@@ -191,7 +192,7 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                           ),
                         ),
                         ElevatedButton(
-                            onPressed: () {},
+                            onPressed: _.postComment,
                             child: const Text(MyStrings.POST),
                             style: ElevatedButton.styleFrom(
                                 primary: MyColors.blackBg))
@@ -201,118 +202,145 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                 ),
               )
             : const SizedBox(),
-        Padding(
-            padding: MyDimens.symetricMarginGeneral,
-            child: Column(
-              children: [
-                Row(
+        ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: _.listComentarios!.length,
+          itemBuilder: (context, index) {
+            final comentario = _.listComentarios![index];
+            return Padding(
+                padding: MyDimens.symetricMarginGeneral,
+                child: Column(
                   children: [
-                    Container(
-                      width: 50,
-                      height: 50,
-                      color: Colors.red,
+                    Row(
+                      children: [
+                        Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  image: NetworkImage(comentario.fotoUsuario),
+                                  fit: BoxFit.cover)),
+                        ),
+                        const SizedBox(width: 20),
+                        Text(
+                          comentario.nombreUsuario,
+                          style: MyStyles.generalTextStyleBlackBold,
+                        ),
+                        const Spacer(),
+                        const Icon(Icons.share),
+                      ],
                     ),
-                    SizedBox(width: 20),
-                    Text('Mariale Castillo'),
-                    Spacer(),
-                    Icon(Icons.share),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, top: 10),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 20,
+                            height: 20,
+                            child:
+                                SvgPicture.asset('assets/icons/dish-icon.svg'),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Text(comentario.post),
+                          const Spacer(),
+                          Row(
+                            children: [
+                              Text(comentario.likes.toString()),
+                              const SizedBox(width: 2),
+                              IconButton(
+                                onPressed: () {
+                                  if (_.darLike == true) {
+                                    _.giveLike(comentario);
+                                  } else {
+                                    _.putOffLike(comentario);
+                                  }
+                                },
+                                icon: const Icon(Icons.favorite),
+                                color: (_.darLike == true)
+                                    ? Colors.pink.withOpacity(.2)
+                                    : Colors.pink,
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(left: 50, top: 10),
+                    //   child: Row(
+                    //     children: [
+                    //       Container(
+                    //         width: 30,
+                    //         height: 30,
+                    //         color: Colors.blue,
+                    //       ),
+                    //       SizedBox(
+                    //         width: 20,
+                    //       ),
+                    //       Text('Maki Imperial'),
+                    //       Spacer(),
+                    //       Row(
+                    //         children: [
+                    //           Text('67'),
+                    //           SizedBox(width: 2),
+                    //           Icon(
+                    //             Icons.favorite,
+                    //             color: Colors.pink.withOpacity(.2),
+                    //           )
+                    //         ],
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(left: 50, top: 10),
+                    //   child: Row(
+                    //     children: [
+                    //       Container(
+                    //         width: 30,
+                    //         height: 30,
+                    //         color: Colors.blue,
+                    //       ),
+                    //       SizedBox(
+                    //         width: 20,
+                    //       ),
+                    //       Text('Maki Imperial'),
+                    //       Spacer(),
+                    //       Row(
+                    //         children: [
+                    //           Text('67'),
+                    //           SizedBox(width: 2),
+                    //           Icon(
+                    //             Icons.favorite,
+                    //             color: Colors.pink.withOpacity(.2),
+                    //           )
+                    //         ],
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
+                    Row(
+                      children: [
+                        Text('Comentarios 8'),
+                        TextButton(onPressed: () {}, child: Text('Responder')),
+                      ],
+                    ),
                   ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 50, top: 10),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 30,
-                        height: 30,
-                        color: Colors.blue,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text('Maki Imperial'),
-                      Spacer(),
-                      Row(
-                        children: [
-                          Text('67'),
-                          SizedBox(width: 2),
-                          Icon(
-                            Icons.favorite,
-                            color: Colors.pink.withOpacity(.2),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 50, top: 10),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 30,
-                        height: 30,
-                        color: Colors.blue,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text('Maki Imperial'),
-                      Spacer(),
-                      Row(
-                        children: [
-                          Text('67'),
-                          SizedBox(width: 2),
-                          Icon(
-                            Icons.favorite,
-                            color: Colors.pink.withOpacity(.2),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 50, top: 10),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 30,
-                        height: 30,
-                        color: Colors.blue,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text('Maki Imperial'),
-                      Spacer(),
-                      Row(
-                        children: [
-                          Text('67'),
-                          SizedBox(width: 2),
-                          Icon(
-                            Icons.favorite,
-                            color: Colors.pink.withOpacity(.2),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                Row(
-                  children: [
-                    Text('Comentarios 8'),
-                    TextButton(onPressed: () {}, child: Text('Responder')),
-                  ],
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 20),
-                  width: MediaQuery.of(context).size.width,
-                  color: Colors.grey,
-                  height: 1,
-                ),
-              ],
-            )),
+                ));
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return Container(
+              margin: EdgeInsets.only(top: 20),
+              width: MediaQuery.of(context).size.width,
+              color: Colors.grey,
+              height: 1,
+            );
+          },
+        ),
       ],
     );
   }

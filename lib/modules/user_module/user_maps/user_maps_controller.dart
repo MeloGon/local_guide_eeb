@@ -430,7 +430,10 @@ class UserMapsController extends GetxController {
       _fotoTap,
       _idSucursalTap,
       0,
-      _tipoUsuario
+      _tipoUsuario,
+      _idUser,
+      _displayName,
+      _photoUrl,
     ]);
   }
 
