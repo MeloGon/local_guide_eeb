@@ -202,144 +202,99 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                 ),
               )
             : const SizedBox(),
-        ListView.separated(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: _.listComentarios!.length,
-          itemBuilder: (context, index) {
-            final comentario = _.listComentarios![index];
-            return Padding(
-                padding: MyDimens.symetricMarginGeneral,
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: NetworkImage(comentario.fotoUsuario),
-                                  fit: BoxFit.cover)),
-                        ),
-                        const SizedBox(width: 20),
-                        Text(
-                          comentario.nombreUsuario,
-                          style: MyStyles.generalTextStyleBlackBold,
-                        ),
-                        const Spacer(),
-                        const Icon(Icons.share),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20, top: 10),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 20,
-                            height: 20,
-                            child:
-                                SvgPicture.asset('assets/icons/dish-icon.svg'),
-                          ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          Text(comentario.post),
-                          const Spacer(),
-                          Row(
-                            children: [
-                              Text(comentario.likes.toString()),
-                              const SizedBox(width: 2),
-                              IconButton(
-                                onPressed: () {
-                                  if (_.darLike == true) {
-                                    _.giveLike(comentario);
-                                  } else {
-                                    _.putOffLike(comentario);
-                                  }
-                                },
-                                icon: const Icon(Icons.favorite),
-                                color: (_.darLike == true)
-                                    ? Colors.pink.withOpacity(.2)
-                                    : Colors.pink,
-                              )
-                            ],
-                          )
-                        ],
+        Padding(
+          padding: MyDimens.symetricMarginGeneral,
+          child: ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: _.listComentarios!.length,
+            itemBuilder: (context, index) {
+              final comentario = _.listComentarios![index];
+              return Column(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: NetworkImage(comentario.fotoUsuario),
+                                fit: BoxFit.cover)),
                       ),
-                    ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 50, top: 10),
-                    //   child: Row(
-                    //     children: [
-                    //       Container(
-                    //         width: 30,
-                    //         height: 30,
-                    //         color: Colors.blue,
-                    //       ),
-                    //       SizedBox(
-                    //         width: 20,
-                    //       ),
-                    //       Text('Maki Imperial'),
-                    //       Spacer(),
-                    //       Row(
-                    //         children: [
-                    //           Text('67'),
-                    //           SizedBox(width: 2),
-                    //           Icon(
-                    //             Icons.favorite,
-                    //             color: Colors.pink.withOpacity(.2),
-                    //           )
-                    //         ],
-                    //       )
-                    //     ],
-                    //   ),
-                    // ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 50, top: 10),
-                    //   child: Row(
-                    //     children: [
-                    //       Container(
-                    //         width: 30,
-                    //         height: 30,
-                    //         color: Colors.blue,
-                    //       ),
-                    //       SizedBox(
-                    //         width: 20,
-                    //       ),
-                    //       Text('Maki Imperial'),
-                    //       Spacer(),
-                    //       Row(
-                    //         children: [
-                    //           Text('67'),
-                    //           SizedBox(width: 2),
-                    //           Icon(
-                    //             Icons.favorite,
-                    //             color: Colors.pink.withOpacity(.2),
-                    //           )
-                    //         ],
-                    //       )
-                    //     ],
-                    //   ),
-                    // ),
-                    Row(
+                      const SizedBox(width: 20),
+                      Text(
+                        comentario.nombreUsuario,
+                        style: MyStyles.generalTextStyleBlackBold,
+                      ),
+                      const Spacer(),
+                      const Icon(Icons.share),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, top: 10),
+                    child: Row(
                       children: [
-                        Text('Comentarios 8'),
-                        TextButton(onPressed: () {}, child: Text('Responder')),
+                        SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: SvgPicture.asset('assets/icons/dish-icon.svg'),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Text(comentario.post),
+                        const Spacer(),
+                        Row(
+                          children: [
+                            Text(comentario.likes.toString()),
+                            const SizedBox(width: 2),
+                            IconButton(
+                              onPressed: () {
+                                if (_.darLike == true) {
+                                  _.giveLike(comentario);
+                                } else {
+                                  _.putOffLike(comentario);
+                                }
+                              },
+                              icon: const Icon(Icons.favorite),
+                              color: (_.darLike == true)
+                                  ? Colors.pink.withOpacity(.2)
+                                  : Colors.pink,
+                            )
+                          ],
+                        )
                       ],
                     ),
-                  ],
-                ));
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return Container(
-              margin: EdgeInsets.only(top: 20),
-              width: MediaQuery.of(context).size.width,
-              color: Colors.grey,
-              height: 1,
-            );
-          },
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Comentarios 8',
+                        style: MyStyles.littleTextStyleBlackDisabled,
+                      ),
+                      TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Responder',
+                            style: MyStyles.littleTextStyleBlackButton,
+                          )),
+                    ],
+                  ),
+                ],
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                color: Colors.grey,
+                height: .5,
+              );
+            },
+          ),
         ),
       ],
     );
