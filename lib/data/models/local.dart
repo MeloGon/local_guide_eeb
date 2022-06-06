@@ -6,6 +6,7 @@ class Local {
   late String fotoLocal;
   late String categoria;
   late String colorCategoria;
+  late int tipoUsuario;
 
   Local({
     required this.idLocal,
@@ -13,6 +14,7 @@ class Local {
     required this.fotoLocal,
     required this.categoria,
     required this.colorCategoria,
+    required this.tipoUsuario,
   });
 
   Local.fromDocumentSnapshot({required DocumentSnapshot documentSnapshot}) {
@@ -21,5 +23,6 @@ class Local {
     fotoLocal = documentSnapshot['fotoLocal'];
     categoria = documentSnapshot['categoria'];
     colorCategoria = documentSnapshot['colorCategoria'];
+    tipoUsuario = documentSnapshot['tipoUsuario'];
   }
 }
