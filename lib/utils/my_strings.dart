@@ -123,4 +123,7 @@ class MyStrings {
   static const String TIPCHANGELOGO =
       'Pulsa sobre el contenedor para cambiar el logo del app';
   static const String PUTTAGLINE = 'Ingresa tu nuevo tagline';
+
+  static const String PUTACOMMENT = 'Escribe un comentario';
+  static const String POST = 'Postear';
 }
