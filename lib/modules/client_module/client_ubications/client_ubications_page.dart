@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:locals_guide_eeb/modules/client_module/client_ubications/client_ubications_controller.dart';
 import 'package:locals_guide_eeb/modules/client_module/client_ubications/local_widgets/speed_dial.dart';
+import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
 import 'package:locals_guide_eeb/utils/my_strings.dart';
@@ -168,6 +169,35 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
           color: Colors.grey,
           height: 1,
         ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          child: Card(
+            elevation: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(
+                    style: MyStyles.generalTextStyleBlack,
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.all(10),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      hintText: MyStrings.PUTACOMMENT,
+                      hintStyle: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  ElevatedButton(
+                      onPressed: () {},
+                      child: const Text(MyStrings.POST),
+                      style:
+                          ElevatedButton.styleFrom(primary: MyColors.blackBg))
+                ],
+              ),
+            ),
+          ),
+        ),
         Padding(
             padding: MyDimens.symetricMarginGeneral,
             child: Column(
@@ -266,14 +296,18 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                     ],
                   ),
                 ),
+                Row(
+                  children: [
+                    Text('Comentarios 8'),
+                    TextButton(onPressed: () {}, child: Text('Responder')),
+                  ],
+                ),
                 Container(
                   margin: EdgeInsets.only(top: 20),
                   width: MediaQuery.of(context).size.width,
                   color: Colors.grey,
                   height: 1,
                 ),
-                Row(),
-                Row(),
               ],
             )),
       ],
