@@ -4,6 +4,7 @@ import 'package:locals_guide_eeb/modules/user_module/user_menu/local_widgets/app
 import 'package:locals_guide_eeb/modules/user_module/user_menu/user_menu_controller.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
+import 'package:locals_guide_eeb/theme/my_styles.dart';
 import 'package:locals_guide_eeb/utils/my_strings.dart';
 
 class UserMenuPage extends StatelessWidget {
@@ -24,7 +25,10 @@ class UserMenuPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(MyStrings.FORCATEGORY),
+                    const Text(
+                      MyStrings.FORCATEGORY,
+                      style: MyStyles.generalTextStyleBlackBold,
+                    ),
                     ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       shrinkWrap: true,
@@ -37,15 +41,18 @@ class UserMenuPage extends StatelessWidget {
                         int value = int.parse(valueString, radix: 16);
                         return Container(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 4, horizontal: 20),
+                              vertical: 0, horizontal: 40),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                categoria.nombre,
+                                categoria.nombre.toUpperCase(),
                                 style: TextStyle(color: Color(value)),
                               ),
                               Checkbox(
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5.0))),
                                 activeColor: MyColors.blackBg,
                                 value: categoria.isSelected,
                                 onChanged: (value) {
