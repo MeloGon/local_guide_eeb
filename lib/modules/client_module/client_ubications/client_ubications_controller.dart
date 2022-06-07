@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:locals_guide_eeb/data/models/comentario.dart';
+import 'package:locals_guide_eeb/data/models/comment_like.dart';
 import 'package:locals_guide_eeb/data/models/foto.dart';
 import 'package:locals_guide_eeb/data/models/localubication.dart';
 import 'package:locals_guide_eeb/data/models/sucursal.dart';
@@ -74,8 +75,8 @@ class ClientUbicationsController extends GetxController
   int? _tipoUsuario;
   int? get tipoUsuario => _tipoUsuario;
   late TextEditingController txPost;
-  List<Comentario>? _listComentarios = [];
-  List<Comentario>? get listComentarios => _listComentarios;
+  List<CommentLike>? _listComentarios = [];
+  List<CommentLike>? get listComentarios => _listComentarios;
   bool? _darLike = true;
   bool? get darLike => _darLike;
   //--------------------------------------
@@ -397,17 +398,20 @@ class ClientUbicationsController extends GetxController
         .doc(_idSucursal)
         .collection("Comentarios")
         .get()
-        .then((comentariosDocs) {
-      comentariosDocs.docs.forEach((comentario) {
+        .then((comentariosDocs) async {
+      for (var comentario in comentariosDocs.docs) {
         final comment =
             Comentario.fromDocumentSnapshot(documentSnapshot: comentario);
-        _listComentarios!.add(comment);
+        var isLiked = await checkIfCommentLikeMe(comment, _idUser!);
+        _listComentarios!.add(CommentLike(comentario: comment, liked: isLiked));
+
         update();
-      });
+      }
     });
   }
 
   giveLike(Comentario comentario) async {
+    //al dar like
     await firebaseFirestore
         .collection("GuiaLocales")
         .doc("admin")
@@ -422,7 +426,53 @@ class ClientUbicationsController extends GetxController
     });
     comentario.likes = comentario.likes + 1;
     _darLike = false;
+    //--------------
+    //crear la coleccion de personas que dieron like
+    final idPersonaQueLeGusta = (randomAlphaNumeric(8));
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .collection("Comentarios")
+        .doc(comentario.idComentario)
+        .collection("UsuarioQueleGusta")
+        .doc(idPersonaQueLeGusta)
+        .set({
+      'idUsuario': _idUser,
+      'nombreUsuario': _displayName,
+      'idComentario': comentario.idComentario,
+    });
+    //--------------
+    // checkIfCommentLikeMe(comentario,_idUser!);
     update();
+  }
+
+  checkIfCommentLikeMe(Comentario comentario, String idUser) async {
+    var query = await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .collection("Comentarios")
+        .doc(comentario.idComentario)
+        .collection("UsuarioQueleGusta")
+        .where('idUsuario', isEqualTo: idUser)
+        .get();
+
+    if (query.size > 0) {
+      print('entro por true');
+      update();
+      return true;
+    } else {
+      print('entro por false');
+      update();
+      return false;
+    }
   }
 
   putOffLike(Comentario comentario) async {
@@ -440,6 +490,26 @@ class ClientUbicationsController extends GetxController
     });
     comentario.likes = comentario.likes - 1;
     _darLike = true;
+    //quitar el usuario la coleccion de personas que dieron like
+    final idPersonaQueLeGusta = (randomAlphaNumeric(8));
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .collection("Comentarios")
+        .doc(comentario.idComentario)
+        .collection("UsuarioQueleGusta")
+        .where('idUsuario', isEqualTo: _idUser)
+        .get()
+        .then((usuarioQueLesGustaDocs) {
+      usuarioQueLesGustaDocs.docs.forEach((usuarioQueLesGusta) {
+        usuarioQueLesGusta.reference.delete();
+      });
+    });
+    //--------------
     update();
   }
 }

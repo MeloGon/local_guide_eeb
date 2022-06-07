@@ -224,16 +224,18 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                                image: NetworkImage(comentario.fotoUsuario),
+                                image: NetworkImage(
+                                    comentario.comentario.fotoUsuario),
                                 fit: BoxFit.cover)),
                       ),
                       const SizedBox(width: 20),
                       Text(
-                        comentario.nombreUsuario,
+                        comentario.comentario.nombreUsuario,
                         style: MyStyles.generalTextStyleBlackBold,
                       ),
-                      const Spacer(),
-                      const Icon(Icons.share),
+                      // por ahora comento el share
+                      // const Spacer(),
+                      // const Icon(Icons.share),
                     ],
                   ),
                   Padding(
@@ -248,22 +250,26 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                         const SizedBox(
                           width: 20,
                         ),
-                        Text(comentario.post),
-                        const Spacer(),
+                        Flexible(
+                            child: Text(
+                          comentario.comentario.post,
+                        )),
                         Row(
                           children: [
-                            Text(comentario.likes.toString()),
+                            Text(comentario.comentario.likes.toString()),
                             const SizedBox(width: 2),
                             IconButton(
                               onPressed: () {
-                                if (_.darLike == true) {
-                                  _.giveLike(comentario);
+                                if (_.darLike == true &&
+                                    comentario.liked == false) {
+                                  _.giveLike(comentario.comentario);
                                 } else {
-                                  _.putOffLike(comentario);
+                                  _.putOffLike(comentario.comentario);
                                 }
                               },
                               icon: const Icon(Icons.favorite),
-                              color: (_.darLike == true)
+                              color: (_.darLike == true &&
+                                      comentario.liked == false)
                                   ? Colors.pink.withOpacity(.2)
                                   : Colors.pink,
                             )
