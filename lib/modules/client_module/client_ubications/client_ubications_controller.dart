@@ -389,25 +389,51 @@ class ClientUbicationsController extends GetxController
   }
 
   loadComments() async {
-    await firebaseFirestore
-        .collection("GuiaLocales")
-        .doc("admin")
-        .collection("Locales")
-        .doc(_idLocal)
-        .collection("Sucursales")
-        .doc(_idSucursal)
-        .collection("Comentarios")
-        .get()
-        .then((comentariosDocs) async {
-      for (var comentario in comentariosDocs.docs) {
-        final comment =
-            Comentario.fromDocumentSnapshot(documentSnapshot: comentario);
-        var isLiked = await checkIfCommentLikeMe(comment, _idUser!);
-        _listComentarios!.add(CommentLike(comentario: comment, liked: isLiked));
+    //si el tipo es el usuario final
+    if (tipoUsuario == 2) {
+      await firebaseFirestore
+          .collection("GuiaLocales")
+          .doc("admin")
+          .collection("Locales")
+          .doc(_idLocal)
+          .collection("Sucursales")
+          .doc(_idSucursal)
+          .collection("Comentarios")
+          .get()
+          .then((comentariosDocs) async {
+        for (var comentario in comentariosDocs.docs) {
+          final comment =
+              Comentario.fromDocumentSnapshot(documentSnapshot: comentario);
+          var isLiked = await checkIfCommentLikeMe(comment, _idUser!);
+          _listComentarios!
+              .add(CommentLike(comentario: comment, liked: isLiked));
 
-        update();
-      }
-    });
+          update();
+        }
+      });
+    }
+    //si el tipo es el usuario local
+    else {
+      await firebaseFirestore
+          .collection("GuiaLocales")
+          .doc("admin")
+          .collection("Locales")
+          .doc(_idLocal)
+          .collection("Sucursales")
+          .doc(_idSucursal)
+          .collection("Comentarios")
+          .get()
+          .then((comentariosDocs) async {
+        for (var comentario in comentariosDocs.docs) {
+          final comment =
+              Comentario.fromDocumentSnapshot(documentSnapshot: comentario);
+          var isLiked = await checkIfCommentLikeMe(comment, _idLocal!);
+          _listComentarios!
+              .add(CommentLike(comentario: comment, liked: isLiked));
+          update();
+        }
+      });
+    }
   }
 
   giveLike(Comentario comentario) async {
@@ -441,7 +467,7 @@ class ClientUbicationsController extends GetxController
         .collection("UsuarioQueleGusta")
         .doc(idPersonaQueLeGusta)
         .set({
-      'idUsuario': _idUser,
+      'idUsuario': (tipoUsuario == 2) ? _idUser : _idLocal,
       'nombreUsuario': _displayName,
       'idComentario': comentario.idComentario,
     });
@@ -465,11 +491,9 @@ class ClientUbicationsController extends GetxController
         .get();
 
     if (query.size > 0) {
-      print('entro por true');
       update();
       return true;
     } else {
-      print('entro por false');
       update();
       return false;
     }
@@ -491,7 +515,6 @@ class ClientUbicationsController extends GetxController
     comentario.likes = comentario.likes - 1;
     _darLike = true;
     //quitar el usuario la coleccion de personas que dieron like
-    final idPersonaQueLeGusta = (randomAlphaNumeric(8));
     await firebaseFirestore
         .collection("GuiaLocales")
         .doc("admin")
@@ -502,7 +525,7 @@ class ClientUbicationsController extends GetxController
         .collection("Comentarios")
         .doc(comentario.idComentario)
         .collection("UsuarioQueleGusta")
-        .where('idUsuario', isEqualTo: _idUser)
+        .where('idUsuario', isEqualTo: (tipoUsuario == 2) ? _idUser : _idLocal)
         .get()
         .then((usuarioQueLesGustaDocs) {
       usuarioQueLesGustaDocs.docs.forEach((usuarioQueLesGusta) {
