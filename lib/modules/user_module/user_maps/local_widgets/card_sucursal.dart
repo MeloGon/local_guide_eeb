@@ -73,7 +73,7 @@ class CardSucursal extends StatelessWidget {
                                 rating: 4,
                                 itemBuilder: (context, index) => const Icon(
                                   Icons.favorite,
-                                  color: Colors.red,
+                                  color: Color(0xffE0627B),
                                 ),
                                 itemCount: 5,
                                 itemSize: 15.0,
@@ -90,7 +90,7 @@ class CardSucursal extends StatelessWidget {
                                 rating: 4,
                                 itemBuilder: (context, index) => const Icon(
                                   Icons.favorite,
-                                  color: Colors.red,
+                                  color: Color(0xffE0627B),
                                 ),
                                 itemCount: 5,
                                 itemSize: 15.0,
@@ -107,7 +107,7 @@ class CardSucursal extends StatelessWidget {
                                 rating: 4,
                                 itemBuilder: (context, index) => const Icon(
                                   Icons.favorite,
-                                  color: Colors.red,
+                                  color: Color(0xffE0627B),
                                 ),
                                 itemCount: 5,
                                 itemSize: 15.0,
@@ -124,7 +124,7 @@ class CardSucursal extends StatelessWidget {
                                 rating: 4,
                                 itemBuilder: (context, index) => const Icon(
                                   Icons.favorite,
-                                  color: Colors.red,
+                                  color: Color(0xffE0627B),
                                 ),
                                 itemCount: 5,
                                 itemSize: 15.0,
