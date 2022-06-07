@@ -13,6 +13,7 @@ import 'package:locals_guide_eeb/modules/client_module/client_ubications/client_
 import 'package:locals_guide_eeb/modules/client_module/client_ubications/local_widgets/speed_dial.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
+import 'package:locals_guide_eeb/theme/my_images.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
 import 'package:locals_guide_eeb/utils/my_strings.dart';
 
@@ -111,20 +112,23 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                             Tab(
                                 icon: Container(
                               padding: const EdgeInsets.all(5),
-                              child: SvgPicture.asset(
-                                  'assets/icons/ubication-icon.svg'),
+                              child: Image.asset(_.tabController!.index == 0
+                                  ? MyImages.UBION
+                                  : MyImages.UBIOFF),
                             )),
                             Tab(
                                 icon: Container(
                               padding: const EdgeInsets.all(5),
-                              child: SvgPicture.asset(
-                                  'assets/icons/gallery-icon.svg'),
+                              child: Image.asset(_.tabController!.index == 1
+                                  ? MyImages.MOMENTON
+                                  : MyImages.MOMENTOFF),
                             )),
                             Tab(
                                 icon: Container(
                               padding: const EdgeInsets.all(5),
-                              child: SvgPicture.asset(
-                                  'assets/icons/dish-icon.svg'),
+                              child: Image.asset(_.tabController!.index == 2
+                                  ? MyImages.RECOMENDON
+                                  : MyImages.RECOMENDOFF),
                             )),
                           ],
                         ),
