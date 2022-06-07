@@ -100,8 +100,8 @@ class UserMapsController extends GetxController {
   void onInit() {
     _heightX = .4;
     _isMarkerSelected = false;
-    rootBundle.loadString('assets/map_style.text').then((value) {
-      _mapStyle = value;
+    rootBundle.loadString('assets/maps/map_style.txt').then((string) {
+      _mapStyle = string;
     });
     _getGeoLocationPosition();
     setArguments();
