@@ -384,6 +384,7 @@ class ClientUbicationsController extends GetxController
         'fecha': DateTime.now().toString(),
       });
     }).then((value) {
+      _listComentarios!.clear();
       loadComments();
     });
   }
