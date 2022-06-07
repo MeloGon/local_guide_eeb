@@ -292,8 +292,7 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
             },
             separatorBuilder: (BuildContext context, int index) {
               return Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
                 color: Colors.grey,
                 height: .5,
               );
