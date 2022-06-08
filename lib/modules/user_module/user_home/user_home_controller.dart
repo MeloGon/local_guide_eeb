@@ -21,16 +21,30 @@ class UserHomeController extends GetxController
   QuerySnapshot? localesQuery;
   //-----------------------------------
 
+  //parametros que llegan
+  String? _idUser, _displayName, _photoUrl;
+  String? get displayName => _displayName;
+  String? get photoUrl => _photoUrl;
+  //------------------------------------
+
   @override
   void onReady() {
     _tabController!.addListener(cambiandoTabs);
+    print('la foto $_photoUrl');
     super.onReady();
   }
 
   @override
   void onInit() {
     _tabController = TabController(length: 3, vsync: this);
+    setArguments();
     super.onInit();
+  }
+
+  setArguments() {
+    _idUser = Get.arguments[0];
+    _displayName = Get.arguments[1];
+    _photoUrl = Get.arguments[2] as String;
   }
 
   cambiandoTabs() {

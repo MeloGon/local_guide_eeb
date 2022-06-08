@@ -20,7 +20,11 @@ class UserDrawerController extends GetxController {
   }
 
   goToHomeUser() async {
-    Get.toNamed(AppRoutes.USERHOME);
+    Get.toNamed(AppRoutes.USERHOME, arguments: [
+      _idUser,
+      _displayName,
+      _photoUrl,
+    ]);
   }
 
   signOut() async {
