@@ -11,16 +11,16 @@ class SpeedDialWidget extends StatelessWidget {
     return GetBuilder<UserHomeController>(
         builder: (_) => SpeedDial(
               animatedIcon: AnimatedIcons.menu_close,
-              animatedIconTheme: IconThemeData(size: 28.0),
-              backgroundColor: Colors.blueAccent,
+              animatedIconTheme: IconThemeData(size: 28.0, color: Colors.black),
+              backgroundColor: Colors.white,
               visible: true,
               curve: Curves.bounceInOut,
-              overlayColor: Colors.black,
+              overlayColor: Colors.transparent,
               children: [
                 SpeedDialChild(
                   child: const Icon(Icons.photo_camera_back_outlined,
-                      color: Colors.white),
-                  backgroundColor: Colors.blueAccent,
+                      color: Colors.black),
+                  backgroundColor: Colors.white,
                   onTap: () => _.addMoment(option: "galeria"),
                   label: 'Abrir la galería',
                   labelStyle: const TextStyle(
@@ -29,8 +29,8 @@ class SpeedDialWidget extends StatelessWidget {
                 ),
                 SpeedDialChild(
                   child: const Icon(Icons.camera_alt_outlined,
-                      color: Colors.white),
-                  backgroundColor: Colors.blueAccent,
+                      color: Colors.black),
+                  backgroundColor: Colors.white,
                   onTap: () => _.addMoment(option: "camara"),
                   label: 'Tomar Fotografia',
                   labelStyle: const TextStyle(
