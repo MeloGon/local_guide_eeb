@@ -10,6 +10,7 @@ import 'package:locals_guide_eeb/modules/user_module/user_home/local_widgets/spe
 import 'package:locals_guide_eeb/modules/user_module/user_home/user_home_controller.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
+import 'package:locals_guide_eeb/theme/my_images.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
 import 'package:locals_guide_eeb/utils/my_strings.dart';
 
@@ -62,32 +63,30 @@ class UserHomePage extends StatelessWidget {
                                         .toInt())
                                     .withOpacity(1.0)),
                             shape: BoxShape.circle),
-                        child: Container(
-                          height: 100,
+                        child: Center(
+                            child: Container(
+                          padding: EdgeInsets.all(4),
                           width: 100,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: NetworkImage('_.fotoLocal!'),
-                                  fit: BoxFit.cover)),
-                        ),
+                          height: 100,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.transparent,
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100.0),
+                            child: FadeInImage(
+                              placeholder: const AssetImage(
+                                  'assets/images/logo/foofle-logo.png'),
+                              image: NetworkImage(_.photoUrl!),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        )),
                       ),
                       const SizedBox(height: 20),
                       Text(
-                        '_.nombreLocal!',
+                        '${_.displayName}',
                         style: MyStyles.generalTextStyleWhiteBold,
-                      ),
-                      const SizedBox(height: 10),
-                      RatingBarIndicator(
-                        rating: 2,
-                        itemBuilder: (context, index) => const Icon(
-                          Icons.favorite,
-                          color: Colors.red,
-                        ),
-                        itemCount: 5,
-                        itemSize: 15.0,
-                        unratedColor: Colors.red.withAlpha(50),
-                        direction: Axis.horizontal,
                       ),
                       const SizedBox(height: 10),
                       DefaultTabController(
@@ -98,26 +97,23 @@ class UserHomePage extends StatelessWidget {
                             Tab(
                                 icon: Container(
                               padding: const EdgeInsets.all(5),
-                              child: SvgPicture.asset(
-                                'assets/icons/ubication-icon.svg',
-                                color: Colors.white,
-                              ),
+                              child: Image.asset(_.tabController!.index == 0
+                                  ? MyImages.UBION
+                                  : MyImages.UBIOFF),
                             )),
                             Tab(
                                 icon: Container(
                               padding: const EdgeInsets.all(5),
-                              child: SvgPicture.asset(
-                                'assets/icons/gallery-icon.svg',
-                                color: Colors.white,
-                              ),
+                              child: Image.asset(_.tabController!.index == 1
+                                  ? MyImages.MOMENTON
+                                  : MyImages.MOMENTOFF),
                             )),
                             Tab(
                                 icon: Container(
                               padding: const EdgeInsets.all(5),
-                              child: SvgPicture.asset(
-                                'assets/icons/dish-icon.svg',
-                                color: Colors.white,
-                              ),
+                              child: Image.asset(_.tabController!.index == 2
+                                  ? MyImages.RECOMENDON
+                                  : MyImages.RECOMENDOFF),
                             )),
                           ],
                         ),
@@ -242,7 +238,7 @@ class UserHomePage extends StatelessWidget {
                         height: 30,
                         color: Colors.blue,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       Text('Maki Imperial'),
