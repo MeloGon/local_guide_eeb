@@ -236,6 +236,11 @@ class ClientUbicationsController extends GetxController
 
             //------------------------------------------
           });
+        }).then((value) {
+          Get.snackbar("Aviso", "Espere un momento en lo que carga la imagen");
+          _listFoto!.clear();
+          loadDataforMomets();
+          update();
         });
       } on CloudinaryException catch (e) {
         print(e.message);
