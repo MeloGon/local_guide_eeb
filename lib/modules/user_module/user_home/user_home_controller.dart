@@ -7,6 +7,8 @@ import 'package:locals_guide_eeb/data/models/comentario.dart';
 import 'package:locals_guide_eeb/data/models/comment_like.dart';
 import 'package:random_string/random_string.dart';
 
+import '../../../data/models/foto.dart';
+
 class UserHomeController extends GetxController
     with GetSingleTickerProviderStateMixin {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -16,6 +18,8 @@ class UserHomeController extends GetxController
   int? _indexTab;
   int? get indexTab => _indexTab;
   //para las fotos del tab de momentos
+  List<Foto>? _listFoto = [];
+  List<Foto>? get listFoto => _listFoto;
   XFile? _fotoMomentos;
   XFile? get fotoMomentos => _fotoMomentos;
   CloudinaryResponse? response;
@@ -79,39 +83,40 @@ class UserHomeController extends GetxController
         break;
     }
 
-    /* if (_fotoMomentos != null) {
+    if (_fotoMomentos != null) {
       var idFotoTemp = (randomAlphaNumeric(8));
       try {
         response = await cloudinary.uploadFile(
           CloudinaryFile.fromFile(_fotoMomentos!.path,
               resourceType: CloudinaryResourceType.Image),
         );
-        await firebaseFirestore
-            .collection("GuiaLocales")
-            .doc("admin")
-            .collection("Locales")
-            .doc(_idLocal)
-            .get()
-            .then((local) {
-          local.reference
-              .collection("Sucursales")
-              .doc(_idSucursal)
-              .get()
-              .then((sucursal) {
-            sucursal.reference.collection("Fotografias").doc(idFotoTemp).set({
-              'idFoto': idFotoTemp,
-              'likes': '0',
-              'pathFoto': response!.secureUrl
-            });
+        // DESCOMENTAR Y ACOMODAR PARA SUBIR EL MOMENTO PARA EL USUARIO
+        // await firebaseFirestore
+        //     .collection("GuiaLocales")
+        //     .doc("admin")
+        //     .collection("Locales")
+        //     .doc(_idLocal)
+        //     .get()
+        //     .then((local) {
+        //   local.reference
+        //       .collection("Sucursales")
+        //       .doc(_idSucursal)
+        //       .get()
+        //       .then((sucursal) {
+        //     sucursal.reference.collection("Fotografias").doc(idFotoTemp).set({
+        //       'idFoto': idFotoTemp,
+        //       'likes': '0',
+        //       'pathFoto': response!.secureUrl
+        //     });
 
-            //------------------------------------------
-          });
-        });
+        //     //------------------------------------------
+        //   });
+        // });
       } on CloudinaryException catch (e) {
         print(e.message);
         print(e.request);
       }
-    } */
+    }
   }
   //---------------------------------------------------------------------------
 

@@ -280,7 +280,7 @@ class UserHomePage extends StatelessWidget {
           child: Center(
               child: Text(
             "Momentos",
-            style: MyStyles.generalTextStyleWhite,
+            style: MyStyles.generalTextStyleBlackBold,
           )),
         ),
         Container(
@@ -288,46 +288,58 @@ class UserHomePage extends StatelessWidget {
           color: Colors.grey,
           height: 1,
         ),
-        /* MasonryGridView.count(
-          shrinkWrap: true,
-          crossAxisCount: 3,
-          mainAxisSpacing: 4,
-          crossAxisSpacing: 4,
-          itemCount: _.listFoto!.length,
-          itemBuilder: (context, index) {
-            final foto = _.listFoto![index];
-            return Padding(
-              padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    // Give each item a random background color
-                    borderRadius: BorderRadius.circular(8.0),
-                    key: ValueKey(index),
-                    child: Image(
-                      image: NetworkImage(foto.pathFoto),
-                      fit: BoxFit.cover,
-                    ),
+        (_.listFoto!.isEmpty)
+            ? SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * .4,
+                child: const Center(
+                  child: Text(
+                    MyStrings.NOMOMENTS,
+                    textAlign: TextAlign.center,
+                    style: MyStyles.disableTextStyle,
                   ),
-                  Positioned(
-                    top: 10,
-                    right: 10,
-                    child: Row(
+                ))
+            : MasonryGridView.count(
+                shrinkWrap: true,
+                crossAxisCount: 3,
+                mainAxisSpacing: 4,
+                crossAxisSpacing: 4,
+                itemCount: _.listFoto!.length,
+                itemBuilder: (context, index) {
+                  final foto = _.listFoto![index];
+                  return Padding(
+                    padding:
+                        const EdgeInsets.only(top: 10, left: 10, right: 10),
+                    child: Stack(
                       children: [
-                        Text(foto.likes),
-                        const Icon(
-                          Icons.favorite,
-                          size: 15,
-                          color: Colors.pink,
+                        ClipRRect(
+                          // Give each item a random background color
+                          borderRadius: BorderRadius.circular(8.0),
+                          key: ValueKey(index),
+                          child: Image(
+                            image: NetworkImage(foto.pathFoto),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Positioned(
+                          top: 10,
+                          right: 10,
+                          child: Row(
+                            children: [
+                              Text(foto.likes),
+                              const Icon(
+                                Icons.favorite,
+                                size: 15,
+                                color: Colors.pink,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                ],
+                  );
+                },
               ),
-            );
-          },
-        ), */
       ],
     );
   }
