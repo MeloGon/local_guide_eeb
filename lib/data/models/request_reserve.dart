@@ -10,6 +10,7 @@ class RequestReserve {
   late String obs;
   late String idMesa;
   late String idUsuario;
+  late bool isAcepted;
 
   RequestReserve({
     required this.idReserva,
@@ -20,6 +21,7 @@ class RequestReserve {
     required this.obs,
     required this.idMesa,
     required this.idUsuario,
+    required this.isAcepted,
   });
 
   RequestReserve.fromDocumentSnapshot(
@@ -32,5 +34,6 @@ class RequestReserve {
     obs = documentSnapshot['observaciones'];
     idMesa = documentSnapshot['mesaid'];
     idUsuario = documentSnapshot['idUsuario'];
+    isAcepted = documentSnapshot['isAcepted'];
   }
 }
