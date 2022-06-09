@@ -382,6 +382,7 @@ class ClientUbicationsController extends GetxController
         'nombreUsuario': _displayName,
         'post': txPost.text,
         'fecha': DateTime.now().toString(),
+        'nombreLocal': _nombreLocal,
       });
     }).then((value) {
       _listComentarios!.clear();
