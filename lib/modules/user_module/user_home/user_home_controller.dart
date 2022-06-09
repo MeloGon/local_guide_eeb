@@ -3,6 +3,8 @@ import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:locals_guide_eeb/data/models/comentario.dart';
+import 'package:locals_guide_eeb/data/models/comment_like.dart';
 import 'package:random_string/random_string.dart';
 
 class UserHomeController extends GetxController
@@ -27,10 +29,20 @@ class UserHomeController extends GetxController
   String? get photoUrl => _photoUrl;
   //------------------------------------
 
+  //para los comentarios
+  int? _tipoUsuario;
+  int? get tipoUsuario => _tipoUsuario;
+  late TextEditingController txPost;
+  List<CommentLike>? _listComentarios = [];
+  List<CommentLike>? get listComentarios => _listComentarios;
+  bool? _darLike = true;
+  bool? get darLike => _darLike;
+  //--------------------------------------
+
   @override
   void onReady() {
     _tabController!.addListener(cambiandoTabs);
-    print('la foto $_photoUrl');
+    loadComments();
     super.onReady();
   }
 
@@ -103,4 +115,33 @@ class UserHomeController extends GetxController
   }
   //---------------------------------------------------------------------------
 
+  loadComments() async {
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .get()
+        .then((docsLocales) {
+      for (var local in docsLocales.docs) {
+        local.reference.collection("Sucursales").get().then((docsSucursales) {
+          for (var sucursal in docsSucursales.docs) {
+            sucursal.reference
+                .collection("Comentarios")
+                .get()
+                .then((docsComentarios) async {
+              for (var comentario in docsComentarios.docs) {
+                if (_idUser == comentario["idUsuario"]) {
+                  final comment = Comentario.fromDocumentSnapshot(
+                      documentSnapshot: comentario);
+                  _listComentarios!
+                      .add(CommentLike(comentario: comment, liked: true));
+                  update();
+                }
+              }
+            });
+          }
+        });
+      }
+    });
+  }
 }

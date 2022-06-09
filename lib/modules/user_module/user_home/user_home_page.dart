@@ -124,7 +124,7 @@ class UserHomePage extends StatelessWidget {
                               physics: const NeverScrollableScrollPhysics(),
                               controller: _.tabController,
                               children: [
-                                tabUbication(context, _),
+                                tabFavorites(context, _),
                                 tabMoments(context, _),
                                 tabRecommends(context),
                               ]),
@@ -332,7 +332,7 @@ class UserHomePage extends StatelessWidget {
     );
   }
 
-  ListView tabUbication(BuildContext context, UserHomeController _) {
+  ListView tabFavorites(BuildContext context, UserHomeController _) {
     return ListView(
       shrinkWrap: true,
       children: [
@@ -340,8 +340,8 @@ class UserHomePage extends StatelessWidget {
           padding: EdgeInsets.all(8.0),
           child: Center(
               child: Text(
-            'Favoritos',
-            style: MyStyles.generalTextStyleWhite,
+            "Favoritos",
+            style: MyStyles.generalTextStyleWhiteBold,
           )),
         ),
         Container(
@@ -351,49 +351,102 @@ class UserHomePage extends StatelessWidget {
         ),
         Padding(
           padding: MyDimens.symetricMarginGeneral,
-          /* child: ListView.separated(
-              separatorBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  height: 1.5,
-                  color: Colors.grey.shade300,
-                );
-              },
-              itemCount: _.listMarkers!.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                if (_.loadingUbications) {
-                  return const Center(child: CircularProgressIndicator());
-                } else {
-                  final sucursal = _.sucursales![index];
-                  return SizedBox(
+          child: ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: _.listComentarios!.length,
+            itemBuilder: (context, index) {
+              final comentario = _.listComentarios![index];
+              return Column(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    comentario.comentario.fotoUsuario),
+                                fit: BoxFit.cover)),
+                      ),
+                      const SizedBox(width: 20),
+                      Text(
+                        comentario.comentario.nombreUsuario,
+                        style: MyStyles.generalTextStyleWhiteBold,
+                      ),
+                      const Text(
+                        ' en ',
+                        style: MyStyles.disableTextStyle,
+                      ),
+                      Text(
+                        comentario.comentario.nombreLocal,
+                        style: MyStyles.generalTextStyleWhiteBold,
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, top: 10),
                     child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('Dirección'),
-                              Text(sucursal.ubicacionLocal)
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: const [
-                              Text(MyStrings.DISTANCE),
-                              Text('350 m')
-                            ],
-                          )
-                        ]),
-                  );
-                }
-              },
-            ) */
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * .45,
-          color: Colors.blue,
+                      children: [
+                        SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: SvgPicture.asset('assets/icons/dish-icon.svg'),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Flexible(
+                            child: Text(
+                          comentario.comentario.post,
+                          style: MyStyles.generalTextStyleWhite,
+                        )),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          children: [
+                            const Icon(
+                              Icons.favorite,
+                              color: Colors.pink,
+                            ),
+                            Text(
+                              comentario.comentario.likes.toString(),
+                              style: MyStyles.itemTextStyleWhite,
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Comentarios 8',
+                        style: MyStyles.littleTextStyleBlackDisabled,
+                      ),
+                      TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Responder',
+                            style: MyStyles.littleTextStyleBlackButton,
+                          )),
+                    ],
+                  ),
+                ],
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+                color: Colors.grey,
+                height: .5,
+              );
+            },
+          ),
         ),
       ],
     );
