@@ -127,4 +127,5 @@ class MyStrings {
   static const String PUTACOMMENT = 'Escribe un comentario';
   static const String POST = 'Postear';
   static const String NOMOMENTS = 'No existen momentos aún';
+  static const String STATE = 'Estado';
 }
