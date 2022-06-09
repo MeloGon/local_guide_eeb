@@ -126,7 +126,7 @@ class UserHomePage extends StatelessWidget {
                               children: [
                                 tabFavorites(context, _),
                                 tabMoments(context, _),
-                                tabRecommends(context),
+                                tabRecommends(context, _),
                               ]),
                         ),
                       )
@@ -141,7 +141,7 @@ class UserHomePage extends StatelessWidget {
     );
   }
 
-  ListView tabRecommends(BuildContext context) {
+  ListView tabRecommends(BuildContext context, UserHomeController _) {
     return ListView(
       shrinkWrap: true,
       children: [
@@ -149,8 +149,8 @@ class UserHomePage extends StatelessWidget {
           padding: EdgeInsets.all(8.0),
           child: Center(
               child: Text(
-            "Recomendaciones",
-            style: MyStyles.generalTextStyleBlackSemiSmall,
+            "Reservas",
+            style: MyStyles.generalTextStyleWhiteBold,
           )),
         ),
         Container(
@@ -158,114 +158,103 @@ class UserHomePage extends StatelessWidget {
           color: Colors.grey,
           height: 1,
         ),
-        Padding(
-            padding: MyDimens.symetricMarginGeneral,
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      width: 50,
-                      height: 50,
-                      color: Colors.red,
-                    ),
-                    SizedBox(width: 20),
-                    Text('Mariale Castillo'),
-                    Spacer(),
-                    Icon(Icons.share),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 50, top: 10),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 30,
-                        height: 30,
-                        color: Colors.blue,
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text('Maki Imperial'),
-                      Spacer(),
-                      Row(
+        Container(
+          padding: MyDimens.symetricMarginGeneral,
+          color: Colors.black,
+          child: Column(
+            children: [
+              Container(
+                width: 100,
+                height: 3,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: MyColors.white),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade800,
+                    borderRadius: BorderRadius.circular(20)),
+                padding: MyDimens.symetricMarginGeneral,
+                child: ListView.separated(
+                  separatorBuilder: (context, index) {
+                    return Container(
+                      height: 1.5,
+                      color: Colors.grey.withOpacity(.6),
+                    );
+                  },
+                  itemCount: _.listaReservas!.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    final reserva = _.listaReservas![index];
+                    final color = reserva.colorCategoria;
+                    String valueString = color.split('(0x')[1].split(')')[0];
+                    int value = int.parse(valueString, radix: 16);
+                    return Container(
+                      color: Colors.transparent,
+                      margin: const EdgeInsets.symmetric(vertical: 12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('67'),
-                          SizedBox(width: 2),
-                          Icon(
-                            Icons.favorite,
-                            color: Colors.pink.withOpacity(.2),
-                          )
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 9,
+                                    height: 9,
+                                    decoration: BoxDecoration(
+                                        color: Color(value),
+                                        shape: BoxShape.circle),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Text(
+                                    reserva.categoria.toUpperCase(),
+                                    style: TextStyle(
+                                        color: Color(value),
+                                        fontFamily: 'Poppins'),
+                                  ),
+                                ],
+                              ),
+                              const Text(
+                                MyStrings.STATE,
+                                style: TextStyle(
+                                    fontFamily: 'Poppins', color: Colors.white),
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                reserva.nombre,
+                                style: MyStyles.generalTextStyleWhite,
+                              ),
+                              reserva.reserva.isAcepted == true
+                                  ? const Text(
+                                      'Hecho',
+                                      style: TextStyle(
+                                          fontFamily: 'Poppins',
+                                          color: Color(0xff62F521)),
+                                    )
+                                  : const Text(
+                                      'Pendiente',
+                                      style: TextStyle(
+                                          fontFamily: 'Poppins',
+                                          color: Color(0xffF5F521)),
+                                    )
+                            ],
+                          ),
                         ],
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 50, top: 10),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 30,
-                        height: 30,
-                        color: Colors.blue,
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text('Maki Imperial'),
-                      Spacer(),
-                      Row(
-                        children: [
-                          Text('67'),
-                          SizedBox(width: 2),
-                          Icon(
-                            Icons.favorite,
-                            color: Colors.pink.withOpacity(.2),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                    );
+                  },
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 50, top: 10),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 30,
-                        height: 30,
-                        color: Colors.blue,
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Text('Maki Imperial'),
-                      Spacer(),
-                      Row(
-                        children: [
-                          Text('67'),
-                          SizedBox(width: 2),
-                          Icon(
-                            Icons.favorite,
-                            color: Colors.pink.withOpacity(.2),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 20),
-                  width: MediaQuery.of(context).size.width,
-                  color: Colors.grey,
-                  height: 1,
-                ),
-                Row(),
-                Row(),
-              ],
-            )),
+              )
+            ],
+          ),
+        )
       ],
     );
   }

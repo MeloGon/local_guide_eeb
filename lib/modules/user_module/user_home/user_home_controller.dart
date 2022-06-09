@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:locals_guide_eeb/data/models/comentario.dart';
 import 'package:locals_guide_eeb/data/models/comment_like.dart';
+import 'package:locals_guide_eeb/data/models/request_reserve.dart';
+import 'package:locals_guide_eeb/data/models/reserve_home_user.dart';
 import 'package:random_string/random_string.dart';
 
 import '../../../data/models/foto.dart';
@@ -43,10 +45,16 @@ class UserHomeController extends GetxController
   bool? get darLike => _darLike;
   //--------------------------------------
 
+  //para las reservas
+  List<ReserveForUser>? _listaReservas = [];
+  List<ReserveForUser>? get listaReservas => _listaReservas;
+  //--------------------------------------
+
   @override
   void onReady() {
     _tabController!.addListener(cambiandoTabs);
     loadComments();
+    loadReservas();
     super.onReady();
   }
 
@@ -134,6 +142,40 @@ class UserHomeController extends GetxController
                       documentSnapshot: comentario);
                   _listComentarios!
                       .add(CommentLike(comentario: comment, liked: true));
+                  update();
+                }
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+
+  loadReservas() async {
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .get()
+        .then((docsLocales) {
+      for (var local in docsLocales.docs) {
+        local.reference.collection("Sucursales").get().then((docsSucursales) {
+          for (var sucursal in docsSucursales.docs) {
+            sucursal.reference
+                .collection("Reservas")
+                .get()
+                .then((docsReservas) async {
+              for (var reserva in docsReservas.docs) {
+                if (_idUser == reserva["idUsuario"]) {
+                  final reqReserve = RequestReserve.fromDocumentSnapshot(
+                      documentSnapshot: reserva);
+                  _listaReservas!.add(ReserveForUser(
+                      reserva: reqReserve,
+                      nombre: local["nombreLocal"],
+                      categoria: local["categoria"],
+                      colorCategoria: local["colorCategoria"]));
+
                   update();
                 }
               }
