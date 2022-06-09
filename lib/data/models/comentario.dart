@@ -7,6 +7,7 @@ class Comentario {
   late String post;
   late String fechaComentario;
   late int likes;
+  late String nombreLocal;
 
   Comentario({
     required this.idComentario,
@@ -15,6 +16,7 @@ class Comentario {
     required this.post,
     required this.fechaComentario,
     required this.likes,
+    required this.nombreLocal,
   });
 
   Comentario.fromDocumentSnapshot(
@@ -24,5 +26,6 @@ class Comentario {
     nombreUsuario = documentSnapshot['nombreUsuario'];
     post = documentSnapshot['post'];
     likes = documentSnapshot['likes'];
+    nombreLocal = documentSnapshot['nombreLocal'];
   }
 }
