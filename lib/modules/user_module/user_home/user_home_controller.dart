@@ -94,20 +94,14 @@ class UserHomeController extends GetxController
         // await firebaseFirestore
         //     .collection("GuiaLocales")
         //     .doc("admin")
-        //     .collection("Locales")
-        //     .doc(_idLocal)
+        //     .collection("Usuarios")
+        //     .doc(_idUser)
         //     .get()
-        //     .then((local) {
-        //   local.reference
-        //       .collection("Sucursales")
-        //       .doc(_idSucursal)
-        //       .get()
-        //       .then((sucursal) {
-        //     sucursal.reference.collection("Fotografias").doc(idFotoTemp).set({
-        //       'idFoto': idFotoTemp,
-        //       'likes': '0',
-        //       'pathFoto': response!.secureUrl
-        //     });
+        //     .then((user) {
+        //   user.reference
+        //       .collection("Fotografias")
+        //       .doc(_idFoto)
+        //       .set();
 
         //     //------------------------------------------
         //   });
