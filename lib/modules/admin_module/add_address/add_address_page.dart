@@ -22,6 +22,7 @@ class AddAddressPage extends StatelessWidget {
       builder: (_) => SafeArea(
           child: Scaffold(
               body: SingleChildScrollView(
+        reverse: true,
         physics: const NeverScrollableScrollPhysics(),
         child: SizedBox(
           height: availableHeight,
