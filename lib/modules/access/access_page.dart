@@ -50,14 +50,16 @@ class AccessPage extends StatelessWidget {
                         padding: MyDimens.symetricMarginGeneral,
                         child: Column(
                           children: [
-                            Container(
-                              height: 60,
-                              width: MediaQuery.of(context).size.width * .7,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/logo/foofle-logo.png'),
-                                      fit: BoxFit.contain)),
+                            FadeInDown(
+                              child: Container(
+                                height: 60,
+                                width: MediaQuery.of(context).size.width * .7,
+                                decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/logo/foofle-logo.png'),
+                                        fit: BoxFit.contain)),
+                              ),
                             ),
                             const SizedBox(height: 20),
                             Text(
