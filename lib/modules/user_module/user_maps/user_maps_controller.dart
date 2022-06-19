@@ -381,6 +381,8 @@ class UserMapsController extends GetxController {
 
     getDirections(location.latitude, location.longitude,
         _ubicacionActual!.latitude, _ubicacionActual!.longitude);
+
+    centerView(location);
     update();
   }
 
@@ -390,6 +392,20 @@ class UserMapsController extends GetxController {
     _isMarkerSelected = false;
     closedPanel();
     update();
+  }
+
+  ///centra la vista entre ubicacion actual y sucursal seleccioanda
+  centerView(LatLng location) async {
+    //espera a que el mapa este listo
+    await _mapController!.getVisibleRegion();
+    var left = min(_ubicacionActual!.latitude, location.latitude);
+    var right = max(_ubicacionActual!.latitude, location.latitude);
+    var top = max(_ubicacionActual!.longitude, location.longitude);
+    var bottom = min(_ubicacionActual!.longitude, location.longitude);
+    var bounds = LatLngBounds(
+        southwest: LatLng(left, bottom), northeast: LatLng(right, top));
+    var cameraUpdate = CameraUpdate.newLatLngBounds(bounds, 50);
+    _mapController!.animateCamera(cameraUpdate);
   }
 
   ///Metodos para dibujar las polylines
