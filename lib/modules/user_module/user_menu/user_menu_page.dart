@@ -6,6 +6,7 @@ import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
 import 'package:locals_guide_eeb/utils/my_strings.dart';
+import 'package:locals_guide_eeb/widgets/item_primary_button.dart';
 
 class UserMenuPage extends StatelessWidget {
   const UserMenuPage({Key? key}) : super(key: key);
@@ -19,9 +20,20 @@ class UserMenuPage extends StatelessWidget {
           child: Scaffold(
             backgroundColor: MyColors.white,
             appBar: appBar(_),
+            bottomSheet: Container(
+              padding: MyDimens.symetricMarginGeneral,
+              child: ItemPrimaryButton(
+                onTap: () {
+                  _.hideFilter();
+                },
+                text: 'Iniciar búsqueda',
+                bgColor: Colors.black,
+              ),
+            ),
             body: SingleChildScrollView(
               child: Padding(
-                padding: MyDimens.symetricMarginGeneral,
+                padding: const EdgeInsets.only(
+                    top: 20, right: 20, left: 20, bottom: 60),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -64,6 +76,7 @@ class UserMenuPage extends StatelessWidget {
                         );
                       },
                     ),
+
                     //SE COMENTAN LOS SLIDERS FALTAN CONFIGURAR
                     // Container(
                     //   margin: const EdgeInsets.symmetric(vertical: 20),
