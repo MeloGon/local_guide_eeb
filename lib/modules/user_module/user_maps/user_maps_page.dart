@@ -33,6 +33,11 @@ class UserMapsPage extends StatelessWidget {
                           ? MediaQuery.of(context).size.height
                           : MediaQuery.of(context).size.height * .6,
                       child: GoogleMap(
+                        padding: (_.isMarkerSelected)
+                            ? EdgeInsets.only(
+                                bottom:
+                                    MediaQuery.of(context).size.height * .53)
+                            : const EdgeInsets.all(0),
                         myLocationButtonEnabled: true,
                         myLocationEnabled: true,
                         onMapCreated: (controller) {
