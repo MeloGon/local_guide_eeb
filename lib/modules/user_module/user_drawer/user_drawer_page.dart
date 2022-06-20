@@ -24,40 +24,43 @@ class UserDrawerPage extends StatelessWidget {
                   height: availableHeight,
                   child: Stack(
                     children: [
-                      Column(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(color: Colors.red)),
-                            child: CircleAvatar(
-                              radius: 65,
-                              backgroundImage: NetworkImage(_.photoUrl!),
+                      SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: Colors.red)),
+                              child: CircleAvatar(
+                                radius: 65,
+                                backgroundImage: NetworkImage(_.photoUrl!),
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            _.displayName!,
-                            style: MyStyles.generalTextStyleWhiteBold,
-                          ),
-                          const SizedBox(height: 40),
-                          Container(
-                            width: MediaQuery.of(context).size.width * .45,
-                            height: 2,
-                            color: Colors.grey,
-                          ),
-                          const SizedBox(height: 20),
-                          Column(
-                            children: [
-                              optionDrawer(Icons.home, 'Home', _),
-                              optionDrawer(
-                                  Icons.notification_add, 'Notificaciones', _),
-                              optionDrawer(Icons.settings, 'Configuración', _),
-                              optionDrawer(Icons.logout, 'Cerrar Sesión', _),
-                            ],
-                          )
-                        ],
+                            const SizedBox(height: 10),
+                            Text(
+                              _.displayName!,
+                              style: MyStyles.generalTextStyleWhiteBold,
+                            ),
+                            const SizedBox(height: 40),
+                            Container(
+                              width: MediaQuery.of(context).size.width * .70,
+                              height: 2,
+                              color: Colors.grey.shade700,
+                            ),
+                            const SizedBox(height: 20),
+                            Column(
+                              children: [
+                                optionDrawer(Icons.home, 'Home', _),
+                                optionDrawer(Icons.notification_add,
+                                    'Notificaciones', _),
+                                optionDrawer(
+                                    Icons.settings, 'Configuración', _),
+                                optionDrawer(Icons.logout, 'Cerrar Sesión', _),
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                       GestureDetector(
                         onTap: () => Get.back(),
@@ -88,7 +91,7 @@ class UserDrawerPage extends StatelessWidget {
         }
       },
       child: Padding(
-        padding: MyDimens.paddingForOptions,
+        padding: const EdgeInsets.symmetric(vertical: 30),
         child: Row(
           children: [
             Icon(
