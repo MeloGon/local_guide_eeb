@@ -91,7 +91,7 @@ class UserDrawerPage extends StatelessWidget {
         }
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30),
+        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
         child: Row(
           children: [
             Icon(
