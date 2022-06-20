@@ -33,7 +33,7 @@ class UserDrawerPage extends StatelessWidget {
                                   shape: BoxShape.circle,
                                   border: Border.all(color: Colors.red)),
                               child: CircleAvatar(
-                                radius: 65,
+                                radius: 50,
                                 backgroundImage: NetworkImage(_.photoUrl!),
                               ),
                             ),
