@@ -45,22 +45,29 @@ class CardSucursal extends StatelessWidget {
                       },
                       icon: const Icon(Icons.close)),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          CircleAvatar(
-                            foregroundColor: Colors.grey,
-                            backgroundColor: Colors.grey,
-                            backgroundImage: NetworkImage(_.fotoTap!),
-                            radius: MediaQuery.of(context).size.height * .05,
-                          ),
-                          Text(
-                            _.nameTap!,
-                            style: MyStyles.generalTextStyleBlackBold,
-                          )
-                        ],
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * .3,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            CircleAvatar(
+                              foregroundColor: Colors.grey,
+                              backgroundColor: Colors.grey,
+                              backgroundImage: NetworkImage(_.fotoTap!),
+                              radius: MediaQuery.of(context).size.height * .05,
+                            ),
+                            FittedBox(
+                              fit: BoxFit.fitWidth,
+                              child: Text(
+                                _.nameTap!,
+                                style: MyStyles.generalTextStyleBlackBold,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
