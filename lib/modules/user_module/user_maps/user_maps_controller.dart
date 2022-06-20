@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
@@ -41,6 +42,11 @@ class UserMapsController extends GetxController {
   List<LocalBottom>? _localsBottom = [];
   List<LocalBottom>? get localsBottom => _localsBottom;
   // --------------------------
+
+  // para hacer la busqueda o filtrado en el bottomsheet
+  List<LocalBottom>? _foundLocalsBottom = [];
+  List<LocalBottom>? get foundLocalsBottom => _foundLocalsBottom;
+  // ---------------------------
 
   //evento de seleccion de un marker
   bool _isMarkerSelected = false;
@@ -93,6 +99,7 @@ class UserMapsController extends GetxController {
   @override
   void onReady() {
     loadMarkers();
+    _foundLocalsBottom = _localsBottom;
     super.onReady();
   }
 
@@ -293,6 +300,26 @@ class UserMapsController extends GetxController {
         });
       });
     }
+    update();
+  }
+
+  ///para la busqueda desde el textfield
+  void runFilter(String enteredKeyword) {
+    List<LocalBottom> results = [];
+    if (enteredKeyword.isEmpty) {
+      // if the search field is empty or only contains white-space, we'll display all users
+      results = _localsBottom!;
+    } else {
+      results = _localsBottom!
+          .where((local) => local.nombreLocal!
+              .toLowerCase()
+              .contains(enteredKeyword.toLowerCase()))
+          .toList();
+      // we use the toLowerCase() method to make it case-insensitive
+    }
+
+    _foundLocalsBottom = results;
+    update();
   }
 
   onMapCreated(GoogleMapController controller) {

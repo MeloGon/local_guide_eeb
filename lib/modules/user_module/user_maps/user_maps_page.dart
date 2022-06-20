@@ -157,8 +157,26 @@ class UserMapsPage extends StatelessWidget {
               width: MediaQuery.of(context).size.width * .5,
               child: Image.asset('assets/images/logo/foofle-logo.png')),
           const SizedBox(height: 20),
+          SizedBox(
+            height: 35,
+            child: TextField(
+              onChanged: (value) {
+                _.runFilter(value);
+              },
+              style:
+                  const TextStyle(color: Colors.black, fontSize: 14, height: 1),
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.only(left: 20),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+                fillColor: Colors.white,
+                filled: true,
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
           Container(
-            height: MediaQuery.of(context).size.height * .72,
+            height: MediaQuery.of(context).size.height * .60,
             decoration: BoxDecoration(
                 color: Colors.grey.shade800,
                 borderRadius: BorderRadius.circular(20)),
@@ -170,10 +188,10 @@ class UserMapsPage extends StatelessWidget {
                   color: Colors.grey,
                 );
               },
-              itemCount: _.localsBottom!.length,
+              itemCount: _.foundLocalsBottom!.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                final localBottom = _.localsBottom![index];
+                final localBottom = _.foundLocalsBottom![index];
                 final color = localBottom.colorCategoria!;
                 String valueString = color.split('(0x')[1].split(')')[0];
                 int value = int.parse(valueString, radix: 16);
