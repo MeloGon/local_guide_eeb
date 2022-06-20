@@ -23,7 +23,8 @@ class AccessPage extends StatelessWidget {
         child: Scaffold(
             backgroundColor: MyColors.blackBg,
             body: SingleChildScrollView(
-              child: SizedBox(
+              child: Container(
+                padding: const EdgeInsets.only(top: 30),
                 height: availableHeight,
                 child: Stack(
                   children: [
@@ -31,7 +32,7 @@ class AccessPage extends StatelessWidget {
                       scale: 1.5,
                       child: Transform.translate(
                         offset:
-                            Offset(0, MediaQuery.of(context).size.height * .32),
+                            Offset(0, MediaQuery.of(context).size.height * .29),
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width,
                           height: availableHeight,
