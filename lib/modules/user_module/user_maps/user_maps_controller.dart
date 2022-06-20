@@ -90,6 +90,9 @@ class UserMapsController extends GetxController {
   String? get displayName => _displayName;
   String? get photoUrl => _photoUrl;
   int? _tipoUsuario;
+  double? _distanceFilter;
+  double? get distanceFilter => _distanceFilter;
+
   //-------------------
 
   //controlando altura
@@ -121,6 +124,7 @@ class UserMapsController extends GetxController {
     _displayName = Get.arguments[2];
     _photoUrl = Get.arguments[3];
     _tipoUsuario = Get.arguments[4];
+    _distanceFilter = Get.arguments[5];
   }
 
   goToDrawerMenu() async {
@@ -180,35 +184,41 @@ class UserMapsController extends GetxController {
                   _ubicacionActual!.longitude,
                   location.latitude,
                   location.longitude);
-              _localsBottom!.add(LocalBottom(
-                nombreLocal: tempNLocal,
-                colorCategoria: colorCategoria,
-                categoria: categoriaLocal,
-                sucursal: tempSucursal,
-                distance: distance,
-                fotoLocal: fotoLocal,
-                idLocal: tempIdLocal,
-              ));
 
-              _myMarker!.add(
-                Marker(
-                  infoWindow: InfoWindow(
-                      snippet: 'presiona para mas info.',
-                      title: tempNLocal,
-                      onTap: () {
-                        markerSelected(tempSucursal, fotoLocal, tempNLocal,
-                            tempIdLocal, colorParseado);
-                        update();
-                      }),
-                  position: location,
-                  markerId: MarkerId(sucursal['marker']),
-                  icon: await MarkerIcon.downloadResizePictureCircle(fotoLocal,
-                      size: 90,
-                      addBorder: true,
-                      borderColor: Color(colorParseado),
-                      borderSize: 20),
-                ),
-              );
+              //compara las distancias y hace funcar el filtro
+              if (distance <= _distanceFilter) {
+                _localsBottom!.add(LocalBottom(
+                  nombreLocal: tempNLocal,
+                  colorCategoria: colorCategoria,
+                  categoria: categoriaLocal,
+                  sucursal: tempSucursal,
+                  distance: distance,
+                  fotoLocal: fotoLocal,
+                  idLocal: tempIdLocal,
+                ));
+
+                _myMarker!.add(
+                  Marker(
+                    infoWindow: InfoWindow(
+                        snippet: 'presiona para mas info.',
+                        title: tempNLocal,
+                        onTap: () {
+                          markerSelected(tempSucursal, fotoLocal, tempNLocal,
+                              tempIdLocal, colorParseado);
+                          update();
+                        }),
+                    position: location,
+                    markerId: MarkerId(sucursal['marker']),
+                    icon: await MarkerIcon.downloadResizePictureCircle(
+                        fotoLocal,
+                        size: 90,
+                        addBorder: true,
+                        borderColor: Color(colorParseado),
+                        borderSize: 20),
+                  ),
+                );
+              }
+
               update();
             }
           });
@@ -261,36 +271,41 @@ class UserMapsController extends GetxController {
                       _ubicacionActual!.longitude,
                       location.latitude,
                       location.longitude);
-                  _localsBottom!.add(LocalBottom(
-                    nombreLocal: tempNLocal,
-                    colorCategoria: colorCategoria,
-                    categoria: categoriaLocal,
-                    sucursal: tempSucursal,
-                    distance: distance,
-                    fotoLocal: fotoLocal,
-                    idLocal: tempIdLocal,
-                  ));
 
-                  _myMarker!.add(
-                    Marker(
-                      infoWindow: InfoWindow(
-                          snippet: 'presiona para mas info.',
-                          title: tempNLocal,
-                          onTap: () {
-                            markerSelected(tempSucursal, fotoLocal, tempNLocal,
-                                tempIdLocal, colorParseado);
-                            update();
-                          }),
-                      position: location,
-                      markerId: MarkerId(sucursal['marker']),
-                      icon: await MarkerIcon.downloadResizePictureCircle(
-                          fotoLocal,
-                          size: 90,
-                          addBorder: true,
-                          borderColor: Color(colorParseado),
-                          borderSize: 20),
-                    ),
-                  );
+                  //compara las distancias y hace funcar el filtro
+                  if (distance <= _distanceFilter) {
+                    _localsBottom!.add(LocalBottom(
+                      nombreLocal: tempNLocal,
+                      colorCategoria: colorCategoria,
+                      categoria: categoriaLocal,
+                      sucursal: tempSucursal,
+                      distance: distance,
+                      fotoLocal: fotoLocal,
+                      idLocal: tempIdLocal,
+                    ));
+
+                    _myMarker!.add(
+                      Marker(
+                        infoWindow: InfoWindow(
+                            snippet: 'presiona para mas info.',
+                            title: tempNLocal,
+                            onTap: () {
+                              markerSelected(tempSucursal, fotoLocal,
+                                  tempNLocal, tempIdLocal, colorParseado);
+                              update();
+                            }),
+                        position: location,
+                        markerId: MarkerId(sucursal['marker']),
+                        icon: await MarkerIcon.downloadResizePictureCircle(
+                            fotoLocal,
+                            size: 90,
+                            addBorder: true,
+                            borderColor: Color(colorParseado),
+                            borderSize: 20),
+                      ),
+                    );
+                  }
+
                   update();
                 });
               });

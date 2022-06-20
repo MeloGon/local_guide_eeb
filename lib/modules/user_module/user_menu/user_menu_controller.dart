@@ -36,6 +36,7 @@ class UserMenuController extends GetxController {
 
   @override
   void onInit() {
+    _distance = 15;
     groupButtonController = GroupButtonController();
     setArguments();
     super.onInit();
@@ -89,7 +90,8 @@ class UserMenuController extends GetxController {
       _idUser,
       _displayName,
       _photoUrl,
-      _tipoUsuario
+      _tipoUsuario,
+      _distance,
     ]);
   }
 

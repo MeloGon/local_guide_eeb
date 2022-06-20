@@ -78,24 +78,33 @@ class UserMenuPage extends StatelessWidget {
                     ),
 
                     //SE COMENTAN LOS SLIDERS FALTAN CONFIGURAR
-                    // Container(
-                    //   margin: const EdgeInsets.symmetric(vertical: 20),
-                    //   width: MediaQuery.of(context).size.width,
-                    //   height: 1,
-                    //   color: Colors.grey,
-                    // ),
-                    // const Text(MyStrings.FORDISTANCE),
-                    // Slider(
-                    //   value: _.distance ?? 0,
-                    //   onChanged: (value) {
-                    //     _.onChangeDistance(value);
-                    //   },
-                    //   min: 0,
-                    //   max: 30,
-                    //   thumbColor: Colors.black,
-                    //   inactiveColor: Colors.grey.withOpacity(.5),
-                    //   activeColor: Colors.black,
-                    // ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 20),
+                      width: MediaQuery.of(context).size.width,
+                      height: 1,
+                      color: Colors.grey,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          MyStrings.FORDISTANCE,
+                          style: MyStyles.generalTextStyleBlackBold,
+                        ),
+                        Text('Hasta ${_.distance!.round()} km'),
+                      ],
+                    ),
+                    Slider(
+                      value: _.distance ?? 0,
+                      onChanged: (value) {
+                        _.onChangeDistance(value);
+                      },
+                      min: 0,
+                      max: 20,
+                      thumbColor: Colors.black,
+                      inactiveColor: Colors.grey.withOpacity(.5),
+                      activeColor: Colors.black,
+                    ),
                     // Container(
                     //   margin: const EdgeInsets.symmetric(vertical: 20),
                     //   width: MediaQuery.of(context).size.width,
