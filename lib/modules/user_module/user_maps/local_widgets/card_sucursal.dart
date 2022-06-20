@@ -20,258 +20,283 @@ class CardSucursal extends StatelessWidget {
           color: Colors.transparent,
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * .53,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            margin: const EdgeInsets.all(20),
-            width: MediaQuery.of(context).size.width * .7,
-            height: MediaQuery.of(context).size.height * .47,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.grey,
-                    offset: Offset(0.0, 1.0), //(x,y)
-                    blurRadius: 6.0,
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(20)),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        _.closeTapMarker();
-                      },
-                      icon: const Icon(Icons.close)),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * .3,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              foregroundColor: Colors.grey,
-                              backgroundColor: Colors.grey,
-                              backgroundImage: NetworkImage(_.fotoTap!),
-                              radius: MediaQuery.of(context).size.height * .05,
-                            ),
-                            FittedBox(
-                              fit: BoxFit.fitWidth,
-                              child: Text(
-                                _.nameTap!,
-                                style: MyStyles.generalTextStyleBlackBold,
-                              ),
-                            )
-                          ],
-                        ),
+          child: Stack(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.all(20),
+                height: MediaQuery.of(context).size.height * .47,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(0.0, 1.0), //(x,y)
+                        blurRadius: 6.0,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                    ],
+                    borderRadius: BorderRadius.circular(20)),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      const SizedBox(height: 30),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              const Text(MyStrings.FOOD),
-                              const SizedBox(width: 10),
-                              RatingBarIndicator(
-                                rating: 4,
-                                itemBuilder: (context, index) => const Icon(
-                                  Icons.favorite,
-                                  color: Color(0xffE0627B),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * .3,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                CircleAvatar(
+                                  foregroundColor: Colors.grey,
+                                  backgroundColor: Colors.grey,
+                                  backgroundImage: NetworkImage(_.fotoTap!),
+                                  radius:
+                                      MediaQuery.of(context).size.height * .05,
                                 ),
-                                itemCount: 5,
-                                itemSize: 15.0,
-                                unratedColor: Colors.red.withAlpha(50),
-                                direction: Axis.horizontal,
-                              ),
-                            ],
+                                FittedBox(
+                                  fit: BoxFit.fitWidth,
+                                  child: Text(
+                                    _.nameTap!,
+                                    style: MyStyles.generalTextStyleBlackBold,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                          Row(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              const Text(MyStrings.SERVICE),
-                              const SizedBox(width: 10),
-                              RatingBarIndicator(
-                                rating: 4,
-                                itemBuilder: (context, index) => const Icon(
-                                  Icons.favorite,
-                                  color: Color(0xffE0627B),
-                                ),
-                                itemCount: 5,
-                                itemSize: 15.0,
-                                unratedColor: Colors.red.withAlpha(50),
-                                direction: Axis.horizontal,
+                              Row(
+                                children: [
+                                  const Text(MyStrings.FOOD),
+                                  const SizedBox(width: 10),
+                                  RatingBarIndicator(
+                                    rating: 4,
+                                    itemBuilder: (context, index) => const Icon(
+                                      Icons.favorite,
+                                      color: Color(0xffE0627B),
+                                    ),
+                                    itemCount: 5,
+                                    itemSize: 15.0,
+                                    unratedColor: Colors.red.withAlpha(50),
+                                    direction: Axis.horizontal,
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              const Text(MyStrings.AMBIENCE),
-                              const SizedBox(width: 10),
-                              RatingBarIndicator(
-                                rating: 4,
-                                itemBuilder: (context, index) => const Icon(
-                                  Icons.favorite,
-                                  color: Color(0xffE0627B),
-                                ),
-                                itemCount: 5,
-                                itemSize: 15.0,
-                                unratedColor: Colors.red.withAlpha(50),
-                                direction: Axis.horizontal,
+                              Row(
+                                children: [
+                                  const Text(MyStrings.SERVICE),
+                                  const SizedBox(width: 10),
+                                  RatingBarIndicator(
+                                    rating: 4,
+                                    itemBuilder: (context, index) => const Icon(
+                                      Icons.favorite,
+                                      color: Color(0xffE0627B),
+                                    ),
+                                    itemCount: 5,
+                                    itemSize: 15.0,
+                                    unratedColor: Colors.red.withAlpha(50),
+                                    direction: Axis.horizontal,
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              const Text(MyStrings.PRICE),
-                              const SizedBox(width: 10),
-                              RatingBarIndicator(
-                                rating: 4,
-                                itemBuilder: (context, index) => const Icon(
-                                  Icons.favorite,
-                                  color: Color(0xffE0627B),
-                                ),
-                                itemCount: 5,
-                                itemSize: 15.0,
-                                unratedColor: Colors.red.withAlpha(50),
-                                direction: Axis.horizontal,
+                              Row(
+                                children: [
+                                  const Text(MyStrings.AMBIENCE),
+                                  const SizedBox(width: 10),
+                                  RatingBarIndicator(
+                                    rating: 4,
+                                    itemBuilder: (context, index) => const Icon(
+                                      Icons.favorite,
+                                      color: Color(0xffE0627B),
+                                    ),
+                                    itemCount: 5,
+                                    itemSize: 15.0,
+                                    unratedColor: Colors.red.withAlpha(50),
+                                    direction: Axis.horizontal,
+                                  ),
+                                ],
                               ),
+                              Row(
+                                children: [
+                                  const Text(MyStrings.PRICE),
+                                  const SizedBox(width: 10),
+                                  RatingBarIndicator(
+                                    rating: 4,
+                                    itemBuilder: (context, index) => const Icon(
+                                      Icons.favorite,
+                                      color: Color(0xffE0627B),
+                                    ),
+                                    itemCount: 5,
+                                    itemSize: 15.0,
+                                    unratedColor: Colors.red.withAlpha(50),
+                                    direction: Axis.horizontal,
+                                  ),
+                                ],
+                              ),
+                              ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Color.fromARGB(255, 19, 20, 19),
+                                      elevation: 0,
+                                      side: const BorderSide(
+                                          color: Colors.black, width: 1.5),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(50))),
+                                  onPressed: () {
+                                    _.goToLocalProfile();
+                                  },
+                                  child: const Text(MyStrings.PERFIL,
+                                      style: MyStyles.generalTextStyleWhite)),
                             ],
-                          ),
-                          ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: Color.fromARGB(255, 19, 20, 19),
-                                  elevation: 0,
-                                  side: const BorderSide(
-                                      color: Colors.black, width: 1.5),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(50))),
-                              onPressed: () {
-                                _.goToLocalProfile();
-                              },
-                              child: const Text(MyStrings.PERFIL,
-                                  style: MyStyles.generalTextStyleWhite)),
+                          )
                         ],
-                      )
+                      ),
+                      const SizedBox(height: 10),
+                      const Divider(height: 1.5, color: Colors.black),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text(
+                            MyStrings.DIRECTION,
+                            style: MyStyles.generalTextStyleBlackBold,
+                          ),
+                          Text(
+                            MyStrings.DISTANCE,
+                            style: MyStyles.generalTextStyleBlackBold,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(_.sucursalTapped!.ubicacionLocal),
+                          Text(_.distanceTap.toString() == '0'
+                              ? 'Calculando'
+                              : '${_.distanceTap!.toStringAsFixed(2)} km'),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      const Divider(height: 1.5, color: Colors.black),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: const Color(0xffE0627B),
+                                    elevation: 0,
+                                    side: const BorderSide(
+                                        color: Colors.black, width: 1.5),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(50))),
+                                onPressed: () async {
+                                  final Uri _url =
+                                      Uri.parse(_.sucursalTapped!.linkWeb);
+                                  await launchUrl(_url);
+                                },
+                                child: const Text(
+                                  MyStrings.WATCHMENU,
+                                  style: MyStyles.generalTextStyleBlack,
+                                )),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: const Color(0xffF3F1BC),
+                                    elevation: 0,
+                                    side: const BorderSide(
+                                        color: Colors.black, width: 1.5),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(50))),
+                                onPressed: () async {
+                                  final Uri _url =
+                                      Uri.parse(_.sucursalTapped!.linkWeb);
+                                  await launchUrl(_url);
+                                },
+                                child: const Text(
+                                  MyStrings.PAGWEB,
+                                  style: MyStyles.generalTextStyleBlack,
+                                )),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: const Color(0xffA6CED9),
+                                    elevation: 0,
+                                    side: const BorderSide(
+                                        color: Colors.black, width: 1.5),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(50))),
+                                onPressed: () async {
+                                  final Uri _url =
+                                      Uri.parse(_.sucursalTapped!.linkDelivery);
+                                  await launchUrl(_url);
+                                },
+                                child: const Text(
+                                  MyStrings.DELIVERY,
+                                  style: MyStyles.generalTextStyleBlack,
+                                )),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: const Color(0xffB8FAB2),
+                                    elevation: 0,
+                                    side: const BorderSide(
+                                        color: Colors.black, width: 1.5),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(50))),
+                                onPressed: _.goToReserve,
+                                child: const Text(
+                                  MyStrings.RESERVE,
+                                  style: MyStyles.generalTextStyleBlack,
+                                )),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
                     ],
                   ),
-                  const SizedBox(height: 10),
-                  const Divider(height: 1.5, color: Colors.black),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
-                        MyStrings.DIRECTION,
-                        style: MyStyles.generalTextStyleBlackBold,
-                      ),
-                      Text(
-                        MyStrings.DISTANCE,
-                        style: MyStyles.generalTextStyleBlackBold,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(_.sucursalTapped!.ubicacionLocal),
-                      Text(_.distanceTap.toString() == '0'
-                          ? 'Calculando'
-                          : '${_.distanceTap!.toStringAsFixed(2)} km'),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  const Divider(height: 1.5, color: Colors.black),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: const Color(0xffE0627B),
-                                elevation: 0,
-                                side: const BorderSide(
-                                    color: Colors.black, width: 1.5),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50))),
-                            onPressed: () async {
-                              final Uri _url =
-                                  Uri.parse(_.sucursalTapped!.linkWeb);
-                              await launchUrl(_url);
-                            },
-                            child: const Text(
-                              MyStrings.WATCHMENU,
-                              style: MyStyles.generalTextStyleBlack,
-                            )),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: const Color(0xffF3F1BC),
-                                elevation: 0,
-                                side: const BorderSide(
-                                    color: Colors.black, width: 1.5),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50))),
-                            onPressed: () async {
-                              final Uri _url =
-                                  Uri.parse(_.sucursalTapped!.linkWeb);
-                              await launchUrl(_url);
-                            },
-                            child: const Text(
-                              MyStrings.PAGWEB,
-                              style: MyStyles.generalTextStyleBlack,
-                            )),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Expanded(
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: const Color(0xffA6CED9),
-                                elevation: 0,
-                                side: const BorderSide(
-                                    color: Colors.black, width: 1.5),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50))),
-                            onPressed: () async {
-                              final Uri _url =
-                                  Uri.parse(_.sucursalTapped!.linkDelivery);
-                              await launchUrl(_url);
-                            },
-                            child: const Text(
-                              MyStrings.DELIVERY,
-                              style: MyStyles.generalTextStyleBlack,
-                            )),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: const Color(0xffB8FAB2),
-                                elevation: 0,
-                                side: const BorderSide(
-                                    color: Colors.black, width: 1.5),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50))),
-                            onPressed: _.goToReserve,
-                            child: const Text(
-                              MyStrings.RESERVE,
-                              style: MyStyles.generalTextStyleBlack,
-                            )),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                ],
+                ),
               ),
-            ),
+              Positioned(
+                right: 30,
+                child: GestureDetector(
+                  onTap: () {
+                    _.closeTapMarker();
+                  },
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: const BoxDecoration(
+                        color: Colors.black, shape: BoxShape.circle),
+                    child: const Center(
+                      child: Icon(
+                        Icons.close,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
           ),
         ),
       );
