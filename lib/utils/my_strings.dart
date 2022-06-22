@@ -128,4 +128,6 @@ class MyStrings {
   static const String POST = 'Postear';
   static const String NOMOMENTS = 'No existen momentos aún';
   static const String STATE = 'Estado';
+
+  static const String ADDFOOD = 'Agregue su carta';
 }
