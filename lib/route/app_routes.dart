@@ -27,4 +27,5 @@ class AppRoutes {
   static const CLIENTRESERVE = '/client_reserve';
   static const ADDLOGO = '/add_logo';
   static const ADDTAGLINE = '/add_tagline';
+  static const ADDFOOD = '/add_food';
 }

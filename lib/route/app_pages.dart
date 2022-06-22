@@ -10,6 +10,8 @@ import 'package:locals_guide_eeb/modules/admin_module/add_categorie_admin/add_ca
 import 'package:locals_guide_eeb/modules/admin_module/add_categorie_admin/add_categorie_admin_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_details_local/add_details_local_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_details_local/add_details_local_page.dart';
+import 'package:locals_guide_eeb/modules/admin_module/add_food/add_food_binding.dart';
+import 'package:locals_guide_eeb/modules/admin_module/add_food/add_food_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_local_admin/add_local_admin_binding.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_local_admin/add_local_admin_page.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_logo/add_logo_binding.dart';
@@ -178,5 +180,9 @@ class AppPages {
         name: AppRoutes.ADDTAGLINE,
         page: () => const AddTaglinePage(),
         binding: AddTaglineBinding()),
+    GetPage(
+        name: AppRoutes.ADDFOOD,
+        page: () => const AddFoodPage(),
+        binding: AddFoodBinding())
   ];
 }
