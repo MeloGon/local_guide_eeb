@@ -7,7 +7,7 @@ class AccessController extends GetxController
     with GetSingleTickerProviderStateMixin {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   late AnimationController animationController;
-  late Animation<double> animationLogo;
+  late Animation<double> animationMove;
   String? _tagline, _urlFoto;
   bool _loading = false;
   bool get loading => _loading;
@@ -18,14 +18,21 @@ class AccessController extends GetxController
   void onInit() {
     animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 1),
+      duration: Duration(seconds: 20),
     );
-    animationLogo = Tween<double>(begin: 0, end: 150)
+    animationMove = Tween<double>(begin: 350, end: -200)
         .animate(animationController)
       ..addListener(() => update());
-    animationController.forward();
+    animationController.repeat(reverse: true);
+
     showResources();
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    animationController.dispose();
+    super.onClose();
   }
 
   @override

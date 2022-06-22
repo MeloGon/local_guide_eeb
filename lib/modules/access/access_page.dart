@@ -28,44 +28,86 @@ class AccessPage extends StatelessWidget {
                 height: availableHeight,
                 child: Stack(
                   children: [
-                    Transform.scale(
-                      scale: 1.5,
-                      child: Transform.translate(
-                        offset:
-                            Offset(0, MediaQuery.of(context).size.height * .29),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          height: availableHeight,
-                          child: FadeInUp(
-                            child: Image.asset('assets/images/parrilla.png',
-                                fit: BoxFit.fitHeight,
-                                // color: Color.fromARGB(255, 15, 147, 59),
-                                opacity:
-                                    const AlwaysStoppedAnimation<double>(0.5)),
+                    AnimatedBuilder(
+                      animation: _.animationController,
+                      child: Positioned(
+                        top: _.animationMove.value,
+                        child: Transform.scale(
+                          scale: 1.5,
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            height: availableHeight,
+                            child: FadeInUp(
+                              child: Image.asset('assets/images/parrilla.png',
+                                  fit: BoxFit.fitHeight,
+                                  // color: Color.fromARGB(255, 15, 147, 59),
+                                  opacity: const AlwaysStoppedAnimation<double>(
+                                      0.5)),
+                            ),
                           ),
                         ),
                       ),
+                      builder: (BuildContext context, Widget? child) {
+                        return child!;
+                      },
                     ),
+                    // Transform.scale(
+                    //   scale: 1.5,
+                    //   child: Transform.translate(
+                    //     offset:
+                    //         Offset(0, MediaQuery.of(context).size.height * .29),
+                    //     child: SizedBox(
+                    //       width: MediaQuery.of(context).size.width,
+                    //       height: availableHeight,
+                    //       child: FadeInUp(
+                    //         child: Image.asset('assets/images/parrilla.png',
+                    //             fit: BoxFit.fitHeight,
+                    //             // color: Color.fromARGB(255, 15, 147, 59),
+                    //             opacity:
+                    //                 const AlwaysStoppedAnimation<double>(0.5)),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     Center(
                       child: Padding(
                         padding: MyDimens.symetricMarginGeneral,
                         child: Column(
                           children: [
-                            FadeInDown(
-                              child: Container(
-                                height: 60,
-                                width: MediaQuery.of(context).size.width * .7,
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/logo/foofle-logo.png'),
-                                        fit: BoxFit.contain)),
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black,
+                                    spreadRadius: 40,
+                                    blurRadius: 20,
+                                    offset: Offset(
+                                        0, 2), // changes position of shadow
+                                  ),
+                                ],
                               ),
-                            ),
-                            const SizedBox(height: 20),
-                            Text(
-                              _.loading ? '' : _.tagLine!,
-                              style: MyStyles.logoSubttitle,
+                              child: FadeInDown(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 60,
+                                      width: MediaQuery.of(context).size.width *
+                                          .7,
+                                      decoration: const BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/images/logo/foofle-logo.png'),
+                                              fit: BoxFit.contain)),
+                                    ),
+                                    const SizedBox(height: 20),
+                                    Text(
+                                      _.loading ? '' : _.tagLine!,
+                                      style: MyStyles.logoSubttitle,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                             const Spacer(),
                             FadeInUp(
