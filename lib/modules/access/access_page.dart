@@ -76,7 +76,7 @@ class AccessPage extends StatelessWidget {
                           children: [
                             Container(
                               width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black,
