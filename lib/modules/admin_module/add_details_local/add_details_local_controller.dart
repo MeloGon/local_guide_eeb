@@ -104,27 +104,6 @@ class AddDetailsLocalController extends GetxController {
     update();
   }
 
-  void goToAddTableReservePage() async {
-    Get.toNamed(AppRoutes.ADDTABLERESERVE, arguments: [
-      _idSucursal,
-      _marker,
-      idLocal,
-      _nameLocal,
-      _photoLocal,
-      _txAddress,
-      _phoneNumber,
-      _txNick,
-      _txPwd,
-      _txRepeatPwd,
-      _categorySelected,
-      _price ?? 0,
-      txMenu.text,
-      txWeb.text,
-      txDelivery.text,
-      _flujo,
-    ]);
-  }
-
   void goToAddFood() async {
     Get.toNamed(AppRoutes.ADDFOOD, arguments: [
       _idSucursal,

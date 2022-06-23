@@ -71,19 +71,14 @@ class AddFoodPage extends StatelessWidget {
                       direction: Axis.vertical,
                       children: _.dynamicList
                           .map((i) => Text(
-                                '${i.numeroPlato} :${i.capacityController.text}',
-                                style: MyStyles.generalTextStyleWhite,
+                                '${i.numeroPlato} : ${i.capacityController.text}',
+                                style: MyStyles.disableTextStyle,
                               ))
                           .toList()),
-                  ItemPrimaryButton(
-                    // onTap: _.addNewAddress,
-                    text: MyStrings.ADDNEWADDRESS,
-                    borderColor: MyColors.white,
-                  ),
                   const SizedBox(height: 20),
                   ItemPrimaryButton(
-                    //onTap: _.sendNewLocalData,
-                    text: MyStrings.FINISH,
+                    onTap: _.goToAddTableReservePage,
+                    text: MyStrings.NEXT,
                     borderColor: MyColors.white,
                   )
                 ],

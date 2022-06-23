@@ -6,9 +6,9 @@ class foodFieldWidget extends StatelessWidget {
   TextEditingController capacityController = TextEditingController();
   final int? numeroPlato;
   final String? nombrePlato;
-  final String? idMesa;
+  final String? idPlato;
 
-  foodFieldWidget({Key? key, this.numeroPlato, this.nombrePlato, this.idMesa})
+  foodFieldWidget({Key? key, this.numeroPlato, this.nombrePlato, this.idPlato})
       : super(key: key);
 
   @override

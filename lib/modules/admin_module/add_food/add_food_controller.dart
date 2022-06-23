@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:locals_guide_eeb/data/models/categorie.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_food/local_widgets/food_field_widget.dart';
+import 'package:locals_guide_eeb/route/app_routes.dart';
 
 class AddFoodController extends GetxController {
   List<foodFieldWidget> dynamicList = [];
 
-  List<String>? _table = [];
-  List<String>? get table => _table;
+  List<String>? _foods = [];
+  List<String>? get food => _foods;
 
   //parametros que llegan
   String? _idSucursal;
@@ -28,6 +29,9 @@ class AddFoodController extends GetxController {
   String? _txNick;
   String? _flujo;
   //--------------------
+
+  Category? _categorySelected;
+  Category? get categorySelected => _categorySelected;
 
   @override
   void onInit() {
@@ -55,8 +59,8 @@ class AddFoodController extends GetxController {
   }
 
   addNewFood() {
-    if (_table!.length != 0) {
-      _table = [];
+    if (_foods!.length != 0) {
+      _foods = [];
       dynamicList = [];
     }
     update();
@@ -66,5 +70,30 @@ class AddFoodController extends GetxController {
     dynamicList.add(foodFieldWidget(
       numeroPlato: dynamicList.length,
     ));
+  }
+
+  void goToAddTableReservePage() async {
+    for (var widget in dynamicList) {
+      _foods!.add(widget.capacityController.text);
+    }
+    Get.toNamed(AppRoutes.ADDTABLERESERVE, arguments: [
+      _idSucursal,
+      _marker,
+      idLocal,
+      _nameLocal,
+      _photoLocal,
+      _txAddress,
+      _phoneNumber,
+      _txNick,
+      _txPwd,
+      _txRepeatPwd,
+      _categorySelected,
+      _price ?? 0,
+      _txMenu,
+      _txWeb,
+      _txDelivery,
+      _flujo,
+      dynamicList,
+    ]);
   }
 }

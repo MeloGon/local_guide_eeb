@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:locals_guide_eeb/data/models/local.dart';
 import 'package:locals_guide_eeb/data/models/mesa.dart';
 import 'package:locals_guide_eeb/data/models/sucursal.dart';
+import 'package:locals_guide_eeb/modules/admin_module/add_food/local_widgets/food_field_widget.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_table_reserve/local_widgets/dynamic_widget.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
@@ -42,6 +43,9 @@ class AddTableReserveController extends GetxController {
   String? _txWeb;
   String? _txDelivery;
   String? _txNick;
+  List<foodFieldWidget>? _dynamicListFood = [];
+  List<String>? _food = [];
+  List<String>? get food => _food;
   //--------------------
   String? _flujo;
 
@@ -81,9 +85,13 @@ class AddTableReserveController extends GetxController {
     _txWeb = Get.arguments[13] as String;
     _txDelivery = Get.arguments[14] as String;
     _flujo = Get.arguments[15] as String;
+    _dynamicListFood = Get.arguments[16] as List<foodFieldWidget>;
   }
 
   addNewTable() {
+    for (var widget in _dynamicListFood!) {
+      print(widget.nombrePlato);
+    }
     if (_table!.length != 0) {
       _table = [];
       dynamicList = [];
@@ -98,8 +106,9 @@ class AddTableReserveController extends GetxController {
   }
 
   sendNewLocalData() async {
-    dynamicList
-        .forEach((widget) => _table!.add(widget.capacityController.text));
+    for (var widget in dynamicList) {
+      _table!.add(widget.capacityController.text);
+    }
 
     await firebaseFirestore
         .collection("GuiaLocales")
@@ -152,8 +161,32 @@ class AddTableReserveController extends GetxController {
     });
 
     //----------------------------------------
+
+    //para agregar los platos
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .get()
+        .then((sucursalDoc) {
+      _dynamicListFood!.forEach((plato) {
+        var idPlato = (randomAlphaNumeric(8));
+        if (_flujo == 'editar') {
+          idPlato = plato.idPlato!;
+        }
+        sucursalDoc.reference.collection("Platos").doc(idPlato).set({
+          'idPlato': idPlato,
+          'nombrePlato': plato.capacityController.text,
+        });
+      });
+    });
+
+    //--------------------
     Get.offAllNamed(AppRoutes.ADMINMENU);
-    Get.snackbar('El local ha sido agregado',
+    Get.snackbar('Se completo el registro del local',
         'Puedes asegurarte ingresando a la opcion de locales para poder visualizarlo.',
         colorText: MyColors.blackBg, backgroundColor: MyColors.white);
   }
