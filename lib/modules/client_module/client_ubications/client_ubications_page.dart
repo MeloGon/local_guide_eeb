@@ -7,6 +7,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:locals_guide_eeb/modules/client_module/client_ubications/client_ubications_controller.dart';
@@ -174,37 +175,67 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
           height: 1,
         ),
         (_.tipoUsuario == 2)
-            ? Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                child: Card(
-                  elevation: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        TextField(
-                          controller: _.txPost,
-                          style: MyStyles.generalTextStyleBlack,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.all(10),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black)),
-                            hintText: MyStrings.PUTACOMMENT,
-                            hintStyle: TextStyle(color: Colors.grey),
-                          ),
-                        ),
-                        ElevatedButton(
-                            onPressed: _.postComment,
-                            child: const Text(MyStrings.POST),
-                            style: ElevatedButton.styleFrom(
-                                primary: MyColors.blackBg))
-                      ],
+            ? Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    MultiSelectDialogField(
+                      buttonIcon: const Icon(Icons.add),
+                      buttonText:
+                          const Text('Pulsa aqui para comentar nuestra carta'),
+                      searchHint: 'Selecciona que platos te gustaron',
+                      selectedColor: Colors.black,
+                      confirmText: const Text('Aceptar'),
+                      cancelText: const Text('Cancelar'),
+                      title:
+                          const Text('Que platos de nuestra carta le gustó.'),
+                      items: _.platosLista!
+                          .map((e) => MultiSelectItem(e, e.nombrePlato))
+                          .toList(),
+                      onConfirm: (values) {
+                        _.seleccionPlatos(values);
+                      },
                     ),
-                  ),
+                    ElevatedButton(
+                        onPressed: _.postComment,
+                        child: const Text(MyStrings.POST),
+                        style:
+                            ElevatedButton.styleFrom(primary: MyColors.blackBg))
+                  ],
                 ),
               )
+            // ? Container(
+            //     padding:
+            //         const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            //     child: Card(
+            //       elevation: 2,
+            //       child: Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: Column(
+            //           crossAxisAlignment: CrossAxisAlignment.end,
+            //           children: [
+            //             TextField(
+            //               controller: _.txPost,
+            //               style: MyStyles.generalTextStyleBlack,
+            //               decoration: const InputDecoration(
+            //                 contentPadding: EdgeInsets.all(10),
+            //                 border: OutlineInputBorder(
+            //                     borderSide: BorderSide(color: Colors.black)),
+            //                 hintText: MyStrings.PUTACOMMENT,
+            //                 hintStyle: TextStyle(color: Colors.grey),
+            //               ),
+            //             ),
+            //             ElevatedButton(
+            //                 onPressed: _.postComment,
+            //                 child: const Text(MyStrings.POST),
+            //                 style: ElevatedButton.styleFrom(
+            //                     primary: MyColors.blackBg))
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   )
             : const SizedBox(),
         Padding(
           padding: MyDimens.symetricMarginGeneral,
@@ -250,7 +281,7 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                         const SizedBox(
                           width: 20,
                         ),
-                        Flexible(
+                        Expanded(
                             child: Text(
                           comentario.comentario.post,
                         )),
@@ -278,21 +309,21 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                       ],
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Comentarios 8',
-                        style: MyStyles.littleTextStyleBlackDisabled,
-                      ),
-                      TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Responder',
-                            style: MyStyles.littleTextStyleBlackButton,
-                          )),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text(
+                  //       'Comentarios 8',
+                  //       style: MyStyles.littleTextStyleBlackDisabled,
+                  //     ),
+                  //     TextButton(
+                  //         onPressed: () {},
+                  //         child: Text(
+                  //           'Responder',
+                  //           style: MyStyles.littleTextStyleBlackButton,
+                  //         )),
+                  //   ],
+                  // ),
                 ],
               );
             },

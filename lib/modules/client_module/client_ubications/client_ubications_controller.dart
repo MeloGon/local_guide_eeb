@@ -15,6 +15,7 @@ import 'package:locals_guide_eeb/data/models/comentario.dart';
 import 'package:locals_guide_eeb/data/models/comment_like.dart';
 import 'package:locals_guide_eeb/data/models/foto.dart';
 import 'package:locals_guide_eeb/data/models/localubication.dart';
+import 'package:locals_guide_eeb/data/models/plato.dart';
 import 'package:locals_guide_eeb/data/models/sucursal.dart';
 import 'package:http/http.dart' as http;
 import 'dart:ui' as ui;
@@ -79,6 +80,11 @@ class ClientUbicationsController extends GetxController
   List<CommentLike>? get listComentarios => _listComentarios;
   bool? _darLike = true;
   bool? get darLike => _darLike;
+  List<Plato>? _platosLista = [];
+  List<Plato>? get platosLista => _platosLista;
+  List<Plato>? _platosSeleccionados = [];
+  List<Plato>? get platosSeleccionados => _platosSeleccionados;
+  String? _postPlatos;
   //--------------------------------------
 
   @override
@@ -86,6 +92,7 @@ class ClientUbicationsController extends GetxController
     loadDataForDashboard();
     loadDataforMomets();
     loadComments();
+    loadDishes();
     _tabController!.addListener(cambiandoTabs);
     _getGeoLocationPosition();
     // make sure to initialize before map loading
@@ -367,6 +374,11 @@ class ClientUbicationsController extends GetxController
   }
 
   postComment() async {
+    List<String> platosPost = [];
+    platosSeleccionados!.forEach((element) {
+      platosPost.add(element.nombrePlato);
+    });
+    final str = platosPost.join(',');
     //se necesita likes,idcomment,idusuario,contenidoPost
     //foto usuario, nombre usuario, fecha
     await firebaseFirestore
@@ -385,7 +397,7 @@ class ClientUbicationsController extends GetxController
         'idUsuario': _idUser,
         'fotoUsuario': _photoUrl,
         'nombreUsuario': _displayName,
-        'post': txPost.text,
+        'post': str,
         'fecha': DateTime.now().toString(),
         'nombreLocal': _nombreLocal,
       });
@@ -540,6 +552,30 @@ class ClientUbicationsController extends GetxController
       });
     });
     //--------------
+    update();
+  }
+
+  loadDishes() async {
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .collection("Platos")
+        .get()
+        .then((platos) {
+      platos.docs.forEach((plato) {
+        final dish = Plato.fromDocumentSnapshot(documentSnapshot: plato);
+        _platosLista!.add(dish);
+        update();
+      });
+    });
+  }
+
+  seleccionPlatos(values) {
+    _platosSeleccionados!.addAll(values);
     update();
   }
 }
