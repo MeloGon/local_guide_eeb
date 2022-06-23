@@ -373,9 +373,11 @@ class UserHomePage extends StatelessWidget {
                                 fit: BoxFit.cover)),
                       ),
                       const SizedBox(width: 20),
-                      Text(
-                        comentario.comentario.nombreUsuario,
-                        style: MyStyles.generalTextStyleWhiteBold,
+                      Flexible(
+                        child: Text(
+                          comentario.comentario.nombreUsuario,
+                          style: MyStyles.generalTextStyleWhiteBold,
+                        ),
                       ),
                       const Text(
                         ' en ',
@@ -390,23 +392,13 @@ class UserHomePage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 20, top: 10),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: SvgPicture.asset('assets/icons/dish-icon.svg'),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
                         Flexible(
                             child: Text(
                           comentario.comentario.post,
                           style: MyStyles.generalTextStyleWhite,
                         )),
-                        const SizedBox(
-                          width: 10,
-                        ),
                         Column(
                           children: [
                             const Icon(
@@ -422,21 +414,21 @@ class UserHomePage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Comentarios 8',
-                        style: MyStyles.littleTextStyleBlackDisabled,
-                      ),
-                      TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Responder',
-                            style: MyStyles.littleTextStyleBlackButton,
-                          )),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text(
+                  //       'Comentarios 8',
+                  //       style: MyStyles.littleTextStyleBlackDisabled,
+                  //     ),
+                  //     TextButton(
+                  //         onPressed: () {},
+                  //         child: Text(
+                  //           'Responder',
+                  //           style: MyStyles.littleTextStyleBlackButton,
+                  //         )),
+                  //   ],
+                  // ),
                 ],
               );
             },
