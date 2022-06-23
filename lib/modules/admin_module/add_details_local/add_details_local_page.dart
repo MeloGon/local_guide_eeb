@@ -146,7 +146,7 @@ class AddDetailsLocalPage extends StatelessWidget {
                           ItemPrimaryButton(
                             text: MyStrings.NEXT,
                             borderColor: MyColors.white,
-                            onTap: _.goToAddTableReservePage,
+                            onTap: _.goToAddFood,
                           )
                         ],
                       ),

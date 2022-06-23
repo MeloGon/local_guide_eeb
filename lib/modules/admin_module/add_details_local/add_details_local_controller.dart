@@ -125,6 +125,27 @@ class AddDetailsLocalController extends GetxController {
     ]);
   }
 
+  void goToAddFood() async {
+    Get.toNamed(AppRoutes.ADDFOOD, arguments: [
+      _idSucursal,
+      _marker,
+      idLocal,
+      _nameLocal,
+      _photoLocal,
+      _txAddress,
+      _phoneNumber,
+      _txNick,
+      _txPwd,
+      _txRepeatPwd,
+      _categorySelected,
+      _price ?? 0,
+      txMenu.text,
+      txWeb.text,
+      txDelivery.text,
+      _flujo,
+    ]);
+  }
+
   loadInfoSucursal() async {
     await firebaseFirestore
         .collection("GuiaLocales")
