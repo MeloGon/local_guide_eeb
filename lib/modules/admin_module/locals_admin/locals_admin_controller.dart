@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:locals_guide_eeb/data/models/local.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
@@ -32,6 +33,7 @@ class LocalsAdminController extends GetxController {
         .collection("GuiaLocales")
         .doc("admin")
         .collection("Locales")
+        .orderBy('nombreLocal')
         .get()
         .then((value) {
       value.docs.forEach((element) {
@@ -52,5 +54,19 @@ class LocalsAdminController extends GetxController {
       nameLocal,
       fotoLocal,
     ]);
+  }
+
+  void deleteLocal(String? idLocal) async {
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(idLocal)
+        .delete()
+        .then((value) {
+      Get.snackbar('Información', 'Su local ha sido eliminado con exito',
+          colorText: Colors.black, backgroundColor: Colors.white);
+      showLocals();
+    });
   }
 }

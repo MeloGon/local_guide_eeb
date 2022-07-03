@@ -116,7 +116,13 @@ class LocalsAdminPage extends StatelessWidget {
                                       icon: const Icon(
                                         Icons.edit,
                                         color: Colors.white,
-                                      ))
+                                      )),
+                                  IconButton(
+                                      onPressed: () {
+                                        _.deleteLocal(local.idLocal);
+                                      },
+                                      icon: const Icon(Icons.close_rounded,
+                                          color: Colors.red))
                                 ],
                               ),
                             );
