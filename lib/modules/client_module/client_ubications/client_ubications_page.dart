@@ -114,8 +114,8 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                                 icon: Container(
                               padding: const EdgeInsets.all(5),
                               child: Image.asset(_.tabController!.index == 0
-                                  ? MyImages.UBION
-                                  : MyImages.UBIOFF),
+                                  ? MyImages.RECOMENDON
+                                  : MyImages.RECOMENDOFF),
                             )),
                             Tab(
                                 icon: Container(
@@ -128,8 +128,8 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                                 icon: Container(
                               padding: const EdgeInsets.all(5),
                               child: Image.asset(_.tabController!.index == 2
-                                  ? MyImages.RECOMENDON
-                                  : MyImages.RECOMENDOFF),
+                                  ? MyImages.UBION
+                                  : MyImages.UBIOFF),
                             )),
                           ],
                         ),
@@ -140,9 +140,9 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                               physics: const NeverScrollableScrollPhysics(),
                               controller: _.tabController,
                               children: [
-                                tabUbication(context, _),
-                                tabMoments(_),
                                 tabRecommends(context, _),
+                                tabMoments(_),
+                                tabUbication(context, _),
                               ]),
                         ),
                       )
