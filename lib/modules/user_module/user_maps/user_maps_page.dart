@@ -92,7 +92,7 @@ class UserMapsPage extends StatelessWidget {
                           ],
                         ),
                         child: const Icon(
-                          Icons.menu_rounded,
+                          Icons.filter_list,
                           size: 20,
                           color: Colors.white,
                         ),
@@ -287,7 +287,7 @@ class UserMapsPage extends StatelessWidget {
           ],
         ),
         child: const Icon(
-          Icons.filter_list,
+          Icons.person,
           size: 20,
         ),
       ),
