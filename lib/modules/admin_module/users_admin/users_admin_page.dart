@@ -84,7 +84,9 @@ class UsersAdminPage extends StatelessWidget {
                               ),
                             ),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _.deleteUser(user.idUser);
+                                },
                                 icon: const Icon(
                                   Icons.close_rounded,
                                   color: Colors.red,
