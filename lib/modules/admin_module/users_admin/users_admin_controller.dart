@@ -44,7 +44,7 @@ class UsersAdminController extends GetxController {
         .doc(idUser)
         .delete()
         .then((value) {
-      Get.snackbar('Información', 'El usuario ha sido eliminado con exito',
+      Get.snackbar('Información', 'El usuario ha sido eliminado con éxito',
           colorText: Colors.black, backgroundColor: Colors.white);
       showUsers();
     });

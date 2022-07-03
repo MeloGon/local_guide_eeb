@@ -76,6 +76,14 @@ class CategoriesAdminPage extends StatelessWidget {
                                 icon: Icon(
                                   Icons.edit,
                                   color: Color(value),
+                                )),
+                            IconButton(
+                                onPressed: () {
+                                  _.deleteCategory(categoria.idCategory);
+                                },
+                                icon: const Icon(
+                                  Icons.close_rounded,
+                                  color: Colors.red,
                                 ))
                           ],
                         ),

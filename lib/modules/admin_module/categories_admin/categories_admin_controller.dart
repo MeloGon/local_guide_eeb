@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:locals_guide_eeb/data/models/categorie.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
@@ -43,5 +44,19 @@ class CategoriesAdminController extends GetxController {
       'editar',
       categoria.idCategory,
     ]);
+  }
+
+  deleteCategory(String? idCategory) async {
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Categorias")
+        .doc(idCategory)
+        .delete()
+        .then((value) {
+      Get.snackbar('Información', 'La categoria ha sido eliminada con éxito',
+          colorText: Colors.black, backgroundColor: Colors.white);
+      showCategories();
+    });
   }
 }

@@ -64,7 +64,7 @@ class LocalsAdminController extends GetxController {
         .doc(idLocal)
         .delete()
         .then((value) {
-      Get.snackbar('Información', 'Su local ha sido eliminado con exito',
+      Get.snackbar('Información', 'Su local ha sido eliminado con éxito',
           colorText: Colors.black, backgroundColor: Colors.white);
       showLocals();
     });
