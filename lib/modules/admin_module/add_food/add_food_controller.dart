@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:locals_guide_eeb/data/models/categorie.dart';
+import 'package:locals_guide_eeb/data/models/plato.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_food/local_widgets/food_field_widget.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
 
 class AddFoodController extends GetxController {
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   List<foodFieldWidget> dynamicList = [];
 
   List<String>? _foods = [];
@@ -32,6 +35,14 @@ class AddFoodController extends GetxController {
 
   Category? _categorySelected;
   Category? get categorySelected => _categorySelected;
+
+  @override
+  void onReady() {
+    if (_flujo == 'editar') {
+      loadInfoPlatos();
+    }
+    super.onReady();
+  }
 
   @override
   void onInit() {
@@ -95,5 +106,31 @@ class AddFoodController extends GetxController {
       _flujo,
       dynamicList,
     ]);
+  }
+
+  loadInfoPlatos() async {
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .get()
+        .then((sucursal) {
+      sucursal.reference.collection("Platos").get().then((value) {
+        int cont = 0;
+        for (var plato in value.docs) {
+          final platoData = Plato.fromDocumentSnapshot(documentSnapshot: plato);
+          dynamicList.add(foodFieldWidget(
+            numeroPlato: cont++,
+            nombrePlato: platoData.nombrePlato,
+            idPlato: platoData.idPlato,
+          ));
+          update();
+        }
+      });
+      update();
+    });
   }
 }
