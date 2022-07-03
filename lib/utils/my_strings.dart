@@ -51,7 +51,7 @@ class MyStrings {
   static const String SAVECATEGORIE = 'Guardar Categoría';
   static const String WRITECATEGORIE = 'Escriba el nombre de la categoría';
 
-  static const String DEFAULTNAMELOCALE = 'I sushi';
+  static const String DEFAULTNAMELOCALE = 'Agregue el nombre del local';
   static const String NAMELABEL = 'Nombre';
   static const String PROFILEIMAGE = 'Imagen de Perfil';
 
