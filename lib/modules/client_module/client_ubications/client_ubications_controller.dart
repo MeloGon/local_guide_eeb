@@ -378,7 +378,7 @@ class ClientUbicationsController extends GetxController
     platosSeleccionados!.forEach((element) {
       platosPost.add(element.nombrePlato);
     });
-    final str = platosPost.join(',');
+    final str = platosPost.join('\n');
     //se necesita likes,idcomment,idusuario,contenidoPost
     //foto usuario, nombre usuario, fecha
     await firebaseFirestore
