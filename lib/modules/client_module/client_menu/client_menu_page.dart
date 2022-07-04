@@ -58,7 +58,7 @@ class ClientMenuPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       RatingBarIndicator(
-                        rating: 2,
+                        rating: 5,
                         itemBuilder: (context, index) => const Icon(
                           Icons.favorite,
                           color: Colors.red,
