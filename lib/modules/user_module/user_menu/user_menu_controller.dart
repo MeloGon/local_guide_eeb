@@ -16,6 +16,10 @@ class UserMenuController extends GetxController {
 
   double? _distance;
   double? get distance => _distance;
+
+  double? _price;
+  double? get price => _price;
+
   set distanceSet(double value) {
     _distance = value;
   }
@@ -37,6 +41,7 @@ class UserMenuController extends GetxController {
   @override
   void onInit() {
     _distance = 15;
+    _price = 30;
     groupButtonController = GroupButtonController();
     setArguments();
     super.onInit();
@@ -81,6 +86,11 @@ class UserMenuController extends GetxController {
     update();
   }
 
+  onChangePrice(double value) {
+    _price = value;
+    update();
+  }
+
   hideFilter() async {
     /* categoriasSelected!.forEach((element) {
       print('nombre de la categoria ${element.nombre}');
@@ -92,6 +102,7 @@ class UserMenuController extends GetxController {
       _photoUrl,
       _tipoUsuario,
       _distance,
+      _price,
     ]);
   }
 

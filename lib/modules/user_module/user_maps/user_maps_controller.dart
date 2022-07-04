@@ -92,6 +92,8 @@ class UserMapsController extends GetxController {
   int? _tipoUsuario;
   double? _distanceFilter;
   double? get distanceFilter => _distanceFilter;
+  double? _priceFilter;
+  double? get priceFilter => _priceFilter;
 
   //-------------------
 
@@ -125,6 +127,7 @@ class UserMapsController extends GetxController {
     _photoUrl = Get.arguments[3];
     _tipoUsuario = Get.arguments[4];
     _distanceFilter = Get.arguments[5];
+    _priceFilter = Get.arguments[6];
   }
 
   goToDrawerMenu() async {
@@ -178,6 +181,9 @@ class UserMapsController extends GetxController {
               int colorParseado = int.parse(valueString, radix: 16);
               //-------------------------------
 
+              //obtiene el precio de la sucursal
+              final precio = sucursal['precioLocal'];
+
               //locales o sucursales para el bottom
               final distance = calculateDistance(
                   _ubicacionActual!.latitude,
@@ -186,7 +192,7 @@ class UserMapsController extends GetxController {
                   location.longitude);
 
               //compara las distancias y hace funcar el filtro
-              if (distance <= _distanceFilter) {
+              if (distance <= _distanceFilter && precio <= _priceFilter) {
                 _localsBottom!.add(LocalBottom(
                   nombreLocal: tempNLocal,
                   colorCategoria: colorCategoria,

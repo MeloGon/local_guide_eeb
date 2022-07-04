@@ -100,7 +100,34 @@ class UserMenuPage extends StatelessWidget {
                         _.onChangeDistance(value);
                       },
                       min: 0,
-                      max: 20,
+                      max: 60,
+                      thumbColor: Colors.black,
+                      inactiveColor: Colors.grey.withOpacity(.5),
+                      activeColor: Colors.black,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 20),
+                      width: MediaQuery.of(context).size.width,
+                      height: 1,
+                      color: Colors.grey,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Text(
+                          MyStrings.FORPRICE,
+                          style: MyStyles.generalTextStyleBlackBold,
+                        ),
+                      ],
+                    ),
+                    Slider(
+                      divisions: 3,
+                      value: _.price ?? 0,
+                      onChanged: (value) {
+                        _.onChangePrice(value);
+                      },
+                      min: 0,
+                      max: 30,
                       thumbColor: Colors.black,
                       inactiveColor: Colors.grey.withOpacity(.5),
                       activeColor: Colors.black,
