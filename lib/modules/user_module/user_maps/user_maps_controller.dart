@@ -110,6 +110,7 @@ class UserMapsController extends GetxController {
 
   @override
   void onInit() {
+    _filtros = [];
     _heightX = .4;
     _isMarkerSelected = false;
     rootBundle.loadString('assets/maps/map_style.txt').then((string) {

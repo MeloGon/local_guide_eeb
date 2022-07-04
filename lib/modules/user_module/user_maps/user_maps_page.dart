@@ -54,7 +54,7 @@ class UserMapsPage extends StatelessWidget {
                         initialCameraPosition: const CameraPosition(
                           target:
                               LatLng(-12.050424378417254, -77.04314569048383),
-                          zoom: 12,
+                          zoom: 11.5,
                         ),
                       ),
                     ),
