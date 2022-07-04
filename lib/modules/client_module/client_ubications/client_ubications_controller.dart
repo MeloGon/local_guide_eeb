@@ -18,6 +18,7 @@ import 'package:locals_guide_eeb/data/models/localubication.dart';
 import 'package:locals_guide_eeb/data/models/plato.dart';
 import 'package:locals_guide_eeb/data/models/sucursal.dart';
 import 'package:http/http.dart' as http;
+import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'dart:ui' as ui;
 
 import 'package:random_string/random_string.dart';
@@ -288,6 +289,7 @@ class ClientUbicationsController extends GetxController
               _ubicacionActual!.longitude,
               location.latitude,
               location.longitude);
+          //centerView(location);
           ubicaciones!
               .add(LocalUbication(sucursal: sucursal, distance: distance));
           _loadingUbications = false;
@@ -577,5 +579,27 @@ class ClientUbicationsController extends GetxController
   seleccionPlatos(values) {
     _platosSeleccionados!.addAll(values);
     update();
+  }
+
+  ///centra la vista entre ubicacion actual y sucursal seleccioanda
+  centerView(Sucursal sucursal) async {
+    Get.snackbar(
+        'Información', 'Estamos ajustando la vista respecto a tu ubicación ...',
+        colorText: MyColors.blackBg, backgroundColor: MyColors.white);
+    List<String> latlong =
+        sucursal.marker.toString().substring(7, 44).split(",");
+    double latitude = double.parse(latlong[0]);
+    double longitude = double.parse(latlong[1]);
+    LatLng location = LatLng(latitude, longitude);
+    //espera a que el mapa este listo
+    await _mapController!.getVisibleRegion();
+    var left = min(_ubicacionActual!.latitude, location.latitude);
+    var right = max(_ubicacionActual!.latitude, location.latitude);
+    var top = max(_ubicacionActual!.longitude, location.longitude);
+    var bottom = min(_ubicacionActual!.longitude, location.longitude);
+    var bounds = LatLngBounds(
+        southwest: LatLng(left, bottom), northeast: LatLng(right, top));
+    var cameraUpdate = CameraUpdate.newLatLngBounds(bounds, 50);
+    _mapController!.animateCamera(cameraUpdate);
   }
 }

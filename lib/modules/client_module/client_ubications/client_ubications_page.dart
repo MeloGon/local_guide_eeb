@@ -457,28 +457,33 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       final ubicacion = _.ubicaciones![index];
-                      return SizedBox(
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text('Dirección',
-                                      style: MyStyles.titleTextStyleBlack),
-                                  Text(ubicacion.sucursal.ubicacionLocal)
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  const Text(MyStrings.DISTANCE,
-                                      style: MyStyles.titleTextStyleBlack),
-                                  Text(
-                                      '${ubicacion.distance.toStringAsFixed(2)} km')
-                                ],
-                              )
-                            ]),
+                      return GestureDetector(
+                        onTap: () {
+                          _.centerView(ubicacion.sucursal);
+                        },
+                        child: SizedBox(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text('Dirección',
+                                        style: MyStyles.titleTextStyleBlack),
+                                    Text(ubicacion.sucursal.ubicacionLocal)
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    const Text(MyStrings.DISTANCE,
+                                        style: MyStyles.titleTextStyleBlack),
+                                    Text(
+                                        '${ubicacion.distance.toStringAsFixed(2)} km')
+                                  ],
+                                )
+                              ]),
+                        ),
                       );
                     },
                   )),
