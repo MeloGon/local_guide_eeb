@@ -126,7 +126,7 @@ class UserHomePage extends StatelessWidget {
                               children: [
                                 tabFavorites(context, _),
                                 tabMoments(context, _),
-                                tabRecommends(context, _),
+                                tabReservas(context, _),
                               ]),
                         ),
                       )
@@ -141,7 +141,7 @@ class UserHomePage extends StatelessWidget {
     );
   }
 
-  ListView tabRecommends(BuildContext context, UserHomeController _) {
+  ListView tabReservas(BuildContext context, UserHomeController _) {
     return ListView(
       shrinkWrap: true,
       children: [
