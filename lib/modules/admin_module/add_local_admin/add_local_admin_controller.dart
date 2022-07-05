@@ -109,15 +109,21 @@ class AddLocalAdminController extends GetxController {
           textButton2: 'Tomar una fotografía',
           isDismissible: true,
           onTap: () async {
-            _fotoLocal =
-                await ImagePicker().pickImage(source: ImageSource.gallery);
+            _fotoLocal = await ImagePicker().pickImage(
+                source: ImageSource.gallery,
+                imageQuality: 70,
+                maxWidth: 1024,
+                maxHeight: 768);
             update();
             Get.back();
             //linkToCloudinary(_fotoLocal!);
           },
           onTap2: () async {
-            _fotoLocal =
-                await ImagePicker().pickImage(source: ImageSource.camera);
+            _fotoLocal = await ImagePicker().pickImage(
+                source: ImageSource.camera,
+                imageQuality: 70,
+                maxWidth: 1024,
+                maxHeight: 768);
             update();
             Get.back();
             //linkToCloudinary(_fotoLocal!);

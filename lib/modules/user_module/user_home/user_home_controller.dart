@@ -80,13 +80,19 @@ class UserHomeController extends GetxController
   addMoment({String? option}) async {
     switch (option) {
       case "camara":
-        _fotoMomentos =
-            await ImagePicker().pickImage(source: ImageSource.camera);
+        _fotoMomentos = await ImagePicker().pickImage(
+            source: ImageSource.camera,
+            imageQuality: 70,
+            maxWidth: 1024,
+            maxHeight: 768);
         update();
         break;
       case "galeria":
-        _fotoMomentos =
-            await ImagePicker().pickImage(source: ImageSource.gallery);
+        _fotoMomentos = await ImagePicker().pickImage(
+            source: ImageSource.gallery,
+            imageQuality: 70,
+            maxWidth: 1024,
+            maxHeight: 768);
         update();
         break;
     }
