@@ -17,6 +17,7 @@ import 'package:locals_guide_eeb/theme/my_dimens.dart';
 import 'package:locals_guide_eeb/theme/my_images.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
 import 'package:locals_guide_eeb/utils/my_strings.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ClientUbicationsPage extends StatefulWidget {
   const ClientUbicationsPage({Key? key}) : super(key: key);
@@ -369,58 +370,60 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
           color: Colors.grey,
           height: 1,
         ),
-        (_.listFoto!.isEmpty)
-            ? SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * .4,
-                child: const Center(
-                  child: Text(
-                    MyStrings.NOMOMENTS,
-                    textAlign: TextAlign.center,
-                    style: MyStyles.disableTextStyle,
-                  ),
-                ))
-            : MasonryGridView.count(
-                shrinkWrap: true,
-                crossAxisCount: 3,
-                mainAxisSpacing: 4,
-                crossAxisSpacing: 4,
-                itemCount: _.listFoto!.length,
-                itemBuilder: (context, index) {
-                  final foto = _.listFoto![index];
-                  return Padding(
-                    padding:
-                        const EdgeInsets.only(top: 10, left: 10, right: 10),
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                          // Give each item a random background color
-                          borderRadius: BorderRadius.circular(8.0),
-                          key: ValueKey(index),
-                          child: Image(
-                            image: NetworkImage(foto.pathFoto),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Positioned(
-                          top: 10,
-                          right: 10,
-                          child: Row(
-                            children: [
-                              Text(foto.likes),
-                              const Icon(
-                                Icons.favorite,
-                                size: 15,
-                                color: Colors.pink,
+        (_.areLoadingPhotos)
+            ? getShimmerLoading()
+            : _.listFoto!.isEmpty
+                ? SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * .4,
+                    child: const Center(
+                        child: Text(
+                      MyStrings.NOMOMENTS,
+                      textAlign: TextAlign.center,
+                      style: MyStyles.disableTextStyle,
+                    )),
+                  )
+                : MasonryGridView.count(
+                    shrinkWrap: true,
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 4,
+                    crossAxisSpacing: 4,
+                    itemCount: _.listFoto!.length,
+                    itemBuilder: (context, index) {
+                      final foto = _.listFoto![index];
+                      return Padding(
+                        padding:
+                            const EdgeInsets.only(top: 10, left: 10, right: 10),
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              // Give each item a random background color
+                              borderRadius: BorderRadius.circular(8.0),
+                              key: ValueKey(index),
+                              child: Image(
+                                image: NetworkImage(foto.pathFoto),
+                                fit: BoxFit.cover,
                               ),
-                            ],
-                          ),
+                            ),
+                            Positioned(
+                              top: 10,
+                              right: 10,
+                              child: Row(
+                                children: [
+                                  Text(foto.likes),
+                                  const Icon(
+                                    Icons.favorite,
+                                    size: 15,
+                                    color: Colors.pink,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  );
-                },
-              ),
+                      );
+                    },
+                  ),
       ],
     );
   }
@@ -514,6 +517,40 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
               )),
         ),
       ],
+    );
+  }
+
+  Shimmer getShimmerLoading() {
+    return Shimmer.fromColors(
+      direction: ShimmerDirection.ttb,
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 100,
+            width: 100,
+            color: Colors.white,
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Container(
+            height: 200,
+            width: 100,
+            color: Colors.white,
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Container(
+            height: 150,
+            width: 100,
+            color: Colors.white,
+          ),
+        ],
+      ),
     );
   }
 }

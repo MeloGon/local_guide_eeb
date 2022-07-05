@@ -56,6 +56,8 @@ class ClientUbicationsController extends GetxController
   bool _loadingUbications = true;
   bool get loadingUbications => _loadingUbications;
   //para las fotos del tab de momentos
+  bool _areLoadingPhotos = true;
+  bool get areLoadingPhotos => _areLoadingPhotos;
   XFile? _fotoMomentos;
   XFile? get fotoMomentos => _fotoMomentos;
   CloudinaryResponse? response;
@@ -328,9 +330,11 @@ class ClientUbicationsController extends GetxController
         sucursal.reference.collection("Fotografias").get().then((fotografias) {
           for (var foto in fotografias.docs) {
             final photo = Foto.fromDocumentSnapshot(documentSnapshot: foto);
-            listFoto!.add(photo);
+            _listFoto!.add(photo);
             update();
           }
+          _areLoadingPhotos = false;
+          update();
         });
       });
     });
