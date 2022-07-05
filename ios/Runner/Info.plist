@@ -27,7 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.632306056834-1l2lnbr0da2hjqf26lnako9bkdpb0h4s</string>
+				<string>com.googleusercontent.apps.632306056834-kvnr01gbq3eg8koak1rb6hk51qp52ios</string>
 			</array>
 		</dict>
 	</array>
@@ -62,5 +62,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

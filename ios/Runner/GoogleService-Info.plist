@@ -3,19 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>632306056834-1l2lnbr0da2hjqf26lnako9bkdpb0h4s.apps.googleusercontent.com</string>
+	<string>632306056834-kvnr01gbq3eg8koak1rb6hk51qp52ios.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.632306056834-1l2lnbr0da2hjqf26lnako9bkdpb0h4s</string>
+	<string>com.googleusercontent.apps.632306056834-kvnr01gbq3eg8koak1rb6hk51qp52ios</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>632306056834-00uufdih7scqieaffrqlfpj4rihadv21.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAf-U9RbJb-Q6L4wvNUFkLhGRTh0hhSEP8</string>
+	<string>AIzaSyCSW-xWiWaANb-YTd5Tc_tqom-zD6wdrsY</string>
 	<key>GCM_SENDER_ID</key>
 	<string>632306056834</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.enelblanco.localsGuideEeb</string>
+	<string>com.enelblanco.localsguide</string>
 	<key>PROJECT_ID</key>
 	<string>local-guide-eeb</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:632306056834:ios:17398ece7fb01712d63e9b</string>
+	<string>1:632306056834:ios:2c225f232efabcb8d63e9b</string>
 </dict>
 </plist>
