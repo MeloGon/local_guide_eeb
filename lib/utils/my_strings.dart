@@ -130,4 +130,5 @@ class MyStrings {
   static const String STATE = 'Estado';
 
   static const String ADDFOOD = 'Agregue su carta';
+  static const String NORECOMENDS = 'No existen recomendaciones por el momento';
 }

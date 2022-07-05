@@ -237,105 +237,116 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
             //     ),
             //   )
             : const SizedBox(),
-        Padding(
-          padding: MyDimens.symetricMarginGeneral,
-          child: ListView.separated(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: _.listComentarios!.length,
-            itemBuilder: (context, index) {
-              final comentario = _.listComentarios![index];
-              return Column(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                    comentario.comentario.fotoUsuario),
-                                fit: BoxFit.cover)),
-                      ),
-                      const SizedBox(width: 20),
-                      Text(
-                        comentario.comentario.nombreUsuario,
-                        style: MyStyles.generalTextStyleBlackBold,
-                      ),
-                      // por ahora comento el share
-                      // const Spacer(),
-                      // const Icon(Icons.share),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, top: 10),
-                    child: Row(
+        _.listComentarios!.isEmpty
+            ? Container(
+                padding: MyDimens.symetricMarginHorizontal,
+                child: const Text(
+                  MyStrings.NORECOMENDS,
+                  style: MyStyles.disableTextStyle,
+                  textAlign: TextAlign.center,
+                ),
+              )
+            : Padding(
+                padding: MyDimens.symetricMarginGeneral,
+                child: ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: _.listComentarios!.length,
+                  itemBuilder: (context, index) {
+                    final comentario = _.listComentarios![index];
+                    return Column(
                       children: [
-                        SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: SvgPicture.asset('assets/icons/dish-icon.svg'),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Expanded(
-                            child: Text(
-                          comentario.comentario.post,
-                        )),
                         Row(
                           children: [
-                            Text(comentario.comentario.likes.toString()),
-                            const SizedBox(width: 2),
-                            IconButton(
-                              onPressed: () {
-                                if (_.darLike == true &&
-                                    comentario.liked == false) {
-                                  _.giveLike(comentario.comentario);
-                                } else {
-                                  _.putOffLike(comentario.comentario);
-                                }
-                              },
-                              icon: const Icon(Icons.favorite),
-                              color: (_.darLike == true &&
-                                      comentario.liked == false)
-                                  ? Colors.pink.withOpacity(.2)
-                                  : Colors.pink,
-                            )
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                          comentario.comentario.fotoUsuario),
+                                      fit: BoxFit.cover)),
+                            ),
+                            const SizedBox(width: 20),
+                            Text(
+                              comentario.comentario.nombreUsuario,
+                              style: MyStyles.generalTextStyleBlackBold,
+                            ),
+                            // por ahora comento el share
+                            // const Spacer(),
+                            // const Icon(Icons.share),
                           ],
-                        )
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, top: 10),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: SvgPicture.asset(
+                                    'assets/icons/dish-icon.svg'),
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Expanded(
+                                  child: Text(
+                                comentario.comentario.post,
+                              )),
+                              Row(
+                                children: [
+                                  Text(comentario.comentario.likes.toString()),
+                                  const SizedBox(width: 2),
+                                  IconButton(
+                                    onPressed: () {
+                                      if (_.darLike == true &&
+                                          comentario.liked == false) {
+                                        _.giveLike(comentario.comentario);
+                                      } else {
+                                        _.putOffLike(comentario.comentario);
+                                      }
+                                    },
+                                    icon: const Icon(Icons.favorite),
+                                    color: (_.darLike == true &&
+                                            comentario.liked == false)
+                                        ? Colors.pink.withOpacity(.2)
+                                        : Colors.pink,
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     Text(
+                        //       'Comentarios 8',
+                        //       style: MyStyles.littleTextStyleBlackDisabled,
+                        //     ),
+                        //     TextButton(
+                        //         onPressed: () {},
+                        //         child: Text(
+                        //           'Responder',
+                        //           style: MyStyles.littleTextStyleBlackButton,
+                        //         )),
+                        //   ],
+                        // ),
                       ],
-                    ),
-                  ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     Text(
-                  //       'Comentarios 8',
-                  //       style: MyStyles.littleTextStyleBlackDisabled,
-                  //     ),
-                  //     TextButton(
-                  //         onPressed: () {},
-                  //         child: Text(
-                  //           'Responder',
-                  //           style: MyStyles.littleTextStyleBlackButton,
-                  //         )),
-                  //   ],
-                  // ),
-                ],
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
-                color: Colors.grey,
-                height: .5,
-              );
-            },
-          ),
-        ),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 10),
+                      color: Colors.grey,
+                      height: .5,
+                    );
+                  },
+                ),
+              ),
       ],
     );
   }
