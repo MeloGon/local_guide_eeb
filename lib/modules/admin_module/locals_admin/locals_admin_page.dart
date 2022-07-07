@@ -90,7 +90,7 @@ class LocalsAdminPage extends StatelessWidget {
                                             fit: BoxFit.cover)),
                                   ),
                                   const SizedBox(
-                                    width: 20,
+                                    width: 10,
                                   ),
                                   Column(
                                     crossAxisAlignment:
