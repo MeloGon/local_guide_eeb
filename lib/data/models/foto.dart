@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Foto {
   String? idFoto;
-  late String likes;
+  late int likes;
   late String pathFoto;
 
   Foto({
