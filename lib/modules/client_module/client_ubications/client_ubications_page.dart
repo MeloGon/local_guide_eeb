@@ -7,6 +7,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:locals_guide_eeb/modules/client_module/client_ubications/local_widgets/dialog_preview_photo.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -310,8 +311,7 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                                       }
                                     },
                                     icon: const Icon(Icons.favorite),
-                                    color: (_.darLike == true &&
-                                            comentario.liked == false)
+                                    color: (comentario.liked == false)
                                         ? Colors.pink.withOpacity(.2)
                                         : Colors.pink,
                                   )
@@ -372,7 +372,7 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
         ),
         (_.areLoadingPhotos)
             ? getShimmerLoading()
-            : _.listFoto!.isEmpty
+            : _.listMoments!.isEmpty
                 ? SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * .4,
@@ -388,38 +388,114 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
                     crossAxisCount: 3,
                     mainAxisSpacing: 4,
                     crossAxisSpacing: 4,
-                    itemCount: _.listFoto!.length,
+                    itemCount: _.listMoments!.length,
                     itemBuilder: (context, index) {
-                      final foto = _.listFoto![index];
+                      final foto = _.listMoments![index];
                       return Padding(
                         padding:
                             const EdgeInsets.only(top: 10, left: 10, right: 10),
-                        child: Stack(
-                          children: [
-                            ClipRRect(
-                              // Give each item a random background color
-                              borderRadius: BorderRadius.circular(8.0),
-                              key: ValueKey(index),
-                              child: Image(
-                                image: NetworkImage(foto.pathFoto),
-                                fit: BoxFit.cover,
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.dialog(DialogPreviewPhoto(
+                              onTap: () {
+                                Get.back();
+                              },
+                              onTapRemovePhoto: () {
+                                // _.removePhoto(i);
+                                // Get.dialog(
+                                //     const DialogWarning(
+                                //       contentStyle: MyStyles.grey_18_medium,
+                                //       content: 'La imagen fue eliminada',
+                                //       iconTop: Icon(
+                                //         Icons.check_circle,
+                                //         color: MyColors.primaryBlue,
+                                //         size: 40,
+                                //       ),
+                                //     ),
+                                //     barrierDismissible: true);
+                                Future.delayed(
+                                    const Duration(milliseconds: 500), () {
+                                  Get.back();
+                                });
+                              },
+                              onTapBack: () {
+                                Get.back();
+                              },
+                              file: foto.foto.pathFoto,
+                            ));
+                          },
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                // Give each item a random background color
+                                borderRadius: BorderRadius.circular(8.0),
+                                key: ValueKey(index),
+                                child: Image(
+                                  image: NetworkImage(foto.foto.pathFoto),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                            Positioned(
-                              top: 10,
-                              right: 10,
-                              child: Row(
-                                children: [
-                                  Text(foto.likes),
-                                  const Icon(
-                                    Icons.favorite,
-                                    size: 15,
-                                    color: Colors.pink,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                              Positioned(
+                                  top: 10,
+                                  right: 10,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      if (_.darLikeFoto == true &&
+                                          foto.liked == false) {
+                                        _.giveLikeFoto(foto.foto);
+                                      } else {
+                                        _.putOffLikePhoto(foto.foto);
+                                      }
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.all(5),
+                                      decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(.6),
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            foto.foto.likes.toString(),
+                                            style:
+                                                const TextStyle(fontSize: 12),
+                                          ),
+                                          const SizedBox(width: 2),
+                                          (foto.liked == false)
+                                              ? const Icon(
+                                                  Icons.favorite_border,
+                                                  color: Colors.red,
+                                                  size: 18,
+                                                )
+                                              : const Icon(
+                                                  Icons.favorite,
+                                                  color: Colors.red,
+                                                  size: 18,
+                                                )
+                                          // IconButton(
+                                          //   onPressed: () {
+                                          //     if (_.darLikeFoto == true &&
+                                          //         foto.liked == false) {
+                                          //       _.giveLikeFoto(foto.foto);
+                                          //     } else {
+                                          //       _.putOffLikePhoto(foto.foto);
+                                          //     }
+                                          //   },
+                                          //   icon: const Icon(
+                                          //     Icons.favorite,
+                                          //     size: 15,
+                                          //   ),
+                                          //   color: (_.darLikeFoto == true &&
+                                          //           foto.liked == false)
+                                          //       ? Colors.pink.withOpacity(.2)
+                                          //       : Colors.pink,
+                                          // )
+                                        ],
+                                      ),
+                                    ),
+                                  )),
+                            ],
+                          ),
                         ),
                       );
                     },
@@ -525,31 +601,63 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
       direction: ShimmerDirection.ttb,
       baseColor: Colors.grey[300]!,
       highlightColor: Colors.grey[100]!,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 100,
-            width: 100,
-            color: Colors.white,
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          Container(
-            height: 200,
-            width: 100,
-            color: Colors.white,
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          Container(
-            height: 150,
-            width: 100,
-            color: Colors.white,
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      height: 100,
+                      width: 100,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      height: 100,
+                      width: 100,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Container(
+                  height: 200,
+                  width: 100,
+                  color: Colors.white,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Column(
+                  children: [
+                    Container(
+                      height: 150,
+                      width: 100,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      height: 80,
+                      width: 100,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

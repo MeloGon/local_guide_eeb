@@ -15,6 +15,7 @@ import 'package:locals_guide_eeb/data/models/comentario.dart';
 import 'package:locals_guide_eeb/data/models/comment_like.dart';
 import 'package:locals_guide_eeb/data/models/foto.dart';
 import 'package:locals_guide_eeb/data/models/localubication.dart';
+import 'package:locals_guide_eeb/data/models/photo_like.dart';
 import 'package:locals_guide_eeb/data/models/plato.dart';
 import 'package:locals_guide_eeb/data/models/sucursal.dart';
 import 'package:http/http.dart' as http;
@@ -56,6 +57,10 @@ class ClientUbicationsController extends GetxController
   bool _loadingUbications = true;
   bool get loadingUbications => _loadingUbications;
   //para las fotos del tab de momentos
+  List<PhotoLike>? _listMoments = [];
+  List<PhotoLike>? get listMoments => _listMoments;
+  bool? _darLikeFoto = true;
+  bool? get darLikeFoto => _darLikeFoto;
   bool _areLoadingPhotos = true;
   bool get areLoadingPhotos => _areLoadingPhotos;
   XFile? _fotoMomentos;
@@ -246,7 +251,7 @@ class ClientUbicationsController extends GetxController
               .then((sucursal) {
             sucursal.reference.collection("Fotografias").doc(idFotoTemp).set({
               'idFoto': idFotoTemp,
-              'likes': '0',
+              'likes': 0,
               'pathFoto': response!.secureUrl
             });
 
@@ -314,30 +319,70 @@ class ClientUbicationsController extends GetxController
   }
 
   loadDataforMomets() async {
-    //esto es para las fotografias
-    await firebaseFirestore
-        .collection("GuiaLocales")
-        .doc("admin")
-        .collection("Locales")
-        .doc(_idLocal)
-        .get()
-        .then((local) {
-      local.reference
-          .collection("Sucursales")
-          .doc(_idSucursal)
+    //si el tipo es el usuario final
+    _listMoments!.clear;
+    if (tipoUsuario == 2) {
+      await firebaseFirestore
+          .collection("GuiaLocales")
+          .doc("admin")
+          .collection("Locales")
+          .doc(_idLocal)
           .get()
-          .then((sucursal) {
-        sucursal.reference.collection("Fotografias").get().then((fotografias) {
-          for (var foto in fotografias.docs) {
-            final photo = Foto.fromDocumentSnapshot(documentSnapshot: foto);
-            _listFoto!.add(photo);
+          .then((local) {
+        local.reference
+            .collection("Sucursales")
+            .doc(_idSucursal)
+            .get()
+            .then((sucursal) {
+          sucursal.reference
+              .collection("Fotografias")
+              .get()
+              .then((fotografias) async {
+            for (var foto in fotografias.docs) {
+              final photo = Foto.fromDocumentSnapshot(documentSnapshot: foto);
+              var isLiked = await checkIfMomentLikeMe(photo, _idUser!);
+              _listMoments!.add(PhotoLike(foto: photo, liked: isLiked));
+              _listMoments!.toSet().toList();
+              update();
+            }
+            _areLoadingPhotos = false;
             update();
-          }
-          _areLoadingPhotos = false;
-          update();
+          });
         });
       });
-    });
+    }
+    //si el tipo es el usuario local
+    else {
+      await firebaseFirestore
+          .collection("GuiaLocales")
+          .doc("admin")
+          .collection("Locales")
+          .doc(_idLocal)
+          .get()
+          .then((local) {
+        local.reference
+            .collection("Sucursales")
+            .doc(_idSucursal)
+            .get()
+            .then((sucursal) {
+          sucursal.reference
+              .collection("Fotografias")
+              .get()
+              .then((fotografias) async {
+            for (var foto in fotografias.docs) {
+              final photo = Foto.fromDocumentSnapshot(documentSnapshot: foto);
+              var isLiked = await checkIfMomentLikeMe(photo, _idLocal!);
+              _listMoments!.add(PhotoLike(foto: photo, liked: isLiked));
+              _listMoments!.toSet().toList();
+              update();
+            }
+            _areLoadingPhotos = false;
+            update();
+          });
+        });
+      });
+    }
+    //esto es para las fotografias
   }
 
   calculateDistance(lat1, lon1, lat2, lon2) {
@@ -501,7 +546,54 @@ class ClientUbicationsController extends GetxController
       'idUsuario': (tipoUsuario == 2) ? _idUser : _idLocal,
       'nombreUsuario': _displayName,
       'idComentario': comentario.idComentario,
+    }).then((value) {
+      _listComentarios!.clear();
+      loadComments();
     });
+    //--------------
+    // checkIfCommentLikeMe(comentario,_idUser!);
+    update();
+  }
+
+  giveLikeFoto(Foto foto) async {
+    //al dar like
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .collection("Fotografias")
+        .doc(foto.idFoto)
+        .update({
+      'likes': foto.likes + 1,
+    });
+    foto.likes = ((foto.likes) + 1);
+    _darLikeFoto = false;
+    //--------------
+    //crear la coleccion de personas que dieron like
+    final idPersonaQueLeGusta = (randomAlphaNumeric(8));
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .collection("Fotografias")
+        .doc(foto.idFoto)
+        .collection("UsuarioQueleGusta")
+        .doc(idPersonaQueLeGusta)
+        .set({
+      'idUsuario': (tipoUsuario == 2) ? _idUser : _idLocal,
+      'nombreUsuario': _displayName,
+      'idComentario': foto.idFoto,
+    }).then((value) {
+      _listMoments!.clear();
+      loadDataforMomets();
+    });
+
     //--------------
     // checkIfCommentLikeMe(comentario,_idUser!);
     update();
@@ -528,6 +620,69 @@ class ClientUbicationsController extends GetxController
       update();
       return false;
     }
+  }
+
+  checkIfMomentLikeMe(Foto foto, String idUser) async {
+    var query = await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .collection("Fotografias")
+        .doc(foto.idFoto)
+        .collection("UsuarioQueleGusta")
+        .where('idUsuario', isEqualTo: idUser)
+        .get();
+
+    if (query.size > 0) {
+      update();
+      return true;
+    } else {
+      update();
+      return false;
+    }
+  }
+
+  putOffLikePhoto(Foto foto) async {
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .collection("Fotografias")
+        .doc(foto.idFoto)
+        .update({
+      'likes': foto.likes - 1,
+    });
+    foto.likes = ((foto.likes) - 1);
+    _darLikeFoto = true;
+    //quitar el usuario la coleccion de personas que dieron like
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .collection("Fotografias")
+        .doc(foto.idFoto)
+        .collection("UsuarioQueleGusta")
+        .where('idUsuario', isEqualTo: (tipoUsuario == 2) ? _idUser : _idLocal)
+        .get()
+        .then((usuarioQueLesGustaDocs) {
+      usuarioQueLesGustaDocs.docs.forEach((usuarioQueLesGusta) {
+        usuarioQueLesGusta.reference.delete();
+      });
+    }).then((value) {
+      _listMoments!.clear();
+      loadDataforMomets();
+    });
+    //--------------
+    update();
   }
 
   putOffLike(Comentario comentario) async {
@@ -562,6 +717,9 @@ class ClientUbicationsController extends GetxController
       usuarioQueLesGustaDocs.docs.forEach((usuarioQueLesGusta) {
         usuarioQueLesGusta.reference.delete();
       });
+    }).then((value) {
+      _listComentarios!.clear();
+      loadComments();
     });
     //--------------
     update();

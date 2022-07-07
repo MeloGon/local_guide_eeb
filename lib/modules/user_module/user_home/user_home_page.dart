@@ -315,7 +315,7 @@ class UserHomePage extends StatelessWidget {
                           right: 10,
                           child: Row(
                             children: [
-                              Text(foto.likes),
+                              Text(foto.likes.toString()),
                               const Icon(
                                 Icons.favorite,
                                 size: 15,
