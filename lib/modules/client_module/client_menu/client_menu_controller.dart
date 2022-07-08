@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:locals_guide_eeb/data/models/local.dart';
 import 'package:locals_guide_eeb/route/app_routes.dart';
@@ -27,6 +28,36 @@ class ClientMenuController extends GetxController {
   setArguments() {
     _idSucursal = Get.arguments[0] as String;
     _idLocal = Get.arguments[1] as String;
+  }
+
+  getPermission() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      await Geolocator.openLocationSettings();
+      return Future.error(
+          'Los servicios de localizacion estan deshabilitados.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Los permisos de localizacion han sido denegados');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Los permisos de localizacion han sido denegados permanentemente');
+    }
   }
 
   loadDataForLocal() async {
