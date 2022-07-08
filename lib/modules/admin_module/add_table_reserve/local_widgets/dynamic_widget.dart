@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
 
@@ -36,12 +37,16 @@ class dynamicWidget extends StatelessWidget {
                     width: 100,
                     padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
                     child: TextFormField(
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                      keyboardType:
+                          const TextInputType.numberWithOptions(signed: true),
                       controller: capacityController,
                       decoration: const InputDecoration(
                           fillColor: MyColors.white,
                           filled: true,
                           border: OutlineInputBorder()),
-                      keyboardType: TextInputType.number,
                     ),
                   )
                 ],

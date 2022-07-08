@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:locals_guide_eeb/modules/admin_module/add_table_reserve/add_table_reserve_controller.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
@@ -49,6 +50,12 @@ class AddTableReservePage extends StatelessWidget {
                     SizedBox(
                         width: MediaQuery.of(context).size.width * .3,
                         child: TextField(
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          keyboardType: const TextInputType.numberWithOptions(
+                              signed: true),
+                          textInputAction: TextInputAction.go,
                           controller: _.txAforo,
                           decoration: const InputDecoration(
                               border: OutlineInputBorder(),
