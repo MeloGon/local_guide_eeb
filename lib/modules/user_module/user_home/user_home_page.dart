@@ -92,28 +92,29 @@ class UserHomePage extends StatelessWidget {
                       DefaultTabController(
                         length: 3,
                         child: TabBar(
+                          indicatorColor: Colors.white,
                           controller: _.tabController,
                           tabs: [
                             Tab(
                                 icon: Container(
                               padding: const EdgeInsets.all(5),
                               child: Image.asset(_.tabController!.index == 0
-                                  ? MyImages.UBION
-                                  : MyImages.UBIOFF),
+                                  ? MyImages.UBIONUSER
+                                  : MyImages.UBIOFFUSER),
                             )),
                             Tab(
                                 icon: Container(
                               padding: const EdgeInsets.all(5),
                               child: Image.asset(_.tabController!.index == 1
-                                  ? MyImages.MOMENTON
-                                  : MyImages.MOMENTOFF),
+                                  ? MyImages.MOMENTONUSER
+                                  : MyImages.MOMENTOFFUSER),
                             )),
                             Tab(
                                 icon: Container(
                               padding: const EdgeInsets.all(5),
                               child: Image.asset(_.tabController!.index == 2
-                                  ? MyImages.RECOMENDON
-                                  : MyImages.RECOMENDOFF),
+                                  ? MyImages.RECOMENDONUSER
+                                  : MyImages.RECOMENDOFFUSER),
                             )),
                           ],
                         ),
