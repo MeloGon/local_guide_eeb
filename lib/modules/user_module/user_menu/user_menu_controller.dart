@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:group_button/group_button.dart';
 import 'package:locals_guide_eeb/data/models/categorie.dart';
@@ -37,14 +38,14 @@ class UserMenuController extends GetxController {
   @override
   void onReady() {
     showCategories();
-    //getPermission();
+    getPermission();
     super.onReady();
   }
 
   @override
   void onInit() {
     _distance = 15;
-    _price = 30;
+    _price = 30.0;
     groupButtonController = GroupButtonController();
     setArguments();
     super.onInit();
@@ -79,8 +80,32 @@ class UserMenuController extends GetxController {
   }
 
   getPermission() async {
-    if (await Permission.location.request().isGranted) {
-      print('permiso concedido');
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      await Geolocator.openLocationSettings();
+      return Future.error(
+          'Los servicios de localizacion estan deshabilitados.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Los permisos de localizacion han sido denegados');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Los permisos de localizacion han sido denegados permanentemente');
     }
   }
 

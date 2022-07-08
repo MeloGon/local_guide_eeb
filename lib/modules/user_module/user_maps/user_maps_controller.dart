@@ -363,34 +363,6 @@ class UserMapsController extends GetxController {
   }
 
   Future<Position> _getGeoLocationPosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    // Test if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
-      await Geolocator.openLocationSettings();
-      return Future.error(
-          'Los servicios de localizacion estan deshabilitados.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Los permisos de localizacion han sido denegados');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Los permisos de localizacion han sido denegados permanentemente');
-    }
-
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
     _ubicacionActual = await Geolocator.getCurrentPosition(
