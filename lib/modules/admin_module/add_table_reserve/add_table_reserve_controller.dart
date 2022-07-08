@@ -88,6 +88,7 @@ class AddTableReserveController extends GetxController {
     _dynamicListFood = Get.arguments[16] as List<foodFieldWidget>;
   }
 
+  ///agrega una nueva mesa
   addNewTable() {
     for (var widget in _dynamicListFood!) {
       print(widget.nombrePlato);
@@ -132,7 +133,6 @@ class AddTableReserveController extends GetxController {
       'linkDelivery': _txDelivery,
       'marker': _marker.toString(),
       'aforo': txAforo.text,
-      //falta aqui as mesas
     });
 
     //para agregar las mesas
@@ -215,8 +215,57 @@ class AddTableReserveController extends GetxController {
       'linkWeb': _txWeb,
       'linkDelivery': _txDelivery,
       'marker': _marker.toString(),
-      //falta aqui as mesas
     });
+
+    //para agregar las mesas
+
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .get()
+        .then((sucursalDoc) {
+      dynamicList.forEach((mesas) {
+        var idMesaTemp = (randomAlphaNumeric(8));
+        if (_flujo == 'editar') {
+          idMesaTemp = mesas.idMesa!;
+        }
+        sucursalDoc.reference.collection("Mesas").doc(idMesaTemp).set({
+          'idMesa': idMesaTemp,
+          'reservado': false,
+          'asientos': mesas.capacityController.text,
+          'nroMesa': dynamicList.indexOf(mesas) + 1,
+        });
+      });
+    });
+
+    //----------------------------------------
+
+    //para agregar los platos
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .get()
+        .then((sucursalDoc) {
+      _dynamicListFood!.forEach((plato) {
+        var idPlato = (randomAlphaNumeric(8));
+        if (_flujo == 'editar') {
+          idPlato = plato.idPlato!;
+        }
+        sucursalDoc.reference.collection("Platos").doc(idPlato).set({
+          'idPlato': idPlato,
+          'nombrePlato': plato.capacityController.text,
+        });
+      });
+    });
+
     Get.offAllNamed(AppRoutes.ADDADDRESS, arguments: [
       idLocal,
       _nameLocal,
@@ -229,6 +278,7 @@ class AddTableReserveController extends GetxController {
         colorText: MyColors.blackBg, backgroundColor: MyColors.white);
   }
 
+  ///carga los datos de cada una de las mesas
   loadInfoTables() async {
     await firebaseFirestore
         .collection("GuiaLocales")
@@ -254,6 +304,7 @@ class AddTableReserveController extends GetxController {
     });
   }
 
+  ///carga los datos del aforo
   loadAforo() async {
     await firebaseFirestore
         .collection("GuiaLocales")
