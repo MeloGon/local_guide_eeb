@@ -20,6 +20,9 @@ class UserMenuController extends GetxController {
   double? _price;
   double? get price => _price;
 
+  String? _labelPrice;
+  String? get labelPrice => _labelPrice;
+
   set distanceSet(double value) {
     _distance = value;
   }
@@ -87,7 +90,23 @@ class UserMenuController extends GetxController {
   }
 
   onChangePrice(double value) {
+    print('PRECIO $_price');
     _price = value;
+    switch (_price.toString()) {
+      case '0.0':
+        _labelPrice = '25';
+        break;
+      case '10.0':
+        _labelPrice = '50';
+        break;
+      case '20.0':
+        _labelPrice = '75';
+        break;
+      case '30.0':
+        _labelPrice = '100+';
+        break;
+      default:
+    }
     update();
   }
 

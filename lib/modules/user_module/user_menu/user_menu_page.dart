@@ -113,11 +113,12 @@ class UserMenuPage extends StatelessWidget {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
+                      children: [
+                        const Text(
                           MyStrings.FORPRICE,
                           style: MyStyles.generalTextStyleBlackBold,
                         ),
+                        Text('Hasta ${_.labelPrice}'),
                       ],
                     ),
                     Slider(
