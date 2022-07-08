@@ -115,7 +115,7 @@ class UserMenuController extends GetxController {
   }
 
   onChangePrice(double value) {
-    print('PRECIO $_price');
+    print('PRECIO $_price  $_labelPrice');
     _price = value;
     switch (_price.toString()) {
       case '0.0':

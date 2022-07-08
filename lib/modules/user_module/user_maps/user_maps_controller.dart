@@ -80,6 +80,11 @@ class UserMapsController extends GetxController {
   List<Marker>? get markerTap => _markerTap;
   //----------------------------
 
+  //loading para la camara del googlemaps
+  bool _loadingPosition = true;
+  bool get loadingPosition => _loadingPosition;
+  //
+
   //para las polylines
   List<Polyline>? _polis = [];
   List<Polyline>? get polis => _polis;
@@ -116,6 +121,7 @@ class UserMapsController extends GetxController {
     _filtros = [];
     _heightX = .4;
     _isMarkerSelected = false;
+    _loadingPosition = true;
     rootBundle.loadString('assets/maps/map_style.txt').then((string) {
       _mapStyle = string;
     });
@@ -367,6 +373,8 @@ class UserMapsController extends GetxController {
     // continue accessing the position of the device.
     _ubicacionActual = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
+    _loadingPosition = false;
+    update();
     return await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
   }

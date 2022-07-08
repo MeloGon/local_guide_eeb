@@ -32,31 +32,34 @@ class UserMapsPage extends StatelessWidget {
                       height: (_.isMarkerSelected)
                           ? MediaQuery.of(context).size.height
                           : MediaQuery.of(context).size.height * .6,
-                      child: GoogleMap(
-                        padding: (_.isMarkerSelected)
-                            ? EdgeInsets.only(
-                                bottom:
-                                    MediaQuery.of(context).size.height * .53)
-                            : const EdgeInsets.all(0),
-                        myLocationButtonEnabled: true,
-                        myLocationEnabled: true,
-                        onMapCreated: (controller) {
-                          _.onMapCreated(controller);
-                          /* _.centrarVista; */
-                        },
-                        polylines: (_.isMarkerSelected)
-                            ? Set.from(_.polis!)
-                            : Set.from(_.polisEmpty!),
-                        markers: (_.isMarkerSelected)
-                            ? Set.from(_.markerTap!)
-                            : Set.from(_.myMarker!),
-                        // onTap: _.putMarker,
-                        initialCameraPosition: const CameraPosition(
-                          target:
-                              LatLng(-12.050424378417254, -77.04314569048383),
-                          zoom: 11.5,
-                        ),
-                      ),
+                      child: _.loadingPosition
+                          ? SizedBox()
+                          : GoogleMap(
+                              padding: (_.isMarkerSelected)
+                                  ? EdgeInsets.only(
+                                      bottom:
+                                          MediaQuery.of(context).size.height *
+                                              .53)
+                                  : const EdgeInsets.all(0),
+                              myLocationButtonEnabled: true,
+                              myLocationEnabled: true,
+                              onMapCreated: (controller) {
+                                _.onMapCreated(controller);
+                                /* _.centrarVista; */
+                              },
+                              polylines: (_.isMarkerSelected)
+                                  ? Set.from(_.polis!)
+                                  : Set.from(_.polisEmpty!),
+                              markers: (_.isMarkerSelected)
+                                  ? Set.from(_.markerTap!)
+                                  : Set.from(_.myMarker!),
+                              // onTap: _.putMarker,
+                              initialCameraPosition: CameraPosition(
+                                target: LatLng(_.ubicacionActual!.latitude,
+                                    _.ubicacionActual!.longitude),
+                                zoom: 11.5,
+                              ),
+                            ),
                     ),
                     (_.isMarkerSelected)
                         ? const CardSucursal()

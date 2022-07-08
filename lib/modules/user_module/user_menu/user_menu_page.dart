@@ -118,7 +118,7 @@ class UserMenuPage extends StatelessWidget {
                           MyStrings.FORPRICE,
                           style: MyStyles.generalTextStyleBlackBold,
                         ),
-                        Text('Hasta ${_.labelPrice}'),
+                        Text('Hasta ${_.labelPrice ?? "100+"}'),
                       ],
                     ),
                     Slider(
