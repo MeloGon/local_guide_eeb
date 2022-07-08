@@ -23,7 +23,7 @@ class foodFieldWidget extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text('Cantidad de personas',
+              const Text('Nombre del plato',
                   style: MyStyles.generalTextStyleWhite),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
