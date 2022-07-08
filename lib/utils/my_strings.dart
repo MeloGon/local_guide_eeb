@@ -104,6 +104,7 @@ class MyStrings {
 
   static const String GO = 'Ir';
   static const String PERFIL = 'Ver perfil';
+  static const String GIVERATING = 'Calificar';
   static const String TABLEMPTY = 'Mesa sin reservar';
   static const String TABLEFULL = 'Mesa Reservada';
   static const String TABLESLIST = 'Lista de Mesas';

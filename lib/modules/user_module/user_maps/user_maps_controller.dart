@@ -20,6 +20,9 @@ import 'package:locals_guide_eeb/route/app_routes.dart';
 import 'package:http/http.dart' as http;
 import 'dart:ui' as ui;
 
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
+
 class UserMapsController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   late GoogleMapController? _mapController;
@@ -488,6 +491,7 @@ class UserMapsController extends GetxController {
     update();
   }
 
+  ///Metodo que lleva al perfil del local
   goToLocalProfile() async {
     Get.toNamed(AppRoutes.CLIENTUBICATIONS, arguments: [
       _idLocal,
@@ -511,6 +515,22 @@ class UserMapsController extends GetxController {
       _idUser,
       _displayName,
     ]);
+  }
+
+  ///metodo que permite enviar las coordenadas y abre google maps
+  useGoogleMaps() {
+    openMap(markerTap![0].position.latitude, markerTap![0].position.longitude);
+  }
+
+  ///metodo adjunto al uso de google maps
+  Future<void> openMap(double latitude, double longitude) async {
+    String googleUrl =
+        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+    if (await canLaunchUrlString(googleUrl)) {
+      await launchUrlString(googleUrl);
+    } else {
+      throw 'Could not open the map.';
+    }
   }
 
   openedPanel() {

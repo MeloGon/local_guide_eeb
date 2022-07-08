@@ -63,7 +63,27 @@ class CardSucursal extends StatelessWidget {
                                     _.nameTap!,
                                     style: MyStyles.generalTextStyleBlackBold,
                                   ),
-                                )
+                                ),
+                                const SizedBox(height: 5),
+                                SizedBox(
+                                  height: 30,
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          primary: const Color.fromARGB(
+                                              255, 19, 20, 19),
+                                          elevation: 0,
+                                          side: const BorderSide(
+                                              color: Colors.black, width: 1.5),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(50))),
+                                      onPressed: () {
+                                        _.useGoogleMaps();
+                                      },
+                                      child: const Text(MyStrings.GO,
+                                          style:
+                                              MyStyles.generalTextStyleWhite)),
+                                ),
                               ],
                             ),
                           ),
@@ -138,20 +158,44 @@ class CardSucursal extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Color.fromARGB(255, 19, 20, 19),
-                                      elevation: 0,
-                                      side: const BorderSide(
-                                          color: Colors.black, width: 1.5),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50))),
-                                  onPressed: () {
-                                    _.goToLocalProfile();
-                                  },
-                                  child: const Text(MyStrings.PERFIL,
-                                      style: MyStyles.generalTextStyleWhite)),
+                              SizedBox(height: 10),
+                              Container(
+                                height: 30,
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        primary: const Color.fromARGB(
+                                            255, 19, 20, 19),
+                                        elevation: 0,
+                                        side: const BorderSide(
+                                            color: Colors.black, width: 1.5),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50))),
+                                    onPressed: () {
+                                      _.goToLocalProfile();
+                                    },
+                                    child: const Text(MyStrings.PERFIL,
+                                        style: MyStyles.generalTextStyleWhite)),
+                              ),
+                              const SizedBox(height: 10),
+                              SizedBox(
+                                height: 30,
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        primary: const Color.fromARGB(
+                                            255, 19, 20, 19),
+                                        elevation: 0,
+                                        side: const BorderSide(
+                                            color: Colors.black, width: 1.5),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50))),
+                                    onPressed: () {
+                                      _.goToLocalProfile();
+                                    },
+                                    child: const Text(MyStrings.GIVERATING,
+                                        style: MyStyles.generalTextStyleWhite)),
+                              ),
                             ],
                           )
                         ],
