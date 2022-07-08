@@ -215,6 +215,7 @@ class AddTableReserveController extends GetxController {
       'linkWeb': _txWeb,
       'linkDelivery': _txDelivery,
       'marker': _marker.toString(),
+      'aforo': txAforo.text,
     });
 
     //para agregar las mesas
