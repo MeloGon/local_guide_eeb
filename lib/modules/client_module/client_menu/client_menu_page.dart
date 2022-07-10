@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -25,51 +26,57 @@ class ClientMenuPage extends StatelessWidget {
                   )
                 : Column(
                     children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 30),
-                        width: 100,
-                        height: 100,
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.teal),
-                        child: Center(
-                            child: Container(
-                          width: 200,
-                          height: 200,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                              border: Border.all(
-                                  color: MyColors.cusTeal, width: 2)),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(100.0),
-                            child: FadeInImage(
-                              placeholder: const AssetImage(
-                                  'assets/images/logo/foofle-logo.png'),
-                              image: NetworkImage(_.local!.fotoLocal),
-                              fit: BoxFit.cover,
+                      FadeInDown(
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 30),
+                          width: 100,
+                          height: 100,
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.teal),
+                          child: Center(
+                              child: Container(
+                            width: 200,
+                            height: 200,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                                border: Border.all(
+                                    color: MyColors.cusTeal, width: 2)),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(100.0),
+                              child: FadeInImage(
+                                placeholder: const AssetImage(
+                                    'assets/images/logo/foofle-logo.png'),
+                                image: NetworkImage(_.local!.fotoLocal),
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                        )),
+                          )),
+                        ),
                       ),
                       const SizedBox(height: 20),
-                      Text(
-                        _.local!.nombreLocal,
-                        style: MyStyles.generalTextStyleBlack,
-                      ),
-                      const SizedBox(height: 10),
-                      RatingBarIndicator(
-                        rating: 5,
-                        itemBuilder: (context, index) => const Icon(
-                          Icons.favorite,
-                          color: Colors.red,
+                      FadeInDown(
+                        child: Text(
+                          _.local!.nombreLocal,
+                          style: MyStyles.generalTextStyleBlack,
                         ),
-                        itemCount: 5,
-                        itemSize: 15.0,
-                        unratedColor: Colors.red.withAlpha(50),
-                        direction: Axis.horizontal,
                       ),
                       const SizedBox(height: 10),
-                      const Text('12k'),
+                      FadeInDown(
+                        child: RatingBarIndicator(
+                          rating: 5,
+                          itemBuilder: (context, index) => const Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          ),
+                          itemCount: 5,
+                          itemSize: 15.0,
+                          unratedColor: Colors.red.withAlpha(50),
+                          direction: Axis.horizontal,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      FadeInDown(child: const Text('12k')),
                       const SizedBox(height: 10),
                       Container(
                         height: 1,
@@ -77,59 +84,71 @@ class ClientMenuPage extends StatelessWidget {
                         color: Colors.grey,
                       ),
                       const SizedBox(height: 20),
-                      Padding(
-                        padding: MyDimens.paddingForOptions,
-                        child: ItemPrimaryButton(
-                          text: MyStrings.UBICATIONUSER,
-                          textColor: Colors.black,
-                          borderColor: Colors.black,
-                          onTap: () {
-                            _.goToClientUbicationsPage(2);
-                          },
+                      FadeInUp(
+                        child: Padding(
+                          padding: MyDimens.paddingForOptions,
+                          child: ItemPrimaryButton(
+                            text: MyStrings.UBICATIONUSER,
+                            textColor: Colors.black,
+                            borderColor: Colors.black,
+                            onTap: () {
+                              _.goToClientUbicationsPage(2);
+                            },
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: MyDimens.paddingForOptions,
-                        child: ItemPrimaryButton(
-                          onTap: () {
-                            _.goToClientUbicationsPage(1);
-                          },
-                          text: MyStrings.MOMENTSUSER,
-                          textColor: Colors.black,
+                      FadeInUp(
+                        child: Padding(
+                          padding: MyDimens.paddingForOptions,
+                          child: ItemPrimaryButton(
+                            onTap: () {
+                              _.goToClientUbicationsPage(1);
+                            },
+                            text: MyStrings.MOMENTSUSER,
+                            textColor: Colors.black,
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: MyDimens.paddingForOptions,
-                        child: ItemPrimaryButton(
-                          onTap: () {
-                            _.goToClientUbicationsPage(0);
-                          },
-                          text: MyStrings.RECOMMENDUSER,
-                          textColor: Colors.black,
+                      FadeInUp(
+                        child: Padding(
+                          padding: MyDimens.paddingForOptions,
+                          child: ItemPrimaryButton(
+                            onTap: () {
+                              _.goToClientUbicationsPage(0);
+                            },
+                            text: MyStrings.RECOMMENDUSER,
+                            textColor: Colors.black,
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: MyDimens.paddingForOptions,
-                        child: ItemPrimaryButton(
-                          onTap: _.goToListOfReserves,
-                          text: MyStrings.RESERVE,
-                          textColor: Colors.black,
+                      FadeInUp(
+                        child: Padding(
+                          padding: MyDimens.paddingForOptions,
+                          child: ItemPrimaryButton(
+                            onTap: _.goToListOfReserves,
+                            text: MyStrings.RESERVE,
+                            textColor: Colors.black,
+                          ),
                         ),
                       ),
-                      const Padding(
-                        padding: MyDimens.paddingForOptions,
-                        child: ItemPrimaryButton(
-                          text: MyStrings.NOTIFIUSER,
-                          textColor: Colors.black,
-                          borderColor: Colors.black,
+                      FadeInUp(
+                        child: const Padding(
+                          padding: MyDimens.paddingForOptions,
+                          child: ItemPrimaryButton(
+                            text: MyStrings.NOTIFIUSER,
+                            textColor: Colors.black,
+                            borderColor: Colors.black,
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: MyDimens.paddingForOptions,
-                        child: ItemPrimaryButton(
-                          onTap: _.logout,
-                          text: MyStrings.LOGOUT,
-                          textColor: Colors.black,
+                      FadeInUp(
+                        child: Padding(
+                          padding: MyDimens.paddingForOptions,
+                          child: ItemPrimaryButton(
+                            onTap: _.logout,
+                            text: MyStrings.LOGOUT,
+                            textColor: Colors.black,
+                          ),
                         ),
                       ),
                     ],
