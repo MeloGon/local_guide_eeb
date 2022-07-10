@@ -84,7 +84,7 @@ class ClientMenuPage extends StatelessWidget {
                           textColor: Colors.black,
                           borderColor: Colors.black,
                           onTap: () {
-                            _.goToClientUbicationsPage(0);
+                            _.goToClientUbicationsPage(2);
                           },
                         ),
                       ),
@@ -102,7 +102,7 @@ class ClientMenuPage extends StatelessWidget {
                         padding: MyDimens.paddingForOptions,
                         child: ItemPrimaryButton(
                           onTap: () {
-                            _.goToClientUbicationsPage(2);
+                            _.goToClientUbicationsPage(0);
                           },
                           text: MyStrings.RECOMMENDUSER,
                           textColor: Colors.black,
