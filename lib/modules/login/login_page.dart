@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:locals_guide_eeb/modules/login/login_controller.dart';
@@ -38,65 +39,85 @@ class LoginPage extends StatelessWidget {
                                 'assets/images/logo/foofle-logo.png'))),
                   ),
                 ),
-                const Text(
-                  MyStrings.USER,
-                  style: MyStyles.generalTextStyleWhite,
-                ),
-                TextField(
-                    controller: _.txUser,
+                FadeInDown(
+                  child: const Text(
+                    MyStrings.USER,
                     style: MyStyles.generalTextStyleWhite,
-                    decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        hintText: MyStrings.INPUTUSER,
-                        hintStyle: TextStyle(color: Colors.grey))),
-                Container(
-                  height: 1,
-                  color: Colors.lightGreen,
-                  width: double.infinity,
+                  ),
+                ),
+                FadeInDown(
+                  child: TextField(
+                      controller: _.txUser,
+                      style: MyStyles.generalTextStyleWhite,
+                      decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: MyStrings.INPUTUSER,
+                          hintStyle: TextStyle(color: Colors.grey))),
+                ),
+                FadeInDown(
+                  child: Container(
+                    height: 1,
+                    color: Colors.lightGreen,
+                    width: double.infinity,
+                  ),
                 ),
                 const SizedBox(height: 30),
-                const Text(
-                  MyStrings.PASSWORD,
-                  style: MyStyles.generalTextStyleWhite,
-                ),
-                TextField(
-                  obscureText: true,
-                  controller: _.txPass,
-                  style: MyStyles.generalTextStyleWhite,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    hintText: MyStrings.INPUTPWD,
-                    hintStyle: TextStyle(color: Colors.grey),
-                  ),
-                ),
-                Container(
-                  height: 1,
-                  color: Colors.lightGreen,
-                  width: double.infinity,
-                ),
-                const Spacer(),
-                ItemPrimaryButton(
-                  text: MyStrings.LOGIN,
-                  onTap: _.searchLocalUser,
-                  borderColor: Colors.white,
-                ),
-                const SizedBox(height: 20),
-                const Center(
-                  child: Text(
-                    MyStrings.ORSOCIAL,
+                FadeInDown(
+                  child: const Text(
+                    MyStrings.PASSWORD,
                     style: MyStyles.generalTextStyleWhite,
                   ),
                 ),
-                const SizedBox(height: 20),
-                ItemPrimaryButton(
-                  onTap: _.loginWithGoogleMail,
-                  text: MyStrings.LOGINGMAIL,
-                  borderColor: Colors.white,
+                FadeInDown(
+                  child: TextField(
+                    obscureText: true,
+                    controller: _.txPass,
+                    style: MyStyles.generalTextStyleWhite,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      hintText: MyStrings.INPUTPWD,
+                      hintStyle: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                ),
+                FadeInDown(
+                  child: Container(
+                    height: 1,
+                    color: Colors.lightGreen,
+                    width: double.infinity,
+                  ),
+                ),
+                const Spacer(),
+                FadeInUp(
+                  child: ItemPrimaryButton(
+                    text: MyStrings.LOGIN,
+                    onTap: _.searchLocalUser,
+                    borderColor: Colors.white,
+                  ),
                 ),
                 const SizedBox(height: 20),
-                ItemPrimaryButton(
-                  text: MyStrings.LOGINFB,
-                  borderColor: Colors.white,
+                FadeInUp(
+                  child: const Center(
+                    child: Text(
+                      MyStrings.ORSOCIAL,
+                      style: MyStyles.generalTextStyleWhite,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                FadeInUp(
+                  child: ItemPrimaryButton(
+                    onTap: _.loginWithGoogleMail,
+                    text: MyStrings.LOGINGMAIL,
+                    borderColor: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                FadeInUp(
+                  child: ItemPrimaryButton(
+                    text: MyStrings.LOGINFB,
+                    borderColor: Colors.white,
+                  ),
                 ),
               ],
             ),
