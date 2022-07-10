@@ -241,11 +241,14 @@ class _ClientUbicationsPageState extends State<ClientUbicationsPage>
             : const SizedBox(),
         _.listComentarios!.isEmpty
             ? Container(
+                height: 200,
                 padding: MyDimens.symetricMarginHorizontal,
-                child: const Text(
-                  MyStrings.NORECOMENDS,
-                  style: MyStyles.disableTextStyle,
-                  textAlign: TextAlign.center,
+                child: const Center(
+                  child: Text(
+                    MyStrings.NORECOMENDS,
+                    style: MyStyles.disableTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               )
             : Padding(
