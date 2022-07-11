@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+
 import 'package:locals_guide_eeb/modules/client_module/client_reserve/client_reserve_controller.dart';
 import 'package:locals_guide_eeb/theme/my_colors.dart';
 import 'package:locals_guide_eeb/theme/my_dimens.dart';
 import 'package:locals_guide_eeb/theme/my_styles.dart';
 import 'package:locals_guide_eeb/utils/my_strings.dart';
-import 'package:locals_guide_eeb/widgets/item_primary_button.dart';
 
 class ClientReservePage extends StatelessWidget {
   const ClientReservePage({Key? key}) : super(key: key);
@@ -144,64 +143,79 @@ class ClientReservePage extends StatelessWidget {
                             'Solicitudes de Reservas',
                             style: MyStyles.generalTextStyleBlackBold,
                           ),
-                          ListView.builder(
-                              itemCount: _.listReservas!.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                final solicitudReserva = _.listReservas![index];
-                                return Container(
-                                  margin: EdgeInsets.all(10),
-                                  padding: EdgeInsets.all(20),
-                                  decoration: BoxDecoration(
-                                    color: MyColors.white,
-                                    borderRadius: BorderRadius.circular(20),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey,
-                                        offset: Offset(0.0, 1.0), //(x,y)
-                                        blurRadius: 6.0,
-                                      ),
-                                    ],
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                          'Solicitada por: ${solicitudReserva.nombreUsuario}'),
-                                      Text('Fecha: ${solicitudReserva.fecha}'),
-                                      Text('Hora: ${solicitudReserva.hora}'),
-                                      Text(
-                                          'Observaciones: ${solicitudReserva.obs == '' ? "--" : solicitudReserva.obs}'),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          TextButton(
-                                              onPressed: () {
-                                                _.acceptReserva(
-                                                    solicitudReserva.idReserva!,
-                                                    solicitudReserva.idUsuario);
-                                              },
-                                              child:
-                                                  const Text(MyStrings.ACCEPT)),
-                                          TextButton(
-                                              onPressed: () {
-                                                _.deniedReserve(
-                                                    solicitudReserva.idReserva!,
-                                                    solicitudReserva.idUsuario);
-                                              },
-                                              child: const Text(
-                                                MyStrings.CANCEL,
-                                                style: TextStyle(
-                                                    color: Colors.red),
-                                              )),
+                          _.listReservas!.isEmpty
+                              ? Container(
+                                  margin: const EdgeInsets.only(top: 15),
+                                  child: const Text(
+                                    MyStrings.NORESERVES,
+                                    style: MyStyles.disableTextStyle,
+                                    textAlign: TextAlign.center,
+                                  ))
+                              : ListView.builder(
+                                  itemCount: _.listReservas!.length,
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index) {
+                                    final solicitudReserva =
+                                        _.listReservas![index];
+                                    return Container(
+                                      margin: const EdgeInsets.all(10),
+                                      padding: const EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                        color: MyColors.white,
+                                        borderRadius: BorderRadius.circular(20),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey,
+                                            offset: Offset(0.0, 1.0), //(x,y)
+                                            blurRadius: 6.0,
+                                          ),
                                         ],
-                                      )
-                                    ],
-                                  ),
-                                );
-                              }),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                              'Solicitada por: ${solicitudReserva.nombreUsuario}'),
+                                          Text(
+                                              'Fecha: ${solicitudReserva.fecha}'),
+                                          Text(
+                                              'Hora: ${solicitudReserva.hora}'),
+                                          Text(
+                                              'Observaciones: ${solicitudReserva.obs == '' ? "--" : solicitudReserva.obs}'),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              TextButton(
+                                                  onPressed: () {
+                                                    _.acceptReserva(
+                                                        solicitudReserva
+                                                            .idReserva!,
+                                                        solicitudReserva
+                                                            .idUsuario);
+                                                  },
+                                                  child: const Text(
+                                                      MyStrings.ACCEPT)),
+                                              TextButton(
+                                                  onPressed: () {
+                                                    _.deniedReserve(
+                                                        solicitudReserva
+                                                            .idReserva!,
+                                                        solicitudReserva
+                                                            .idUsuario);
+                                                  },
+                                                  child: const Text(
+                                                    MyStrings.CANCEL,
+                                                    style: TextStyle(
+                                                        color: Colors.red),
+                                                  )),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  }),
                           const SizedBox(height: 30),
                         ],
                       ),

@@ -132,4 +132,6 @@ class MyStrings {
 
   static const String ADDFOOD = 'Agregue su carta';
   static const String NORECOMENDS = 'No existen recomendaciones por el momento';
+  static const String NORESERVES =
+      'No existen solicitudes de reserva por el momento';
 }
