@@ -117,6 +117,7 @@ class MyStrings {
 
   static const String ACCEPT = 'Aceptar';
   static const String CANCEL = 'Cancelar';
+  static const String DELETE = 'Eliminar';
 
   static const String NUMBEROFPEOPLE = 'Cantidad de personas:';
   static const String CHANGELOGO = 'Cambia el logo del app';
