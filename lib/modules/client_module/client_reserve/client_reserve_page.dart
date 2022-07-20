@@ -182,6 +182,16 @@ class ClientReservePage extends StatelessWidget {
                                           Text(
                                               'Hora: ${solicitudReserva.hora}'),
                                           Text(
+                                            solicitudReserva.isAcepted
+                                                ? 'Estado: Aceptada'
+                                                : 'Estado: Pendiente',
+                                            style: TextStyle(
+                                                color:
+                                                    solicitudReserva.isAcepted
+                                                        ? Colors.green
+                                                        : Colors.amber),
+                                          ),
+                                          Text(
                                               'Observaciones: ${solicitudReserva.obs == '' ? "--" : solicitudReserva.obs}'),
                                           Row(
                                             mainAxisAlignment:
@@ -190,8 +200,7 @@ class ClientReservePage extends StatelessWidget {
                                               TextButton(
                                                   onPressed: () {
                                                     _.acceptReserva(
-                                                        solicitudReserva
-                                                            .idReserva!,
+                                                        solicitudReserva,
                                                         solicitudReserva
                                                             .idUsuario);
                                                   },
@@ -200,8 +209,7 @@ class ClientReservePage extends StatelessWidget {
                                               TextButton(
                                                   onPressed: () {
                                                     _.deniedReserve(
-                                                        solicitudReserva
-                                                            .idReserva!,
+                                                        solicitudReserva,
                                                         solicitudReserva
                                                             .idUsuario);
                                                   },
@@ -209,6 +217,16 @@ class ClientReservePage extends StatelessWidget {
                                                     MyStrings.CANCEL,
                                                     style: TextStyle(
                                                         color: Colors.red),
+                                                  )),
+                                              TextButton(
+                                                  onPressed: () {
+                                                    _.deleteReserve(
+                                                        solicitudReserva);
+                                                  },
+                                                  child: const Text(
+                                                    MyStrings.DELETE,
+                                                    style: TextStyle(
+                                                        color: Colors.black),
                                                   )),
                                             ],
                                           )

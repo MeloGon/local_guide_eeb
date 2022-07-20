@@ -12,10 +12,13 @@ class ClientMenuController extends GetxController {
   String? _idLocal;
   Local? _local;
   Local? get local => _local;
+  int _reserveRequest = 0;
+  int get reserveRequest => _reserveRequest;
 
   @override
   void onReady() {
     loadDataForLocal();
+    checkIfThereReserves();
     super.onReady();
   }
 
@@ -72,6 +75,26 @@ class ClientMenuController extends GetxController {
         .then((value) {
       _local = Local.fromDocumentSnapshot(documentSnapshot: value);
       update();
+    });
+  }
+
+  checkIfThereReserves() async {
+    _reserveRequest = 0;
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .get()
+        .then((sucursal) {
+      sucursal.reference.collection("Reservas").get().then((docReservas) {
+        for (var reservas in docReservas.docs) {
+          _reserveRequest = _reserveRequest + 1;
+          update();
+        }
+      });
     });
   }
 

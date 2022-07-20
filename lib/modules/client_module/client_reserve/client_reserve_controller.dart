@@ -42,6 +42,7 @@ class ClientReserveController extends GetxController {
   }
 
   loadTables() async {
+    _mesas!.clear();
     await firebaseFirestore
         .collection("GuiaLocales")
         .doc("admin")
@@ -61,6 +62,7 @@ class ClientReserveController extends GetxController {
   }
 
   loadRequestReserves() async {
+    _listaReservas!.clear();
     await firebaseFirestore
         .collection("GuiaLocales")
         .doc("admin")
@@ -81,8 +83,8 @@ class ClientReserveController extends GetxController {
     });
   }
 
-  acceptReserva(String idReserva, String idUsuario) async {
-    Get.snackbar('Informacion', 'Has aceptado la reserva',
+  acceptReserva(RequestReserve reserve, String idUsuario) async {
+    Get.snackbar('Información', 'Has aceptado la reserva',
         colorText: MyColors.blackBg, backgroundColor: MyColors.white);
     await firebaseFirestore
         .collection("GuiaLocales")
@@ -92,15 +94,34 @@ class ClientReserveController extends GetxController {
         .collection("Sucursales")
         .doc(_idSucursal)
         .collection("Reservas")
-        .doc(idReserva)
+        .doc(reserve.idReserva)
         .update({
       'isAcepted': true,
+    }).then((value) {
+      loadRequestReserves();
+      update();
     });
-    sendNotification(idUsuario, idReserva, 'Reserva aceptada');
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .collection("Mesas")
+        .doc(reserve.idMesa)
+        .update({
+      'reservado': true,
+    }).then((value) {
+      loadTables();
+      update();
+    });
+    sendNotification(idUsuario, reserve.idReserva!,
+        'Tu reserva en $_nombreLocal en la mesa nro. ${reserve.mesa} ha sido aceptada');
   }
 
-  deniedReserve(String idReserva, String idUsuario) async {
-    Get.snackbar('Informacion', 'Has rechazado la reserva',
+  deniedReserve(RequestReserve reserve, String idUsuario) async {
+    Get.snackbar('Información', 'Has rechazado la reserva',
         colorText: MyColors.blackBg, backgroundColor: MyColors.white);
 
     await firebaseFirestore
@@ -111,10 +132,14 @@ class ClientReserveController extends GetxController {
         .collection("Sucursales")
         .doc(_idSucursal)
         .collection("Reservas")
-        .doc(idReserva)
-        .delete();
-
-    sendNotification(idUsuario, idReserva, 'Reserva denegada');
+        .doc(reserve.idReserva)
+        .delete()
+        .then((value) {
+      loadRequestReserves();
+      update();
+    });
+    sendNotification(idUsuario, reserve.idReserva!,
+        'Tu reserva en $_nombreLocal en la mesa nro. ${reserve.mesa} ha sido rechazada');
   }
 
   sendNotification(String idUsuario, String idReserva, String content) async {
@@ -129,6 +154,42 @@ class ClientReserveController extends GetxController {
         .set({
       'idNotificacion': idNotificacion,
       'notificacion': content,
+    });
+  }
+
+  deleteReserve(RequestReserve reserve) async {
+    Get.snackbar('Información', 'Has eliminado la reserva',
+        colorText: MyColors.blackBg, backgroundColor: MyColors.white);
+
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .collection("Reservas")
+        .doc(reserve.idReserva)
+        .delete()
+        .then((value) {
+      loadRequestReserves();
+      update();
+    });
+
+    await firebaseFirestore
+        .collection("GuiaLocales")
+        .doc("admin")
+        .collection("Locales")
+        .doc(_idLocal)
+        .collection("Sucursales")
+        .doc(_idSucursal)
+        .collection("Mesas")
+        .doc(reserve.idMesa)
+        .update({
+      'reservado': false,
+    }).then((value) {
+      loadTables();
+      update();
     });
   }
 }
